@@ -1,0 +1,24 @@
+@import 'mixin';
+
+.textBlock {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  gap: 48px;
+  padding: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f4f4f4;
+  }
+
+  &:active {
+    background-color: #f0f0f0;
+  }
+}
+
+.text {
+  @include body;
+  color: #ff3b30;
+}

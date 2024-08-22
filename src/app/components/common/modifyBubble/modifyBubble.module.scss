@@ -11,10 +11,26 @@
 
   &:hover {
     background-color: #f4f4f4;
+
+    .modifyText {
+      color: rgba(0, 0, 0, 1);
+      stroke-opacity: 1;
+      path {
+        stroke-opacity: 1;
+      }
+    }
   }
 
   &:active {
     background-color: #f0f0f0;
+
+    .modifyText {
+      color: rgba(0, 0, 0, 1);
+
+      path {
+        stroke-opacity: 1;
+      }
+    }
   }
 }
 

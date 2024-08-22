@@ -10,10 +10,10 @@
   cursor: pointer;
 
   &:hover {
-    background-color: #f4f4f4;
+    background-color: var(--color-background-gray-500);
 
     .modifyText {
-      color: rgba(0, 0, 0, 1);
+      color: var(--color-text-black-100);
       stroke-opacity: 1;
       path {
         stroke-opacity: 1;
@@ -22,10 +22,10 @@
   }
 
   &:active {
-    background-color: #f0f0f0;
+    background-color: var(--color-background-gray-600);
 
     .modifyText {
-      color: rgba(0, 0, 0, 1);
+      color: var(--color-text-black-100);
 
       path {
         stroke-opacity: 1;
@@ -35,11 +35,9 @@
 }
 
 .modifyText {
-  @include body;
-  color: rgba(0, 0, 0, 0.5);
+  @include body(black-50);
 }
 
 .deleteText {
-  @include body;
-  color: #ff3b30;
+  @include body(red);
 }

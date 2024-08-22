@@ -1,6 +1,6 @@
 .bubble {
   background-color: #fafafa;
-  border: rgba(0, 0, 0, 0.55) solid 1px;
+  border: var(--color-text-black-50) solid 1px;
   border-radius: 10px;
   height: auto;
   letter-spacing: -0.25px;
@@ -10,9 +10,9 @@
   left: -50px;
   z-index: 100;
   box-shadow:
-          0px 0px 9px 0px rgba(0, 0, 0, 0.2),  // First shadow with blur 9 and rgba(0, 0, 0, 0.2)
-          0px 0px 2px 0px rgba(0, 0, 0, 0.25), // Second shadow with blur 2 and rgba(0, 0, 0, 0.25)
-          0px 0px 1px 0px rgba(255, 255, 255, 0.1); // Third shadow with blur 1 and rgba(255, 255, 255, 0.1)
+          0 0 9px 0 #00000020,
+          0 0 2px 0 #00000025,
+          0 0 1px 0 #ffffff10;
 
   ::after {
     border-color: #fafafa transparent;
@@ -28,7 +28,7 @@
   }
 
   ::before {
-    border-color: rgba(0, 0, 0, 0.55) transparent;
+    border-color: var(--color-text-black-50) transparent;
     border-style: solid;
     border-width: 0 6px 8px 6.5px;
     content: '';

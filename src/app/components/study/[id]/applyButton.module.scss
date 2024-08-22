@@ -1,8 +1,0 @@
-@import 'mixin';
-
-.button {
-  @include title1Emphasized;
-  color: white;
-  background-color: rgba(0, 122, 255, 1);
-  padding: 12px 36px;
-}

@@ -10,15 +10,14 @@
   cursor: pointer;
 
   &:hover {
-    background-color: #f4f4f4;
+    background-color: var(--color-background-gray-500);
   }
 
   &:active {
-    background-color: #f0f0f0;
+    background-color: var(--color-background-gray-600);
   }
 }
 
 .text {
-  @include body;
-  color: #ff3b30;
+  @include body(red);
 }

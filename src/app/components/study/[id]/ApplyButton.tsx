@@ -1,6 +1,6 @@
 "use client"
 
-import styles from './applyButton.module.scss';
+import styles from './boardButton.module.scss';
 
 export default function ApplyButton() {
   const onApply = () => {};

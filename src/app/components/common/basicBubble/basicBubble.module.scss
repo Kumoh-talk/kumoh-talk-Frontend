@@ -1,7 +1,5 @@
 .basicBubble {
   display: flex;
-  filter: drop-shadow(0px 35.66px 89.15px rgba(0, 0, 0, 0.1))
-    drop-shadow(0px 0px 2.674px rgba(0, 0, 0, 0.55));
 
   & > .bubble {
     background: var(--color-gray-400, #f5f5f5);
@@ -48,6 +46,8 @@
     }
   }
   &.large {
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.55))
+      drop-shadow(0px 8px 40px rgba(0, 0, 0, 0.25));
     & > .bubble {
       border-radius: 1.35rem;
     }
@@ -55,12 +55,16 @@
       zoom: 2;
     }
   }
+  &.medium {
+    filter: drop-shadow(0px 35.66px 89.15px rgba(0, 0, 0, 0.1))
+      drop-shadow(0px 0px 2.674px rgba(0, 0, 0, 0.55));
+  }
   &.small {
     & > .bubble {
-      border-radius: .25rem;
+      border-radius: 0.25rem;
     }
     .tail {
-      zoom: .6;
+      zoom: 0.6;
     }
   }
   .tail {

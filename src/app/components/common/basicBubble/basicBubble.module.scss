@@ -47,6 +47,11 @@
       margin: 0 0.4375rem;
     }
   }
+  &.large {
+    .tail {
+      zoom: 2;
+    }
+  }
   .tail {
     fill: var(--color-gray-400, #f5f5f5);
   }

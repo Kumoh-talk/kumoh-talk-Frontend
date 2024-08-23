@@ -14,6 +14,7 @@ export type BubbleDirectionType =
 export interface Props {
   direction: BubbleDirectionType;
   className?: string;
+  size?: 'small' | 'medium' | 'large';
   children?: React.ReactNode;
 }
 
@@ -30,6 +31,7 @@ const tailSvgs: Record<
 export default function BasicBubble({
   direction,
   className = '',
+  size = 'medium',
   children,
 }: Props) {
   const [dirPrimary, dirSecondary] = direction.split('-') as [
@@ -46,6 +48,7 @@ export default function BasicBubble({
         className,
         styles[`primary-${dirPrimary}`],
         styles[`secondary-${dirSecondary}`],
+        styles[size],
       )}
     >
       <div className={styles.bubble}>{children}</div>

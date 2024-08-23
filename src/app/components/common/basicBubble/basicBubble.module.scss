@@ -48,6 +48,9 @@
     }
   }
   &.large {
+    & > .bubble {
+      border-radius: 1.35rem;
+    }
     .tail {
       zoom: 2;
     }

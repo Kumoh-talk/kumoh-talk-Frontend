@@ -14,18 +14,16 @@
   }
 
   th {
-    @include title2Emphasized;
+    @include title2Emphasized(black-85);
     background-color: #f2f2f2;
     padding: 40px;
     text-align: center;
     width: 20%;
-    color: rgba(0, 122, 255, 1);
   }
 
   td {
-    @include title2;
+    @include title2(black-50);
     padding: 40px 32px;
     width: 80%;
-    color: rgba(0, 0, 0, 0.5);
   }
 }

@@ -1,8 +1,7 @@
 @import 'mixin';
 
 @mixin tag {
-  @include title3;
-  color: white;
+  @include title3(white);
   padding: 4px 8px;
   border-radius: 1px;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.03), 0 0.5px 2.5px 0 rgba(0, 0, 0, 0.15);

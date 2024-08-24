@@ -1,5 +1,5 @@
 import styles from './studyAndProjectContent.module.scss';
-
+// TODO: 백엔드 api 완성되면 수정
 export default function StudyAndProjectContent() {
   return (
     <div className={styles.tableContainer}>

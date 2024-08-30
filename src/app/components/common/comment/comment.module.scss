@@ -1,0 +1,80 @@
+@import 'mixin';
+
+.block {
+  margin-bottom: 32vh;
+}
+
+.head {
+  @include title1(black-100);
+  margin-bottom: 24px;
+}
+
+.inputBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.profile {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 40px;
+}
+
+.input {
+  @include subHeadline(black-100);
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 2px solid var(--color-gray-500);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.commentBlock {
+  display: flex;
+  gap: 12px;
+}
+
+.commentMain {
+  flex: 1;
+}
+
+.commentTop {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+
+  .commentName {
+    @include bodyEmphasized(black-85);
+  }
+
+  .commentDate {
+    @include caption1(black-50);
+  }
+}
+
+.commentBottom {
+  display: flex;
+  gap: 12px;
+
+  .commentText {
+    @include body(black-85);
+  }
+
+  .reactButton {
+    @include body(black-50);
+    cursor: pointer;
+  }
+}
+
+.moreButton {
+  position: relative;
+}
+
+.btn {
+  cursor: pointer;
+}

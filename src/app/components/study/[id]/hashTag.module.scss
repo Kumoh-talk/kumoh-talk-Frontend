@@ -1,0 +1,18 @@
+@import 'mixin';
+
+@mixin tag {
+  @include title3(white);
+  padding: 4px 8px;
+  border-radius: 1px;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.03), 0 0.5px 2.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.categoryTag {
+  @include tag;
+  background-color: rgba(255, 168, 0, 1);
+}
+
+.stackTag {
+  @include tag;
+  background-color: rgba(0, 122, 255, 1);
+}

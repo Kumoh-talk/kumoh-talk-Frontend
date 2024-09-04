@@ -1,0 +1,29 @@
+@import 'mixin';
+
+.tableContainer {
+  border: 1px solid #ddd;
+}
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    @include title2Emphasized(black-85);
+    background-color: #f2f2f2;
+    padding: 40px;
+    text-align: center;
+    width: 20%;
+  }
+
+  td {
+    @include title2(black-50);
+    padding: 40px 32px;
+    width: 80%;
+  }
+}

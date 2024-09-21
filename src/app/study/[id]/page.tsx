@@ -13,12 +13,12 @@ export default function Page() {
         <StudyAndProjectDetail />
       </Suspense>
       <div className={styles.buttonBlock}>
-        <ApplyButton/>
+        <ApplyButton />
       </div>
       <div className={styles.buttonBlock}>
-        <ModifyButton/>
+        <ModifyButton />
       </div>
-      <Comment/>
+      <Comment />
     </main>
   )
 }

@@ -1,14 +1,18 @@
 import { useState, useCallback, ChangeEvent } from 'react';
 
-function useInput<T extends { [key: string]: any }>(): [ T, (e: ChangeEvent<HTMLInputElement>) => void ] {
-  const [ content, setContent ] = useState<T>({} as T);
+type ContentType = { [key: string]: any };
+
+function useInputs<T extends ContentType>(initialContent: T) {
+  const [content, setContent] = useState<T>(initialContent);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setContent(content => ({ ...content, [name]: value }));
-  }, []);
+  }, [content]);
 
-  return [ content, onChange ];
+  const reset = useCallback(() => setContent(initialContent), [initialContent]);
+
+  return [content, onChange, reset] as const;
 }
 
-export default useInput;
+export default useInputs;

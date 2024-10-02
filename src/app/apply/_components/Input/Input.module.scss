@@ -1,0 +1,17 @@
+@import 'mixin';
+
+.input {
+  @include body(black-85);
+
+  height: 64px;
+  border: 0.2px solid var(--color-black-25);
+  padding: 24px;
+
+  &::placeholder {
+    @include body(black-25);
+  }
+
+  &:not(:placeholder-shown) {
+    border: 0.2px solid var(--color-black-100);
+  }
+}

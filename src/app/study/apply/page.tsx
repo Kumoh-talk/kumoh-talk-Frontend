@@ -7,8 +7,8 @@ import { StudyAndProjectTitle } from '@/app/components/study/[id]/StudyAndProjec
 export default function Page() {
   return (
     <main className={styles.block}>
-      <ApplyBanner/>
-      <StudyAndProjectTitle/>
+      <ApplyBanner />
+      <StudyAndProjectTitle  title={'제목1'} type={'STUDY'} tag={'FRONT'} />
       <BoardDetail/>
       <ApplyForm/>
     </main>

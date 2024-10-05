@@ -6,7 +6,7 @@ import CommentInput from '@/app/components/common/comment/CommentInput';
 import Comment from '@/app/components/common/comment/Comment'
 import useInput from '@/app/lib/hooks/useInput';
 import { KeyboardEvent } from 'react';
-// TODO: 백엔드 api 완성되면 수정
+
 export default function CommentComponent() {
   const [content, onChange, reset] = useInput({ comment: '' });
 
@@ -19,7 +19,7 @@ export default function CommentComponent() {
 
   return (
     <div className={styles.block}>
-      <div className={styles.head}>댓글 2</div>
+      <div className={styles.head}>댓글 1</div>
       <div className={styles.inputBlock}>
         <CommentProfile />
         <CommentInput placeholder={'댓글 추가'} name={'comment'} value={content.comment} onChange={onChange} onKeyDown={onSubmit} />

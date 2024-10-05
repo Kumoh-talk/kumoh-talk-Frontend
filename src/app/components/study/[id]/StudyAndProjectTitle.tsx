@@ -1,5 +1,5 @@
 import styles from './studyAndProjectTitle.module.scss';
-import HashTag from "@/app/components/study/[id]/HashTag";
+import HashTag from '@/app/components/study/[id]/HashTag';
 
 export interface Props {
   title: string,

@@ -1,6 +1,6 @@
 "use client"
 
-import CommentProfile from '@/app/components/common/comment/CommentProfile';
+import ProfileImage from '@/app/components/common/ProfileImage';
 import styles from './comment.module.scss';
 import CommentInput from '@/app/components/common/comment/CommentInput';
 import Comment from '@/app/components/common/comment/Comment'
@@ -21,7 +21,7 @@ export default function CommentComponent() {
     <div className={styles.block}>
       <div className={styles.head}>댓글 1</div>
       <div className={styles.inputBlock}>
-        <CommentProfile />
+        <ProfileImage />
         <CommentInput placeholder={'댓글 추가'} name={'comment'} value={content.comment} onChange={onChange} onKeyDown={onSubmit} />
       </div>
       <Comment id={1} name={'황용진'} date={'2024.08.24'} comment={'테스트 댓글이요'} />

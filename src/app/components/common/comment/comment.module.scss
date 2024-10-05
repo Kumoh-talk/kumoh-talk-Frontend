@@ -67,8 +67,17 @@
 
   .commentEdit {
     @include body(black-85);
+    font-size: 32px;
     width: 100%;
-    resize: none;
+    padding: 4px 6px; // 내부 패딩 추가
+    border: none;
+    border-bottom: 2px solid var(--color-gray-500);
+    transition: all 0.3s ease; // 부드러운 전환 효과
+
+    &:focus {
+      border-bottom-color: #007bff; // 포커스 상태일 때 파란색 테두리
+      outline: none; // 기본 아웃라인 제거
+    }
   }
 
   .reactButton {

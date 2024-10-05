@@ -1,6 +1,6 @@
 'use client'
 
-import CommentProfile from '@/app/components/common/comment/CommentProfile';
+import ProfileImage from '@/app/components/common/ProfileImage';
 import styles from './comment.module.scss'
 import MoreButton from '@/app/components/common/comment/MoreButton';
 import { useEffect, useRef, useState } from 'react';
@@ -26,7 +26,7 @@ export default function Comment({ id, name, date, comment }: Props) {
 
   return (
     <div className={styles.commentBlock}>
-      <CommentProfile/>
+      <ProfileImage/>
       <div className={styles.commentMain}>
         <div className={styles.commentTop}>
           <div className={styles.commentName}>{name}</div>

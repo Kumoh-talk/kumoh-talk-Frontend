@@ -1,41 +1,54 @@
 import styles from './studyAndProjectContent.module.scss';
+
+export interface Props {
+  name: string,
+  categories: string[],
+  target: string,
+  recruitmentNum: string,
+  recruitmentStart: string,
+  recruitmentDeadline: string,
+  activity: string,
+  activityStart: string,
+  activityFinish: string,
+  detail: string,
+}
 // TODO: 백엔드 api 완성되면 수정
-export default function StudyAndProjectContent() {
+export default function StudyAndProjectContent({name, categories, target, recruitmentNum, recruitmentStart, recruitmentDeadline, activity, activityStart, activityFinish, detail}: Props) {
   return (
     <div className={styles.tableContainer}>
       <table className={styles.infoTable}>
         <tbody>
         <tr>
           <th>주최자</th>
-          <td>황준호</td>
+          <td>{name}</td>
         </tr>
         <tr>
           <th>카테고리</th>
-          <td>스터디 프론트 모바일</td>
+          <td>{categories.reduce((i, value) => i + `${value} `, '')}</td>
         </tr>
         <tr>
           <th>신청대상</th>
-          <td>컴퓨터공학과</td>
+          <td>{target}</td>
         </tr>
         <tr>
           <th>모집인원</th>
-          <td>10명</td>
+          <td>{recruitmentNum}명</td>
         </tr>
         <tr>
           <th>모집기한</th>
-          <td>2024.07.01 12:00</td>
+          <td>{`${recruitmentStart} - ${recruitmentDeadline}`}</td>
         </tr>
         <tr>
           <th>활동방식</th>
-          <td>주 2회 화요일(대면), 수요일(비대면)</td>
+          <td>{activity}</td>
         </tr>
         <tr>
           <th>활동기간</th>
-          <td>2024.07.01 12:00 - 2024.07.08 24:00</td>
+          <td>{`${activityStart} - ${activityFinish}`}</td>
         </tr>
         <tr>
           <th>세부내용</th>
-          <td>해결하는 방법을 배워서 학점을 고칠예정</td>
+          <td>{detail}</td>
         </tr>
         </tbody>
       </table>

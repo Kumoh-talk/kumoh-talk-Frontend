@@ -2,7 +2,7 @@
 
 import { StudyAndProjectTitle } from '@/app/components/study/[id]/StudyAndProjectTitle';
 import StudyAndProjectContent from '@/app/components/study/[id]/StudyAndProjectContent';
-import useGetStudyProjectBoardDetail from '@/app/lib/hooks/studyProject/useGetStudyProjectBoardDetail';
+import useGetStudyProjectBoardDetail from '@/app/lib/hooks/useGetStudyProjectBoardDetail';
 import dayjs from 'dayjs';
 
 const boardId = '이건 보드Id';

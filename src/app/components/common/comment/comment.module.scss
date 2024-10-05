@@ -65,6 +65,12 @@
     @include body(black-85);
   }
 
+  .commentEdit {
+    @include body(black-85);
+    width: 100%;
+    resize: none;
+  }
+
   .reactButton {
     @include body(black-50);
     cursor: pointer;

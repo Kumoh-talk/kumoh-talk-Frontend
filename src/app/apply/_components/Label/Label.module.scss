@@ -1,0 +1,5 @@
+@import 'mixin';
+
+.label{
+  @include title3Emphasized(black-85);
+}

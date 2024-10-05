@@ -24,7 +24,7 @@ export default function CommentComponent() {
         <CommentProfile />
         <CommentInput placeholder={'댓글 추가'} name={'comment'} value={content.comment} onChange={onChange} onKeyDown={onSubmit} />
       </div>
-      <Comment name={'황용진'} date={'2024.08.24'} comment={'테스트 댓글이요'} />
+      <Comment id={1} name={'황용진'} date={'2024.08.24'} comment={'테스트 댓글이요'} />
     </div>
   )
 }

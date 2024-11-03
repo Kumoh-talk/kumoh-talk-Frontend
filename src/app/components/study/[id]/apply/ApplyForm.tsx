@@ -32,9 +32,19 @@ export default function ApplyForm() {
             <TextInput type={'text'} placeholder={'필수 입력 칸 입니다.'} name={'학번'} required={true}/>
           </div>
         </div>
+        <div className={styles.inputBlock}>
+          <div className={styles.title}>재학상태</div>
+          <TextInput type={'text'} placeholder={'필수 입력 칸 입니다.'} name={'재학상태'} required={true}/>
+        </div>
+        <div className={styles.inputBlock}>
+          <div className={styles.title}>전화번호</div>
+          <TextInput type={'text'} placeholder={'필수 입력 칸 입니다.'} name={'전화번호'} required={true}/>
+        </div>
+        <div className={styles.inputBlock}>
+          <div className={styles.title}>지원동기</div>
+          <TextInput type={'text'} placeholder={'필수 입력 칸 입니다.'} name={'지원동기'} required={true}/>
+        </div>
       </div>
-      <CheckBoxInput selectList={['체크해주세요', '체크해주세요']} />
-      <FormTemplate formTitles={applyFormTitles.slice(3,)}/>
     </form>
   )
 }

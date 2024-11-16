@@ -1,4 +1,4 @@
-import styles from './studyAndProjectContent.module.scss';
+import styles from './recruitmentBoardContent.module.scss';
 
 export interface Props {
   name: string,
@@ -13,7 +13,7 @@ export interface Props {
   detail: string,
 }
 // TODO: 백엔드 api 완성되면 수정
-export default function StudyAndProjectContent({name, categories, target, recruitmentNum, recruitmentStart, recruitmentDeadline, activity, activityStart, activityFinish, detail}: Props) {
+export default function RecruitmentBoardContent({name, categories, target, recruitmentNum, recruitmentStart, recruitmentDeadline, activity, activityStart, activityFinish, detail}: Props) {
   return (
     <div className={styles.tableContainer}>
       <table className={styles.infoTable}>

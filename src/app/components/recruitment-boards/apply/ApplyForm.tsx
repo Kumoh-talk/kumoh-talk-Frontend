@@ -1,6 +1,6 @@
 import FormTemplate from './FormTemplate';
 import TextInput from '@/app/components/common/textInput/TextInput';
-import styles from '@/app/components/study/[id]/apply/applyForm.module.scss';
+import styles from '@/app/components/recruitment-boards/apply/applyForm.module.scss';
 import CheckBoxInput from '@/app/components/common/checkboxInput/CheckBoxInput';
 
 const applyFormTitles = [ '이름', '학과', '학년', '학번', '재학상태', '전화번호', '지원동기' ];

@@ -1,5 +1,5 @@
-import ListTitle from '@/app/components/study/list/ListTitle';
-import ListContent from '@/app/components/study/list/ListContent';
+import ListTitle from '@/app/components/recruitment-boards/list/ListTitle';
+import ListContent from '@/app/components/recruitment-boards/list/ListContent';
 import styles from './listTable.module.scss';
 
 export default function ListTable() {

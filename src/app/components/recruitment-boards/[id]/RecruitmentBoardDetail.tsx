@@ -1,18 +1,18 @@
 'use client'
 
-import { StudyAndProjectTitle } from '@/app/components/study/[id]/StudyAndProjectTitle';
-import StudyAndProjectContent from '@/app/components/study/[id]/StudyAndProjectContent';
+import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/[id]/RecruitmentBoardTitle';
+import RecruitmentBoardContent from '@/app/components/recruitment-boards/[id]/RecruitmentBoardContent';
 import dayjs from 'dayjs';
 import { useContext, useEffect } from 'react';
-import { StudyAndProjectDetailContext } from '@/app/components/study/[id]/StudyAndProjectDetailProvider';
+import { RecruitmentBoardDetailContext } from '@/app/components/recruitment-boards/[id]/RecruitmentBoardDetailProvider';
 
-export default function StudyAndProjectDetail() {
-  const { state, setState, fetchData } = useContext(StudyAndProjectDetailContext);
+export default function RecruitmentBoardDetail() {
+  const { state, setState, fetchData } = useContext(RecruitmentBoardDetailContext);
 
   return (
     <main>
-      <StudyAndProjectTitle title={state.data.title} type={state.data.type} tag={state.data.tag}/>
-      <StudyAndProjectContent
+      <RecruitmentBoardTitle title={state.data.title} type={state.data.type} tag={state.data.tag}/>
+      <RecruitmentBoardContent
         name={state.data.writerNickname}
         categories={[ state.data.type, state.data.tag ]}
         target={state.data.recruitmentTarget}

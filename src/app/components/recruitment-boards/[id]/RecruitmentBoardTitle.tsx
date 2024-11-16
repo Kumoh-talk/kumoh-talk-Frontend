@@ -1,5 +1,5 @@
-import styles from './studyAndProjectTitle.module.scss';
-import HashTag from '@/app/components/study/[id]/HashTag';
+import styles from './recruitmentBoardTitle.module.scss';
+import HashTag from '@/app/components/recruitment-boards/[id]/HashTag';
 
 export interface Props {
   title: string,
@@ -7,7 +7,7 @@ export interface Props {
   tag: string,
 }
 // TODO: 백엔드 api 완성되면 수정
-export function StudyAndProjectTitle({ title, type, tag }: Props) {
+export function RecruitmentBoardTitle({ title, type, tag }: Props) {
   return (
     <div className={styles.titleBlock}>
       <div className={styles.title}>{title}</div>

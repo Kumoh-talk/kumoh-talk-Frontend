@@ -2,6 +2,7 @@
 
 import { createContext, useState, useEffect } from 'react';
 import { StudyProjectBoard, StudyProjectBoardApi } from '@/app/lib/types/studyProject/studyProjectBoard';
+import { usePathname } from 'next/navigation';
 
 export const StudyAndProjectDetailContext = createContext<{
   state: StudyProjectBoardApi;
@@ -22,11 +23,12 @@ export function StudyAndProjectDetailProvider({ children }: Props) {
     success: 'false',
     data: {} as StudyProjectBoard,
   });
+  const id = usePathname().split('/').at(-1);
 
   const fetchData = async () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     try {
-      const response = await fetch(`${API_URL}/api/v1/recruitment-boards/12/board`);
+      const response = await fetch(`${API_URL}/api/v1/recruitment-boards/${id}/board`);
       const result = await response.json();
 
       if (response.ok && 'success' in result && 'data' in result) {
@@ -40,6 +42,10 @@ export function StudyAndProjectDetailProvider({ children }: Props) {
       setState({ success: 'false', data: {} as StudyProjectBoard });
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <StudyAndProjectDetailContext.Provider value={{ state, setState, fetchData }}>

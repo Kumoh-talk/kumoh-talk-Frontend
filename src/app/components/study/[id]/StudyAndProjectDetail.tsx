@@ -9,14 +9,6 @@ import { StudyAndProjectDetailContext } from '@/app/components/study/[id]/StudyA
 export default function StudyAndProjectDetail() {
   const { state, setState, fetchData } = useContext(StudyAndProjectDetailContext);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  if (!state.data.title) {
-    return <p>Loading...</p>
-  }
-
   return (
     <main>
       <StudyAndProjectTitle title={state.data.title} type={state.data.type} tag={state.data.tag}/>

@@ -4,26 +4,36 @@ import { StudyAndProjectTitle } from '@/app/components/study/[id]/StudyAndProjec
 import StudyAndProjectContent from '@/app/components/study/[id]/StudyAndProjectContent';
 import useGetStudyProjectBoardDetail from '@/app/lib/hooks/useGetStudyProjectBoardDetail';
 import dayjs from 'dayjs';
-
-const boardId = '이건 보드Id';
+import { useContext, useEffect } from 'react';
+import { StudyAndProjectDetailContext } from '@/app/components/study/[id]/StudyAndProjectDetailProvider';
+import { StudyProjectBoard } from '@/app/lib/types/studyProject/studyProjectBoard';
 
 export default function StudyAndProjectDetail() {
-  // const { data } = useGetStudyProjectBoardDetail(boardId);
+  const { state, setState, fetchData } = useContext(StudyAndProjectDetailContext);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  if (!state.data) {
+    return <p>Loading...</p>
+  }
+  console.log(state.data);
 
   return (
-    <>
-      <StudyAndProjectTitle title={'제목1'} type={'STUDY'} tag={'FRONT'}/>
+    <main>
+      <StudyAndProjectTitle title={state.data.title} type={state.data.type} tag={state.data.tag}/>
       <StudyAndProjectContent
-        name={'황준호'}
-        categories={[ '스터디', '프론트' ]}
-        target={'컴퓨터공학과'}
-        recruitmentNum={'10'}
-        recruitmentStart={dayjs('2024-07-20T08:00:00').format('YYYY.MM.DD HH:mm')}
-        recruitmentDeadline={dayjs('2024-09-10T23:59:59').format('YYYY.MM.DD HH:mm')}
-        activity={'주 2회 화요일(대면), 수요일(비대면)'}
-        activityStart={dayjs('2024-07-20T08:00:00').format('YYYY.MM.DD HH:mm')}
-        activityFinish={dayjs('2024-07-30T10:00:00').format('YYYY.MM.DD HH:mm')}
-        detail={'해킹하는법을 배워서 학점을 고칠예정'}/>
-    </>
+        name={state.data.writerNickname}
+        categories={[ state.data.type, state.data.tag ]}
+        target={state.data.recruitmentTarget}
+        recruitmentNum={state.data.recruitmentNum}
+        recruitmentStart={dayjs(state.data.recruitmentStart).format('YYYY.MM.DD HH:mm')}
+        recruitmentDeadline={dayjs(state.data.recruitmentDeadline).format('YYYY.MM.DD HH:mm')}
+        activity={state.data.activityCycle}
+        activityStart={dayjs(state.data.activityStart).format('YYYY.MM.DD HH:mm')}
+        activityFinish={dayjs(state.data.activityFinish).format('YYYY.MM.DD HH:mm')}
+        detail={state.data.content}/>
+    </main>
   )
 }

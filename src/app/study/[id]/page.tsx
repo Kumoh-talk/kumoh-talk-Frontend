@@ -5,20 +5,23 @@ import Comment from '@/app/components/common/comment/CommentComponent';
 import { Suspense } from 'react';
 import StudyAndProjectDetail from '@/app/components/study/[id]/StudyAndProjectDetail';
 import CheckApplicantButton from '@/app/components/study/[id]/CheckApplicantButton';
+import { StudyAndProjectDetailProvider } from '@/app/components/study/[id]/StudyAndProjectDetailProvider';
 
 // TODO: 백엔드 api 완성되면 수정
 export default function Page() {
   return (
     <main className={styles.board}>
-      <Suspense fallback={<p>Loading...</p>}>
-        <StudyAndProjectDetail />
-      </Suspense>
-      <div className={styles.buttonBlock}>
-        <ApplyButton />
-        <ModifyButton />
-        <CheckApplicantButton />
-      </div>
-      <Comment />
+      <StudyAndProjectDetailProvider>
+        <Suspense fallback={<p>Loading...</p>}>
+          <StudyAndProjectDetail/>
+        </Suspense>
+        <div className={styles.buttonBlock}>
+          <ApplyButton/>
+          <ModifyButton/>
+          <CheckApplicantButton/>
+        </div>
+        <Comment/>
+      </StudyAndProjectDetailProvider>
     </main>
   )
 }

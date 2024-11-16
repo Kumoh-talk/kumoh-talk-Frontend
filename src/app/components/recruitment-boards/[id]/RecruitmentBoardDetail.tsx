@@ -7,22 +7,26 @@ import { useContext, useEffect } from 'react';
 import { RecruitmentBoardDetailContext } from '@/app/components/recruitment-boards/[id]/RecruitmentBoardDetailProvider';
 
 export default function RecruitmentBoardDetail() {
-  const { state, setState, fetchData } = useContext(RecruitmentBoardDetailContext);
+  const { success, data, fetchData } = useContext(RecruitmentBoardDetailContext);
+
+  if (!data.title) {
+    return <p>Loading...</p>
+  }
 
   return (
     <main>
-      <RecruitmentBoardTitle title={state.data.title} type={state.data.type} tag={state.data.tag}/>
+      <RecruitmentBoardTitle title={data.title} type={data.type} tag={data.tag}/>
       <RecruitmentBoardContent
-        name={state.data.writerNickname}
-        categories={[ state.data.type, state.data.tag ]}
-        target={state.data.recruitmentTarget}
-        recruitmentNum={state.data.recruitmentNum}
-        recruitmentStart={dayjs(state.data.recruitmentStart).format('YYYY.MM.DD HH:mm')}
-        recruitmentDeadline={dayjs(state.data.recruitmentDeadline).format('YYYY.MM.DD HH:mm')}
-        activity={state.data.activityCycle}
-        activityStart={dayjs(state.data.activityStart).format('YYYY.MM.DD HH:mm')}
-        activityFinish={dayjs(state.data.activityFinish).format('YYYY.MM.DD HH:mm')}
-        detail={state.data.content}/>
+        name={data.writerNickname}
+        categories={[ data.type, data.tag ]}
+        target={data.recruitmentTarget}
+        recruitmentNum={data.recruitmentNum}
+        recruitmentStart={dayjs(data.recruitmentStart).format('YYYY.MM.DD HH:mm')}
+        recruitmentDeadline={dayjs(data.recruitmentDeadline).format('YYYY.MM.DD HH:mm')}
+        activity={data.activityCycle}
+        activityStart={dayjs(data.activityStart).format('YYYY.MM.DD HH:mm')}
+        activityFinish={dayjs(data.activityFinish).format('YYYY.MM.DD HH:mm')}
+        detail={data.content}/>
     </main>
   )
 }

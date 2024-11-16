@@ -2,11 +2,9 @@
 
 import { StudyAndProjectTitle } from '@/app/components/study/[id]/StudyAndProjectTitle';
 import StudyAndProjectContent from '@/app/components/study/[id]/StudyAndProjectContent';
-import useGetStudyProjectBoardDetail from '@/app/lib/hooks/useGetStudyProjectBoardDetail';
 import dayjs from 'dayjs';
 import { useContext, useEffect } from 'react';
 import { StudyAndProjectDetailContext } from '@/app/components/study/[id]/StudyAndProjectDetailProvider';
-import { StudyProjectBoard } from '@/app/lib/types/studyProject/studyProjectBoard';
 
 export default function StudyAndProjectDetail() {
   const { state, setState, fetchData } = useContext(StudyAndProjectDetailContext);
@@ -15,10 +13,9 @@ export default function StudyAndProjectDetail() {
     fetchData();
   }, [fetchData]);
 
-  if (!state.data) {
+  if (!state.data.title) {
     return <p>Loading...</p>
   }
-  console.log(state.data);
 
   return (
     <main>

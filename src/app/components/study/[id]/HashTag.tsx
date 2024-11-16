@@ -23,6 +23,6 @@ const textObj: TagType = {
 
 export default function HashTag({ type, size = 'large' }: Props) {
   return (
-    <div className={clsx(styles.tag, styles[type.toLocaleLowerCase()], styles[size])}>{textObj[type]}</div>
+    <div className={clsx(styles.tag, styles[type?.toLocaleLowerCase()], styles[size])}>{textObj[type]}</div>
   )
 }

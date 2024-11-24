@@ -1,4 +1,4 @@
-import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/[id]/RecruitmentBoardTitle';
+import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import styles from './page.module.scss';
 import ListDetailTable from '@/app/components/recruitment-boards/list/[id]/ListDetailTable';
 

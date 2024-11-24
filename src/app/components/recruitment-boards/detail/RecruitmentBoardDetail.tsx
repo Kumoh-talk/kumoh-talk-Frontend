@@ -1,10 +1,10 @@
 'use client'
 
-import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/[id]/RecruitmentBoardTitle';
-import RecruitmentBoardContent from '@/app/components/recruitment-boards/[id]/RecruitmentBoardContent';
+import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
+import RecruitmentBoardContent from '@/app/components/recruitment-boards/detail/RecruitmentBoardContent';
 import dayjs from 'dayjs';
 import { useContext, useEffect } from 'react';
-import { RecruitmentBoardDetailContext } from '@/app/components/recruitment-boards/[id]/RecruitmentBoardDetailProvider';
+import { RecruitmentBoardDetailContext } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 
 export default function RecruitmentBoardDetail() {
   const { success, data, fetchData } = useContext(RecruitmentBoardDetailContext);

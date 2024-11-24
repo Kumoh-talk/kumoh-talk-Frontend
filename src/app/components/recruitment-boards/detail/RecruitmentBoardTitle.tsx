@@ -1,5 +1,5 @@
 import styles from './recruitmentBoardTitle.module.scss';
-import HashTag from '@/app/components/recruitment-boards/[id]/HashTag';
+import HashTag from '@/app/components/recruitment-boards/detail/HashTag';
 
 export interface Props {
   title: string,

@@ -2,7 +2,7 @@
 
 import { createContext, useState, useEffect } from 'react';
 import { StudyProjectBoard, StudyProjectBoardApi } from '@/app/lib/types/studyProject/studyProjectBoard';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export const RecruitmentBoardDetailContext = createContext<{
   success: string;
@@ -23,8 +23,7 @@ export function RecruitmentBoardDetailProvider({ children }: Props) {
     success: 'false',
     data: {} as StudyProjectBoard,
   });
-  const pathNames = usePathname().split('/');
-  const boardId = pathNames.at(-1);
+  const boardId = useSearchParams().get('id');
 
   const fetchData = async () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';

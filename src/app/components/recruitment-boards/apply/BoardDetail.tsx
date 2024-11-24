@@ -1,7 +1,11 @@
-export default function BoardDetail() {
+export interface Props {
+  content: string;
+}
+
+export default function BoardDetail({ content }: Props) {
   return (
     <div style={{ margin: '2rem 0' }}>
-      세부사항이 들어감
+      {content}
     </div>
   )
 }

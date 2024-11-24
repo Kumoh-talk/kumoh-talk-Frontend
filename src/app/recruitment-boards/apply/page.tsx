@@ -4,15 +4,15 @@ import ApplyForm from '@/app/components/recruitment-boards/apply/ApplyForm';
 import {
   RecruitmentBoardDetailProvider
 } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
-import RecruitmentApplayContainer from '@/app/components/recruitment-boards/apply/RecruitmentApplayContainer';
+import RecruitmentApplyContainer from '@/app/components/recruitment-boards/apply/RecruitmentApplyContainer';
 
 export default function Page() {
   return (
     <main className={styles.block}>
       <RecruitmentBoardDetailProvider>
-        <ApplyBanner/>
-          <RecruitmentApplayContainer />
-        <ApplyForm/>
+        <ApplyBanner />
+        <RecruitmentApplyContainer />
+        <ApplyForm />
       </RecruitmentBoardDetailProvider>
     </main>
   )

@@ -1,16 +1,16 @@
 'use client';
 
 import { createContext, useState, useEffect } from 'react';
-import { StudyProjectBoard, StudyProjectBoardApi } from '@/app/lib/types/studyProject/studyProjectBoard';
+import { RecruitmentBoards,  RecruitmentBoardsApi } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 export const RecruitmentBoardDetailContext = createContext<{
   success: string;
-  data: StudyProjectBoard;
+  data: RecruitmentBoards;
   fetchData: () => Promise<void>;
 }>({
   success: 'false',
-  data: {} as StudyProjectBoard,
+  data: {} as RecruitmentBoards,
   fetchData: async () => {},
 });
 
@@ -19,9 +19,9 @@ interface Props {
 }
 
 export function RecruitmentBoardDetailProvider({ children }: Props) {
-  const [state, setState] = useState<StudyProjectBoardApi>({
+  const [state, setState] = useState<RecruitmentBoardsApi>({
     success: 'false',
-    data: {} as StudyProjectBoard,
+    data: {} as RecruitmentBoards,
   });
   const boardId = useSearchParams().get('id');
 
@@ -35,11 +35,11 @@ export function RecruitmentBoardDetailProvider({ children }: Props) {
         setState({ success: 'true', data: result.data });
       } else {
         console.error('Failed to fetch data:', result);
-        setState({ success: 'false', data: {} as StudyProjectBoard });
+        setState({ success: 'false', data: {} as RecruitmentBoards });
       }
     } catch (error) {
       console.error('Error fetching data:', error);
-      setState({ success: 'false', data: {} as StudyProjectBoard });
+      setState({ success: 'false', data: {} as RecruitmentBoards });
     }
   };
 

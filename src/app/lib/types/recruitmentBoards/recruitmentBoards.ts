@@ -1,9 +1,9 @@
-export interface StudyProjectBoardApi {
+export interface RecruitmentBoardsApi {
   success: string;
-  data: StudyProjectBoard;
+  data: RecruitmentBoards;
 }
 
-export interface StudyProjectBoard {
+export interface RecruitmentBoards {
   boardId: number;
   writerNickname: string;
   writerPhoneNumber: string;

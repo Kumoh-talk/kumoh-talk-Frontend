@@ -1,0 +1,33 @@
+@import 'mixin';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  margin-bottom: 1.35rem;
+}
+
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.675rem;
+}
+
+.gradeInputBlock {
+  display: flex;
+  gap: 1.35rem;
+
+  .grade {
+    @extend .inputBlock;
+    flex: 3;
+  }
+
+  .number {
+    @extend .inputBlock;
+    flex: 7;
+  }
+}
+
+.title {
+  @include title3Emphasized(black-100);
+}

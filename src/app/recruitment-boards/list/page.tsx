@@ -1,15 +1,15 @@
-import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import styles from './page.module.scss';
-import ListTable from '@/app/components/recruitment-boards/list/ListTable';
-import { Suspense } from 'react';
+import {
+  RecruitmentBoardDetailProvider
+} from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
+import ApplyListContainer from '@/app/components/recruitment-boards/list/ApplyListContainer';
 
 export default function Page() {
   return (
     <main className={styles.block}>
-      <RecruitmentBoardTitle title={'제목1'} type={'STUDY'} tag={'FRONT'}/>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ListTable/>
-      </Suspense>
+      <RecruitmentBoardDetailProvider>
+        <ApplyListContainer/>
+      </RecruitmentBoardDetailProvider>
     </main>
   )
 }

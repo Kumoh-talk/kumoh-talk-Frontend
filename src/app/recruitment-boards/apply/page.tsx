@@ -9,11 +9,11 @@ import RecruitmentApplyContainer from '@/app/components/recruitment-boards/apply
 export default function Page() {
   return (
     <main className={styles.block}>
+      <ApplyBanner/>
       <RecruitmentBoardDetailProvider>
-        <ApplyBanner />
-        <RecruitmentApplyContainer />
-        <ApplyForm />
+        <RecruitmentApplyContainer/>
       </RecruitmentBoardDetailProvider>
+      <ApplyForm/>
     </main>
   )
 }

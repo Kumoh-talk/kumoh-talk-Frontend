@@ -2,13 +2,14 @@ import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction, useState } from '
 
 type commentEditProps = {
   id: number,
+  groupId: number | null,
   comment: string,
   setIsEdit: Dispatch<SetStateAction<boolean>>,
 }
 
 type commentEditType = [string, (e: ChangeEvent<HTMLTextAreaElement>) => void, (e: KeyboardEvent<HTMLTextAreaElement>) => void];
 
-export default function useCommentEdit({ id, comment, setIsEdit }: commentEditProps): commentEditType {
+export default function useCommentEdit({ id, groupId = null, comment, setIsEdit }: commentEditProps): commentEditType {
   const [content, setContent] = useState(comment);
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -16,9 +17,25 @@ export default function useCommentEdit({ id, comment, setIsEdit }: commentEditPr
     console.log(content);
   }
 
-  const onSubmit = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  const onSubmit = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      console.log(`${id}번 댓글이 ${content}로 수정 완료되었습니다.`);
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN || '';
+      try {
+        const response = await fetch(`${API_URL}/api/v1/comments/${id}`, {
+          method: 'PATCH',
+          redirect: 'follow',
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content,
+            groupId
+          })
+        });
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
       setIsEdit(false);
     }
   }

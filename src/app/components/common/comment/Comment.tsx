@@ -36,8 +36,13 @@ export default function Comment({ id, name, date, comment }: Props) {
         <div className={styles.commentBottom}>
           {
             isEdit ?
-              <input className={styles.commentEdit} ref={editRef} value={content} onChange={onChange}
-                     onKeyDown={onSubmit}/> :
+              <textarea
+                className={styles.commentEdit}
+                ref={editRef}
+                value={content}
+                onChange={onChange}
+                onKeyDown={onSubmit}
+              /> :
               <div className={styles.commentText}>{content}</div>
           }
           {isEdit || <div className={styles.reactButton}>답글</div>}

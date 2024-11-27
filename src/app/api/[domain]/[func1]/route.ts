@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCookie } from '@/app/lib/apis/auth';
+import { getCookie, parseJwt } from '@/app/lib/apis/auth';
 import { refreshToken } from '@/app/lib/apis/user';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
@@ -119,7 +119,7 @@ export async function POST(
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
-      GET,
+      POST,
       { params },
       getCookie(cookies!, 'accessToken')!,
       getCookie(cookies!, 'refreshToken')!,
@@ -152,7 +152,7 @@ export async function PUT(
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
-      GET,
+      PUT,
       { params },
       getCookie(cookies!, 'accessToken')!,
       getCookie(cookies!, 'refreshToken')!,
@@ -171,6 +171,12 @@ export async function PATCH(
 
   const searchParams = request.nextUrl.searchParams;
 
+  if (cookies && getCookie(cookies, 'accessToken')) {
+    const accessToken = getCookie(cookies, 'accessToken')!;
+    const { USER_ID: userId } = parseJwt(accessToken);
+    searchParams.append('userId', '' + userId);
+  }
+
   const res = await _fetch(
     `${baseUrl}/${params.domain}/${params.func1}?${searchParams.toString()}`,
     {
@@ -180,19 +186,36 @@ export async function PATCH(
     await request.json(),
   );
 
+  const resBody = await res.json();
+  console.log(res.status, resBody);
+
   // 토큰 만료
   if (res.status === 401) {
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
-      GET,
+      PATCH,
       { params },
       getCookie(cookies!, 'accessToken')!,
       getCookie(cookies!, 'refreshToken')!,
     );
   }
 
-  return NextResponse.json(await res.json(), { status: res.status });
+  const response = NextResponse.json(resBody, { status: res.status });
+  if (resBody.data?.accessToken) {
+    response.cookies.set('accessToken', resBody.data.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+    response.cookies.set('refreshToken', resBody.data.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+  }
+
+  return response;
 }
 
 export async function DELETE(
@@ -217,7 +240,7 @@ export async function DELETE(
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
-      GET,
+      DELETE,
       { params },
       getCookie(cookies!, 'accessToken')!,
       getCookie(cookies!, 'refreshToken')!,

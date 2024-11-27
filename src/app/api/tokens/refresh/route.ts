@@ -15,12 +15,16 @@ const _fetch = async (
 };
 
 export async function POST(request: NextRequest) {
+  console.log('POST /api/tokens/refresh123123');
   const { accessToken, refreshToken } = await request.json();
   if (!accessToken || !refreshToken) {
     return NextResponse.json('Invalid tokens', { status: 400 });
   }
 
+  console.log(accessToken, refreshToken);
+
   try {
+    //check if accessToken and refreshToken are valid
     if (!accessToken || !refreshToken) {
       return NextResponse.json('Invalid tokens', { status: 400 });
     }
@@ -51,6 +55,8 @@ export async function POST(request: NextRequest) {
         path: '/',
       });
     }
+
+    console.log(res.status, data, response.cookies)
 
     return response;
   } catch (e) {

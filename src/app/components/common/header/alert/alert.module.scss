@@ -1,0 +1,16 @@
+@import 'mixin';
+
+.alert {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:active {
+    outline: none;
+  }
+
+  & > svg {
+    width: 1.75rem;
+  }
+}

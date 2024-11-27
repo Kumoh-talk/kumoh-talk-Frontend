@@ -43,11 +43,7 @@ const refreshAndRetry = async (
     const tokenBody: {
       accessToken: string;
       refreshToken: string;
-    } = body;
-    request.headers.set(
-      'cookies',
-      `accessToken=${tokenBody.accessToken}; refreshToken=${tokenBody.refreshToken}`,
-    );
+    } = body.data;
 
     const res2 = await func(request, params);
 

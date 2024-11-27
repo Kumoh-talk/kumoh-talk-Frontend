@@ -29,21 +29,14 @@ const refreshAndRetry = async (
   request: NextRequest,
   func: (request: NextRequest, params: any) => Promise<NextResponse>,
   params: any,
+  accessToken?: string,
+  _refreshToken?: string,
 ) => {
-  const cookies = request.headers.get('cookie');
-
-  if (
-    !cookies ||
-    !getCookie(cookies, 'accessToken') ||
-    !getCookie(cookies, 'refreshToken')
-  ) {
+  if (!accessToken || !_refreshToken) {
     return NextResponse.json({ status: 403 });
   }
 
-  const newTokenRes = await refreshToken(
-    getCookie(cookies, 'accessToken')!,
-    getCookie(cookies, 'refreshToken')!,
-  );
+  const newTokenRes = await refreshToken(accessToken, _refreshToken!);
 
   if (newTokenRes.status === 200) {
     const body = await newTokenRes.json();
@@ -57,6 +50,17 @@ const refreshAndRetry = async (
     );
 
     const res2 = await func(request, params);
+
+    res2.cookies.set('accessToken', tokenBody.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+    res2.cookies.set('refreshToken', tokenBody.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
     return res2;
   } else {
     return NextResponse.json({ status: 403 });
@@ -84,7 +88,13 @@ export async function GET(
   // 토큰 만료
   if (res.status === 401) {
     console.log('Token expired, refreshing token');
-    refreshAndRetry(request, GET, { params });
+    return refreshAndRetry(
+      request,
+      GET,
+      { params },
+      getCookie(cookies!, 'accessToken')!,
+      getCookie(cookies!, 'refreshToken')!,
+    );
   }
 
   return NextResponse.json(body, { status: res.status });
@@ -111,7 +121,13 @@ export async function POST(
   // 토큰 만료
   if (res.status === 401) {
     console.log('Token expired, refreshing token');
-    refreshAndRetry(request, POST, { params });
+    return refreshAndRetry(
+      request,
+      GET,
+      { params },
+      getCookie(cookies!, 'accessToken')!,
+      getCookie(cookies!, 'refreshToken')!,
+    );
   }
 
   return NextResponse.json(await res.json(), { status: res.status });
@@ -138,7 +154,13 @@ export async function PUT(
   // 토큰 만료
   if (res.status === 401) {
     console.log('Token expired, refreshing token');
-    refreshAndRetry(request, PUT, { params });
+    return refreshAndRetry(
+      request,
+      GET,
+      { params },
+      getCookie(cookies!, 'accessToken')!,
+      getCookie(cookies!, 'refreshToken')!,
+    );
   }
 
   return NextResponse.json(await res.json(), { status: res.status });
@@ -165,7 +187,13 @@ export async function PATCH(
   // 토큰 만료
   if (res.status === 401) {
     console.log('Token expired, refreshing token');
-    refreshAndRetry(request, PATCH, { params });
+    return refreshAndRetry(
+      request,
+      GET,
+      { params },
+      getCookie(cookies!, 'accessToken')!,
+      getCookie(cookies!, 'refreshToken')!,
+    );
   }
 
   return NextResponse.json(await res.json(), { status: res.status });
@@ -191,7 +219,13 @@ export async function DELETE(
   // 토큰 만료
   if (res.status === 401) {
     console.log('Token expired, refreshing token');
-    refreshAndRetry(request, DELETE, { params });
+    return refreshAndRetry(
+      request,
+      GET,
+      { params },
+      getCookie(cookies!, 'accessToken')!,
+      getCookie(cookies!, 'refreshToken')!,
+    );
   }
 
   return NextResponse.json(await res.json(), { status: res.status });

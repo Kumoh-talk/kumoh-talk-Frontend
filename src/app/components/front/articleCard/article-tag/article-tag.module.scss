@@ -1,0 +1,40 @@
+@import 'mixin';
+
+.tag {
+  @include callout;
+  color: white;
+  display: flex;
+  padding: 3px 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 1px;
+  background: var(--orange, #ffa800);
+  box-shadow: 0px 0.5px 2.5px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
+
+  &.project {
+    background: #007aff;
+  }
+  &.study {
+    background: var(--color-orange);
+  }
+  &.frontend {
+    background: var(--color-blue-200);
+  }
+  &.backend {
+    background: #333b43;
+  }
+  &.mobile {
+    background: #426c98;
+  }
+  &.security {
+    background: #6e5e42;
+  }
+  &.ai {
+    background: #ad843d;
+  }
+  &.mentor {
+    background: #6a50fa;
+  }
+}

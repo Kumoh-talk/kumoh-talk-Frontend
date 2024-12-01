@@ -1,0 +1,27 @@
+@import 'mixin';
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem; // 100px
+  max-width: 79.5rem; // 1240px
+  margin: 0 auto;
+  padding: 2.5rem 1rem 15rem;
+
+  & > header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+
+    .logo {
+      align-self: center;
+      height: 3rem;
+    }
+    .bannerWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      align-items: center;
+    }
+  }
+}

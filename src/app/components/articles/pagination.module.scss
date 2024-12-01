@@ -1,0 +1,31 @@
+@import 'mixin';
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-self: center;
+
+  .pages {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+  .side,
+  .page {
+    @include title3Emphasized(black-85);
+    background: transparent;
+    border: 1px solid var(--color-blue-400);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: 1.75rem;
+    height: 1.75rem;
+    &:after {
+      border-radius: 0.25rem;
+    }
+    &.nonActive {
+      @include title3Emphasized(black-85);
+      border-color: transparent;
+    }
+  }
+}

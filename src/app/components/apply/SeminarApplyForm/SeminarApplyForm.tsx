@@ -5,7 +5,7 @@ import Input from '../Input/Input';
 import Select from '../Select/Select';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '@/app/components/common/button/Button';
-import { grades, dates } from '../../_constants/selectValues';
+import { grades, dates } from '../../../apply/_constants/selectValues';
 import styles from './SeminarApplyForm.module.scss';
 
 const SeminarApplyForm = () => {

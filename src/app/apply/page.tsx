@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import seminarApply from '@/app/assets/png/seminarApply.png';
-import SeminarApplyForm from './_components/SeminarApplyForm/SeminarApplyForm';
+import SeminarApplyForm from '../components/apply/SeminarApplyForm/SeminarApplyForm';
 import styles from './page.module.scss';
 
 export default function SeminarApply() {

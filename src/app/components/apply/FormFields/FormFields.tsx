@@ -5,14 +5,16 @@ import Input from '../Input/Input';
 import Select from '../Select/Select';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '@/app/components/common/button/Button';
-import {
-  departments,
-  grades,
-  dates,
-} from '../../../apply/_constants/selectValues';
+import { departments, grades } from '../../../apply/_constants/selectValues';
+import { getUpcomingWeekdayDates } from '@/app/lib/utils/dateUtils';
 import styles from './FormFields.module.scss';
 
 const FormFields = () => {
+  const dates = getUpcomingWeekdayDates(4, 3).map((date) => ({
+    value: date,
+    label: `${date} (목)`,
+  }));
+
   return (
     <>
       <div className={styles.fields}>

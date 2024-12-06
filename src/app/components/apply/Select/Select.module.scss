@@ -3,7 +3,7 @@
 .container {
   position: relative;
   display: inline-block;
-  width : 300px;
+  width: 300px;
 
   .display {
     @include body(black-85);
@@ -46,6 +46,7 @@
     border-radius: 8px;
     background-color: var(--color-white);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
 
     &.open {
       display: block;

@@ -5,7 +5,11 @@ import Input from '../Input/Input';
 import Select from '../Select/Select';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '@/app/components/common/button/Button';
-import { grades, dates } from '../../../apply/_constants/selectValues';
+import {
+  departments,
+  grades,
+  dates,
+} from '../../../apply/_constants/selectValues';
 import styles from './SeminarApplyForm.module.scss';
 
 const SeminarApplyForm = () => {
@@ -14,7 +18,7 @@ const SeminarApplyForm = () => {
       <div className={styles.fields}>
         <div className={styles.formField}>
           <Label>학과</Label>
-          <Input />
+          <Select options={departments} />
         </div>
         <div className={styles.row}>
           <div className={styles.formField}>

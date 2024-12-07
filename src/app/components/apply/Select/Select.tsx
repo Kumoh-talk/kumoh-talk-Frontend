@@ -12,11 +12,12 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
+  onChange: (value: string) => void;
 }
 
-const Select = ({ options }: SelectProps) => {
+const Select = ({ options, onChange }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<Option | null>(options[0]);
+  const [selected, setSelected] = useState<Option>(options[0]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
@@ -24,6 +25,7 @@ const Select = ({ options }: SelectProps) => {
   const handleOptionSelect = (option: Option) => {
     setSelected(option);
     setIsOpen(false);
+    onChange(option.value);
   };
 
   useEffect(() => {

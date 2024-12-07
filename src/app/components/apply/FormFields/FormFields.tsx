@@ -1,11 +1,10 @@
 'use client';
 
 import { useFormContext } from 'react-hook-form';
-import Label from '../Label/Label';
-import Select from '../Select/Select';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '@/app/components/common/button/Button';
 import InputField from '../Field/InputField';
+import SelectField from '../Field/SelectField';
 import { departments, grades } from '@/app/lib/constants/apply/selectValues';
 import { getUpcomingWeekdayDates } from '@/app/lib/utils/dateUtils';
 import styles from './FormFields.module.scss';
@@ -20,19 +19,25 @@ const FormFields = () => {
   return (
     <>
       <div className={styles.fields}>
-        <div className={styles.formField}>
-          <Label>학과</Label>
-          <Select options={departments} />
-        </div>
+        <SelectField
+          control={form.control}
+          name='department'
+          label='학과'
+          options={departments}
+        />
         <div className={styles.row}>
-          <div className={styles.formField}>
-            <Label>학년</Label>
-            <Select options={grades} />
-          </div>
-          <div className={styles.formField}>
-            <Label>발표 희망 날짜</Label>
-            <Select options={dates} />
-          </div>
+          <SelectField
+            control={form.control}
+            name='grade'
+            label='학년'
+            options={grades}
+          />
+          <SelectField
+            control={form.control}
+            name='preferredDate'
+            label='발표 희망 날짜'
+            options={dates}
+          />
         </div>
         <InputField control={form.control} name='studentId' label='학번' />
         <InputField

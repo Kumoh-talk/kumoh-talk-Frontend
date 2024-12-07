@@ -1,0 +1,12 @@
+@import 'mixin';
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+
+  input {
+    width: 100%;
+  }
+}

@@ -72,6 +72,12 @@ export async function GET(
 
   const searchParams = request.nextUrl.searchParams;
 
+  if (cookies && getCookie(cookies, 'accessToken')) {
+    const accessToken = getCookie(cookies, 'accessToken')!;
+    const { USER_ID: userId } = parseJwt(accessToken);
+    searchParams.append('userId', '' + userId);
+  }
+
   const res = await _fetch(
     `${baseUrl}/${params.domain}/${params.func1}?${searchParams.toString()}`,
     {
@@ -105,6 +111,12 @@ export async function POST(
 
   const searchParams = request.nextUrl.searchParams;
 
+  if (cookies && getCookie(cookies, 'accessToken')) {
+    const accessToken = getCookie(cookies, 'accessToken')!;
+    const { USER_ID: userId } = parseJwt(accessToken);
+    searchParams.append('userId', '' + userId);
+  }
+
   const res = await _fetch(
     `${baseUrl}/${params.domain}/${params.func1}?${searchParams.toString()}`,
     {
@@ -137,6 +149,12 @@ export async function PUT(
   const headers = convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
+
+  if (cookies && getCookie(cookies, 'accessToken')) {
+    const accessToken = getCookie(cookies, 'accessToken')!;
+    const { USER_ID: userId } = parseJwt(accessToken);
+    searchParams.append('userId', '' + userId);
+  }
 
   const res = await _fetch(
     `${baseUrl}/${params.domain}/${params.func1}?${searchParams.toString()}`,
@@ -226,6 +244,12 @@ export async function DELETE(
   const headers = convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
+
+  if (cookies && getCookie(cookies, 'accessToken')) {
+    const accessToken = getCookie(cookies, 'accessToken')!;
+    const { USER_ID: userId } = parseJwt(accessToken);
+    searchParams.append('userId', '' + userId);
+  }
 
   const res = await _fetch(
     `${baseUrl}/${params.domain}/${params.func1}?${searchParams.toString()}`,

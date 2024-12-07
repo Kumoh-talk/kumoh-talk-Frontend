@@ -21,6 +21,29 @@ const departments = [
   { value: '경영학과', label: '경영학과' },
 ];
 
+const departmentValues = [
+  '전자공학부',
+  '건축학부',
+  '산업공학과',
+  '고분자공학과',
+  '소재디자인공학과',
+  '화학공학과',
+  '신소재공학부',
+  '기계공학과',
+  '기계시스템공학부',
+  '토목공학과',
+  '컴퓨터공학과',
+  '컴퓨터소프트웨어공학과',
+  '인공지능공학과',
+  '광시스템공학과',
+  '메디컬IT융합공학과',
+  '환경공학과',
+  'IT융합학과',
+  '수리빅데이터학과',
+  '화학생명과학과',
+  '경영학과',
+] as const;
+
 const grades = [
   { value: '1', label: '1학년' },
   { value: '2', label: '2학년' },
@@ -28,4 +51,4 @@ const grades = [
   { value: '4', label: '4학년' },
 ];
 
-export { departments, grades };
+export { departments, departmentValues, grades };

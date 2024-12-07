@@ -26,3 +26,9 @@ export const seminarFormSchema = z.object({
 });
 
 export type SeminarFormValues = z.infer<typeof seminarFormSchema>;
+
+export const validateSeminarForm = (formData: FormData) => {
+  const formValues = Object.fromEntries(formData.entries());
+
+  return seminarFormSchema.safeParse(formValues);
+};

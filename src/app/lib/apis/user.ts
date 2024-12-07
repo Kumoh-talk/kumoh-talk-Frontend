@@ -65,7 +65,7 @@ export const logout = (userId: string) => {
 };
 
 
-export const getUserInfo = (token: string) => {
+export const getUserInfo = () => {
   return _fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: {

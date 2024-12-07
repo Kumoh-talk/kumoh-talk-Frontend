@@ -12,4 +12,12 @@ const FormFieldNameContext = createContext<FormFieldNameContextValue>(
   {} as FormFieldNameContextValue
 );
 
-export { FormFieldNameContext };
+type FormFieldIdContextValue = {
+  id: string;
+};
+
+const FormFieldIdContext = createContext<FormFieldIdContextValue>(
+  {} as FormFieldIdContextValue
+);
+
+export { FormFieldNameContext, FormFieldIdContext };

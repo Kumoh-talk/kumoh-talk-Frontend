@@ -8,7 +8,7 @@ import styles from './page.module.scss';
 export default function SeminarApply() {
   return (
     <>
-      <Header />
+      <Header title='세미나 신청' />
       <main className={styles.layout}>
         <article className={styles.seminarApply}>
           <figure className={styles.imageWrapper}>

@@ -3,7 +3,7 @@
 .container {
   position: relative;
   display: inline-block;
-  width: 300px;
+  width: 100%;
 
   .display {
     @include body(black-85);

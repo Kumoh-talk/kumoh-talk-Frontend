@@ -5,8 +5,9 @@
   flex-direction: column;
   justify-content: center;
   gap: 16px;
+  width: 100%;
+}
 
-  input {
-    width: 100%;
-  }
+.formMessage {
+  @include body(red);
 }

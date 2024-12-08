@@ -3,15 +3,15 @@
 .input {
   @include body(black-85);
 
-  height: 64px;
+  height: 48px;
   border: 0.2px solid var(--color-black-25);
-  padding: 24px;
+  padding: 0 10px;
 
   &::placeholder {
     @include body(black-25);
   }
 
-  &:not(:placeholder-shown) {
+  &:focus {
     border: 0.2px solid var(--color-black-100);
   }
 }

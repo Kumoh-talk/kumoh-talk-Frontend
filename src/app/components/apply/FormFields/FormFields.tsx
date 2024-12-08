@@ -19,12 +19,15 @@ const FormFields = () => {
   return (
     <>
       <div className={styles.fields}>
-        <SelectField
-          control={form.control}
-          name='department'
-          label='학과'
-          options={departments}
-        />
+        <div className={styles.row}>
+          <InputField control={form.control} name='studentId' label='학번' />
+          <SelectField
+            control={form.control}
+            name='department'
+            label='학과'
+            options={departments}
+          />
+        </div>
         <div className={styles.row}>
           <SelectField
             control={form.control}
@@ -39,7 +42,6 @@ const FormFields = () => {
             options={dates}
           />
         </div>
-        <InputField control={form.control} name='studentId' label='학번' />
         <InputField
           control={form.control}
           name='phoneNumber'

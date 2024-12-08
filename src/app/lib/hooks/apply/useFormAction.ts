@@ -36,7 +36,7 @@ export function useFormAction<
         form.reset();
         break;
     }
-  }, [formState, form]);
+  }, [formState]);
 
   return { ...form };
 }

@@ -13,7 +13,7 @@ const FormFields = () => {
   const form = useFormContext();
   const dates = getUpcomingWeekdayDates(4, 3).map((date) => ({
     value: date,
-    label: `${date} (목)`,
+    label: `${date.replace(/-/g, '.')} (목)`,
   }));
 
   return (

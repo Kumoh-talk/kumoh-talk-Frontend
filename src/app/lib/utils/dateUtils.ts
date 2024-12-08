@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-const getDateForWeekday = (targetWeekday: number, format = 'YYYY.MM.DD') => {
+const getDateForWeekday = (targetWeekday: number, format = 'YYYY-MM-DD') => {
   const today = dayjs();
   const todayWeekday = today.day();
   const offset = (targetWeekday - todayWeekday + 7) % 7;
@@ -11,7 +11,7 @@ const getDateForWeekday = (targetWeekday: number, format = 'YYYY.MM.DD') => {
 const getUpcomingWeekdayDates = (
   targetWeekday: number,
   weeks: number,
-  format = 'YYYY.MM.DD'
+  format = 'YYYY-MM-DD'
 ) => {
   const result = [];
 
@@ -25,4 +25,4 @@ const getUpcomingWeekdayDates = (
   return result;
 };
 
-export { getUpcomingWeekdayDates };
+export { getDateForWeekday, getUpcomingWeekdayDates };

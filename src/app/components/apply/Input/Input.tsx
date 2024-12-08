@@ -1,7 +1,18 @@
+import { forwardRef, InputHTMLAttributes } from 'react';
 import styles from './Input.module.scss';
 
-const Input = ({ ...props }) => {
-  return <input className={styles.input} {...props} placeholder='필수 입력 칸입니다'/>;
-};
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = forwardRef<HTMLInputElement, InputProps>(({ ...props }, ref) => {
+  return (
+    <input
+      className={styles.input}
+      ref={ref}
+      placeholder='필수 입력 칸입니다'
+      {...props}
+    />
+  );
+});
+Input.displayName = 'SeminarFormInput';
 
 export default Input;

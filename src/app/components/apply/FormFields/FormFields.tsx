@@ -46,6 +46,7 @@ const FormFields = () => {
           control={form.control}
           name='phoneNumber'
           label='전화번호'
+          type='phone'
         />
         <InputField
           control={form.control}

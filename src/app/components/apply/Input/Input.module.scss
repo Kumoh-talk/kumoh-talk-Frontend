@@ -8,7 +8,7 @@
   padding: 0 0.8rem;
 
   &::placeholder {
-    @include body(black-25);
+    @include body(black-50);
   }
 
   &:focus {

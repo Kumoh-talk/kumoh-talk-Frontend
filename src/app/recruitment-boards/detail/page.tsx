@@ -5,23 +5,30 @@ import Comment from '@/app/components/common/comment/CommentComponent';
 import { Suspense } from 'react';
 import RecruitmentBoardDetail from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetail';
 import CheckApplicantButton from '@/app/components/recruitment-boards/detail/CheckApplicantButton';
-import { RecruitmentBoardDetailProvider } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
+import {
+  RecruitmentBoardDetailProvider
+} from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
+import Header from '@/app/components/common/header/Header';
+import Footer from '@/app/components/common/footer/Footer';
 
-// TODO: 백엔드 api 완성되면 수정
 export default function Page() {
   return (
-    <main className={styles.board}>
-      <RecruitmentBoardDetailProvider>
-        <Suspense fallback={<p>Loading...</p>}>
-          <RecruitmentBoardDetail/>
-        </Suspense>
-        <div className={styles.buttonBlock}>
-          <ApplyButton/>
-          <ModifyButton/>
-          <CheckApplicantButton/>
-        </div>
-        <Comment/>
-      </RecruitmentBoardDetailProvider>
-    </main>
+    <>
+      <Header title={`스터디/프로젝트`}/>
+      <main className={styles.board}>
+        <RecruitmentBoardDetailProvider>
+          <Suspense fallback={<p>Loading...</p>}>
+            <RecruitmentBoardDetail/>
+          </Suspense>
+          <div className={styles.buttonBlock}>
+            <ApplyButton/>
+            <ModifyButton/>
+            <CheckApplicantButton/>
+          </div>
+          <Comment/>
+        </RecruitmentBoardDetailProvider>
+      </main>
+      <Footer/>
+    </>
   )
 }

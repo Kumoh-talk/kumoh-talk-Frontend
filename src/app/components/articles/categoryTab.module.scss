@@ -1,0 +1,29 @@
+@import 'mixin';
+
+li.tab {
+  display: flex;
+
+  .button {
+    @include body(black-25);
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    display: flex;
+    filter: drop-shadow(0rem 0rem 0.38px rgba(0, 0, 0, 0.03))
+      drop-shadow(0rem 0.38px 1.88px rgba(0, 0, 0, 0.15));
+    padding: 0.375rem 1rem;
+
+    &.selected {
+      @include textColor(white);
+      &.project {
+        background: #007aff;
+      }
+      &.study {
+        background: var(--color-orange);
+      }
+      &.mentor {
+        background: #6a50fa;
+      }
+    }
+  }
+}

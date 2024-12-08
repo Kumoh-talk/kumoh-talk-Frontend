@@ -1,0 +1,18 @@
+button.logout {
+  background: transparent;
+  border: none;
+  &:active {
+    outline: none;
+  }
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.bubble {
+  position: absolute;
+  right: 107%;
+  top: -0.75rem;
+}

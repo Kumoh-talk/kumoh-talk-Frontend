@@ -12,7 +12,7 @@
 
 @mixin largeTitleEmphasized($color: primary) {
   @include largeTitle($color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin title1($color: primary) {
@@ -78,7 +78,7 @@
 
 @mixin bodyEmphasized($color: primary) {
   @include body($color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin callout($color: primary) {
@@ -91,7 +91,7 @@
 
 @mixin calloutEmphasized($color: primary) {
   @include callout($color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin subHeadline($color: primary) {
@@ -104,19 +104,19 @@
 
 @mixin subHeadlineEmphasized($color: primary) {
   @include subHeadline($color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin footnote($color: primary) {
   @include textColor($color);
-  font-size: 0.625rem;
+  font-size: 0.833rem;
   font-weight: 400;
-  line-height: 0.8125rem;
-  letter-spacing: -0.02188rem;
+  line-height: 1.083rem;
+  letter-spacing: -0.029173rem;
 }
 
 @mixin footnoteEmphasized($color: primary) {
-  @include title3($color);
+  @include footnote($color);
   font-weight: 700;
 }
 
@@ -129,6 +129,6 @@
 }
 
 @mixin caption1Emphasized($color: primary) {
-  @include title3($color);
-  font-weight: 700;
+  @include caption1($color);
+  font-weight: 500;
 }

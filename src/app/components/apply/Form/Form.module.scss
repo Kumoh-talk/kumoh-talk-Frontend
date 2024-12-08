@@ -1,0 +1,12 @@
+@import 'mixin';
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.formMessage {
+  @include body(red);
+}

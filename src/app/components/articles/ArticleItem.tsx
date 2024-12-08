@@ -27,7 +27,7 @@ export default function ArticleItem({
 }: Props) {
   return (
     <li className={styles.item}>
-      <Link href={`${categoryId.toLowerCase()}/${articleId}`}>
+      <Link href={`recruitment-boards/detail?id=${articleId}&boardType=${categoryId.toLowerCase()}`}>
         <span className={clsx(styles.category, styles[categoryId.toLocaleLowerCase()])}>
           [{nameMap[categoryId]}]
         </span>

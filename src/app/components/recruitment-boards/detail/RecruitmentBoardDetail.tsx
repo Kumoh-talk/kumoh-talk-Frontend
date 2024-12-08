@@ -3,8 +3,10 @@
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import RecruitmentBoardContent from '@/app/components/recruitment-boards/detail/RecruitmentBoardContent';
 import dayjs from 'dayjs';
-import { useContext, useEffect } from 'react';
-import { RecruitmentBoardDetailContext } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
+import { useContext } from 'react';
+import {
+  RecruitmentBoardDetailContext
+} from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 
 export default function RecruitmentBoardDetail() {
   const { success, data, fetchData } = useContext(RecruitmentBoardDetailContext);
@@ -17,8 +19,8 @@ export default function RecruitmentBoardDetail() {
     <main>
       <RecruitmentBoardTitle title={data.title} type={data.type} tag={data.tag}/>
       <RecruitmentBoardContent
-        name={data.writerNickname}
-        categories={[ data.type, data.tag ]}
+        name={data.host}
+        categories={[data.type, data.tag]}
         target={data.recruitmentTarget}
         recruitmentNum={data.recruitmentNum}
         recruitmentStart={dayjs(data.recruitmentStart).format('YYYY.MM.DD HH:mm')}

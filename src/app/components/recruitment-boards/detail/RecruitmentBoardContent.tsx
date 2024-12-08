@@ -4,7 +4,7 @@ export interface Props {
   name: string,
   categories: string[],
   target: string,
-  recruitmentNum: string,
+  recruitmentNum: number,
   recruitmentStart: string,
   recruitmentDeadline: string,
   activity: string,
@@ -12,8 +12,20 @@ export interface Props {
   activityFinish: string,
   detail: string,
 }
+
 // TODO: 백엔드 api 완성되면 수정
-export default function RecruitmentBoardContent({name, categories, target, recruitmentNum, recruitmentStart, recruitmentDeadline, activity, activityStart, activityFinish, detail}: Props) {
+export default function RecruitmentBoardContent({
+  name,
+  categories,
+  target,
+  recruitmentNum,
+  recruitmentStart,
+  recruitmentDeadline,
+  activity,
+  activityStart,
+  activityFinish,
+  detail
+}: Props) {
   return (
     <div className={styles.tableContainer}>
       <table className={styles.infoTable}>

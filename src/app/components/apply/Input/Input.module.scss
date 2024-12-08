@@ -3,9 +3,9 @@
 .input {
   @include body(black-85);
 
-  height: 48px;
+  height: 3rem;
   border: 0.2px solid var(--color-black-25);
-  padding: 0 10px;
+  padding: 0 0.8rem;
 
   &::placeholder {
     @include body(black-25);

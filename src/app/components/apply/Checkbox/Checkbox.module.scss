@@ -6,13 +6,13 @@
   cursor: pointer;
 
   .checkbox {
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.375rem;
     appearance: none;
     outline: none;
     border: 0.4px solid var(--color-m-outline);
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background-color: var(--color-white);
     position: relative;
 
@@ -30,8 +30,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 16px;
-    height: 16px;
+    width: 1rem;
+    height: 1rem;
     pointer-events: none;
 
     svg {

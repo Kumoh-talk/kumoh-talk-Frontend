@@ -3,7 +3,7 @@ import { departmentValues } from '@/app/lib/constants/apply/selectValues';
 
 const REGEX = {
   studentId: /^\d{8}$/,
-  phoneNumber: /^010\d{8}$/,
+  phoneNumber: /^010-\d{4}-\d{4}$/,
   preferredDate: /^\d{4}-\d{2}-\d{2}$/,
 };
 

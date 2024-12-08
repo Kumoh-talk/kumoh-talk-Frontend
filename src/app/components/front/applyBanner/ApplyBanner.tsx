@@ -1,4 +1,5 @@
 import styles from './applyBanner.module.scss';
+import Link from 'next/link';
 
 export default function ApplyBanner() {
   return (
@@ -49,12 +50,14 @@ export default function ApplyBanner() {
         />
       </div>
       <div className={styles.bottom}>
-        <button className={styles.apply}>신청하기</button>
+        <Link href={'apply/'}>
+          <button className={styles.apply}>신청하기</button>
+        </Link>
         <div className={styles.introduce}>
           야밤의 금오톡에서 세미나 발표자를 찾습니다!
           <span className={styles.duration}>
             09.15
-            <div className={styles.line} />
+            <div className={styles.line}/>
             10.17
           </span>
         </div>

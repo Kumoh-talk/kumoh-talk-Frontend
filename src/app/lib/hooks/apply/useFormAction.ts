@@ -28,7 +28,7 @@ export function useFormAction<
 
         Object.keys(fieldErrors).forEach((key) => {
           form.setError(key as any, {
-            message: fieldErrors[key].flat().join(' '),
+            message: fieldErrors[key].flat()[0],
           });
         });
         break;

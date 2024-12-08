@@ -17,6 +17,7 @@ export default function SeminarApply() {
               alt='세미나 신청 이미지'
               width={500}
               height={200}
+              priority
             />
           </figure>
           <h1 className={styles.title}>야밤의 금오톡 세미나 신청하기</h1>

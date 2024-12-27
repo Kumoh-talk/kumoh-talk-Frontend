@@ -5,30 +5,39 @@ import Comment from '@/app/components/common/comment/CommentComponent';
 import { Suspense } from 'react';
 import RecruitmentBoardDetail from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetail';
 import CheckApplicantButton from '@/app/components/recruitment-boards/detail/CheckApplicantButton';
-import {
-  RecruitmentBoardDetailProvider
-} from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
+import { RecruitmentBoardDetailProvider } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { boardType?: 'study' | 'project' | 'mentor' };
+}) {
+  const title =
+    searchParams.boardType === 'study'
+      ? '스터디'
+      : searchParams.boardType === 'project'
+      ? '프로젝트'
+      : '멘토링';
+
   return (
     <>
-      <Header title={`스터디/프로젝트`}/>
+      <Header title={title} />
       <main className={styles.board}>
         <RecruitmentBoardDetailProvider>
           <Suspense fallback={<p>Loading...</p>}>
-            <RecruitmentBoardDetail/>
+            <RecruitmentBoardDetail />
           </Suspense>
           <div className={styles.buttonBlock}>
-            <ApplyButton/>
-            <ModifyButton/>
-            <CheckApplicantButton/>
+            <ApplyButton />
+            <ModifyButton />
+            <CheckApplicantButton />
           </div>
-          <Comment/>
+          <Comment />
         </RecruitmentBoardDetailProvider>
       </main>
-      <Footer/>
+      <Footer />
     </>
-  )
+  );
 }

@@ -1,0 +1,15 @@
+@import 'mixin';
+
+.page {
+  background-color: var(--color-gray-400);
+  height: 100vh;
+}
+
+.form {
+  width: 70vw;
+  height: inherit;
+  margin: 0 auto;
+  margin-top: 7.5rem;
+  padding-top: 1.5rem;
+  background-color: white;
+}

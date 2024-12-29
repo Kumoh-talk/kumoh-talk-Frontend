@@ -18,9 +18,12 @@ export default function PostForm() {
 
   const formState = useForm({ defaultValues });
 
+  const onSubmit = (data: unknown) => console.log(data);
+  const onError = (error: unknown) => console.log(error);
+
   return (
     <FormProvider {...formState}>
-      <form>
+      <form onSubmit={formState.handleSubmit(onSubmit, onError)} noValidate>
         <PostFormField />
       </form>
     </FormProvider>

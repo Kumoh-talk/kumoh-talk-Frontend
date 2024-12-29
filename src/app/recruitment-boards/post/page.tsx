@@ -7,7 +7,7 @@ import PostForm from '@/app/components/recruitment-boards/post/PostForm';
 export default function Page() {
   return (
     <div className={styles.page}>
-      <Header title="모집글 작성" />
+      <Header title='모집글 작성' />
       <TabsProvider>
         <Tabs />
         <div className={styles.form}>

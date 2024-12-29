@@ -7,6 +7,7 @@ export default function PostForm() {
   const defaultValues = {
     title: '',
     summary: '',
+    host: '',
     content: '',
     recruitmentTarget: '',
     recruitmentNum: '',

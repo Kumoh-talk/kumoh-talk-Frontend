@@ -1,5 +1,5 @@
 .fields {
-  width: 50%;
+  width: 65%;
   margin: 0 auto;
 }
 
@@ -8,4 +8,17 @@
   display: flex;
   justify-content: space-between;
   gap: 4rem;
+}
+
+.postFormCreate {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+
+  hr {
+    background: var(--color-gray-400);
+    height: 3px;
+    border: 0;
+  }
 }

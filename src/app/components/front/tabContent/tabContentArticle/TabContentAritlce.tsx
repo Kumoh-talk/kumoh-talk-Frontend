@@ -99,15 +99,15 @@ export default function TabContentArticle() {
       <section className={styles.card}>
         <header>
           <span>멘토링</span>
-          <Link href="/articles?category=mentor">
+          <Link href='/recruitment-boards?category=mentor'>
             더 보기
             <PageMoreSvg />
           </Link>
         </header>
-        <ScrollableList size="large">
+        <ScrollableList size='large'>
           <ul className={clsx(styles.cardList, styles.large)}>
             {dummylist.slice(0, 4).map((item, index) => (
-              <ArticleCard key={index} {...item} size="large" />
+              <ArticleCard key={index} {...item} size='large' />
             ))}
           </ul>
         </ScrollableList>
@@ -115,7 +115,7 @@ export default function TabContentArticle() {
       <section className={styles.card}>
         <header>
           <span>프로젝트</span>
-          <Link href="/articles?category=project">
+          <Link href='/recruitment-boards?category=project'>
             더 보기
             <PageMoreSvg />
           </Link>
@@ -131,7 +131,7 @@ export default function TabContentArticle() {
       <section className={styles.card}>
         <header>
           <span>스터디</span>
-          <Link href="/articles?category=study">
+          <Link href='/recruitment-boards?category=study'>
             더 보기
             <PageMoreSvg />
           </Link>

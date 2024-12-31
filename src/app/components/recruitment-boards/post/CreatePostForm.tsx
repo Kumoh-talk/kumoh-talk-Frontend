@@ -30,6 +30,12 @@ export default function CreatePostForm() {
     ]);
   };
 
+  const deleteQuestion = (number: number) => {
+    setQuestionArr(
+      questionArr.filter((question) => question.number !== number)
+    );
+  };
+
   return (
     <div className={styles.createPostForm}>
       {questionArr.map((question) => (
@@ -37,6 +43,7 @@ export default function CreatePostForm() {
           question={question}
           questionArr={questionArr}
           setQuestionArr={setQuestionArr}
+          deleteQuestion={deleteQuestion}
           key={question.number}
         />
       ))}

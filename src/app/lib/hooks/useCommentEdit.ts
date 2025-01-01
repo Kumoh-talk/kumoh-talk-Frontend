@@ -2,9 +2,9 @@ import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction, useState } from '
 
 type commentEditProps = {
   id: number,
-  groupId: number | null,
+  groupId?: number | null,
   comment: string,
-  setIsEdit?: Dispatch<SetStateAction<boolean>>,
+  setIsEdit: Dispatch<SetStateAction<boolean>>,
 }
 
 type commentEditType = [string, (e: ChangeEvent<HTMLTextAreaElement>) => void, (e: KeyboardEvent<HTMLTextAreaElement>) => void];

@@ -1,0 +1,106 @@
+@import 'mixin';
+
+.block {
+  margin-bottom: 12rem;
+}
+
+.head {
+  @include title1(black-100);
+  margin-bottom: 24px;
+}
+
+.inputBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.profile {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 40px;
+}
+
+.input {
+  @include subHeadline(black-100);
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 2px solid var(--color-gray-500);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.commentBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.commentMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.commentTop {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+
+  .commentName {
+    @include bodyEmphasized(black-85);
+  }
+
+  .commentDate {
+    @include caption1(black-50);
+  }
+}
+
+.commentBottom {
+  display: flex;
+  gap: 12px;
+
+  .commentText {
+    @include body(black-85);
+    white-space: pre;
+  }
+
+  .commentEdit {
+    @include body(black-85);
+    width: 100%;
+    padding: 0.125rem 0.25rem; // 내부 패딩 추가
+    border: none;
+    border-bottom: 2px solid var(--color-gray-500);
+    transition: border-bottom-color 0.3s ease; // 부드러운 전환 효과
+    resize: vertical;
+
+    &:focus {
+      border-bottom-color: #007bff; // 포커스 상태일 때 파란색 테두리
+      outline: none; // 기본 아웃라인 제거
+    }
+  }
+
+  .reactButton {
+    @include body(black-50);
+    cursor: pointer;
+  }
+}
+
+.moreButton {
+  position: relative;
+}
+
+.btn {
+  cursor: pointer;
+}

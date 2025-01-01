@@ -1,0 +1,38 @@
+@import 'mixin';
+
+.contentBlock {
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid rgba(217, 217, 217, 0.2);
+  cursor: pointer;
+
+  .profile {
+    width: 11%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .name {
+      @include title3Emphasized(black-85);
+      text-wrap: nowrap;
+    }
+  }
+
+  p {
+    @include title3(black-85);
+    width: 11%;
+    text-wrap: nowrap;
+  }
+
+  p:last-child {
+    width: 7%;
+    text-align: right;
+  }
+
+  &:hover {
+    background: #eaeaea40;
+  }
+}

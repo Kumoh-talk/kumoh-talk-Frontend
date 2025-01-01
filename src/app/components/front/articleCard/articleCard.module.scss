@@ -1,0 +1,84 @@
+@import 'mixin';
+
+.articleCard,
+.articleCardLarge {
+  background: white;
+  border-radius: 1rem;
+  width: 23.0625rem;
+
+  &Large {
+    width: 35.25rem;
+  }
+
+  & > a {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 2.674px 0px rgba(0, 0, 0, 0.55);
+  }
+
+  .thumbnail {
+    border-radius: 1rem 1rem 0 0;
+    width: 100%;
+    height: 0;
+    flex: 1;
+    overflow: hidden;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .info {
+    @include title3;
+    border-radius: 0 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .titleWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+
+      .title {
+        @include title2Emphasized;
+      }
+
+      .description {
+        @include textColor(secondary);
+      }
+    }
+
+    .targetWrapper,
+    .durationWrapper {
+      display: flex;
+      width: 100%;
+      & > div {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+    .targetWrapper {
+      @include textColor(secondary);
+      flex-direction: column;
+      gap: 0.75rem;
+      .currentCount {
+        @include textColor(primary);
+      }
+    }
+    .durationWrapper {
+    }
+  }
+}

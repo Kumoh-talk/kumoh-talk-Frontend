@@ -1,0 +1,87 @@
+@import 'mixin';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(4px);
+}
+.welcomeBubble {
+  display: flex;
+  flex-direction: column;
+
+  section.content {
+    display: flex;
+    flex-direction: column;
+    padding: 3.5rem 6.5rem;
+
+    .welcome {
+      align-self: center;
+      width: 27.375rem;
+      margin-bottom: 4rem;
+    }
+    .desc {
+      font-size: 2.25rem;
+      line-height: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -3.5%;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .inputWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      justify-self: stretch;
+      gap: 3.75rem;
+      margin-bottom: 1rem;
+
+      input[type='text'] {
+        border-radius: 0.625rem;
+        @include textColor(gray-900);
+        font-size: 1.625rem;
+        line-height: 2rem;
+        letter-spacing: -3.5%;
+        font-weight: 400;
+        padding: 1rem;
+        border: none;
+        width: 0;
+        flex: 1;
+        box-shadow: 0px 0px 0px 0.5px #00000008, 0px 0.5px 2.5px 0px #00000026;
+
+        &.error {
+          box-shadow: 0px 0px 0px 0.5px #ff0000aa, 0px 0.5px 2.5px 0px #ff000026;
+        }
+      }
+    }
+
+    .errorMsg {
+      @include title2(red);
+    }
+
+    .submitButton {
+      @include title1(white);
+      background: var(--color-blue-400);
+      border: none;
+      border-radius: 0.25rem;
+      font-family: var(
+        --font-family
+      ); /* TODO: 모든 버튼에 pretendard font overwrite 적용하기 */
+      padding: 0.75rem;
+      margin-top: 3rem;
+      cursor: pointer;
+
+      &:disabled {
+        cursor: default;
+        background: #007affaa;
+        color: var(--color-gray-400);
+      }
+    }
+  }
+}

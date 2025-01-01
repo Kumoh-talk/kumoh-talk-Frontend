@@ -1,0 +1,48 @@
+@import 'mixin';
+
+footer.footer {
+  @include footnote(black-85);
+  background-color: var(--color-gray-300);
+  border-top: 1px solid var(--color-gray-800);
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 5rem 1.25rem 1.5rem;
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 1rem;
+
+    .logo {
+      width: 20px;
+    }
+
+    .terms {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .left {
+      @include footnoteEmphasized(black-85);
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+
+      .line {
+        background-color: var(--color-text-black-85);
+        width: 1px;
+        height: 1.083rem;
+      }
+    }
+  }
+}

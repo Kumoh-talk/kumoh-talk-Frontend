@@ -1,129 +1,134 @@
-@mixin largeTitle {
-  color: var(--color-text-primary);
+@mixin textColor($color: primary) {
+  color: var(--color-text-#{$color});
+}
+
+@mixin largeTitle($color: primary) {
+  @include textColor($color);
   font-size: 1.625rem;
   font-weight: 400;
   line-height: 2rem;
   letter-spacing: -0.05688rem;
 }
 
-@mixin largeTitleEmphasized {
-  @include largeTitle;
-  font-weight: 700;
+@mixin largeTitleEmphasized($color: primary) {
+  @include largeTitle($color);
+  font-weight: 600;
 }
 
-@mixin title1 {
-  color: var(--color-text-primary);
+@mixin title1($color: primary) {
+  @include textColor($color);
   font-size: 1.375rem;
   font-weight: 400;
   line-height: 1.625rem;
   letter-spacing: -0.05688rem;
+
 }
 
-@mixin title1Emphasized {
-  @include title1;
+@mixin title1Emphasized($color: primary) {
+  @include title1($color);
   font-weight: 700;
 }
 
-@mixin title2 {
-  color: var(--color-text-primary);
+@mixin title2($color: primary) {
+  @include textColor($color);
   font-size: 1.0625rem;
   font-weight: 400;
   line-height: 1.375rem;
   letter-spacing: -0.03719rem;
 }
 
-@mixin title2Emphasized {
-  @include title2;
+@mixin title2Emphasized($color: primary) {
+  @include title2($color);
   font-weight: 700;
 }
 
-@mixin title3 {
-  color: var(--color-text-primary);
+@mixin title3($color: primary) {
+  @include textColor($color);
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.25rem;
   letter-spacing: -0.03281rem;
 }
 
-@mixin title3Emphasized {
-  @include title3;
+@mixin title3Emphasized($color: primary) {
+  @include title3($color);
   font-weight: 700;
 }
 
-@mixin headline {
-  color: var(--color-text-primary);
+@mixin headline($color: primary) {
+  @include textColor($color);
   font-size: 0.8125rem;
   font-weight: 700;
   line-height: 1rem;
   letter-spacing: -0.02844rem;
 }
 
-@mixin headlineEmphasized {
-  @include headline;
+@mixin headlineEmphasized($color: primary) {
+  @include headline($color);
   font-weight: 900;
 }
 
-@mixin body {
-  color: var(--color-text-primary);
+@mixin body($color: primary) {
+  @include textColor($color);
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1rem;
   letter-spacing: -0.02844rem;
 }
 
-@mixin bodyEmphasized {
-  @include body;
-  font-weight: 700;
+@mixin bodyEmphasized($color: primary) {
+  @include body($color);
+  font-weight: 600;
 }
 
-@mixin callout {
-  color: var(--color-text-primary);
+@mixin callout($color: primary) {
+  @include textColor($color);
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 0.9375rem;
   letter-spacing: -0.02625rem;
 }
 
-@mixin calloutEmphasized {
-  @include callout;
-  font-weight: 700;
+@mixin calloutEmphasized($color: primary) {
+  @include callout($color);
+  font-weight: 600;
 }
 
-@mixin subHeadline {
-  color: var(--color-text-primary);
+@mixin subHeadline($color: primary) {
+  @include textColor($color);
   font-size: 0.6875rem;
   font-weight: 400;
   line-height: 0.875rem;
   letter-spacing: -0.02406rem;
 }
 
-@mixin subHeadlineEmphasized {
-  @include subHeadline;
-  font-weight: 700;
+@mixin subHeadlineEmphasized($color: primary) {
+  @include subHeadline($color);
+  font-weight: 600;
 }
 
-@mixin footnote {
-  color: var(--color-text-primary);
-  font-size: 0.625rem;
+@mixin footnote($color: primary) {
+  @include textColor($color);
+  font-size: 0.833rem;
   font-weight: 400;
-  line-height: 0.8125rem;
-  letter-spacing: -0.02188rem;
+  line-height: 1.083rem;
+  letter-spacing: -0.029173rem;
 }
 
-@mixin footnoteEmphasized {
-  @include title3;
+@mixin footnoteEmphasized($color: primary) {
+  @include footnote($color);
   font-weight: 700;
 }
 
-@mixin caption1 {
-  color: var(--color-text-primary);
+@mixin caption1($color: primary) {
+  @include textColor($color);
   font-size: 0.5625rem;
   font-weight: 400;
   line-height: 0.8125rem;
   letter-spacing: -0.01969rem;
 }
 
-@mixin caption1Emphasized {
-  @include title3;
-  font-weight: 700;
+@mixin caption1Emphasized($color: primary) {
+  @include caption1($color);
+  font-weight: 500;
 }

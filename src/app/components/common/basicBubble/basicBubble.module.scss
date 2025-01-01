@@ -1,0 +1,82 @@
+.basicBubble {
+  display: flex;
+  z-index: 5000;
+
+  & > .bubble {
+    background: var(--color-gray-400, #f5f5f5);
+    border: 0.5px solid var(--color-gray-100, #f9fafc);
+    border-radius: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.5rem;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  &.large {
+    & > .bubble {
+      background: rgba(255, 255, 255, 0.91);
+      z-index: 4999;
+    }
+  }
+
+  &.primary-left {
+    flex-direction: row-reverse;
+  }
+  &.primary-top {
+    flex-direction: column-reverse;
+  }
+  &.primary-right {
+    flex-direction: row;
+  }
+  &.primary-bottom {
+    flex-direction: column;
+  }
+
+  &.secondary-start {
+    align-items: flex-start;
+  }
+  &.secondary-end {
+    align-items: flex-end;
+  }
+
+  &.primary-right,
+  &.primary-left {
+    .tail {
+      margin: 0.4375rem 0;
+    }
+  }
+  &.primary-top,
+  &.primary-bottom {
+    .tail {
+      margin: 0 0.4375rem;
+    }
+  }
+  &.large {
+    filter: drop-shadow(0rem 0rem 0.1875rem rgba(0, 0, 0, 0.55))
+      drop-shadow(0rem 0.5rem 2.5rem rgba(0, 0, 0, 0.25));
+    & > .bubble {
+      border-radius: 1.35rem;
+    }
+    .tail {
+      zoom: 1.5;
+    }
+  }
+  &.medium {
+    filter: drop-shadow(0rem 2.22875rem 5.571875rem rgba(0, 0, 0, 0.1))
+      drop-shadow(0rem 0rem 0.167125rem rgba(0, 0, 0, 0.55));
+  }
+  &.small {
+    & > .bubble {
+      border-radius: 0.25rem;
+    }
+    .tail {
+      zoom: 0.45;
+    }
+  }
+  .tail {
+    fill: var(--color-gray-400, #f5f5f5);
+    zoom: 0.75;
+  }
+}

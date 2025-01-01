@@ -1,0 +1,105 @@
+@import 'mixin';
+
+.button {
+  @include title3;
+  background-color: var(--color-gray-300);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  padding: 0.25rem 0.5rem;
+  color: var(--color-black-25);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-gray-100);
+    color: var(--color-black-50);
+  }
+}
+
+.study {
+  background-color: var(--color-orange);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-orange);
+    color: white;
+  }
+}
+
+.project {
+  background-color: var(--color-blue-400);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-blue-400);
+    color: white;
+  }
+}
+
+.mentor {
+  background-color: var(--color-purple);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-purple);
+    color: white;
+  }
+}
+
+.front {
+  background-color: var(--color-blue-200);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-blue-200);
+    color: white;
+  }
+}
+
+.backend {
+  background-color: #333b43;
+  color: white;
+
+  &:hover {
+    background-color: #333b43;
+    color: white;
+  }
+}
+
+.mobile {
+  background-color: #426c98;
+  color: white;
+
+  &:hover {
+    background-color: #426c98;
+    color: white;
+  }
+}
+
+.secure {
+  background-color: #6e5e42;
+  color: white;
+
+  &:hover {
+    background-color: #6e5e42;
+    color: white;
+  }
+}
+
+.ai {
+  background-color: #ad843d;
+  color: white;
+
+  &:hover {
+    background-color: #ad843d;
+    color: white;
+  }
+}
+
+.etc {
+  background-color: var(--color-gray-900);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-gray-900);
+    color: white;
+  }
+}

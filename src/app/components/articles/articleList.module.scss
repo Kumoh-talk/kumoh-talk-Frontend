@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  .aside {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  ul.list {
+    display: flex;
+    flex-direction: column;
+
+    & > li:last-child {
+      border-bottom: 1px solid var(--color-gray-600);
+    }
+  }
+}

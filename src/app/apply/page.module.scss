@@ -1,0 +1,29 @@
+@import 'mixin';
+
+.layout {
+  display: flex;
+  justify-content: center;
+  padding-top: 4.5rem;
+  padding-bottom: 9rem;
+}
+
+.seminarApply {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+
+  .imageWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0;
+  }
+
+  .title {
+    @include largeTitleEmphasized(black-85);
+  }
+
+  .description {
+    @include title2(black-85);
+    margin: 3rem 0;
+  }
+}

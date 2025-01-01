@@ -1,10 +1,29 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Header from './components/common/header/Header';
+import ApplyBanner from './components/front/applyBanner/ApplyBanner';
+import TabList from './components/front/tabList/TabList';
+import TabContent from './components/front/tabContent/TabContent';
+import styles from './page.module.scss';
+import Footer from './components/common/footer/Footer';
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { tab?: string };
+}) {
   return (
-    <main className={styles.main}>
-      main
-    </main>
+    <>
+      <Header />
+      <main className={styles.main}>
+        <header>
+          <div className={styles.logo}></div>
+          <div className={styles.bannerWrapper}>
+            <ApplyBanner />
+            <TabList />
+          </div>
+        </header>
+        <TabContent tab={searchParams.tab} />
+      </main>
+      <Footer />
+    </>
   );
 }

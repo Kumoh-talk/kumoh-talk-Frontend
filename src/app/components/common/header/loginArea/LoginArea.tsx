@@ -19,7 +19,7 @@ export default async function LoginArea() {
   if (!accessToken) {
     return offline;
   }
-  const userInfo = await getUserInfo(accessToken);
+  const userInfo = await getUserInfo();
   
   // 기본 정보 입력 안 됐을 때
   if (parseJwt(accessToken).USER_ROLE === 'ROLE_GUEST') {

@@ -1,6 +1,7 @@
 'use client';
 
 import Select from '../../apply/Select/Select';
+import Switch from '../../common/Switch/Switch';
 import styles from './questionInputField.module.scss';
 import { Trash } from 'lucide-react';
 
@@ -21,6 +22,7 @@ export interface Props {
   question: QuestionType;
   questionArr: QuestionType[];
   setQuestionArr: (questionArr: QuestionType[]) => void;
+  deleteQuestion: (number: number) => void;
 }
 
 const options = [
@@ -42,6 +44,7 @@ export default function QuestionInputField({
   question,
   questionArr,
   setQuestionArr,
+  deleteQuestion,
 }: Props) {
   return (
     <div className={styles.questionInputField}>
@@ -66,10 +69,16 @@ export default function QuestionInputField({
           </div>
         </div>
         <div className={styles.questionBottom}>
-          <div>
+          <div
+            className={styles.deleteButton}
+            onClick={() => deleteQuestion(question.number)}
+          >
             <Trash color='#959595' size={16} />
           </div>
-          <div>필수</div>
+          <div className={styles.requiredSwitch}>
+            <p>필수</p>
+            <Switch defaultChecked />
+          </div>
         </div>
       </div>
     </div>

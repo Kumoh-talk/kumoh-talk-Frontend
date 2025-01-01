@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .questionInputField {
   width: 100%;
   display: flex;
@@ -49,4 +51,21 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+}
+
+.deleteButton {
+  cursor: pointer;
+}
+
+.requiredSwitch {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  p {
+    @include headline;
+    position: relative;
+    top: -0.05rem;
+    color: var(--color-gray-900);
+  }
 }

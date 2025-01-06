@@ -11,7 +11,7 @@ export const TabsContext = createContext<{
 }>({
   state: {
     type: 'study',
-    tag: 'front',
+    tag: 'frontend',
   },
   setState: () => {},
 });
@@ -23,7 +23,7 @@ export interface Props {
 export function TabsProvider({ children }: Props) {
   const [state, setState] = useState({
     type: 'study',
-    tag: 'front',
+    tag: 'frontend',
   });
 
   return (

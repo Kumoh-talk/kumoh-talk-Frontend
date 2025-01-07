@@ -1,27 +1,15 @@
 'use client';
 
+import { PostForm } from '@/app/lib/types/recruitmentBoards/post/postForm';
 import Select from '../../apply/Select/Select';
 import Switch from '../../common/Switch/Switch';
 import styles from './questionInputField.module.scss';
 import { Trash } from 'lucide-react';
 
-type AnswerType = {
-  number: number;
-  answer: string;
-};
-
-export type QuestionType = {
-  number: number;
-  question: string;
-  type: 'description' | 'choice' | 'checkbox';
-  isEssential: boolean;
-  answerList: AnswerType[];
-};
-
 export interface Props {
-  question: QuestionType;
-  questionArr: QuestionType[];
-  setQuestionArr: (questionArr: QuestionType[]) => void;
+  question: PostForm;
+  questionArr: PostForm[];
+  setQuestionArr: (questionArr: PostForm[]) => void;
   deleteQuestion: (number: number) => void;
 }
 

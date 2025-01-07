@@ -5,6 +5,7 @@ import Select from '../../apply/Select/Select';
 import Switch from '../../common/Switch/Switch';
 import styles from './questionInputField.module.scss';
 import { Trash } from 'lucide-react';
+import { formOptions } from '@/app/lib/constants/recruitmentBoards/post/formOptions';
 
 export interface Props {
   question: PostForm;
@@ -12,21 +13,6 @@ export interface Props {
   setQuestionArr: (questionArr: PostForm[]) => void;
   deleteQuestion: (number: number) => void;
 }
-
-const options = [
-  {
-    value: 'description',
-    label: '주관형',
-  },
-  {
-    value: 'choice',
-    label: '객관형',
-  },
-  {
-    value: 'checkbox',
-    label: '체크박스',
-  },
-];
 
 export default function QuestionInputField({
   question,
@@ -53,7 +39,7 @@ export default function QuestionInputField({
             placeholder='질문 제목을 입력하세요'
           />
           <div className={styles.select}>
-            <Select options={options} onChange={() => {}} />
+            <Select options={formOptions} onChange={() => {}} />
           </div>
         </div>
         <div className={styles.questionBottom}>

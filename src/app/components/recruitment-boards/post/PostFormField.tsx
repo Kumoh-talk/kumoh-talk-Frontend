@@ -70,8 +70,8 @@ export default function PostFormField() {
           <CreatePostForm />
         </div>
         <div className={styles.row}>
-          <Button size='medium' onClick={handleSubmit(() => {})}>
-            신청하기
+          <Button type='submit' size='medium'>
+            등록하기
           </Button>
         </div>
       </div>

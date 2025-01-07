@@ -17,7 +17,7 @@ export default function CreatePostForm() {
         number: ++questionRef.current,
         question: '',
         type: 'description',
-        isEssential: false,
+        isEssential: true,
         answerList: [],
       },
     ]);
@@ -32,8 +32,6 @@ export default function CreatePostForm() {
       {form.map((question) => (
         <QuestionInputField
           question={question}
-          questionArr={form}
-          setQuestionArr={setForm}
           deleteQuestion={deleteQuestion}
           key={question.number}
         />

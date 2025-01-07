@@ -11,6 +11,7 @@ import { Trash } from 'lucide-react';
 import { formOptions } from '@/app/lib/constants/recruitmentBoards/post/formOptions';
 import { useContext } from 'react';
 import { PostContext } from './PostProvider';
+import AnswerOptions from './AnswerOptions';
 
 export interface Props {
   question: PostForm;
@@ -61,6 +62,11 @@ export default function QuestionInputField({
           <div className={styles.select}>
             <Select options={formOptions} onChange={onSelectChange} />
           </div>
+        </div>
+        <div>
+          {question.type !== 'description' && (
+            <AnswerOptions question={question} />
+          )}
         </div>
         <div className={styles.questionBottom}>
           <div

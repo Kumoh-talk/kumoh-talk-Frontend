@@ -3,12 +3,12 @@ export interface PostForm {
   question: string;
   type: selectType;
   isEssential: boolean;
-  answerList: AnswerList[];
+  answerList: Answer[];
 }
 
 export type selectType = 'description' | 'choice' | 'checkbox';
 
-export interface AnswerList {
+export interface Answer {
   number: number;
   answer: string;
 }

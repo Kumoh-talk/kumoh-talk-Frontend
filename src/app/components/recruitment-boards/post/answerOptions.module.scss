@@ -1,0 +1,34 @@
+@import 'mixin';
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  input {
+    @include title3;
+    background: none;
+    border: none;
+    width: 8rem;
+
+    &::placeholder {
+      color: var(--color-black-25);
+    }
+  }
+}
+
+.deleteButton {
+  cursor: pointer;
+}
+
+.addButton {
+  @include title3;
+  color: var(--color-blue-400);
+  cursor: pointer;
+}

@@ -3,7 +3,7 @@
 .questionInputField {
   width: 100%;
   display: flex;
-  min-height: 10rem;
+  min-height: 12rem;
 }
 
 .leftWall {
@@ -45,6 +45,10 @@
 
 .select {
   flex: 1;
+  scale: 0.9;
+  position: relative;
+  right: -0.75rem;
+  z-index: 10;
 }
 
 .questionBottom {
@@ -61,6 +65,7 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
+  z-index: 0;
 
   p {
     @include headline;

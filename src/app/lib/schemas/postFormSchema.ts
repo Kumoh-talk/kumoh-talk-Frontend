@@ -1,11 +1,12 @@
-import { z } from 'zod';
+import { number, z } from 'zod';
 
 const ERROR_MSG = {
   required: '필수 입력 항목입니다.',
+  numberRequired: '1 이상의 숫자를 입력해주세요.',
   exceed: {
-    title: '50자 이내로 입력해주세요.',
-    summary: '100자 이내로 입력해주세요.',
-    content: '1000자 이내로 입력해주세요.',
+    fifty: '50자 이내로 입력해주세요.',
+    hundred: '100자 이내로 입력해주세요.',
+    thousand: '1000자 이내로 입력해주세요.',
     recruitmentTarget: '50자 이내로 입력해주세요.',
     activityCycle: '50자 이내로 입력해주세요.',
   },
@@ -14,23 +15,25 @@ const ERROR_MSG = {
   preferredDate: '올바른 날짜 형식(YYYY-MM-DD)을 입력해주세요.',
 };
 
-export const seminarFormSchema = z.object({
-  title: z.string().min(1, ERROR_MSG.required).max(50, ERROR_MSG.exceed.title),
+export const postFormSchema = z.object({
+  title: z.string().min(1, ERROR_MSG.required).max(50, ERROR_MSG.exceed.fifty),
   summary: z
     .string()
     .min(1, ERROR_MSG.required)
-    .max(100, ERROR_MSG.exceed.summary),
+    .max(100, ERROR_MSG.exceed.hundred),
+  host: z.string().min(1, ERROR_MSG.required).max(50, ERROR_MSG.exceed.fifty),
   content: z
     .string()
     .min(1, ERROR_MSG.required)
-    .max(1000, ERROR_MSG.exceed.content),
+    .max(1000, ERROR_MSG.exceed.thousand),
   recruitmentTarget: z
     .string()
     .min(1, ERROR_MSG.required)
     .max(50, ERROR_MSG.exceed.recruitmentTarget),
-  recruitmentNum: z.date(),
-  recruitmentDeadline: z.date(),
-  activityStart: z.date(),
+  recruitmentNum: z.number().min(1, ERROR_MSG.numberRequired),
+  currentMemberNum: z.number().min(1, ERROR_MSG.numberRequired),
+  recruitmentDeadline: z.string().min(1, ERROR_MSG.required),
+  activityStart: z.string().min(1, ERROR_MSG.required),
   activityFinish: z.string().min(1, ERROR_MSG.required),
   activityCycle: z
     .string()
@@ -38,10 +41,10 @@ export const seminarFormSchema = z.object({
     .max(50, ERROR_MSG.exceed.activityCycle),
 });
 
-export type SeminarFormValues = z.infer<typeof seminarFormSchema>;
+export type SeminarFormValues = z.infer<typeof postFormSchema>;
 
-export const validateSeminarForm = (formData: FormData) => {
+export const validatePostForm = (formData: FormData) => {
   const formValues = Object.fromEntries(formData.entries());
 
-  return seminarFormSchema.safeParse(formValues);
+  return postFormSchema.safeParse(formValues);
 };

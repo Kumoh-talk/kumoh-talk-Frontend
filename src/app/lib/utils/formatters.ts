@@ -7,4 +7,13 @@ const formatPhoneNumber = (value: string) => {
     );
 };
 
-export { formatPhoneNumber };
+const formatNumber = (value: string) => {
+  if (value === '') return '0';
+
+  return value
+    .replace(/[^0-9]/g, '')
+    .replace(/^0/g, '')
+    .replace(/^$/g, '0');
+};
+
+export { formatPhoneNumber, formatNumber };

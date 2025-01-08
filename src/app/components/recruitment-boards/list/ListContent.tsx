@@ -4,10 +4,14 @@ import Link from 'next/link';
 
 export default function ListContent() {
   return (
-    <Link style={{ textDecoration: 'none' }} href={`./list/${'applicantId'}?id=${'게시물ID'}&boardType=${'게시물 타입'}`} passHref={true}>
+    <Link
+      style={{ textDecoration: 'none' }}
+      href={`./list/${'applicantId'}?id=${'게시물ID'}&boardType=${'게시물 타입'}`}
+      passHref={true}
+    >
       <div className={styles.contentBlock}>
         <div className={styles.profile}>
-          <ProfileImage/>
+          <ProfileImage />
           <p className={styles.name}>황용진</p>
         </div>
         <p>컴퓨터공학과</p>
@@ -17,5 +21,5 @@ export default function ListContent() {
         <p>재학중</p>
       </div>
     </Link>
-  )
+  );
 }

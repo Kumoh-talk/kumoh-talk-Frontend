@@ -1,4 +1,4 @@
-import { formatPhoneNumber } from '@/app/lib/utils/formatters';
+import { formatPhoneNumber, formatNumber } from '@/app/lib/utils/formatters';
 import Input from '../Input/Input';
 import FormField from '../Form/FormField';
 import FormItem from '../Form/FormItem';
@@ -10,7 +10,7 @@ interface InputFieldProps {
   control: Control<FieldValues, any>;
   name: string;
   label: string;
-  type?: 'text' | 'phone';
+  type?: 'text' | 'phone' | 'number';
   placeholder?: string;
 }
 
@@ -26,6 +26,10 @@ const InputField = ({
 
     if (type === 'phone') {
       target.value = formatPhoneNumber(target.value);
+    }
+
+    if (type === 'number') {
+      target.value = formatNumber(target.value);
     }
   };
 

@@ -37,6 +37,15 @@ export default function PostFormField() {
             control={control}
             name='recruitmentNum'
             label='모집인원'
+            type='number'
+          />
+        </div>
+        <div className={styles.row}>
+          <InputField
+            control={control}
+            name='currentMemberNum'
+            label='현재인원'
+            type='number'
           />
         </div>
         <div className={styles.row}>

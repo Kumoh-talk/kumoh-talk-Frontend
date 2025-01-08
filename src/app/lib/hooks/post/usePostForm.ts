@@ -18,10 +18,10 @@ const defaultValues: PostBoard = {
   activityCycle: '',
 };
 
-export default function usePostForm() {
+export default function usePostForm({ resolver }: { resolver: any }) {
   const { state } = useContext(TabsContext);
   const { form } = useContext(PostContext);
-  const formState = useForm({ defaultValues });
+  const formState = useForm({ defaultValues, resolver });
 
   const onSubmit = (data: PostBoard) => {
     const formData = {

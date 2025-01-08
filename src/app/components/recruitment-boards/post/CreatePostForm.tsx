@@ -17,7 +17,7 @@ export default function CreatePostForm() {
         number: ++questionRef.current,
         question: '',
         type: 'description',
-        isEssential: true,
+        isEssential: false,
         answerList: [],
       },
     ]);

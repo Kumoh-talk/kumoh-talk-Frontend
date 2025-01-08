@@ -12,7 +12,7 @@ export const PostContext = createContext<{
       number: 1,
       question: '',
       type: 'description',
-      isEssential: true,
+      isEssential: false,
       answerList: [],
     },
   ],
@@ -29,7 +29,7 @@ export function PostProvider({ children }: Props) {
       number: 1,
       question: '',
       type: 'description',
-      isEssential: true,
+      isEssential: false,
       answerList: [],
     },
   ]);

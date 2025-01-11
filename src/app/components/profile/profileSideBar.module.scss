@@ -2,6 +2,9 @@
 
 .bar {
   display: flex;
+  position: fixed;
+  top: 16rem;
+  bottom: 0;
   flex-direction: column;
   gap: 0.25rem;
 }

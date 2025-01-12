@@ -1,4 +1,4 @@
-import { number, z } from 'zod';
+import { z } from 'zod';
 
 const ERROR_MSG = {
   required: '필수 입력 항목입니다.',

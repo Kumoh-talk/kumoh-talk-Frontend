@@ -8,9 +8,9 @@ import {
 
 type commentEditProps = {
   id: number;
-  groupId: number | null;
+  groupId?: number | null;
   comment: string;
-  setIsEdit?: Dispatch<SetStateAction<boolean>>;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
 };
 
 type commentEditType = [

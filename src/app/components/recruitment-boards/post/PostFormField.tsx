@@ -53,6 +53,7 @@ export default function PostFormField() {
             control={control}
             name='recruitmentDeadline'
             label='모집기한'
+            type='date'
           />
         </div>
         <div className={styles.row}>
@@ -60,11 +61,13 @@ export default function PostFormField() {
             control={control}
             name='activityStart'
             label='활동시작일'
+            type='date'
           />
           <InputField
             control={control}
             name='activityFinish'
             label='활동종료일'
+            type='date'
           />
         </div>
         <div className={styles.row}>

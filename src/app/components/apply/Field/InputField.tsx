@@ -14,7 +14,7 @@ interface InputFieldProps {
   control: Control<FieldValues, any>;
   name: string;
   label: string;
-  type?: 'text' | 'phone' | 'number';
+  type?: 'text' | 'phone' | 'number' | 'date' | 'datetime-local';
   placeholder?: string;
 }
 
@@ -33,12 +33,17 @@ const InputField = ({
 
     if (type === 'phone') {
       target.value = formatPhoneNumber(target.value);
+      field.onChange(target.value);
+      return;
     }
 
     if (type === 'number') {
       target.value = formatNumber(target.value);
-      field.onChange(target.value === '' ? '0' : Number(target.value));
+      field.onChange(target.value === '' ? 0 : Number(target.value));
+      return;
     }
+
+    field.onChange(target.value);
   };
 
   return (
@@ -51,16 +56,8 @@ const InputField = ({
           <Input
             {...field}
             placeholder={placeholder}
-            onInput={(e) => handleInput(e, field)}
+            onChange={(e) => handleInput(e, field)}
             type={type}
-            onChange={(e) => {
-              if (type === 'number') {
-                const value = e.target.value;
-                field.onChange(value === '' ? '' : Number(value));
-              } else {
-                field.onChange(e.target.value);
-              }
-            }}
           />
           <FormMessage />
         </FormItem>

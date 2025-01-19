@@ -6,6 +6,8 @@ import { createContext, useState } from 'react';
 export const PostContext = createContext<{
   form: PostForm[];
   setForm: (state: PostForm[]) => void;
+  questionError: string;
+  setQuestionError: (state: string) => void;
 }>({
   form: [
     {
@@ -14,9 +16,12 @@ export const PostContext = createContext<{
       type: 'description',
       isEssential: false,
       answerList: [],
+      error: '',
     },
   ],
   setForm: () => {},
+  questionError: '',
+  setQuestionError: () => {},
 });
 
 export interface Props {
@@ -31,11 +36,15 @@ export function PostProvider({ children }: Props) {
       type: 'description',
       isEssential: false,
       answerList: [],
+      error: '',
     },
   ]);
+  const [questionError, setQuestionError] = useState('');
 
   return (
-    <PostContext.Provider value={{ form, setForm }}>
+    <PostContext.Provider
+      value={{ form, setForm, questionError, setQuestionError }}
+    >
       {children}
     </PostContext.Provider>
   );

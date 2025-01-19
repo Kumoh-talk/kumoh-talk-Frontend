@@ -4,6 +4,7 @@ export interface PostForm {
   type: selectType;
   isEssential: boolean;
   answerList: Answer[];
+  error: string;
 }
 
 export type selectType = 'description' | 'choice' | 'checkbox';

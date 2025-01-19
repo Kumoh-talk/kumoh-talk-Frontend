@@ -7,7 +7,11 @@ import Button from '../../common/button/Button';
 import FormLabel from '../../apply/Form/FormLabel';
 import CreatePostForm from './CreatePostForm';
 
-export default function PostFormField() {
+export default function PostFormField({
+  questionError,
+}: {
+  questionError: string;
+}) {
   const {
     register,
     handleSubmit,
@@ -78,6 +82,7 @@ export default function PostFormField() {
         </div>
         <div className={styles.postFormCreate}>
           <FormLabel>신청폼 만들기</FormLabel>
+          <span className={styles.questionError}>{questionError}</span>
           <hr />
           <CreatePostForm />
         </div>

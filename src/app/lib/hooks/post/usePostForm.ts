@@ -4,6 +4,7 @@ import { PostContext } from '@/app/components/recruitment-boards/post/PostProvid
 import { PostBoard } from '../../types/recruitmentBoards/post/postBoard';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { PostForm } from '../../types/recruitmentBoards/post/postForm';
 
 const defaultValues: PostBoard = {
   title: '',
@@ -19,13 +20,50 @@ const defaultValues: PostBoard = {
   activityCycle: '',
 };
 
+function validateQuestionForm(
+  form: PostForm[],
+  setQuestionError: (state: string) => void
+) {
+  // 질문의 갯수가 0개일 때 에러 메시지 출력
+  if (form.length === 0) {
+    setQuestionError('1개 이상의 질문을 추가해주세요');
+    return false;
+  }
+
+  const hasError = form.some(({ question, type, answerList }) => {
+    if (question === '') {
+      setQuestionError('모든 질문 제목을 입력해주세요');
+      return true;
+    }
+
+    if (answerList.length === 0 && type !== 'description') {
+      setQuestionError(
+        '객관형 혹은 체크박스 질문은 1개 이상의 답변을 추가해주세요'
+      );
+      return true;
+    }
+
+    return false;
+  });
+
+  if (!hasError) {
+    setQuestionError('');
+  }
+
+  return !hasError;
+}
+
 export default function usePostForm({ resolver }: { resolver: any }) {
   const router = useRouter();
   const { state } = useContext(TabsContext);
-  const { form } = useContext(PostContext);
+  const { form, questionError, setQuestionError } = useContext(PostContext);
   const formState = useForm({ defaultValues, resolver });
 
   const onSubmit = async (data: PostBoard) => {
+    if (!validateQuestionForm(form, setQuestionError)) {
+      return;
+    }
+
     const formData = {
       board: {
         ...state,
@@ -55,5 +93,5 @@ export default function usePostForm({ resolver }: { resolver: any }) {
   };
   const onError = (error: unknown) => console.log(error);
 
-  return { state, form, formState, onSubmit, onError };
+  return { state, form, formState, onSubmit, onError, questionError };
 }

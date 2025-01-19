@@ -7,14 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { postFormSchema } from '@/app/lib/schemas/postFormSchema';
 
 export default function PostForm() {
-  const { formState, onSubmit, onError } = usePostForm({
+  const { formState, onSubmit, onError, questionError } = usePostForm({
     resolver: zodResolver(postFormSchema),
   });
 
   return (
     <FormProvider {...formState}>
       <form onSubmit={formState.handleSubmit(onSubmit, onError)} noValidate>
-        <PostFormField />
+        <PostFormField questionError={questionError} />
       </form>
     </FormProvider>
   );

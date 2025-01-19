@@ -1,6 +1,11 @@
-import styles from './educationInfo.module.scss';
+import { useContext } from "react";
+import styles from "./educationInfo.module.scss";
+import { userInfoContext } from "./UserInfoProvider";
 
 export default function EducationInfo() {
+  // TODO: 학사 정보에 넣을만한 내용이 api에 없음
+  const { data } = useContext(userInfoContext);
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -9,7 +14,7 @@ export default function EducationInfo() {
             <span>재적상태</span>
           </div>
           <div className={styles.content}>
-            <span>재학</span>
+            <span>{data.role}</span>
           </div>
         </div>
         <div className={styles.right}>

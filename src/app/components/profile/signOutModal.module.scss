@@ -1,0 +1,19 @@
+@import 'mixin';
+
+.title {
+  @include largeTitleEmphasized;
+
+  .emphasized {
+    color: var(--color-blue-400);
+  }
+}
+
+.content {
+  @include title2;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}

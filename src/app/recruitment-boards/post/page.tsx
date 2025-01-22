@@ -3,6 +3,7 @@ import Tabs from '@/app/components/recruitment-boards/post/Tabs';
 import { TabsProvider } from '@/app/components/recruitment-boards/post/TabsProvider';
 import styles from './page.module.scss';
 import PostForm from '@/app/components/recruitment-boards/post/PostForm';
+import { PostProvider } from '@/app/components/recruitment-boards/post/PostProvider';
 
 export default function Page() {
   return (
@@ -11,7 +12,9 @@ export default function Page() {
       <TabsProvider>
         <Tabs />
         <div className={styles.form}>
-          <PostForm />
+          <PostProvider>
+            <PostForm />
+          </PostProvider>
         </div>
       </TabsProvider>
     </div>

@@ -7,7 +7,11 @@ import Button from '../../common/button/Button';
 import FormLabel from '../../apply/Form/FormLabel';
 import CreatePostForm from './CreatePostForm';
 
-export default function PostFormField() {
+export default function PostFormField({
+  questionError,
+}: {
+  questionError: string;
+}) {
   const {
     register,
     handleSubmit,
@@ -37,6 +41,15 @@ export default function PostFormField() {
             control={control}
             name='recruitmentNum'
             label='모집인원'
+            type='number'
+          />
+        </div>
+        <div className={styles.row}>
+          <InputField
+            control={control}
+            name='currentMemberNum'
+            label='현재인원'
+            type='number'
           />
         </div>
         <div className={styles.row}>
@@ -44,6 +57,7 @@ export default function PostFormField() {
             control={control}
             name='recruitmentDeadline'
             label='모집기한'
+            type='date'
           />
         </div>
         <div className={styles.row}>
@@ -51,11 +65,13 @@ export default function PostFormField() {
             control={control}
             name='activityStart'
             label='활동시작일'
+            type='date'
           />
           <InputField
             control={control}
             name='activityFinish'
             label='활동종료일'
+            type='date'
           />
         </div>
         <div className={styles.row}>
@@ -66,12 +82,13 @@ export default function PostFormField() {
         </div>
         <div className={styles.postFormCreate}>
           <FormLabel>신청폼 만들기</FormLabel>
+          <span className={styles.questionError}>{questionError}</span>
           <hr />
           <CreatePostForm />
         </div>
         <div className={styles.row}>
-          <Button size='medium' onClick={handleSubmit(() => {})}>
-            신청하기
+          <Button type='submit' size='medium'>
+            등록하기
           </Button>
         </div>
       </div>

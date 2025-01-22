@@ -7,7 +7,10 @@ type Props = {
   size?: 'small' | 'medium' | 'large' | 'full';
   bgColor?: `bg-${Color}`;
   color?: `text-${Color}`;
-  onClick?: (...args: any[]) => unknown;
+  onClick?: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    ...args: unknown[]
+  ) => unknown;
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 

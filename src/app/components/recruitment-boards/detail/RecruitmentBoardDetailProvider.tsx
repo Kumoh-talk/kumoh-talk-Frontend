@@ -1,7 +1,10 @@
 'use client';
 
 import { createContext, useState, useEffect } from 'react';
-import { RecruitmentBoards,  RecruitmentBoardsApi } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
+import {
+  RecruitmentBoards,
+  RecruitmentBoardsApi,
+} from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 export const RecruitmentBoardDetailContext = createContext<{
@@ -28,7 +31,9 @@ export function RecruitmentBoardDetailProvider({ children }: Props) {
   const fetchData = async () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     try {
-      const response = await fetch(`${API_URL}/api/v1/recruitment-boards/${boardId}/board`);
+      const response = await fetch(
+        `${API_URL}/api/v1/recruitment-boards/${boardId}/board`
+      );
       const result = await response.json();
 
       if (response.ok && 'success' in result && 'data' in result) {
@@ -48,7 +53,9 @@ export function RecruitmentBoardDetailProvider({ children }: Props) {
   }, []);
 
   return (
-    <RecruitmentBoardDetailContext.Provider value={{ success: state.success, data: state.data, fetchData }}>
+    <RecruitmentBoardDetailContext.Provider
+      value={{ success: state.success, data: state.data, fetchData }}
+    >
       {children}
     </RecruitmentBoardDetailContext.Provider>
   );

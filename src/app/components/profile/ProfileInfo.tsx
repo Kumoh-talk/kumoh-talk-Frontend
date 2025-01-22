@@ -1,10 +1,16 @@
-import { useContext } from "react";
-import styles from "./profileInfo.module.scss";
-import Image from "next/image";
-import { userInfoContext } from "./UserInfoProvider";
+import { useContext } from 'react';
+import styles from './profileInfo.module.scss';
+import Image from 'next/image';
+import { userInfoContext } from './UserInfoProvider';
+
+const data = {
+  profileImageUrl: null,
+  name: '홍길동',
+  nickname: 'hong',
+};
 
 export default function ProfileInfo() {
-  const { data } = useContext(userInfoContext);
+  // const { data } = useContext(userInfoContext);
 
   return (
     <div className={styles.container}>
@@ -15,7 +21,7 @@ export default function ProfileInfo() {
         <div className={styles.content}>
           <Image
             className={styles.image}
-            src={data.profileImageUrl || "/images/defaultProfileImage.svg"}
+            src={data.profileImageUrl || '/images/defaultProfileImage.svg'}
             alt="프로필 사진"
             width={100}
             height={100}

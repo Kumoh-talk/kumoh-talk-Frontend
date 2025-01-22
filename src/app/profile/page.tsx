@@ -1,17 +1,18 @@
-import EducationInfo from "../components/profile/EducationInfo";
-import NewsletterInfo from "../components/profile/NewsletterInfo";
-import ProfileInfo from "../components/profile/ProfileInfo";
-import ProfileSideBar from "../components/profile/ProfileSideBar";
-import SubscriptionStatus from "../components/profile/SubscriptionStatus";
-import { UserInfoProvider } from "../components/profile/UserInfoProvider";
-import { Subscription } from "../lib/types/profile/subscription";
-import styles from "./page.module.scss";
+import EducationInfo from '../components/profile/EducationInfo';
+import NewsletterInfo from '../components/profile/NewsletterInfo';
+import ProfileInfo from '../components/profile/ProfileInfo';
+import ProfileSideBar from '../components/profile/ProfileSideBar';
+import SignOutContainer from '../components/profile/SignOutContainer';
+import SubscriptionStatus from '../components/profile/SubscriptionStatus';
+import { UserInfoProvider } from '../components/profile/UserInfoProvider';
+import { Subscription } from '../lib/types/profile/subscription';
+import styles from './page.module.scss';
 
 const dummySubscriptionList: Subscription[] = [
-  { name: "세미나 내용 정리 알림", type: "seminarContentNotice" },
-  { name: "스터디 새 글 알림", type: "studyNotice" },
-  { name: "프로젝트 새 글 알림", type: "projectNotice" },
-  { name: "멘토링 새 글 알림", type: "mentoringNotice" },
+  { name: '세미나 내용 정리 알림', type: 'seminarContentNotice' },
+  { name: '스터디 새 글 알림', type: 'studyNotice' },
+  { name: '프로젝트 새 글 알림', type: 'projectNotice' },
+  { name: '멘토링 새 글 알림', type: 'mentoringNotice' },
 ];
 
 export default function Page() {
@@ -48,7 +49,7 @@ export default function Page() {
               <span className={styles.title}>학사 정보</span>
             </div>
             <EducationInfo />
-            <span className={styles.cancelSubscription}>회원 탈퇴</span>
+            <SignOutContainer />
           </div>
         </div>
       </div>

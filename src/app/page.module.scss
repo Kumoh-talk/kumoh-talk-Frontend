@@ -1,4 +1,7 @@
 @import 'mixin';
+html:has(.main) {
+  font-size: 100%;
+}
 .main {
   display: flex;
   flex-direction: column;

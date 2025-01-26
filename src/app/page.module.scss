@@ -27,4 +27,9 @@ html:has(.main) {
       align-items: center;
     }
   }
+  .seminarNotice {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+  }
 }

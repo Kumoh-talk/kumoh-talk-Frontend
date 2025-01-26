@@ -1,4 +1,4 @@
-import NoticeCard, { Props } from '../../noticeCard/NoticeCard';
+import NoticeCard, { Props } from '../../noticeList/NoticeCard';
 import styles from './tabContentNotice.module.scss';
 
 const dummylist: Props[] = [
@@ -60,12 +60,12 @@ const dummylist: Props[] = [
   },
 ];
 export default function TabContentNotice() {
-  const list = dummylist.map((props) => (
-    <NoticeCard key={props.articleId} {...props} />
-  ));
-  return (
-    <section className={styles.notice}>
-      <ul className={styles.list}>{list}</ul>
-    </section>
-  );
+  // const list = dummylist.map((props) => (
+  //   <NoticeCard key={props.articleId} {...props} />
+  // ));
+  // return (
+  //   <section className={styles.notice}>
+  //     <ul className={styles.list}>{list}</ul>
+  //   </section>
+  // );
 }

@@ -8,14 +8,21 @@ import CheckApplicantButton from '@/app/components/recruitment-boards/detail/Che
 import { RecruitmentBoardDetailProvider } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
-import { matchRecruitmentTitle } from '@/app/lib/apis/recruitment-boards/boardDetail';
+import {
+  getRecruitmentBoardDetail,
+  matchRecruitmentTitle,
+} from '@/app/lib/apis/recruitment-boards/recruitmentBoard';
+import { RecruitmentBoardsApi } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
-  searchParams: { boardType: string };
+  searchParams: { id: string; boardType: string };
 }) {
   const title = matchRecruitmentTitle(searchParams.boardType);
+
+  const response = await getRecruitmentBoardDetail(searchParams.id);
+  const boardDetail: RecruitmentBoardsApi = await response.json();
 
   return (
     <>
@@ -23,7 +30,7 @@ export default function Page({
       <main className={styles.board}>
         <RecruitmentBoardDetailProvider>
           <Suspense fallback={<p>Loading...</p>}>
-            <RecruitmentBoardDetail />
+            <RecruitmentBoardDetail boardDetail={boardDetail} />
           </Suspense>
           <div className={styles.buttonBlock}>
             <ApplyButton />

@@ -5,7 +5,6 @@ import Comment from '@/app/components/common/comment/CommentComponent';
 import { Suspense } from 'react';
 import RecruitmentBoardDetail from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetail';
 import CheckApplicantButton from '@/app/components/recruitment-boards/detail/CheckApplicantButton';
-import { RecruitmentBoardDetailProvider } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
 import {
@@ -28,17 +27,15 @@ export default async function Page({
     <>
       <Header title={title} />
       <main className={styles.board}>
-        <RecruitmentBoardDetailProvider>
-          <Suspense fallback={<p>Loading...</p>}>
-            <RecruitmentBoardDetail boardDetail={boardDetail} />
-          </Suspense>
-          <div className={styles.buttonBlock}>
-            <ApplyButton />
-            <ModifyButton />
-            <CheckApplicantButton />
-          </div>
-          <Comment />
-        </RecruitmentBoardDetailProvider>
+        <Suspense fallback={<p>Loading...</p>}>
+          <RecruitmentBoardDetail boardDetail={boardDetail} />
+        </Suspense>
+        <div className={styles.buttonBlock}>
+          <ApplyButton />
+          <ModifyButton />
+          <CheckApplicantButton />
+        </div>
+        <Comment />
       </main>
       <Footer />
     </>

@@ -6,18 +6,16 @@ import RecruitmentApplyForm from '@/app/components/recruitment-boards/apply/Recr
 import RecruitmentApplyContainer from '@/app/components/recruitment-boards/apply/RecruitmentApplyContainer';
 import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
+import { matchRecruitmentTitle } from '@/app/lib/apis/recruitment-boards/boardDetail';
 
 export default function Page({
+  params,
   searchParams,
 }: {
+  params: { id: string };
   searchParams: { boardType: string };
 }) {
-  const title =
-    searchParams.boardType === 'study'
-      ? '스터디'
-      : searchParams.boardType === 'project'
-      ? '프로젝트'
-      : '멘토링';
+  const title = matchRecruitmentTitle(searchParams.boardType);
 
   return (
     <>

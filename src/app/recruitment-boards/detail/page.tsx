@@ -8,18 +8,14 @@ import CheckApplicantButton from '@/app/components/recruitment-boards/detail/Che
 import { RecruitmentBoardDetailProvider } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
+import { matchRecruitmentTitle } from '@/app/lib/apis/recruitment-boards/boardDetail';
 
 export default function Page({
   searchParams,
 }: {
-  searchParams: { boardType?: 'study' | 'project' | 'mentor' };
+  searchParams: { boardType: string };
 }) {
-  const title =
-    searchParams.boardType === 'study'
-      ? '스터디'
-      : searchParams.boardType === 'project'
-      ? '프로젝트'
-      : '멘토링';
+  const title = matchRecruitmentTitle(searchParams.boardType);
 
   return (
     <>

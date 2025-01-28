@@ -1,3 +1,5 @@
+import { RecruitmentBoardsApi } from '../../types/recruitmentBoards/recruitmentBoards';
+
 const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
 
 export const matchRecruitmentTitle = (recruitmentBoardType: string) => {
@@ -19,7 +21,18 @@ const _fetch = async (
   if (body && typeof body !== 'string') {
     options.body = JSON.stringify(body);
   }
-  return await fetch(url, options);
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error(JSON.stringify(response));
+    }
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 };
 
 export const getRecruitmentBoardDetail = (recruitmentBoardId: string) => {

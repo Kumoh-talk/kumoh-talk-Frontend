@@ -24,6 +24,8 @@ export default async function Page({
     searchParams.id
   );
 
+  const userId = 111;
+
   return (
     <>
       <Header title={title} />
@@ -32,9 +34,14 @@ export default async function Page({
           <RecruitmentBoardDetail boardDetail={boardDetail} />
         </Suspense>
         <div className={styles.buttonBlock}>
-          <ApplyButton />
-          <ModifyButton />
-          <CheckApplicantButton />
+          {userId === boardDetail.data.userId ? (
+            <>
+              <ModifyButton />
+              <CheckApplicantButton />
+            </>
+          ) : (
+            <ApplyButton />
+          )}
         </div>
         <Comment boardId={searchParams.id} />
       </main>

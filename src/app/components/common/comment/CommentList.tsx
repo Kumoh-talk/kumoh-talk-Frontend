@@ -10,14 +10,7 @@ export default function CommentList({ commentList }: Props) {
   return (
     <div className={styles.commentList}>
       {commentList.commentInfoResponseList.map((comment) => (
-        <Comment
-          commentId={comment.commentId}
-          key={comment.commentId}
-          name={comment.userNickname}
-          date={comment.createdAt}
-          comment={comment.content}
-          replyComments={comment.replyComments}
-        />
+        <Comment currentComment={comment} key={comment.commentId} />
       ))}
     </div>
   );

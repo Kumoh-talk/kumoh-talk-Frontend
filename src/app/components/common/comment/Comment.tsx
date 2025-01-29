@@ -9,22 +9,21 @@ import dayjs from 'dayjs';
 import { CommentInfoResponseList } from '@/app/lib/types/comment/commentList';
 
 export interface Props {
-  commentId: number;
-  parentCommentName?: string | null;
-  name: string;
-  date: string;
-  comment: string;
-  replyComments: CommentInfoResponseList[];
+  currentComment: CommentInfoResponseList;
+  parentComment?: CommentInfoResponseList | null;
 }
 
 export default function Comment({
-  commentId,
-  parentCommentName = null,
-  name,
-  date,
-  comment,
-  replyComments,
+  currentComment,
+  parentComment = null,
 }: Props) {
+  const {
+    commentId,
+    userNickname: name,
+    content: comment,
+    createdAt: date,
+    replyComments,
+  } = currentComment;
   const [isEdit, setIsEdit] = useState(false);
   const [content, onChange, onSubmit] = useCommentEdit({
     id: commentId,
@@ -42,7 +41,7 @@ export default function Comment({
   return (
     <>
       <div className={styles.commentWrapper}>
-        {parentCommentName && <div className={styles.leftPadding} />}
+        {parentComment && <div className={styles.leftPadding} />}
         <div className={styles.commentBlock}>
           <ProfileImage />
           <div className={styles.commentMain}>
@@ -63,9 +62,9 @@ export default function Comment({
                 />
               ) : (
                 <span className={styles.commentText}>
-                  {parentCommentName || (
+                  {parentComment?.groupId && (
                     <span className={styles.reply}>
-                      @ &nbsp; {parentCommentName}
+                      @ &nbsp; {parentComment?.userNickname}
                     </span>
                   )}
                   {content}
@@ -81,13 +80,9 @@ export default function Comment({
       </div>
       {replyComments.map((replyComment) => (
         <Comment
-          commentId={replyComment.commentId}
+          currentComment={replyComment}
           key={replyComment.commentId}
-          parentCommentName={name}
-          name={replyComment.userNickname}
-          date={replyComment.createdAt}
-          comment={replyComment.content}
-          replyComments={replyComment.replyComments}
+          parentComment={currentComment}
         />
       ))}
     </>

@@ -40,7 +40,16 @@
   gap: 1rem;
 }
 
+.commentWrapper {
+  display: flex;
+}
+
+.leftPadding {
+  flex: 1;
+}
+
 .commentBlock {
+  flex: 23;
   display: flex;
   align-items: center;
   gap: 0.875rem;
@@ -74,6 +83,12 @@
   .commentText {
     @include body(black-85);
     white-space: pre;
+  }
+
+  .reply {
+    @include bodyEmphasized(black-50);
+    padding: 0.125rem 0.25rem;
+    background-color: var(--color-gray-300);
   }
 
   .commentEdit {

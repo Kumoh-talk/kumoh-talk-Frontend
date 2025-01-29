@@ -20,8 +20,9 @@ export default async function Page({
 }) {
   const title = matchRecruitmentTitle(searchParams.boardType);
 
-  const response = await getRecruitmentBoardDetail(searchParams.id);
-  const boardDetail: RecruitmentBoardsApi = await response.json();
+  const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(
+    searchParams.id
+  );
 
   return (
     <>
@@ -35,7 +36,7 @@ export default async function Page({
           <ModifyButton />
           <CheckApplicantButton />
         </div>
-        <Comment />
+        <Comment boardId={searchParams.id} />
       </main>
       <Footer />
     </>

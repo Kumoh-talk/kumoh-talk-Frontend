@@ -11,14 +11,14 @@ export interface Props {
 }
 
 export default function CommentInput({ boardId }: Props) {
-  const { content, onChange, onSubmit } = useCommentInput(boardId);
+  const { comment, onChange, onSubmit } = useCommentInput(boardId);
 
   return (
     <input
       className={styles.input}
       placeholder={'댓글 추가'}
       name={'comment'}
-      value={content.comment}
+      value={comment}
       onChange={onChange}
       onKeyDown={onSubmit}
     />

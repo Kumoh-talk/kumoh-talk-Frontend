@@ -22,5 +22,5 @@ export default function useCommentInput(boardId: string) {
     }
   };
 
-  return { content, onChange, reset, onSubmit };
+  return { comment: content.comment, onChange, reset, onSubmit };
 }

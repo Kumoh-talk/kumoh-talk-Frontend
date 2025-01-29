@@ -1,50 +1,19 @@
-'use client'
+'use client';
 
 import MoreSvg from '@/app/assets/svg/MoreSvg';
 import styles from './comment.module.scss';
-import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import ModifyBubble from '@/app/components/common/modifyBubble/ModifyBubble';
+import useCommentMoreBubble from '@/app/lib/hooks/useCommentMoreBubble';
 
 interface Props {
-  setIsEdit:  Dispatch<SetStateAction<boolean>>;
+  commentId: number;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function MoreButton({ setIsEdit }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-  const bubbleRef = useRef<HTMLDivElement>(null);
-
-  const onModify = () => {
-    setIsEdit(true);
-    setIsOpen(false);
-  }
-
-  const onDelete = () => {
-    setIsOpen(false);
-  }
-
-  const onInsideClick = (event: React.MouseEvent) => {
-    setIsOpen(!isOpen);
-  };
-
-  useEffect(() => {
-    const onClickOutside = (event: MouseEvent) => {
-      if (bubbleRef.current &&
-        !bubbleRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      window.addEventListener('click', onClickOutside);
-    } else {
-      window.removeEventListener('click', onClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener('click', onClickOutside);
-    };
-  }, [isOpen]);
+export default function MoreButton({ commentId, setIsEdit }: Props) {
+  const { bubbleRef, isOpen, onModify, onDelete, onInsideClick } =
+    useCommentMoreBubble(commentId, setIsEdit);
 
   return (
     <div ref={bubbleRef}>
@@ -55,5 +24,5 @@ export default function MoreButton({ setIsEdit }: Props) {
         {isOpen && <ModifyBubble onModify={onModify} onDelete={onDelete} />}
       </div>
     </div>
-  )
+  );
 }

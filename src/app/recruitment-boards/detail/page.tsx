@@ -37,7 +37,12 @@ export default async function Page({
           {userId === boardDetail.data.userId ? (
             <>
               <ModifyButton />
-              <CheckApplicantButton />
+              <CheckApplicantButton
+                id={searchParams.id}
+                title={boardDetail.data.title}
+                boardType={boardDetail.data.type}
+                tag={boardDetail.data.tag}
+              />
             </>
           ) : (
             <ApplyButton />

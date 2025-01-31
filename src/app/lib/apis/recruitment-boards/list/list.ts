@@ -48,3 +48,19 @@ export const getApplicantUserInfo = (userId: number) => {
     credentials: 'include',
   });
 };
+
+export const getApplicantDetail = (
+  applicantId: string,
+  recruitmentBoardId: string
+) => {
+  return _fetch(
+    `${baseUrl}/applications/recruitment/${recruitmentBoardId}/${applicantId}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    }
+  );
+};

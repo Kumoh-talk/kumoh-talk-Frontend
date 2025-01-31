@@ -1,15 +1,14 @@
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import { Suspense } from 'react';
 import ListTable from '@/app/components/recruitment-boards/list/ListTable';
-import { getRecruitmentBoardApplicantList } from '@/app/lib/apis/recruitment-boards/list/list';
+import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 
 export interface Props {
   id: string;
   title: string;
   boardType: string;
   tag: string;
-  page: string;
-  sort: string;
+  applicantList: ApplyListApi;
 }
 
 export default async function ApplyListContainer({
@@ -17,14 +16,19 @@ export default async function ApplyListContainer({
   title,
   boardType,
   tag,
-  page,
-  sort,
+  applicantList,
 }: Props) {
   return (
     <>
       <RecruitmentBoardTitle title={title} type={boardType} tag={tag} />
       <Suspense fallback={<div>Loading...</div>}>
-        <ListTable id={id} page={page} sort={sort} />
+        <ListTable
+          id={id}
+          title={title}
+          boardType={boardType}
+          tag={tag}
+          applicantList={applicantList}
+        />
       </Suspense>
     </>
   );

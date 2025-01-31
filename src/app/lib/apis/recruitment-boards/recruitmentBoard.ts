@@ -42,6 +42,7 @@ export const getRecruitmentBoardDetail = (recruitmentBoardId: string) => {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
+    cache: 'no-store',
   });
 };
 
@@ -52,6 +53,7 @@ export const getRecruitmentBoardComment = (recruitmentBoardId: string) => {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
+    cache: 'no-store',
   });
 };
 

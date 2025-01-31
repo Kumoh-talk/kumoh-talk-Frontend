@@ -25,11 +25,21 @@ type ApplicantUserInfoApi = {
   data: ApplicantUserInfo;
 };
 
-export default async function ListContent({
-  applicant,
-}: {
+export interface Props {
+  id: string;
+  title: string;
+  boardType: string;
+  tag: string;
   applicant: Applicant;
-}) {
+}
+
+export default async function ListContent({
+  id,
+  title,
+  boardType,
+  tag,
+  applicant,
+}: Props) {
   const { applicantId, userId, createdAt, updatedAt } = applicant;
   const applicationUserInfo: ApplicantUserInfoApi = await getApplicantUserInfo(
     userId
@@ -39,7 +49,7 @@ export default async function ListContent({
   return (
     <Link
       style={{ textDecoration: 'none' }}
-      href={`./list/${applicantId}?id=${'게시물ID'}&boardType=${'게시물 타입'}`}
+      href={`./list/${applicantId}?id=${id}&title=${title}&boardType=${boardType}&tag=${tag}`}
       passHref={true}
     >
       <div className={styles.contentBlock}>

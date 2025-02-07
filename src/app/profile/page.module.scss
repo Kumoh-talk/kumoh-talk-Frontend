@@ -6,6 +6,10 @@
   margin-bottom: 12rem;
 }
 
+.provider {
+  scale: 0.7;
+}
+
 .sideBar {
   flex: 1;
   padding: 12rem 0 0 4rem;
@@ -23,7 +27,7 @@
 
 .titleBlock {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
   margin-bottom: 2rem;
 }

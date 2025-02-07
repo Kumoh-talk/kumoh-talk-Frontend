@@ -71,12 +71,21 @@ export default function usePostForm({ resolver }: { resolver: any }) {
       },
       form,
     };
+    formData.board.recruitmentDeadline = new Date(
+      formData.board.recruitmentDeadline
+    ).toISOString();
+    formData.board.activityStart = new Date(
+      formData.board.activityStart
+    ).toISOString();
+    formData.board.activityFinish = new Date(
+      formData.board.activityFinish
+    ).toISOString();
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     fetch(`${baseUrl}/api/v1/recruitment-boards?status=published`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        Authorization: process.env.NEXT_PUBLIC_ACCESS_TOKEN as string,
       },
       body: JSON.stringify(formData),
     })

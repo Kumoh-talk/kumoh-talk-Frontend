@@ -69,11 +69,12 @@ export default function Comment({
                     </span>
                   ) : (
                     <>
-                      parentComment?.groupId && (
-                      <span className={styles.reply}>
-                        @ &nbsp; {parentComment?.userNickname}
-                      </span>
-                      ){content}
+                      {parentComment?.groupId && (
+                        <span className={styles.reply}>
+                          @ &nbsp; {parentComment?.userNickname}
+                        </span>
+                      )}
+                      {content}
                     </>
                   )}
                 </span>

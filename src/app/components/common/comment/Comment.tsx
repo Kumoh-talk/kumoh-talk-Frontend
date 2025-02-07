@@ -22,6 +22,7 @@ export default function Comment({
     userNickname: name,
     content: comment,
     createdAt: date,
+    deletedAt,
     replyComments,
   } = currentComment;
   const [isEdit, setIsEdit] = useState(false);
@@ -62,12 +63,19 @@ export default function Comment({
                 />
               ) : (
                 <span className={styles.commentText}>
-                  {parentComment?.groupId && (
-                    <span className={styles.reply}>
-                      @ &nbsp; {parentComment?.userNickname}
+                  {deletedAt ? (
+                    <span className={styles.deletedComment}>
+                      삭제된 댓글입니다.
                     </span>
+                  ) : (
+                    <>
+                      parentComment?.groupId && (
+                      <span className={styles.reply}>
+                        @ &nbsp; {parentComment?.userNickname}
+                      </span>
+                      ){content}
+                    </>
                   )}
-                  {content}
                 </span>
               )}
               {isEdit || <div className={styles.reactButton}>답글</div>}

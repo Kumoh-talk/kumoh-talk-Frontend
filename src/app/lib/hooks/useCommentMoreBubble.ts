@@ -14,8 +14,8 @@ export default function useCommentMoreBubble(
   };
 
   const onDelete = async () => {
-    setIsOpen(false);
     await deleteRecruitmentBoardComment(commentId);
+    setIsOpen(false);
     window.location.reload();
   };
 

@@ -24,7 +24,7 @@ export default async function Page({
     searchParams.id
   );
 
-  const userId = 111;
+  const userId = 1111;
 
   return (
     <>
@@ -45,7 +45,11 @@ export default async function Page({
               />
             </>
           ) : (
-            <ApplyButton />
+            <ApplyButton
+              title={boardDetail.data.title}
+              detail={boardDetail.data.summary}
+              tag={boardDetail.data.tag}
+            />
           )}
         </div>
         <Comment boardId={searchParams.id} />

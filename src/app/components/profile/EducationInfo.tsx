@@ -1,20 +1,22 @@
-import { useContext } from 'react';
 import styles from './educationInfo.module.scss';
-import { userInfoContext } from './UserInfoProvider';
 
-const data = {
-  role: 'ROLE_GUEST',
-  grade: 1,
-  department: '컴퓨터공학과',
-  studentStatus: '재학',
-  phoneNumber: '010-1234-5678',
-  email: 'asd123@qwd.com',
-};
+export interface Props {
+  studentStatus: string;
+  grade: number;
+  studentId: number;
+  department: string;
+  phoneNumber: string;
+  email: string;
+}
 
-export default function EducationInfo() {
-  // TODO: 학사 정보에 넣을만한 내용이 api에 없음
-  // const { data } = useContext(userInfoContext);
-
+export default function EducationInfo({
+  studentStatus,
+  grade,
+  studentId,
+  department,
+  phoneNumber,
+  email,
+}: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -23,7 +25,7 @@ export default function EducationInfo() {
             <span>재적상태</span>
           </div>
           <div className={styles.content}>
-            <span>{data.studentStatus}</span>
+            <span>{studentStatus}</span>
           </div>
         </div>
         <div className={styles.right}>
@@ -31,7 +33,9 @@ export default function EducationInfo() {
             <span>학번/학년</span>
           </div>
           <div className={styles.content}>
-            <span>20201234/{data.grade}</span>
+            <span>
+              {studentId}/{grade}
+            </span>
           </div>
         </div>
       </div>
@@ -41,7 +45,7 @@ export default function EducationInfo() {
             <span>학과</span>
           </div>
           <div className={styles.content}>
-            <span>{data.department}</span>
+            <span>{department}</span>
           </div>
         </div>
         <div className={styles.right}>
@@ -49,7 +53,7 @@ export default function EducationInfo() {
             <span>전화번호</span>
           </div>
           <div className={styles.content}>
-            <span>{data.phoneNumber}</span>
+            <span>{phoneNumber}</span>
           </div>
         </div>
       </div>
@@ -58,7 +62,7 @@ export default function EducationInfo() {
           <span>이메일</span>
         </div>
         <div className={styles.lastContent}>
-          <span>{data.email}</span>
+          <span>{email}</span>
         </div>
       </div>
     </div>

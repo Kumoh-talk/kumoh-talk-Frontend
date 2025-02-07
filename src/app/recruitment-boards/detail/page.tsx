@@ -12,6 +12,7 @@ import {
   matchRecruitmentTitle,
 } from '@/app/lib/apis/recruitment-boards/recruitmentBoard';
 import { RecruitmentBoardsApi } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
+import { notFound } from 'next/navigation';
 
 export default async function Page({
   searchParams,
@@ -23,6 +24,10 @@ export default async function Page({
   const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(
     searchParams.id
   );
+
+  if (!boardDetail.data) {
+    return notFound();
+  }
 
   const userId = 1111;
 

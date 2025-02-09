@@ -22,3 +22,28 @@ export interface RecruitmentBoards {
   activityFinish: string; // 활동 종료 날자 및 시간
   activityCycle: string; // 활동 주기
 }
+
+export type RecruitmentType = 'STUDY' | 'PROJECT' | 'MENTORING';
+export type RecruitmentTag =
+  | 'STUDY'
+  | 'PROJECT'
+  | 'FRONTEND'
+  | 'BACKEND'
+  | 'MOBILE'
+  | 'SECURITY'
+  | 'AI'
+  | 'MENTORING'
+  | 'ETC';
+
+export type RecruitmentArticle = {
+  boardId: number;
+  title: string;
+  summary: string;
+  type: RecruitmentType;
+  tag: RecruitmentTag;
+  recruitmentTarget: string;
+  recruitmentNum: number;
+  currentMemberNum: number;
+  recruitmentStart: string;
+  recruitmentDeadline: string;
+};

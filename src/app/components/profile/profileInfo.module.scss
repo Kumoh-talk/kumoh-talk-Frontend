@@ -54,18 +54,4 @@
   display: flex;
   align-items: center;
   flex: 3;
-
-  * {
-    margin-left: 2rem;
-  }
-
-  span {
-    @include title2;
-  }
-}
-
-.image {
-  border-radius: 50%;
-  border: 1px solid #cecece;
-  overflow: hidden;
 }

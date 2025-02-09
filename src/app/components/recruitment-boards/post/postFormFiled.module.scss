@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .fields {
   width: 65%;
   margin: 0 auto;
@@ -21,4 +23,8 @@
     height: 3px;
     border: 0;
   }
+}
+
+.questionError {
+  @include body(red);
 }

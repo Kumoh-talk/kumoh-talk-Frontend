@@ -1,31 +1,20 @@
 'use client';
 
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 import PostFormField from './PostFormField';
+import usePostForm from '@/app/lib/hooks/post/usePostForm';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { postFormSchema } from '@/app/lib/schemas/postFormSchema';
 
 export default function PostForm() {
-  const defaultValues = {
-    title: '',
-    summary: '',
-    host: '',
-    content: '',
-    recruitmentTarget: '',
-    recruitmentNum: '',
-    recruitmentDeadline: '',
-    activityStart: '',
-    activityFinish: '',
-    activityCycle: '',
-  };
-
-  const formState = useForm({ defaultValues });
-
-  const onSubmit = (data: unknown) => console.log(data);
-  const onError = (error: unknown) => console.log(error);
+  const { formState, onSubmit, onError, questionError } = usePostForm({
+    resolver: zodResolver(postFormSchema),
+  });
 
   return (
     <FormProvider {...formState}>
       <form onSubmit={formState.handleSubmit(onSubmit, onError)} noValidate>
-        <PostFormField />
+        <PostFormField questionError={questionError} />
       </form>
     </FormProvider>
   );

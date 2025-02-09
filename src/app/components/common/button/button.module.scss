@@ -44,7 +44,15 @@
     background: var(--color-red);
 
     &:hover {
-      background: var(--color-blue-500);
+      background: rgba(237, 52, 41, 1);
+    }
+  }
+
+  &.bg-gray-800 {
+    background: var(--color-gray-800);
+
+    &:hover {
+      background: var(--color-gray-900);
     }
   }
 

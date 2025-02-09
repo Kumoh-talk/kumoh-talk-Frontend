@@ -1,0 +1,47 @@
+@import 'mixin';
+
+.page {
+  display: flex;
+  margin-top: 6rem;
+  margin-bottom: 12rem;
+}
+
+.provider {
+  scale: 0.7;
+}
+
+.sideBar {
+  flex: 1;
+  padding: 12rem 0 0 4rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  padding: 4rem 10rem;
+  position: relative;
+  left: -4rem;
+  gap: 6rem;
+}
+
+.titleBlock {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  @include largeTitle;
+  color: var(--color-blue-400);
+}
+
+.cancelSubscription {
+  @include title2;
+  color: var(--color-gray-900);
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-gray-900);
+  padding-bottom: 0.25rem;
+  float: right;
+}

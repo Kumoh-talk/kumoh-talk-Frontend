@@ -1,0 +1,49 @@
+@import 'mixin';
+
+.bar {
+  display: flex;
+  position: fixed;
+  top: 16rem;
+  bottom: 0;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  p {
+    @include title2;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}
+
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 2px solid var(--color-gray-800);
+  margin-top: 0.5rem;
+  padding: 0 0.625rem;
+}
+
+.subRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  span {
+    @include title3;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}

@@ -1,25 +1,18 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import { Plus } from 'lucide-react';
 import styles from './createPostForm.module.scss';
-import QuestionInputField, { QuestionType } from './QuestionInputField';
+import QuestionInputField from './QuestionInputField';
+import { PostContext } from './PostProvider';
 
 export default function CreatePostForm() {
-  const [questionArr, setQuestionArr] = useState<QuestionType[]>([
-    {
-      number: 1,
-      question: '',
-      type: 'description',
-      isEssential: false,
-      answerList: [],
-    },
-  ]);
+  const { form, setForm } = useContext(PostContext);
   const questionRef = useRef(1);
 
   const addQuestion = () => {
-    setQuestionArr([
-      ...questionArr,
+    setForm([
+      ...form,
       {
         number: ++questionRef.current,
         question: '',
@@ -30,13 +23,16 @@ export default function CreatePostForm() {
     ]);
   };
 
+  const deleteQuestion = (number: number) => {
+    setForm(form.filter((question) => question.number !== number));
+  };
+
   return (
     <div className={styles.createPostForm}>
-      {questionArr.map((question) => (
+      {form.map((question) => (
         <QuestionInputField
           question={question}
-          questionArr={questionArr}
-          setQuestionArr={setQuestionArr}
+          deleteQuestion={deleteQuestion}
           key={question.number}
         />
       ))}

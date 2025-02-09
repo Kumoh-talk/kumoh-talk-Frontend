@@ -18,3 +18,8 @@ export interface CommentInfoResponseList {
   deletedAt: string;
   replyComments: CommentInfoResponseList[];
 }
+
+export interface Comment {
+  content: string;
+  groupId: number | null;
+}

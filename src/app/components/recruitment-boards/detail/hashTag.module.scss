@@ -1,7 +1,6 @@
 @import 'mixin';
 
 .tag {
-
   &.study {
     background: var(--color-orange);
   }
@@ -10,7 +9,11 @@
     background: var(--color-blue-400);
   }
 
-  &.front {
+  &.mentoring {
+    background: #6a50fa;
+  }
+
+  &.frontend {
     background: var(--color-blue-200);
   }
 
@@ -22,7 +25,7 @@
     background: #426c98;
   }
 
-  &.secure {
+  &.security {
     background: #6e5e42;
   }
 
@@ -30,21 +33,23 @@
     background: #ad843d;
   }
 
-  &.mentor {
-    background: #6a50fa;
+  &.etc {
+    background: var(--color-gray-900);
   }
 
   &.large {
     @include title3(white);
     padding: 4px 8px;
     border-radius: 1px;
-    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.03), 0 0.5px 2.5px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.03),
+      0 0.5px 2.5px 0 rgba(0, 0, 0, 0.15);
   }
 
   &.small {
     @include subHeadline(white);
     padding: 3px 6px;
     border-radius: 0.75px;
-    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.03), 0 0.5px 2.5px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.03),
+      0 0.5px 2.5px 0 rgba(0, 0, 0, 0.15);
   }
 }

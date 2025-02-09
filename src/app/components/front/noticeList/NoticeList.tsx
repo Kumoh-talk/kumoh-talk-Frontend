@@ -1,23 +1,15 @@
 import Link from 'next/link';
 import styles from './noticeList.module.scss';
 import PageMoreSvg from '@/app/assets/svg/PageMoreSvg';
-import { BoardItemData } from '../seminarList/SeminarList';
+import { BoardArticle } from '@/app/lib/types/board/board';
 import NoticeItem from './NoticeItem';
+import { getBoardArticles } from '@/app/lib/apis/boards';
 
 export default async function NoticeList() {
-  const list: BoardItemData[] = [];
+  const list: BoardArticle[] = [];
 
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/boards/?boardType=NOTICE&size=9&page=1&sort=createdAt,DESC`,
-    );
-    const result = await response.json();
-
-    if (response.ok && 'success' in result && 'data' in result) {
-      list.push(...(result.data.pageContents as BoardItemData[]));
-    } else {
-      console.error('Failed to fetch data:', result);
-    }
+    list.push(...(await getBoardArticles('NOTICE', 1, 9)));
   } catch (error) {
     console.error('Error fetching data:', error);
   }

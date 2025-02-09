@@ -1,40 +1,13 @@
+import { BoardArticle } from '@/app/lib/types/board/board';
 import SeminarItem from './SeminarItem';
 import styles from './seminarList.module.scss';
-
-type BoardType = 'SEMINAR' | 'NOTICE';
-
-type BoardProps = {
-  boardType: BoardType;
-  page: number;
-  size: number;
-  sort: string;
-};
-
-export type BoardItemData = {
-  boardId: number;
-  title: string;
-  userName: string;
-  boardTag: BoardType;
-  view: number;
-  like: number;
-  headImageUrl: string;
-  createdAt: string;
-};
+import { getBoardArticles } from '@/app/lib/apis/boards';
 
 export default async function SeminarList() {
-  const list: BoardItemData[] = [];
+  const list: BoardArticle[] = [];
 
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/boards/?boardType=SEMINAR&size=7&page=1&sort=createdAt,DESC`,
-    );
-    const result = await response.json();
-
-    if (response.ok && 'success' in result && 'data' in result) {
-      list.push(...(result.data.pageContents as BoardItemData[]));
-    } else {
-      console.error('Failed to fetch data:', result);
-    }
+    list.push(...(await getBoardArticles('SEMINAR', 1, 7)));
   } catch (error) {
     console.error('Error fetching data:', error);
   }

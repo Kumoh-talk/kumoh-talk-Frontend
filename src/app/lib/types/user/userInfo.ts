@@ -38,3 +38,13 @@ export type AdditionalInfo = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type PresignedURLResponse = {
+  success: string;
+  data: string;
+};
+
+export type PatchProfileImageResponse = {
+  success: string;
+  data: any;
+};

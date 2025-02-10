@@ -1,68 +1,55 @@
 import Link from 'next/link';
-import { CategoryIdType } from '../../articles/ArticleItem';
-import ArticleTag, { ArticleTagNameType } from './article-tag/article-tag';
+import ArticleTag from './article-tag/article-tag';
+import { RecruitmentArticle } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 import styles from './articleCard.module.scss';
 
-export interface Props {
-  tags: ArticleTagNameType[];
-  categoryId: CategoryIdType;
-  articleId: number;
-  title: string;
-  description: string;
-  startDate: Date;
-  endDate: Date;
-  target: string[];
-  currentCount: number;
-  maxCount: number;
-  thumbnail: string;
+export interface Props extends RecruitmentArticle {
   size?: 'normal' | 'large';
 }
 
 export default function ArticleCard({
-  tags,
-  categoryId,
-  articleId,
+  tag,
+  type,
+  boardId,
   title,
-  description,
-  startDate,
-  endDate,
-  target,
-  currentCount,
-  maxCount,
-  thumbnail,
+  summary,
+  recruitmentStart,
+  recruitmentDeadline,
+  recruitmentTarget,
+  currentMemberNum,
+  recruitmentNum,
   size = 'normal',
 }: Props) {
-
   return (
     <li
       className={
         size === 'large' ? styles.articleCardLarge : styles.articleCard
       }
     >
-      <Link href={`${categoryId.toLowerCase()}/${articleId}`}>
+      <Link
+        href={`/recruitment-boards/detail?boardType=${type?.toLowerCase()}&id=${boardId}`}
+      >
         <div className={styles.thumbnail}>
           <img src="/images/thumbnail.png" alt="썸네일" />
         </div>
         <div className={styles.info}>
           <ul className={styles.tags}>
-            {tags.map((tag) => (
-              <ArticleTag key={tag} name={tag} />
-            ))}
+            <ArticleTag name={tag} />
           </ul>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{title}</span>
-            <span className={styles.description}>{description}</span>
+            <span className={styles.description}>{summary}</span>
           </div>
           <div className={styles.targetWrapper}>
             <div>
               모집대상
-              <span>{target.join(',')}</span>
+              <span>{recruitmentTarget}</span>
             </div>
             <div>
               모집인원
               <span>
                 <span className={styles.currentCount}></span>
-                {currentCount}/{maxCount}
+                {currentMemberNum}/{recruitmentNum}
               </span>
             </div>
           </div>
@@ -70,7 +57,8 @@ export default function ArticleCard({
             <div>
               신청기간
               <span>
-                {startDate.toLocaleDateString('sv-SE')}~{endDate.toLocaleDateString('sv-SE')}
+                {new Date(recruitmentStart).toLocaleDateString('sv-SE')}~
+                {new Date(recruitmentDeadline).toLocaleDateString('sv-SE')}
               </span>
             </div>
           </div>

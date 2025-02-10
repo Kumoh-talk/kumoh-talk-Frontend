@@ -13,28 +13,28 @@
   box-shadow: 0px 0.5px 2.5px 0px rgba(0, 0, 0, 0.15),
     0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
 
-  &.project {
+  &.PROJECT {
     background: #007aff;
   }
-  &.study {
+  &.STUDY {
     background: var(--color-orange);
   }
-  &.frontend {
+  &.FRONTEND {
     background: var(--color-blue-200);
   }
-  &.backend {
+  &.BACKEND {
     background: #333b43;
   }
-  &.mobile {
+  &.MOBILE {
     background: #426c98;
   }
-  &.security {
+  &.SECURITY {
     background: #6e5e42;
   }
-  &.ai {
+  &.AI {
     background: #ad843d;
   }
-  &.mentor {
+  &.MENTORING {
     background: #6a50fa;
   }
 }

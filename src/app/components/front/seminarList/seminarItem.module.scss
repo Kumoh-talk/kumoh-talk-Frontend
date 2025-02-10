@@ -1,0 +1,46 @@
+@import 'mixin';
+
+.container {
+  & > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.125rem;
+    background-color: #aaa;
+    width: 100%;
+    height: 100%;
+  }
+
+  .new {
+    display: none;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    gap: 0.25rem;
+    max-width: calc(100% - 2rem);
+
+    .title {
+      @include largeTitleEmphasized(white);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+    .sub {
+      @include textColor(white);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      display: inline-flex;
+
+      svg {
+        margin: 0 0.5rem;
+      }
+    }
+  }
+}

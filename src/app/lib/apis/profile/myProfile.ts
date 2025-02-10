@@ -1,4 +1,4 @@
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
+const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 
 const _fetch = async (
   url: string,
@@ -27,9 +27,9 @@ export const getMyProfile = () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: process.env.NEXT_PUBLIC_ACCESS_TOKEN as string,
     },
     credentials: 'include',
+    cache: 'no-store',
   });
 };
 
@@ -38,7 +38,44 @@ export const getAdditionalInfo = (userId: number) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: process.env.NEXT_PUBLIC_ACCESS_TOKEN as string,
+    },
+    credentials: 'include',
+  });
+};
+
+export const getPresignedURL = (fileName: string) => {
+  return _fetch(
+    `${baseUrl}/users/files/presigned-url`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    { fileName, fileType: 'IMAGE' }
+  );
+};
+
+export const patchProfileImage = (url: string) => {
+  return _fetch(
+    `${baseUrl}/users/files/profile`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    { url }
+  );
+};
+
+export const deleteProfileImage = () => {
+  return _fetch(`${baseUrl}/users/files/profile`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
     },
     credentials: 'include',
   });

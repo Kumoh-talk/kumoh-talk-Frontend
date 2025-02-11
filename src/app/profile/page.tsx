@@ -24,13 +24,6 @@ const providerObj = {
   NAVER: <NaverSvg />,
 };
 
-const dummySubscriptionList: Subscription[] = [
-  { name: '세미나 내용 정리 알림', type: 'seminarContentNotice' },
-  { name: '스터디 새 글 알림', type: 'studyNotice' },
-  { name: '프로젝트 새 글 알림', type: 'projectNotice' },
-  { name: '멘토링 새 글 알림', type: 'mentoringNotice' },
-];
-
 export default function Page() {
   const [myProfile, setMyProfile] = useState<UserInfoResponse | null>(null);
   const [additionalInfo, setAdditionalInfo] =

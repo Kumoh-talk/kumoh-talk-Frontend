@@ -33,7 +33,7 @@ export const getMyProfile = () => {
   });
 };
 
-export const getAdditionalInfo = (userId: number) => {
+export const getAdditionalInfo = () => {
   return _fetch(`${baseUrl}/userAdditionalInfos/me`, {
     method: 'GET',
     headers: {
@@ -57,7 +57,21 @@ export const getPresignedURL = (fileName: string) => {
   );
 };
 
+export const uploadProfileImage = (url: string, image: File) => {
+  return _fetch(
+    url,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+    { image }
+  );
+};
+
 export const patchProfileImage = (url: string) => {
+  console.log(`유알엘: ${url}`);
   return _fetch(
     `${baseUrl}/users/files/profile`,
     {

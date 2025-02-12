@@ -38,7 +38,7 @@ export default function Page() {
 
         if (profileData?.data) {
           setMyProfile(profileData);
-          const additionalData = await getAdditionalInfo(profileData.data.id);
+          const additionalData = await getAdditionalInfo();
           setAdditionalInfo(additionalData);
         }
       } catch (error) {

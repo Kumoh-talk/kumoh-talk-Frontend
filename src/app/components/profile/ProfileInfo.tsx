@@ -1,17 +1,17 @@
-import { useContext } from 'react';
 import styles from './profileInfo.module.scss';
 import Image from 'next/image';
-import { userInfoContext } from './UserInfoProvider';
 
-const data = {
-  profileImageUrl: null,
-  name: '홍길동',
-  nickname: 'hong',
-};
+export interface Props {
+  profileImageUrl: string;
+  name: string;
+  nickname: string;
+}
 
-export default function ProfileInfo() {
-  // const { data } = useContext(userInfoContext);
-
+export default function ProfileInfo({
+  profileImageUrl,
+  name,
+  nickname,
+}: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -21,7 +21,7 @@ export default function ProfileInfo() {
         <div className={styles.content}>
           <Image
             className={styles.image}
-            src={data.profileImageUrl || '/images/defaultProfileImage.svg'}
+            src={'/images/defaultProfileImage.svg'}
             alt="프로필 사진"
             width={100}
             height={100}
@@ -34,7 +34,7 @@ export default function ProfileInfo() {
             <span>이름</span>
           </div>
           <div className={styles.content}>
-            <span>{data.name}</span>
+            <span>{name}</span>
           </div>
         </div>
         <div className={styles.row}>
@@ -42,7 +42,7 @@ export default function ProfileInfo() {
             <span>닉네임</span>
           </div>
           <div className={styles.content}>
-            <span>{data.nickname}</span>
+            <span>{nickname}</span>
           </div>
         </div>
       </div>

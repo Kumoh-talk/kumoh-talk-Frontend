@@ -1,21 +1,35 @@
-'use client';
-
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
-import { Suspense, useContext } from 'react';
+import { Suspense } from 'react';
 import ListTable from '@/app/components/recruitment-boards/list/ListTable';
-import {
-  RecruitmentBoardDetailContext
-} from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
+import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 
-export default function ApplyListContainer() {
-  const { success, data, fetchData } = useContext(RecruitmentBoardDetailContext);
+export interface Props {
+  id: string;
+  title: string;
+  boardType: string;
+  tag: string;
+  applicantList: ApplyListApi;
+}
 
+export default async function ApplyListContainer({
+  id,
+  title,
+  boardType,
+  tag,
+  applicantList,
+}: Props) {
   return (
     <>
-      <RecruitmentBoardTitle title={data.title} type={data.type} tag={data.tag}/>
+      <RecruitmentBoardTitle title={title} type={boardType} tag={tag} />
       <Suspense fallback={<div>Loading...</div>}>
-        <ListTable/>
+        <ListTable
+          id={id}
+          title={title}
+          boardType={boardType}
+          tag={tag}
+          applicantList={applicantList}
+        />
       </Suspense>
     </>
-  )
+  );
 }

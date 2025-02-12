@@ -1,21 +1,27 @@
-'use client';
-
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import BoardDetail from '@/app/components/recruitment-boards/apply/BoardDetail';
-import { useContext } from 'react';
-import { RecruitmentBoardDetailContext } from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetailProvider';
 
-export default function RecruitmentApplyContainer() {
-  const { success, data, fetchData } = useContext(RecruitmentBoardDetailContext);
+export interface Props {
+  title: string;
+  boardType: string;
+  tag: string;
+  detail: string;
+}
 
-  if (!data.title) {
-    return <p>Loading...</p>
-  }
-
+export default function RecruitmentApplyContainer({
+  title,
+  boardType,
+  tag,
+  detail,
+}: Props) {
   return (
     <>
-      <RecruitmentBoardTitle title={data.title} type={data.type} tag={data.tag} />
-      <BoardDetail content={data.content} />
+      <RecruitmentBoardTitle
+        title={title}
+        type={boardType.toUpperCase()}
+        tag={tag}
+      />
+      <BoardDetail content={detail} />
     </>
-  )
+  );
 }

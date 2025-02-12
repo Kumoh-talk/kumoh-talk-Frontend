@@ -58,19 +58,15 @@ export const getPresignedURL = (fileName: string) => {
 };
 
 export const uploadProfileImage = (url: string, image: File) => {
-  return _fetch(
-    url,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    },
-    { image }
-  );
+  return fetch(url, {
+    method: 'PUT',
+    body: image,
+    headers: { 'Content-Type': image.type },
+  });
 };
 
-export const patchProfileImage = (url: string) => {
+export const patchProfileImage = (requestUrl: string) => {
+  const url = requestUrl.split('?')[0];
   console.log(`유알엘: ${url}`);
   return _fetch(
     `${baseUrl}/users/files/profile`,

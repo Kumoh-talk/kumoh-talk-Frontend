@@ -90,3 +90,17 @@ export const deleteProfileImage = () => {
     credentials: 'include',
   });
 };
+
+export const patchUserNickname = (nickname: string) => {
+  return _fetch(
+    `${baseUrl}/users/me/nickname`,
+    {
+      method: 'PATCH',
+      headers: {
+        Content_type: 'application/json',
+      },
+      credentials: 'include',
+    },
+    { nickname }
+  );
+};

@@ -18,6 +18,7 @@ export default function NicknameEditModal({ onClose }: Props) {
           placeholder="새로운 닉네임을 입력해주세요."
           name="nickname"
           required
+          autoFocus
         />
         <div className={styles.actions}>
           <Button size="medium" bgColor="bg-gray-800" onClick={onClose}>

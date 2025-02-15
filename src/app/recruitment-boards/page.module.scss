@@ -1,10 +1,12 @@
 @import 'mixin';
-
+html:has(.main) {
+  font-size: 100%;
+}
 .main {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 79.5rem;
+  max-width: 70rem;
   margin: 10.5rem auto 8.25rem;
 
   & > header {

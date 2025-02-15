@@ -1,0 +1,33 @@
+@import 'mixin';
+
+.container {
+  & > a {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 1.25rem 0;
+    border-top: solid 1px var(--color-gray-700);
+  }
+
+  .titleWrapper {
+    display: inline;
+    flex: 1;
+    width: 0;
+    .title {
+      @include title2Emphasized(black-85);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+
+    .new {
+      // display: inline-block;
+      display: none;
+    }
+  }
+
+  .date {
+    @include title2(black-50);
+  }
+}

@@ -6,7 +6,7 @@ import styles from './page.module.scss';
 export default function Home({
   searchParams,
 }: {
-  searchParams: { category?: string; page?: number; order?: string };
+  searchParams: { category?: string; page?: string; order?: string };
 }) {
   return (
     <>

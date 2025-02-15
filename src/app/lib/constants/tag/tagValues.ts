@@ -2,7 +2,7 @@ export interface TagType {
   [key: string]: string;
 }
 
-export const typeToText: TagType = {
+export const typeToText = {
   STUDY: '스터디',
   PROJECT: '프로젝트',
   FRONTEND: '프론트',
@@ -14,7 +14,7 @@ export const typeToText: TagType = {
   ETC: '기타',
 };
 
-export const textToType: TagType = {
+export const textToType = {
   스터디: 'STUDY',
   프로젝트: 'PROJECT',
   프론트: 'FRONTEND',

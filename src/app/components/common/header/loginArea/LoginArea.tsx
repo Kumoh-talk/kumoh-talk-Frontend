@@ -19,7 +19,8 @@ export default async function LoginArea() {
   if (!accessToken) {
     return offline;
   }
-  const userInfo = await getUserInfo();
+  const userInfoResponse = await getUserInfo(cookies().toString());
+  const userInfo = await userInfoResponse.json();
   
   // 기본 정보 입력 안 됐을 때
   if (parseJwt(accessToken).USER_ROLE === 'ROLE_GUEST') {

@@ -1,15 +1,12 @@
 import Header from './components/common/header/Header';
 import ApplyBanner from './components/front/applyBanner/ApplyBanner';
-import TabList from './components/front/tabList/TabList';
-import TabContent from './components/front/tabContent/TabContent';
+import TabContentArticle from './components/front/tabContent/tabContentArticle/TabContentAritlce';
 import styles from './page.module.scss';
 import Footer from './components/common/footer/Footer';
+import SeminarList from './components/front/seminarList/SeminarList';
+import NoticeList from './components/front/noticeList/NoticeList';
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { tab?: string };
-}) {
+export default function Home() {
   return (
     <>
       <Header />
@@ -18,10 +15,13 @@ export default function Home({
           <div className={styles.logo}></div>
           <div className={styles.bannerWrapper}>
             <ApplyBanner />
-            <TabList />
           </div>
         </header>
-        <TabContent tab={searchParams.tab} />
+        <div className={styles.seminarNotice}>
+          <SeminarList />
+          <NoticeList />
+        </div>
+        <TabContentArticle />
       </main>
       <Footer />
     </>

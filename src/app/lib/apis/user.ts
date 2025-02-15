@@ -3,7 +3,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 const _fetch = async (
   url: string,
   options: RequestInit,
-  body?: string | any,
+  body?: string | any
 ) => {
   if (body && typeof body !== 'string') {
     options.body = JSON.stringify(body);
@@ -20,7 +20,7 @@ export const refreshToken = (accessToken: string, refreshToken: string) => {
         'Content-Type': 'application/json',
       },
     },
-    { accessToken, refreshToken },
+    { accessToken, refreshToken }
   );
 };
 
@@ -33,7 +33,7 @@ export const checkNickname = async (nickname: string) => {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-    },
+    }
   );
 };
 
@@ -50,7 +50,7 @@ export const completeRegistration = (nickname: string, name: string) => {
     {
       nickname,
       name,
-    },
+    }
   );
 };
 
@@ -63,7 +63,6 @@ export const logout = (userId: string) => {
     credentials: 'include',
   });
 };
-
 
 export const getUserInfo = () => {
   return _fetch(`${baseUrl}/users/me`, {

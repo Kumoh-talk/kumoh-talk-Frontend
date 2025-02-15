@@ -5,6 +5,7 @@ import { PostBoard } from '../../types/recruitmentBoards/post/postBoard';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { PostForm } from '../../types/recruitmentBoards/post/postForm';
+import { postRecruitmentBoard } from '../../apis/recruitment-boards/recruitmentBoard';
 
 const defaultValues: PostBoard = {
   title: '',
@@ -80,25 +81,8 @@ export default function usePostForm({ resolver }: { resolver: any }) {
     formData.board.activityFinish = new Date(
       formData.board.activityFinish
     ).toISOString();
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-    fetch(`${baseUrl}/api/v1/recruitment-boards?status=published`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: process.env.NEXT_PUBLIC_ACCESS_TOKEN as string,
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => {
-        if (res.ok) {
-          console.log('submit success');
-          console.log(formData);
-          router.back();
-        } else {
-          console.log('submit fail');
-        }
-      })
-      .catch((error) => console.log(error));
+
+    await postRecruitmentBoard(formData);
   };
   const onError = (error: unknown) => console.log(error);
 

@@ -93,7 +93,7 @@ export default function Page() {
                 phoneNumber={additionalInfo.data.phoneNumber}
                 email={additionalInfo.data.email}
               />
-              <SignOutContainer />
+              <SignOutContainer provider={provider} />
             </>
           ) : (
             <div>정보를 등록해주세요.</div>

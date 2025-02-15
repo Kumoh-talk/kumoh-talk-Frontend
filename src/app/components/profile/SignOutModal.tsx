@@ -1,18 +1,16 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import Button from '../common/button/Button';
 import Modal from '../common/modal/Modal';
 import styles from './signOutModal.module.scss';
+import { handleUnlink } from '@/app/lib/apis/profile/signOut';
 
 export interface Props {
   onClose: () => void;
+  provider: string;
 }
 
-const provider = 'GOOGLE';
-
-export default function SignOutModal({ onClose }: Props) {
-  const pathname = usePathname();
+export default function SignOutModal({ onClose, provider }: Props) {
   return (
     <Modal onClose={onClose}>
       <h1 className={styles.title}>
@@ -29,15 +27,9 @@ export default function SignOutModal({ onClose }: Props) {
         <Button size="medium" bgColor="bg-gray-800" onClick={onClose}>
           뒤로가기
         </Button>
-        <a
-          href={`${
-            process.env.NEXT_PUBLIC_API_URL
-          }/api/users/oauth2/${provider.toLowerCase()}?redirect-uri=${
-            process.env.NEXT_PUBLIC_BASE_URL
-          }${pathname}&mode=unlink`}
-        >
-          <Button size="medium">탈퇴하기</Button>
-        </a>
+        <Button size="medium" onClick={() => handleUnlink(provider)}>
+          탈퇴하기
+        </Button>
       </div>
     </Modal>
   );

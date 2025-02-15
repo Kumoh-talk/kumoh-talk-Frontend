@@ -4,11 +4,17 @@ import { TabsProvider } from '@/app/components/recruitment-boards/post/TabsProvi
 import styles from './page.module.scss';
 import PostForm from '@/app/components/recruitment-boards/post/PostForm';
 import { PostProvider } from '@/app/components/recruitment-boards/post/PostProvider';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 export default function Page() {
+  if (!cookies().get('accessToken')) {
+    notFound();
+  }
+
   return (
     <div className={styles.page}>
-      <Header title='모집글 작성' />
+      <Header title="모집글 작성" />
       <TabsProvider>
         <Tabs />
         <div className={styles.form}>

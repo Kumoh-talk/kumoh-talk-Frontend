@@ -2,6 +2,7 @@
   color: var(--color-text-#{$color});
 }
 
+// typography
 @mixin largeTitle($color: primary) {
   @include textColor($color);
   font-size: 1.625rem;
@@ -21,7 +22,6 @@
   font-weight: 400;
   line-height: 1.625rem;
   letter-spacing: -0.05688rem;
-
 }
 
 @mixin title1Emphasized($color: primary) {
@@ -131,4 +131,10 @@
 @mixin caption1Emphasized($color: primary) {
   @include caption1($color);
   font-weight: 500;
+}
+
+// effect
+@mixin backEffect() {
+  filter: drop-shadow(0px 0px 2.67px rgba(0, 0, 0, 0.55))
+    drop-shadow(0px 35.66px 89.15px rgba(0, 0, 0, 0.1));
 }

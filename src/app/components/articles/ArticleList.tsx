@@ -8,6 +8,10 @@ import CategoryList from './CategoryList';
 import Pagination from './Pagination';
 import styles from './articleList.module.scss';
 import { getRecruitmentArticlesByPage } from '@/app/lib/apis/recruitmentBoards';
+import Link from 'next/link';
+import { getUserInfo } from '@/app/lib/apis/user';
+import { cookies } from 'next/headers';
+import clsx from 'clsx';
 
 export default async function ArticleList({
   searchParams,
@@ -15,7 +19,9 @@ export default async function ArticleList({
   searchParams: { category?: string; page?: string; order?: string };
 }) {
   const listData: RecruitmentArticle[] = [];
+  let isCanPost = false;
 
+  // fetch articles
   try {
     const category = (searchParams.category?.toUpperCase() ??
       'MENTORING') as RecruitmentType;
@@ -26,6 +32,16 @@ export default async function ArticleList({
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+
+  // fetch user info
+  try {
+    const userInfoResponse = await getUserInfo(cookies().toString());
+    const userInfo = (await userInfoResponse.json()).data;
+    isCanPost = userInfo?.role === 'ROLE_USER';
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
   const list = listData.map((article) => (
     <ArticleItem key={article.boardId} {...article} />
   ));
@@ -36,7 +52,13 @@ export default async function ArticleList({
         <ArticleOrder />
       </div>
       <ul className={styles.list}>{list}</ul>
-      <Pagination searchParams={searchParams} />
+      <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>
+        <div className={styles.dummy}></div>
+        <Pagination searchParams={searchParams} />
+        <Link className={styles.postButton} href="/recruitment-boards/post">
+          글쓰기
+        </Link>
+      </div>
     </div>
   );
 }

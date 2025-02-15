@@ -1,33 +1,42 @@
-import ArticleItem, { Props as ArticleItemProps } from './ArticleItem';
+import {
+  RecruitmentArticle,
+  RecruitmentType,
+} from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
+import ArticleItem from './ArticleItem';
 import ArticleOrder from './ArticleOrder';
 import CategoryList from './CategoryList';
 import Pagination from './Pagination';
 import styles from './articleList.module.scss';
+import { getRecruitmentArticlesByPage } from '@/app/lib/apis/recruitmentBoards';
 
-const dummy: ArticleItemProps[] = Array.from({ length: 15 }, (_, i) => ({
-  categoryId: 'STUDY',
-  articleId: 1,
-  title: '글제목입니다123123',
-  createdAt: new Date(),
-  commentCount: 3,
-}));
-
-export default function ArticleList({
+export default async function ArticleList({
   searchParams,
 }: {
-  searchParams: { category?: string; page?: number; order?: string };
+  searchParams: { category?: string; page?: string; order?: string };
 }) {
-  const list = dummy.map((article) => (
-    <ArticleItem key={article.articleId} {...article} />
+  const listData: RecruitmentArticle[] = [];
+
+  try {
+    const category = (searchParams.category?.toUpperCase() ??
+      'MENTORING') as RecruitmentType;
+    const page = parseInt(searchParams.page ?? '1');
+
+    const res = await getRecruitmentArticlesByPage(category, page);
+    listData.push(...(res?.boardInfo ?? []));
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+  const list = listData.map((article) => (
+    <ArticleItem key={article.boardId} {...article} />
   ));
   return (
     <div className={styles.wrapper}>
       <div className={styles.aside}>
-        <CategoryList categoryId={searchParams.category ?? 'mentor'} />
+        <CategoryList searchParams={searchParams} />
         <ArticleOrder />
       </div>
       <ul className={styles.list}>{list}</ul>
-      <Pagination />
+      <Pagination searchParams={searchParams} />
     </div>
   );
 }

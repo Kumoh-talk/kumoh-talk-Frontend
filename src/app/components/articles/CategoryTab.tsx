@@ -1,39 +1,36 @@
-'use client';
-
 import clsx from 'clsx';
 import styles from './categoryTab.module.scss';
+import Link from 'next/link';
 
 export interface Props {
   name: string;
   categoryId: string;
   selected: boolean;
+  searchParams: { category?: string; page?: string; order?: string };
 }
 
-export default function CategoryTab({ name, categoryId, selected }: Props) {
-  const onClick = () => {
-    // params category를 categoryId로 변경
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set('category', categoryId);
-    window.history.replaceState(
-      null,
-      '',
-      `${window.location.pathname}?${searchParams.toString()}`,
-    );
-  };
-  console.log(categoryId, selected);
-
+export default function CategoryTab({
+  name,
+  categoryId,
+  selected,
+  searchParams,
+}: Props) {
+  const params = new URLSearchParams(searchParams as Record<string, string>);
+  params.set('category', categoryId);
+  params.delete('page');
+  const url = params.toString();
   return (
     <li className={styles.tab}>
-      <button
+      <Link
+        href={`?${url}`}
         className={clsx(
           styles.button,
           { [styles.selected]: selected },
           styles[categoryId],
         )}
-        onClick={onClick}
       >
         {name}
-      </button>
+      </Link>
     </li>
   );
 }

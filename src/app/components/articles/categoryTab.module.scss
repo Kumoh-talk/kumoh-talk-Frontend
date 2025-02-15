@@ -5,6 +5,7 @@ li.tab {
 
   .button {
     @include body(black-25);
+    background: var(--color-gray-100);
     border: none;
     border-radius: 1rem;
     cursor: pointer;
@@ -21,7 +22,7 @@ li.tab {
       &.study {
         background: var(--color-orange);
       }
-      &.mentor {
+      &.mentoring {
         background: #6a50fa;
       }
     }

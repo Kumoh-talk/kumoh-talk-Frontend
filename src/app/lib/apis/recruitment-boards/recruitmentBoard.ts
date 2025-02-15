@@ -1,4 +1,6 @@
 import { Comment } from '../../types/comment/commentList';
+import { PostBoard } from '../../types/recruitmentBoards/post/postBoard';
+import { PostForm } from '../../types/recruitmentBoards/post/postForm';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 
@@ -44,6 +46,22 @@ export const getRecruitmentBoardDetail = (recruitmentBoardId: string) => {
     credentials: 'include',
     cache: 'no-store',
   });
+};
+
+export const postRecruitmentBoard = (formData: {
+  board: PostBoard;
+  form: PostForm[];
+}) => {
+  return _fetch(
+    `${baseUrl}/recruitment-boards?status=published`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+    formData
+  );
 };
 
 export const getRecruitmentBoardComment = (recruitmentBoardId: string) => {

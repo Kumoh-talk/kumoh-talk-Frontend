@@ -34,7 +34,6 @@ export default async function LoginArea() {
   return (
     <div className={styles.loginArea}>
       <LogoutButton />
-      {JSON.stringify(userInfo)}
     </div>
   );
 }

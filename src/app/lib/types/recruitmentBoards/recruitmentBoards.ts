@@ -47,3 +47,11 @@ export type RecruitmentArticle = {
   recruitmentStart: string;
   recruitmentDeadline: string;
 };
+
+export type RecruitmentByPageResponse = {
+  pageSize: number;
+  pageNum: number;
+  totalPage: number;
+  pageSort: string;
+  boardInfo: RecruitmentArticle[];
+};

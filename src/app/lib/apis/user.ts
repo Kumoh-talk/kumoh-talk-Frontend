@@ -64,11 +64,12 @@ export const logout = (userId: string) => {
   });
 };
 
-export const getUserInfo = () => {
+export const getUserInfo = (cookie?: string) => {
   return _fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...(cookie ? { Cookie: cookie ?? '' } : {}),
     },
     credentials: 'include',
   });

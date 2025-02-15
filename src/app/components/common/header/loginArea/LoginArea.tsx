@@ -28,14 +28,12 @@ export default async function LoginArea() {
       <div className={styles.loginArea}>
         <LogoutButton />
         <WelcomeBubble />
-        {JSON.stringify(userInfo)}
       </div>
     );
   }
   return (
     <div className={styles.loginArea}>
       <LogoutButton />
-      {JSON.stringify(userInfo)}
     </div>
   );
 }

@@ -21,8 +21,8 @@ export default async function ArticleSection({
 }) {
   const listData: RecruitmentArticle[] = [];
   try {
-    const list = await getRecruitmentArticlesByPage(category);
-    listData.push(...list);
+    const res = await getRecruitmentArticlesByPage(category);
+    listData.push(...(res?.boardInfo ?? []));
   } catch (error) {
     console.error('Error fetching data:', error);
   }

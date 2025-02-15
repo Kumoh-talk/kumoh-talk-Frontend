@@ -1,0 +1,48 @@
+@import 'mixin';
+
+.imageContainer {
+  margin-left: 2rem;
+  position: relative;
+}
+
+.image {
+  border-radius: 50%;
+  border: 1px solid hsl(0, 0%, 81%);
+  overflow: hidden;
+}
+
+.editContainer {
+  position: absolute;
+  left: 4.5rem;
+  top: 4.5rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid var(--color-black-25);
+
+  &:hover {
+    background-color: var(--color-gray-500);
+  }
+
+  &:active {
+    background-color: var(--color-gray-600);
+  }
+}
+
+.icon {
+  scale: 0.8;
+  margin: 0;
+}
+
+.buttonText {
+  @include footnote(black-50);
+  margin: 0;
+  text-wrap: nowrap;
+}

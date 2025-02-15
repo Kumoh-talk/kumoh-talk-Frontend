@@ -1,6 +1,7 @@
 import styles from './profileInfo.module.scss';
-import Image from 'next/image';
-
+import ImageEdit from './ImageEdit';
+import PenSvg from '@/app/assets/svg/PenSvg';
+import NicknameEdit from './NicknameEdit';
 export interface Props {
   profileImageUrl: string;
   name: string;
@@ -19,13 +20,7 @@ export default function ProfileInfo({
           <span>프로필 사진</span>
         </div>
         <div className={styles.content}>
-          <Image
-            className={styles.image}
-            src={'/images/defaultProfileImage.svg'}
-            alt="프로필 사진"
-            width={100}
-            height={100}
-          />
+          <ImageEdit profileImageUrl={profileImageUrl} />
         </div>
       </div>
       <div className={styles.right}>
@@ -43,6 +38,7 @@ export default function ProfileInfo({
           </div>
           <div className={styles.content}>
             <span>{nickname}</span>
+            <NicknameEdit />
           </div>
         </div>
       </div>

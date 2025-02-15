@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SignOutModal from './SignOutModal';
 import styles from './signOutContainer.module.scss';
 
-export default function SignOutContainer() {
+export default function SignOutContainer({ provider }: { provider: string }) {
   const [isShow, setIsShow] = useState(false);
 
   const openShowModal = () => {
@@ -20,7 +20,7 @@ export default function SignOutContainer() {
       <span className={styles.cancelSubscription} onClick={openShowModal}>
         회원 탈퇴
       </span>
-      {isShow && <SignOutModal onClose={closeShowModal} />}
+      {isShow && <SignOutModal onClose={closeShowModal} provider={provider} />}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { Comment } from '../../types/comment/commentList';
 
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
+const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 
 export const matchRecruitmentTitle = (recruitmentBoardType: string) => {
   const typeObj: {

@@ -1,0 +1,28 @@
+@import 'mixin';
+
+.title {
+  @include largeTitleEmphasized;
+
+  .emphasized {
+    color: var(--color-blue-400);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+
+  input {
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}

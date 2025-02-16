@@ -21,7 +21,7 @@ export default function ApplyButton({ title, detail, tag }: Props) {
       href={`./apply?id=${boardId}&title=${title}&boardType=${boardType}&detail=${detail}&tag=${tag}`}
       passHref={true}
     >
-      <Button size={'medium'}>신청하기</Button>
+      <Button size={'large'}>신청하기</Button>
     </Link>
   );
 }

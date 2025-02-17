@@ -22,7 +22,7 @@ export default async function Page({
   const title = matchRecruitmentTitle(searchParams.boardType);
 
   const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(
-    searchParams.id
+    searchParams.id,
   );
 
   if (!boardDetail.data) {
@@ -31,32 +31,35 @@ export default async function Page({
 
   const userId = 1111;
 
+  const buttonBlock = (
+    <div className={styles.buttonBlock}>
+      {userId === boardDetail.data.userId ? (
+        <>
+          <ModifyButton />
+          <CheckApplicantButton
+            id={searchParams.id}
+            title={boardDetail.data.title}
+            boardType={boardDetail.data.type}
+            tag={boardDetail.data.tag}
+          />
+        </>
+      ) : (
+        <ApplyButton
+          title={boardDetail.data.title}
+          detail={boardDetail.data.summary}
+          tag={boardDetail.data.tag}
+        />
+      )}
+    </div>
+  );
+
   return (
     <>
       <Header title={title} />
       <main className={styles.board}>
         <Suspense fallback={<p>Loading...</p>}>
-          <RecruitmentBoardDetail boardDetail={boardDetail} />
+          <RecruitmentBoardDetail boardDetail={boardDetail} buttonBlock={buttonBlock} />
         </Suspense>
-        <div className={styles.buttonBlock}>
-          {userId === boardDetail.data.userId ? (
-            <>
-              <ModifyButton />
-              <CheckApplicantButton
-                id={searchParams.id}
-                title={boardDetail.data.title}
-                boardType={boardDetail.data.type}
-                tag={boardDetail.data.tag}
-              />
-            </>
-          ) : (
-            <ApplyButton
-              title={boardDetail.data.title}
-              detail={boardDetail.data.summary}
-              tag={boardDetail.data.tag}
-            />
-          )}
-        </div>
         <Comment boardId={searchParams.id} />
       </main>
       <Footer />

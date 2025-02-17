@@ -20,7 +20,7 @@ export default function CheckApplicantButton({
       href={`./list?id=${id}&title=${title}&boardType=${boardType}&tag=${tag}&page=1&sort=createdAt%2CDESC`}
       passHref={true}
     >
-      <Button onClick={() => {}} size={'medium'}>
+      <Button onClick={() => {}} size={'large'}>
         신청자 확인하기
       </Button>
     </Link>

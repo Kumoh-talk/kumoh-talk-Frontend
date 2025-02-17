@@ -15,7 +15,7 @@ export default function ModifyButton() {
       href={`./modify?id=${boardId}`}
       passHref={true}
     >
-      <Button onClick={onModify} size={'medium'}>
+      <Button onClick={onModify} size={'large'}>
         수정하기
       </Button>
     </Link>

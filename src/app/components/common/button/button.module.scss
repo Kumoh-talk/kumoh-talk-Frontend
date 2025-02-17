@@ -16,13 +16,13 @@
   }
 
   &.medium {
-    @include title3Emphasized(black-50);
+    @include title3(black-50);
     padding: 8px 24px;
     border-radius: 3px;
   }
 
   &.large {
-    @include title1Emphasized(black-50);
+    @include title1(black-50);
     padding: 12px 36px;
     border-radius: 3px;
   }

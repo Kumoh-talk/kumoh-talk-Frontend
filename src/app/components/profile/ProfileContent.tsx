@@ -39,7 +39,7 @@ export default function ProfileContent() {
         if (profileData?.data) {
           setMyProfile(profileData.data);
           const additionalData = await getAdditionalInfo();
-          setAdditionalInfo(additionalData);
+          setAdditionalInfo(additionalData.data);
         }
       } catch (error) {
         console.error('Error fetching profile:', error);

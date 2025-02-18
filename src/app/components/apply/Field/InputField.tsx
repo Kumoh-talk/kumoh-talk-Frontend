@@ -10,13 +10,14 @@ import type {
   FieldValues,
 } from 'react-hook-form';
 
-interface InputFieldProps {
+type InputFieldProps = {
   control: Control<FieldValues, any>;
   name: string;
   label: string;
   type?: 'text' | 'phone' | 'number' | 'date' | 'datetime-local';
   placeholder?: string;
-}
+  required?: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 const InputField = ({
   control,
@@ -24,6 +25,7 @@ const InputField = ({
   label,
   type = 'text',
   placeholder = '필수 입력 칸 입니다.',
+  required = false,
 }: InputFieldProps) => {
   const handleInput = (
     e: React.FormEvent<HTMLInputElement>,
@@ -52,7 +54,14 @@ const InputField = ({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel>
+            {label} &nbsp;{' '}
+            {required && (
+              <span aria-label="required" style={{ color: '#ff7f00' }}>
+                *
+              </span>
+            )}
+          </FormLabel>
           <Input
             {...field}
             placeholder={placeholder}

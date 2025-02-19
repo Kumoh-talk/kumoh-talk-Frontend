@@ -27,7 +27,11 @@ const _fetch = async (
 
 const refreshAndRetry = async (
   request: NextRequest,
-  func: (request: NextRequest, params: any) => Promise<NextResponse>,
+  func: (
+    request: NextRequest,
+    params: any,
+    isRefreshTokenEnabled: boolean,
+  ) => Promise<NextResponse>,
   params: any,
   accessToken?: string,
   _refreshToken?: string,
@@ -45,7 +49,7 @@ const refreshAndRetry = async (
       refreshToken: string;
     } = body.data;
 
-    const res2 = await func(request, params);
+    const res2 = await func(request, params, false);
 
     res2.cookies.set('accessToken', tokenBody.accessToken, {
       httpOnly: true,
@@ -66,6 +70,7 @@ const refreshAndRetry = async (
 export async function GET(
   request: NextRequest,
   { params }: { params: { domain: string } },
+  isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -77,7 +82,6 @@ export async function GET(
     const { USER_ID: userId } = parseJwt(accessToken);
     searchParams.append('userId', '' + userId);
   }
-  console.log(`${baseUrl}/${params.domain}?${searchParams.toString()}`)
 
   const res = await _fetch(
     `${baseUrl}/${params.domain}?${searchParams.toString()}`,
@@ -89,7 +93,12 @@ export async function GET(
   const body = await res.json();
 
   // 토큰 만료
-  if (res.status === 401) {
+  if (
+    isRefreshTokenEnabled &&
+    cookies &&
+    getCookie(cookies, 'accessToken') &&
+    res.status === 401
+  ) {
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
@@ -106,6 +115,7 @@ export async function GET(
 export async function POST(
   request: NextRequest,
   { params }: { params: { domain: string } },
+  isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -128,7 +138,12 @@ export async function POST(
   );
 
   // 토큰 만료
-  if (res.status === 401) {
+  if (
+    isRefreshTokenEnabled &&
+    cookies &&
+    getCookie(cookies, 'accessToken') &&
+    res.status === 401
+  ) {
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
@@ -145,6 +160,7 @@ export async function POST(
 export async function PUT(
   request: NextRequest,
   { params }: { params: { domain: string } },
+  isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -167,7 +183,12 @@ export async function PUT(
   );
 
   // 토큰 만료
-  if (res.status === 401) {
+  if (
+    isRefreshTokenEnabled &&
+    cookies &&
+    getCookie(cookies, 'accessToken') &&
+    res.status === 401
+  ) {
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
@@ -184,6 +205,7 @@ export async function PUT(
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { domain: string } },
+  isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -209,7 +231,12 @@ export async function PATCH(
   console.log(res.status, resBody);
 
   // 토큰 만료
-  if (res.status === 401) {
+  if (
+    isRefreshTokenEnabled &&
+    cookies &&
+    getCookie(cookies, 'accessToken') &&
+    res.status === 401
+  ) {
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,
@@ -240,6 +267,7 @@ export async function PATCH(
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { domain: string } },
+  isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -261,7 +289,12 @@ export async function DELETE(
   );
 
   // 토큰 만료
-  if (res.status === 401) {
+  if (
+    isRefreshTokenEnabled &&
+    cookies &&
+    getCookie(cookies, 'accessToken') &&
+    res.status === 401
+  ) {
     console.log('Token expired, refreshing token');
     return refreshAndRetry(
       request,

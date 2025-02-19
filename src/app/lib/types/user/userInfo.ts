@@ -1,5 +1,5 @@
 type Provider = 'GOOGLE' | 'GITHUB' | 'NAVER' | 'KAKAO';
-type Role =
+export type Role =
   | 'ROLE_GUEST'
   | 'ROLE_USER'
   | 'ROLE_ACTIVE_USER'

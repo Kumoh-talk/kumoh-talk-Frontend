@@ -49,7 +49,7 @@ export default function CheckboxField({
                     // 체크가 되면 기존 배열에 추가
                     field.onChange([
                       ...selectedValues,
-                      { number: value.number, answer: value.answer },
+                      { number: value.number },
                     ]);
                   } else {
                     // 체크 해제하면 배열에서 제거

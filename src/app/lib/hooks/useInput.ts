@@ -6,7 +6,11 @@ function useInputs<T extends ContentType>(initialContent: T) {
   const [content, setContent] = useState<T>(initialContent);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, type, value, checked } = e.target;
+    if (type === 'checkbox') {
+      setContent(content => ({ ...content, [name]: checked }));
+      return;
+    }
     setContent(content => ({ ...content, [name]: value }));
   }, [content]);
 

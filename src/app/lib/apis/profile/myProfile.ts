@@ -29,7 +29,6 @@ export const getMyProfile = () => {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-    cache: 'no-store',
   });
 };
 
@@ -67,7 +66,6 @@ export const uploadProfileImage = (url: string, image: File) => {
 
 export const patchProfileImage = (requestUrl: string) => {
   const url = requestUrl.split('?')[0];
-  console.log(`유알엘: ${url}`);
   return _fetch(
     `${baseUrl}/users/files/profile`,
     {

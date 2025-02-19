@@ -40,10 +40,11 @@ export default function ChoiceField({
                 key={value.answerId}
                 {...field}
                 onChange={(e) => {
-                  field.onChange({
-                    number: value.number,
-                    answer: value.answer,
-                  });
+                  field.onChange([
+                    {
+                      number: value.number,
+                    },
+                  ]);
                   console.log(field.value);
                 }}
               >

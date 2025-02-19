@@ -34,7 +34,10 @@ export default async function Page({
           tag={tag}
           detail={detail}
         />
-        <RecruitmentApplyForm questions={questions.data} />
+        <RecruitmentApplyForm
+          recruitmentBoardId={id}
+          questions={questions.data}
+        />
       </main>
       <Footer />
     </>

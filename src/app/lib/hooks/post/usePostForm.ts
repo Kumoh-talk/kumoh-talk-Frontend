@@ -82,7 +82,11 @@ export default function usePostForm({ resolver }: { resolver: any }) {
       formData.board.activityFinish
     ).toISOString();
 
-    await postRecruitmentBoard(formData);
+    const response = await postRecruitmentBoard(formData);
+
+    if (response.status === 'true') {
+      router.replace('/recruitment-boards');
+    }
   };
   const onError = (error: unknown) => console.log(error);
 

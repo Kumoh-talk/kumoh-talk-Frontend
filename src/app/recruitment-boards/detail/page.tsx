@@ -1,10 +1,7 @@
 import styles from './page.module.scss';
-import ApplyButton from '@/app/components/recruitment-boards/detail/ApplyButton';
-import ModifyButton from '@/app/components/recruitment-boards/detail/ModifyButton';
 import Comment from '@/app/components/common/comment/CommentComponent';
 import { Suspense } from 'react';
 import RecruitmentBoardDetail from '@/app/components/recruitment-boards/detail/RecruitmentBoardDetail';
-import CheckApplicantButton from '@/app/components/recruitment-boards/detail/CheckApplicantButton';
 import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
 import {
@@ -13,6 +10,9 @@ import {
 } from '@/app/lib/apis/recruitment-boards/recruitmentBoard';
 import { RecruitmentBoardsApi } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 import { notFound } from 'next/navigation';
+import { UserInfo } from '@/app/lib/types/user/userInfo';
+import { getUserInfo } from '@/app/lib/apis/user';
+import { cookies } from 'next/headers';
 
 export default async function Page({
   searchParams,
@@ -20,45 +20,28 @@ export default async function Page({
   searchParams: { id: string; boardType: string };
 }) {
   const title = matchRecruitmentTitle(searchParams.boardType);
-
+  const UserInfoResponse = await getUserInfo(cookies().toString());
+  const userInfo: UserInfo = (await UserInfoResponse.json()).data;
+  console.log(userInfo);
   const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(
-    searchParams.id,
+    searchParams.id
   );
 
   if (!boardDetail.data) {
     return notFound();
   }
 
-  const userId = 1111;
-
-  const buttonBlock = (
-    <div className={styles.buttonBlock}>
-      {userId === boardDetail.data.userId ? (
-        <>
-          <ModifyButton />
-          <CheckApplicantButton
-            id={searchParams.id}
-            title={boardDetail.data.title}
-            boardType={boardDetail.data.type}
-            tag={boardDetail.data.tag}
-          />
-        </>
-      ) : (
-        <ApplyButton
-          title={boardDetail.data.title}
-          detail={boardDetail.data.summary}
-          tag={boardDetail.data.tag}
-        />
-      )}
-    </div>
-  );
-
   return (
     <>
       <Header title={title} />
       <main className={styles.board}>
         <Suspense fallback={<p>Loading...</p>}>
-          <RecruitmentBoardDetail boardDetail={boardDetail} buttonBlock={buttonBlock} />
+          <RecruitmentBoardDetail
+            boardDetail={boardDetail}
+            userId={userInfo?.id}
+            writerUserId={boardDetail.data.userId}
+            boardId={searchParams.id}
+          />
         </Suspense>
         <Comment boardId={searchParams.id} />
       </main>

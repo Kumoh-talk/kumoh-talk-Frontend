@@ -17,7 +17,7 @@ export interface Props {
 export default function NewsletterBubble({ className, onClose }: Props) {
   const [state, onChange] = useInputs({
     email: '',
-    sub_semina_notice: false,
+    sub_semina_notice: true,
     sub_semina: false,
     sub_new_study: false,
     sub_new_project: false,
@@ -27,7 +27,7 @@ export default function NewsletterBubble({ className, onClose }: Props) {
     try {
       const res = await subscribe(
         state.email,
-        state.sub_semina_notice,
+        true,
         state.sub_semina,
         state.sub_new_study,
         state.sub_new_project,
@@ -71,13 +71,13 @@ export default function NewsletterBubble({ className, onClose }: Props) {
         />
         <div className={styles.checkboxs}>
           <div className={styles.checkbox}>
-            <label>
+            <label className={styles.disabled}>
               세미나 공지사항
               <input
                 type="checkbox"
                 name="sub_semina_notice"
-                onChange={onChange}
-                value={state.sub_semina_notice ? 'on' : ''}
+                value={'on'}
+                disabled
               />
               <span className={styles.checkmark}>
                 <UnionIcon />

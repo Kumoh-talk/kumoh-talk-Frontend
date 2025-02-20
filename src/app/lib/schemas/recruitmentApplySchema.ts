@@ -23,7 +23,7 @@ export const recruitmentApplySchema = (questions: Questions[]) => {
               key,
               question.isEssential
                 ? z
-                    .array(z.object({ number: z.string() }))
+                    .array(z.object({ number: z.number() }))
                     .nonempty(ERROR_MSG.required)
                 : z.any(),
             ];
@@ -32,7 +32,7 @@ export const recruitmentApplySchema = (questions: Questions[]) => {
               key,
               question.isEssential
                 ? z
-                    .array(z.object({ number: z.string() }))
+                    .array(z.object({ number: z.number() }))
                     .nonempty(ERROR_MSG.required)
                 : z.any(),
             ];

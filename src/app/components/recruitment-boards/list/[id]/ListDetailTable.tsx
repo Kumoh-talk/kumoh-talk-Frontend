@@ -12,10 +12,17 @@ export default function ListDetailTable({ applicantDetail }: Props) {
     <div className={styles.tableContainer}>
       <table className={styles.infoTable}>
         <tbody>
-          {applicantAnswer.map((answer) => (
-            <tr key={answer.questionId}>
-              <th>{answer.question}</th>
-              <td>{answer.answerList.join('\n')}</td>
+          {applicantAnswer.map((answerField) => (
+            <tr key={answerField.questionId}>
+              <th>{answerField.question}</th>
+              <td>
+                {answerField.answerList.map((answer, index) => (
+                  <>
+                    <span key={answer.answerId}>{answer.answer}</span>
+                    {index !== answerField.answerList.length - 1 && <br />}
+                  </>
+                ))}
+              </td>
             </tr>
           ))}
         </tbody>

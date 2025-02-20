@@ -30,6 +30,7 @@ export interface Props {
   title: string;
   boardType: string;
   tag: string;
+  name: string;
   applicant: Applicant;
 }
 
@@ -38,28 +39,30 @@ export default async function ListContent({
   title,
   boardType,
   tag,
+  name,
   applicant,
 }: Props) {
   const { applicantId, userId, createdAt, updatedAt } = applicant;
   const applicationUserInfo: ApplicantUserInfoApi = await getApplicantUserInfo(
     userId
   );
-  const { name, userAdditionalProfile } = applicationUserInfo.data;
+  const { name: applicantUserName, userAdditionalProfile } =
+    applicationUserInfo.data;
 
   return (
     <Link
       style={{ textDecoration: 'none' }}
-      href={`./list/${applicantId}?id=${id}&title=${title}&boardType=${boardType}&tag=${tag}`}
+      href={`./list/${applicantId}?id=${id}&title=${title}&boardType=${boardType}&tag=${tag}&name=${name}`}
       passHref={true}
     >
       <div className={styles.contentBlock}>
         <div className={styles.profile}>
           <ProfileImage />
-          <p className={styles.name}>{name}</p>
+          <p className={styles.name}>{applicantUserName}</p>
         </div>
         <p>{userAdditionalProfile.department}</p>
         <p>{userAdditionalProfile.grade}</p>
-        <p>20201287</p>
+        <p>{userAdditionalProfile.studentId}</p>
         <p>010 1234 5678</p>
         <p>{userAdditionalProfile.studentStatus}</p>
       </div>

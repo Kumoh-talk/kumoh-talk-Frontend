@@ -8,6 +8,7 @@ export interface Props {
   title: string;
   boardType: string;
   tag: string;
+  name: string;
   applicantList: ApplyListApi;
 }
 
@@ -16,6 +17,7 @@ export default async function ListTable({
   title,
   boardType,
   tag,
+  name,
   applicantList,
 }: Props) {
   if (!applicantList.data) {
@@ -32,6 +34,7 @@ export default async function ListTable({
           title={title}
           boardType={boardType}
           tag={tag}
+          name={name}
           applicant={applicant}
         />
       ))}

@@ -8,6 +8,7 @@ export interface Props {
   title: string;
   boardType: string;
   tag: string;
+  name: string;
   applicantList: ApplyListApi;
 }
 
@@ -16,17 +17,24 @@ export default async function ApplyListContainer({
   title,
   boardType,
   tag,
+  name,
   applicantList,
 }: Props) {
   return (
     <>
-      <RecruitmentBoardTitle title={title} type={boardType} tag={tag} />
+      <RecruitmentBoardTitle
+        title={title}
+        type={boardType}
+        tag={tag}
+        name={name}
+      />
       <Suspense fallback={<div>Loading...</div>}>
         <ListTable
           id={id}
           title={title}
           boardType={boardType}
           tag={tag}
+          name={name}
           applicantList={applicantList}
         />
       </Suspense>

@@ -28,12 +28,13 @@ export default function RecruitmentBoardDetail({
     <div className={styles.buttonBlock}>
       {userId === writerUserId ? (
         <>
-          <ModifyButton />
+          {/* <ModifyButton /> */}
           <CheckApplicantButton
             id={boardId}
             title={boardDetail.data.title}
             boardType={boardDetail.data.type}
             tag={boardDetail.data.tag}
+            name={boardDetail.data.host}
           />
         </>
       ) : (

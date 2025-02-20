@@ -8,16 +8,18 @@ export default function CheckApplicantButton({
   title,
   boardType,
   tag,
+  name,
 }: {
   id: string;
   title: string;
   boardType: string;
   tag: string;
+  name: string;
 }) {
   return (
     <Link
       style={{ textDecoration: 'none' }}
-      href={`./list?id=${id}&title=${title}&boardType=${boardType}&tag=${tag}&page=1&sort=createdAt%2CDESC`}
+      href={`./list?id=${id}&title=${title}&boardType=${boardType}&tag=${tag}&name=${name}&page=1&sort=createdAt%2CDESC`}
       passHref={true}
     >
       <Button onClick={() => {}} size={'large'}>

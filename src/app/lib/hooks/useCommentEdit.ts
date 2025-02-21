@@ -17,7 +17,7 @@ type commentEditProps = {
 type commentEditType = [
   string,
   (e: ChangeEvent<HTMLTextAreaElement>) => void,
-  (e: KeyboardEvent<HTMLTextAreaElement>) => void
+  () => void
 ];
 
 export default function useCommentEdit({
@@ -32,12 +32,10 @@ export default function useCommentEdit({
     setContent(e.target.value);
   };
 
-  const onSubmit = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      await patchRecruitmentBoardComment(id, { groupId, content });
+  const onSubmit = async () => {
+    await patchRecruitmentBoardComment(id, { groupId, content });
 
-      if (setIsEdit) setIsEdit(false);
-    }
+    if (setIsEdit) setIsEdit(false);
   };
 
   return [content, onChange, onSubmit];

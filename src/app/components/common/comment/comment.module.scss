@@ -2,6 +2,20 @@
 
 .block {
   margin-bottom: 12rem;
+
+  textarea {
+    @include subHeadline(black-100);
+    width: 100%;
+    min-height: 80px;
+    padding: 4px;
+    resize: vertical;
+    border: 2px solid var(--color-gray-600);
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 .head {
@@ -11,9 +25,18 @@
 
 .inputBlock {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   margin-bottom: 32px;
+
+  .editor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1;
+    gap: 0.5rem;
+    width: 100%;
+  }
 }
 
 .profile {
@@ -95,25 +118,28 @@
     background-color: var(--color-gray-300);
   }
 
-  .commentEdit {
-    @include body(black-85);
-    width: 100%;
-    padding: 0.125rem 0.25rem; // 내부 패딩 추가
-    border: none;
-    border-bottom: 2px solid var(--color-gray-500);
-    transition: border-bottom-color 0.3s ease; // 부드러운 전환 효과
-    resize: vertical;
-
-    &:focus {
-      border-bottom-color: #007bff; // 포커스 상태일 때 파란색 테두리
-      outline: none; // 기본 아웃라인 제거
-    }
-  }
-
   .reactButton {
     @include body(black-50);
     cursor: pointer;
   }
+}
+
+.commentEditWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.commentEdit {
+  width: 100%;
+}
+
+.editButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
 .moreButton {

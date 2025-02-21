@@ -5,21 +5,18 @@ import { postRecruitmentBoardComment } from '../apis/recruitment-boards/recruitm
 export default function useCommentInput(boardId: string) {
   const [content, onChange, reset] = useInput({ comment: '' });
 
-  const onSubmit = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onSubmit = () => {
     if (!content.comment) {
       return;
     }
+    const commentBody = {
+      groupId: null,
+      content: content.comment,
+    };
+    postRecruitmentBoardComment(boardId, commentBody);
 
-    if (e.key === 'Enter') {
-      const commentBody = {
-        groupId: null,
-        content: content.comment,
-      };
-      postRecruitmentBoardComment(boardId, commentBody);
-
-      reset();
-      window.location.reload();
-    }
+    reset();
+    window.location.reload();
   };
 
   return { comment: content.comment, onChange, reset, onSubmit };

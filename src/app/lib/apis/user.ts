@@ -54,8 +54,8 @@ export const completeRegistration = (nickname: string, name: string) => {
   );
 };
 
-export const logout = (userId: string) => {
-  return _fetch(`${baseUrl}/users/logout?userId=${userId}`, {
+export const logout = () => {
+  return _fetch(`${baseUrl}/users/logout`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

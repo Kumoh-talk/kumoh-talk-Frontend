@@ -7,10 +7,17 @@ function useInputs<T extends ContentType>(initialContent: T) {
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = e.target;
+      const { name, type, value } = e.target;
+      if (type === 'checkbox') {
+        setContent((content) => ({
+          ...content,
+          [name]: (e as ChangeEvent<HTMLInputElement>).target.checked,
+        }));
+        return;
+      }
       setContent((content) => ({ ...content, [name]: value }));
     },
-    [content]
+    [content],
   );
 
   const reset = useCallback(() => setContent(initialContent), [initialContent]);

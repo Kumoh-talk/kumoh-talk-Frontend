@@ -18,6 +18,13 @@ export async function middleware(request: NextRequest) {
     return resLogin;
   }
 
+  // 로그아웃 시
+  const resLogout = checkLogout(request);
+  if (resLogout) {
+    return resLogout;
+  }
+
+  // 토큰 만료 체크
   const resCheckTokenExpired = await checkTokenExpired(request);
   if (resCheckTokenExpired) {
     return resCheckTokenExpired;
@@ -59,6 +66,25 @@ const checkLoginSuccess = (request: NextRequest): NextResponse | null => {
       status: 302,
     });
     return setCookieIntoResponse(response, accessToken, refreshToken);
+  } else {
+    return null;
+  }
+};
+
+const checkLogout = (request: NextRequest): NextResponse | null => {
+  const { nextUrl } = request;
+
+  const isLogout = nextUrl.searchParams.get('logout');
+
+  if (isLogout) {
+    nextUrl.searchParams.delete('logout');
+
+    const response = NextResponse.redirect(nextUrl.toString(), {
+      status: 302,
+    });
+    response.cookies.delete('accessToken');
+    response.cookies.delete('refreshToken');
+    return response;
   } else {
     return null;
   }

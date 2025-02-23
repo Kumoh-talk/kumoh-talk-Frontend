@@ -41,6 +41,7 @@ export type RecruitmentArticle = {
   summary: string;
   type: RecruitmentType;
   tag: RecruitmentTag;
+  commentCount: number;
   recruitmentTarget: string;
   recruitmentNum: number;
   currentMemberNum: number;

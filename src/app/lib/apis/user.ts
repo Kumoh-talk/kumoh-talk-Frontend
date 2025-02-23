@@ -3,7 +3,7 @@ const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 const _fetch = async (
   url: string,
   options: RequestInit,
-  body?: string | any,
+  body?: string | any
 ) => {
   if (body && typeof body !== 'string') {
     options.body = JSON.stringify(body);
@@ -20,7 +20,7 @@ export const refreshToken = (accessToken: string, refreshToken: string) => {
         'Content-Type': 'application/json',
       },
     },
-    { accessToken, refreshToken },
+    { accessToken, refreshToken }
   );
 };
 
@@ -33,7 +33,7 @@ export const checkNickname = async (nickname: string) => {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-    },
+    }
   );
 };
 
@@ -50,12 +50,12 @@ export const completeRegistration = (nickname: string, name: string) => {
     {
       nickname,
       name,
-    },
+    }
   );
 };
 
-export const logout = (userId: string) => {
-  return _fetch(`${baseUrl}/users/logout?userId=${userId}`, {
+export const logout = () => {
+  return _fetch(`${baseUrl}/users/logout`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -64,12 +64,12 @@ export const logout = (userId: string) => {
   });
 };
 
-
-export const getUserInfo = () => {
+export const getUserInfo = (cookie?: string) => {
   return _fetch(`${baseUrl}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...(cookie ? { Cookie: cookie ?? '' } : {}),
     },
     credentials: 'include',
   });

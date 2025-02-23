@@ -24,7 +24,7 @@ export default async function CommentComponent({ boardId }: Props) {
         <ProfileImage />
         <CommentInput boardId={boardId} />
       </div>
-      <CommentList commentList={commentList.data} />
+      <CommentList boardId={Number(boardId)} commentList={commentList.data} />
     </div>
   );
 }

@@ -12,17 +12,17 @@
   &.small {
     @include body(black-50);
     padding: 6px 12px;
-    border-radius: 1px;
+    border-radius: 3px;
   }
 
   &.medium {
-    @include title3Emphasized(black-50);
+    @include title3(black-50);
     padding: 8px 24px;
     border-radius: 3px;
   }
 
   &.large {
-    @include title1Emphasized(black-50);
+    @include title1(black-50);
     padding: 12px 36px;
     border-radius: 3px;
   }
@@ -56,7 +56,20 @@
     }
   }
 
+  &.bg-white {
+    background: var(--color-white);
+    border: 1px solid var(--color-black-85);
+
+    &:hover {
+      background: var(--color-gray-100);
+    }
+  }
+
   &.text-white {
     color: var(--color-white);
+  }
+
+  &.text-black-85 {
+    color: var(--color-black-85);
   }
 }

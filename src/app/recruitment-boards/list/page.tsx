@@ -4,6 +4,7 @@ import Header from '@/app/components/common/header/Header';
 import Footer from '@/app/components/common/footer/Footer';
 import { getRecruitmentBoardApplicantList } from '@/app/lib/apis/recruitment-boards/list/list';
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
+import { cookies } from 'next/headers';
 
 export default async function Page({
   searchParams,
@@ -13,15 +14,17 @@ export default async function Page({
     title: string;
     boardType: string;
     tag: string;
+    name: string;
     page: string;
     sort: string;
   };
 }) {
-  const { id, title, boardType, tag, page, sort } = searchParams;
+  const { id, title, boardType, tag, name, page, sort } = searchParams;
   const applicantList: ApplyListApi = await getRecruitmentBoardApplicantList(
     id,
     Number(page),
-    sort
+    sort,
+    cookies().toString()
   );
 
   return (
@@ -33,6 +36,7 @@ export default async function Page({
           title={title}
           boardType={boardType}
           tag={tag}
+          name={name}
           applicantList={applicantList}
         />
       </main>

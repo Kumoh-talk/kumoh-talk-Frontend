@@ -1,4 +1,4 @@
-const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
+const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 
 const _fetch = async (
   url: string,
@@ -25,7 +25,8 @@ const _fetch = async (
 export const getRecruitmentBoardApplicantList = (
   recruitmentBoardId: string,
   page: number,
-  sort: string
+  sort: string,
+  cookie?: string
 ) => {
   return _fetch(
     `${baseUrl}/applications/recruitment/${recruitmentBoardId}?page=${page}&size=${10}&sort=${sort}`,
@@ -33,17 +34,19 @@ export const getRecruitmentBoardApplicantList = (
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        ...(cookie ? { Cookie: cookie ?? '' } : {}),
       },
       credentials: 'include',
     }
   );
 };
 
-export const getApplicantUserInfo = (userId: number) => {
+export const getApplicantUserInfo = (userId: number, cookie?: string) => {
   return _fetch(`${baseUrl}/users/${userId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...(cookie ? { Cookie: cookie ?? '' } : {}),
     },
     credentials: 'include',
   });
@@ -51,7 +54,8 @@ export const getApplicantUserInfo = (userId: number) => {
 
 export const getApplicantDetail = (
   applicantId: string,
-  recruitmentBoardId: string
+  recruitmentBoardId: string,
+  cookie?: string
 ) => {
   return _fetch(
     `${baseUrl}/applications/recruitment/${recruitmentBoardId}/${applicantId}`,
@@ -59,6 +63,7 @@ export const getApplicantDetail = (
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        ...(cookie ? { Cookie: cookie ?? '' } : {}),
       },
       credentials: 'include',
     }

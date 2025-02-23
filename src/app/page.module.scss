@@ -1,4 +1,7 @@
 @import 'mixin';
+html:has(.main) {
+  font-size: 100%;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -23,5 +26,10 @@
       gap: 1.25rem;
       align-items: center;
     }
+  }
+  .seminarNotice {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
   }
 }

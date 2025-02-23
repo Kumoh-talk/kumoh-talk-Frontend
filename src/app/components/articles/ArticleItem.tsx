@@ -10,6 +10,7 @@ export default function ArticleItem({
   type,
   boardId,
   title,
+  commentCount,
   recruitmentStart,
 }: Props) {
   return (
@@ -24,7 +25,7 @@ export default function ArticleItem({
         </span>
         <span className={styles.titleWrapper}>
           <span className={styles.title}>{title}</span>{' '}
-          <span className={styles.comment}>[0]</span>
+          <span className={styles.comment}>[{commentCount}]</span>
         </span>
         <span className={styles.datetime}>
           {new Date(recruitmentStart).toLocaleDateString('en-CA')}

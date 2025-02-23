@@ -85,7 +85,7 @@ export default function Comment({
                   </div>
                 </div>
               ) : (
-                <div>
+                <div className={styles.textWrapper}>
                   <span className={styles.commentText}>
                     {deletedAt ? (
                       <span className={styles.deletedComment}>
@@ -98,16 +98,18 @@ export default function Comment({
                             @ &nbsp; {parentComment?.userNickname}
                           </span>
                         )}
-                        {content}
+                        <pre>{content}</pre>
                       </>
                     )}
                   </span>
-                  <div
+                  <br />
+                  <br />
+                  <span
                     className={styles.reactButton}
                     onClick={() => setIsReply((prev) => !prev)}
                   >
                     답글
-                  </div>
+                  </span>
                 </div>
               )}
             </div>

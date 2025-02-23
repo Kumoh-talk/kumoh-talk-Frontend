@@ -19,6 +19,7 @@ export default function CommentInput({ boardId }: Props) {
         name={'comment'}
         value={comment}
         onChange={onChange}
+        maxLength={500}
       />
       <Button onClick={onSubmit}>등록</Button>
     </div>

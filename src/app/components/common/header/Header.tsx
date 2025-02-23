@@ -25,7 +25,7 @@ export default function Header({ title = '' }: Props) {
         <LoginArea />
         <NewsletterArea />
         <div className={styles.line}></div>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <Alert />
       </div>
     </Background>

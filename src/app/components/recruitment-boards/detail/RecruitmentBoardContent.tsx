@@ -57,13 +57,13 @@ export default function RecruitmentBoardContent({
           </div>
         </div>
       </section>
-      {buttonBlock}
       <section className={styles.section}>
         <span className={styles.header}>세부내용</span>
         <div className={styles.detail}>
           <span>{detail}</span>
         </div>
       </section>
+      {buttonBlock}
     </div>
   );
 }

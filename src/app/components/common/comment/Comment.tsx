@@ -72,6 +72,7 @@ export default function Comment({
                     ref={editRef}
                     value={content}
                     onChange={onChange}
+                    maxLength={500}
                   />
                   <div className={styles.editButtonWrapper}>
                     <Button

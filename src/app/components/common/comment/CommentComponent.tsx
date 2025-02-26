@@ -30,7 +30,11 @@ export default async function CommentComponent({ boardId }: Props) {
         <ProfileImage profileImageUrl={userInfo?.profileImageUrl} />
         <CommentInput boardId={boardId} />
       </div>
-      <CommentList boardId={Number(boardId)} commentList={commentList.data} />
+      <CommentList
+        userName={userInfo?.nickname}
+        boardId={Number(boardId)}
+        commentList={commentList.data}
+      />
     </div>
   );
 }

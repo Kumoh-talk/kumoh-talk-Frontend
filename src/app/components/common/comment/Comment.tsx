@@ -11,12 +11,14 @@ import Reply from './Reply';
 import Button from '../button/Button';
 
 export interface Props {
+  userName?: string;
   boardId: number;
   currentComment: CommentInfoResponseList;
   parentComment?: CommentInfoResponseList | null;
 }
 
 export default function Comment({
+  userName,
   boardId,
   currentComment,
   parentComment = null,
@@ -116,7 +118,12 @@ export default function Comment({
             </div>
           </div>
           <div className={styles.moreButton}>
-            <MoreButton commentId={commentId} setIsEdit={setIsEdit} />
+            <MoreButton
+              userName={userName}
+              commentId={commentId}
+              commentUserName={name}
+              setIsEdit={setIsEdit}
+            />
           </div>
         </div>
       </div>
@@ -132,6 +139,7 @@ export default function Comment({
       </div>
       {replyComments.map((replyComment) => (
         <Comment
+          userName={userName}
           boardId={boardId}
           currentComment={replyComment}
           key={replyComment.commentId}

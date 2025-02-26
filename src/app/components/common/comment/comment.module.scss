@@ -1,5 +1,12 @@
 @import 'mixin';
 
+@font-face {
+  font-family: 'PretendardVariable';
+  src: url('/PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900; /* 가변 폰트인 경우 */
+  font-display: swap;
+}
+
 .block {
   margin-bottom: 12rem;
 
@@ -14,6 +21,10 @@
 
     &:focus {
       outline: none;
+
+      &::placeholder {
+        color: var(--color-gray-600);
+      }
     }
   }
 }
@@ -51,6 +62,7 @@
   padding: 8px 0;
   border: none;
   border-bottom: 2px solid var(--color-gray-500);
+  resize: vertical;
 
   &:focus {
     outline: none;
@@ -74,7 +86,8 @@
 .commentBlock {
   flex: 23;
   display: flex;
-  align-items: center;
+  width: inherit;
+  align-items: flex-start;
   gap: 0.875rem;
 }
 
@@ -99,13 +112,25 @@
   }
 }
 
+.textWrapper {
+  width: 100%;
+}
+
 .commentBottom {
   display: flex;
   gap: 12px;
+  width: 100%;
+  text-wrap: wrap;
 
   .commentText {
     @include body(black-85);
-    white-space: pre;
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    pre {
+      font-family: 'PretendardVariable';
+      white-space: pre-wrap;
+    }
   }
 
   .deletedComment {

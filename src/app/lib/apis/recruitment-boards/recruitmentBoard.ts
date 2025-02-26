@@ -119,3 +119,7 @@ export const deleteRecruitmentBoardComment = (commentId: number) => {
     credentials: 'include',
   });
 };
+
+export const reportRecruitmentBoardComment = (commentId: number) => {
+  console.log(`${commentId} 댓글을 신고`);
+};

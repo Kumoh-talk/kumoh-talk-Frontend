@@ -11,12 +11,14 @@ import Reply from './Reply';
 import Button from '../button/Button';
 
 export interface Props {
+  userName?: string;
   boardId: number;
   currentComment: CommentInfoResponseList;
   parentComment?: CommentInfoResponseList | null;
 }
 
 export default function Comment({
+  userName,
   boardId,
   currentComment,
   parentComment = null,
@@ -72,6 +74,7 @@ export default function Comment({
                     ref={editRef}
                     value={content}
                     onChange={onChange}
+                    maxLength={500}
                   />
                   <div className={styles.editButtonWrapper}>
                     <Button
@@ -85,7 +88,7 @@ export default function Comment({
                   </div>
                 </div>
               ) : (
-                <div>
+                <div className={styles.textWrapper}>
                   <span className={styles.commentText}>
                     {deletedAt ? (
                       <span className={styles.deletedComment}>
@@ -98,22 +101,29 @@ export default function Comment({
                             @ &nbsp; {parentComment?.userNickname}
                           </span>
                         )}
-                        {content}
+                        <pre>{content}</pre>
                       </>
                     )}
                   </span>
-                  <div
+                  <br />
+                  <br />
+                  <span
                     className={styles.reactButton}
                     onClick={() => setIsReply((prev) => !prev)}
                   >
                     답글
-                  </div>
+                  </span>
                 </div>
               )}
             </div>
           </div>
           <div className={styles.moreButton}>
-            <MoreButton commentId={commentId} setIsEdit={setIsEdit} />
+            <MoreButton
+              userName={userName}
+              commentId={commentId}
+              commentUserName={name}
+              setIsEdit={setIsEdit}
+            />
           </div>
         </div>
       </div>
@@ -129,6 +139,7 @@ export default function Comment({
       </div>
       {replyComments.map((replyComment) => (
         <Comment
+          userName={userName}
           boardId={boardId}
           currentComment={replyComment}
           key={replyComment.commentId}

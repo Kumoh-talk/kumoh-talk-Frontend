@@ -120,6 +120,19 @@ export const deleteRecruitmentBoardComment = (commentId: number) => {
   });
 };
 
-export const reportRecruitmentBoardComment = (commentId: number) => {
-  console.log(`${commentId} 댓글을 신고`);
+export const reportRecruitmentBoardComment = (
+  commentId: number,
+  userId: number
+) => {
+  return _fetch(
+    `${baseUrl}/reports/recruitment-board/comments/${commentId}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    { commentId, userId }
+  );
 };

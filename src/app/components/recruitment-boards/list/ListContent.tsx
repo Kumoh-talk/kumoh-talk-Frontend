@@ -58,13 +58,16 @@ export default async function ListContent({
       <div className={styles.contentBlock}>
         <div className={styles.profile}>
           <ProfileImage />
-          <p className={styles.name}>{applicantUserName}</p>
+          <div className={styles.profileInfo}>
+            <p className={styles.name}>{applicantUserName}</p>
+            <p className={styles.department}>
+              {userAdditionalProfile.department}
+            </p>
+          </div>
         </div>
-        <p>{userAdditionalProfile.department}</p>
-        <p>{userAdditionalProfile.grade}</p>
-        <p>{userAdditionalProfile.studentId}</p>
-        <p>010 1234 5678</p>
-        <p>{userAdditionalProfile.studentStatus}</p>
+        <p className={styles.grade}>{userAdditionalProfile.grade}</p>
+        <p className={styles.studentId}>{userAdditionalProfile.studentId}</p>
+        <p className={styles.status}>{userAdditionalProfile.studentStatus}</p>
       </div>
     </Link>
   );

@@ -20,10 +20,6 @@ export default async function ListTable({
   name,
   applicantList,
 }: Props) {
-  if (!applicantList.data) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className={styles.list}>
       <ListTitle />

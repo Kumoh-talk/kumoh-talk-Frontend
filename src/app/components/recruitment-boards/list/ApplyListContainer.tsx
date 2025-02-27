@@ -28,16 +28,14 @@ export default async function ApplyListContainer({
         tag={tag}
         name={name}
       />
-      <Suspense fallback={<div>Loading...</div>}>
-        <ListTable
-          id={id}
-          title={title}
-          boardType={boardType}
-          tag={tag}
-          name={name}
-          applicantList={applicantList}
-        />
-      </Suspense>
+      <ListTable
+        id={id}
+        title={title}
+        boardType={boardType}
+        tag={tag}
+        name={name}
+        applicantList={applicantList}
+      />
     </>
   );
 }

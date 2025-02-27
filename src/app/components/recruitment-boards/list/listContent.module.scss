@@ -14,25 +14,35 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 9;
 
     .name {
       @include title3Emphasized(black-85);
-      text-wrap: nowrap;
+    }
+
+    .department {
+      @include title3(black-50);
     }
   }
 
   p {
     @include title3(black-85);
-    width: 11%;
     text-wrap: nowrap;
-  }
-
-  p:last-child {
-    width: 7%;
-    text-align: right;
+    text-align: center;
   }
 
   &:hover {
     background: #eaeaea40;
   }
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.grade,
+.studentId,
+.status {
+  flex: 5;
 }

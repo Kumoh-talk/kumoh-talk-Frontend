@@ -1,11 +1,8 @@
-import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import styles from './page.module.scss';
 import ListDetailTable from '@/app/components/recruitment-boards/list/[id]/ListDetailTable';
 import { getApplicantDetail } from '@/app/lib/apis/recruitment-boards/list/list';
 import { ApplicantDetailApi } from '@/app/lib/types/recruitmentBoards/applicantDetail';
 import { cookies } from 'next/headers';
-import Header from '@/app/components/common/header/Header';
-import Footer from '@/app/components/common/footer/Footer';
 
 export interface Props {
   params: {
@@ -31,18 +28,8 @@ export default async function Page({ params, searchParams }: Props) {
   );
 
   return (
-    <>
-      <Header title={`신청서 확인`} />
-      <main className={styles.block}>
-        <RecruitmentBoardTitle
-          title={title}
-          type={boardType}
-          tag={tag}
-          name={name}
-        />
-        <ListDetailTable applicantDetail={applicantDetail} />
-      </main>
-      <Footer />
-    </>
+    <main className={styles.block}>
+      <ListDetailTable applicantDetail={applicantDetail} />
+    </main>
   );
 }

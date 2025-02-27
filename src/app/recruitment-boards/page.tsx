@@ -10,7 +10,7 @@ export default function Home({
 }) {
   return (
     <>
-      <Header title='게시글' />
+      <Header title="게시글" />
       <main className={styles.main}>
         <header>게시글</header>
         <ArticleList searchParams={searchParams} />

@@ -1,0 +1,25 @@
+@import 'mixin';
+
+.active {
+  @include body;
+  color: #1e40af;
+  background-color: #dbeafe;
+  border-radius: 10px;
+  padding: 0.25rem 0.375rem;
+}
+
+.inactive {
+  @include body;
+  color: #1f2937;
+  background-color: #f3f4f6;
+  border-radius: 10px;
+  padding: 0.25rem 0.375rem;
+}
+
+.graduate {
+  @include body;
+  color: #854d0e;
+  background-color: #fef9c3;
+  border-radius: 10px;
+  padding: 0.25rem 0.375rem;
+}

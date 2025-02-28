@@ -1,6 +1,7 @@
 import BoldSvg from '@/app/assets/svg/Editor/BoldSvg';
 import ItalicSvg from '@/app/assets/svg/Editor/ItalicSvg';
 import StrikeSvg from '@/app/assets/svg/Editor/StrikeSvg';
+import UnderLineSvg from '@/app/assets/svg/Editor/UnderLineSvg';
 import type { Editor } from '@tiptap/react';
 import type { ButtonProps } from './EditorMenuButton';
 
@@ -19,6 +20,11 @@ const basicButtons = (editor: Editor): ButtonProps[] => [
     icon: StrikeSvg,
     command: () => editor.chain().focus().toggleStrike().run(),
     isActive: () => editor.isActive('strike'),
+  },
+  {
+    icon: UnderLineSvg,
+    command: () => editor.chain().focus().toggleUnderline().run(),
+    isActive: () => editor.isActive('underline'),
   },
 ];
 

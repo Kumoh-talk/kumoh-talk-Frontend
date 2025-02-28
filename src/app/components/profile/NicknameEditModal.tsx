@@ -2,7 +2,7 @@
 
 import nicknameEditAction from '@/app/lib/apis/profile/nicknameEditAction';
 import Button from '../common/button/Button';
-import Modal from '../common/modal/Modal';
+import Modal from '../common/modal/ModalBackup';
 import styles from './nicknameEditModal.module.scss';
 
 export interface Props {

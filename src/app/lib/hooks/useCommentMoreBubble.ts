@@ -23,7 +23,7 @@ export default function useCommentMoreBubble(
   };
 
   const onReport = async () => {
-    await reportRecruitmentBoardComment(commentId);
+    await reportRecruitmentBoardComment(commentId, 1);
     setIsOpen(false);
   };
 

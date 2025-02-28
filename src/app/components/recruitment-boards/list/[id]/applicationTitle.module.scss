@@ -1,0 +1,73 @@
+@import 'mixin';
+
+.titleWrapper {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  margin-bottom: 2rem;
+}
+
+.profileWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profileImage {
+  scale: 1.2;
+}
+
+.nameDepartment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .name {
+    @include bodyEmphasized(black-85);
+  }
+
+  .department {
+    @include body;
+    color: #6b7280;
+  }
+}
+
+.detailInfo {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #f8fafc;
+  border-radius: 5px;
+}
+
+.detailComponent {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+
+  .detailTitle {
+    @include callout;
+    color: #6b7280;
+  }
+
+  .detailContent {
+    @include callout;
+    color: var(--color-black-85);
+  }
+}

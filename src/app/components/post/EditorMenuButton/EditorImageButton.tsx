@@ -7,6 +7,15 @@ interface EditorImageButtonProps {
 }
 
 const EditorImageButton = ({ editor }: EditorImageButtonProps) => {
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
   return (
     <label className={styles.editorMenuButton}>
       <input type='file' accept='image/*' hidden onChange={() => {}} />

@@ -6,12 +6,16 @@ import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import { all, createLowlight } from 'lowlight';
 import Header from '../components/post/Header/Header';
 import EditorMenu from '../components/post/EditorMenu/EditorMenu';
 import styles from './page.module.scss';
 
 export default function Post() {
   const [isMarkdwonMode, setIsMarkdwonMode] = useState(false);
+
+  const lowlight = createLowlight(all);
 
   const editor = useEditor(
     {
@@ -21,6 +25,9 @@ export default function Post() {
         Image,
         TextAlign.configure({
           types: ['heading', 'paragraph'],
+        }),
+        CodeBlockLowlight.configure({
+          lowlight,
         }),
       ],
       enablePasteRules: isMarkdwonMode,

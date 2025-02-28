@@ -21,6 +21,11 @@
     color: var(--color-black-85);
   }
 
+  &.active:hover {
+    background-color: var(--color-blue-400);
+    color: var(--color-white);
+  }
+
   &:disabled {
     background: none;
     color: var(--color-gray-800);

@@ -14,9 +14,10 @@ import styles from './EditorMenu.module.scss';
 
 interface EditorMenuProps {
   editor: Editor;
+  onModeChange: (value: string) => void;
 }
 
-const EditorMenu = ({ editor }: EditorMenuProps) => {
+const EditorMenu = ({ editor, onModeChange }: EditorMenuProps) => {
   const EditorMode = [
     { value: 'default', label: '기본모드' },
     { value: 'markdown', label: '마크다운' },
@@ -47,7 +48,7 @@ const EditorMenu = ({ editor }: EditorMenuProps) => {
         </>
       ))}
       <div className={styles.editorModeSelect}>
-        <Select options={EditorMode} onChange={() => {}} />
+        <Select options={EditorMode} onChange={onModeChange} />
       </div>
     </div>
   );

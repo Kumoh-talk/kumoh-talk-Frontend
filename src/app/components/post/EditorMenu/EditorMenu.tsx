@@ -14,20 +14,25 @@ import styles from './EditorMenu.module.scss';
 
 interface EditorMenuProps {
   editor: Editor;
+  isMarkdwonMode: boolean;
   onModeChange: (value: string) => void;
 }
 
-const EditorMenu = ({ editor, onModeChange }: EditorMenuProps) => {
+const EditorMenu = ({
+  editor,
+  isMarkdwonMode,
+  onModeChange,
+}: EditorMenuProps) => {
   const EditorMode = [
     { value: 'default', label: '기본모드' },
     { value: 'markdown', label: '마크다운' },
   ];
 
   const buttonGroups = [
-    basicButtons(editor),
-    formatButtons(editor),
-    alignButtons(editor),
-    utilityButtons(editor),
+    basicButtons(editor, isMarkdwonMode),
+    formatButtons(editor, isMarkdwonMode),
+    alignButtons(editor, isMarkdwonMode),
+    utilityButtons(editor, isMarkdwonMode),
   ];
 
   return (
@@ -42,6 +47,7 @@ const EditorMenu = ({ editor, onModeChange }: EditorMenuProps) => {
               icon={button.icon}
               command={button.command}
               isActive={button.isActive}
+              disabled={button.disabled}
             />
           ))}
           <div className={styles.editorMenuDivider} />

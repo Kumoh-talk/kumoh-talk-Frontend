@@ -25,6 +25,7 @@ export default function Post() {
       ],
       enablePasteRules: isMarkdwonMode,
       enableInputRules: isMarkdwonMode,
+      immediatelyRender: false,
     },
     [isMarkdwonMode]
   );
@@ -41,7 +42,11 @@ export default function Post() {
   return (
     <>
       <Header />
-      <EditorMenu editor={editor} onModeChange={handleModeChange} />
+      <EditorMenu
+        editor={editor}
+        isMarkdwonMode={isMarkdwonMode}
+        onModeChange={handleModeChange}
+      />
       <main className={styles.layout}>
         <div className={styles.content}>
           <input className={styles.title} placeholder='제목을 입력하세요' />

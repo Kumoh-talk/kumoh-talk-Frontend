@@ -30,4 +30,17 @@
   min-height: 25rem;
   padding-top: 1rem;
   border-top: 1px solid var(--color-gray-600);
+
+  > div {
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      @include title2(black-85);
+
+      min-height: 15rem;
+      overflow-y: auto;
+      padding-bottom: 2rem;
+    }
+  }
 }

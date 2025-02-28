@@ -10,6 +10,7 @@ import BulletListSvg from '@/app/assets/svg/Editor/BulletListSvg';
 import AlignLeftSvg from '@/app/assets/svg/Editor/AlignLeftSvg';
 import AlignCenterSvg from '@/app/assets/svg/Editor/AlignCenterSvg';
 import AlignRightSvg from '@/app/assets/svg/Editor/AlignRightSvg';
+import CodeSvg from '@/app/assets/svg/Editor/CodeSvg';
 import type { Editor } from '@tiptap/react';
 import type { ButtonProps } from './EditorMenuButton';
 
@@ -82,4 +83,12 @@ const alignButtons = (editor: Editor): ButtonProps[] => [
   },
 ];
 
-export { basicButtons, formatButtons, alignButtons };
+const utilityButtons = (editor: Editor): ButtonProps[] => [
+  {
+    icon: CodeSvg,
+    command: () => editor.chain().focus().toggleCodeBlock().run(),
+    isActive: () => editor.isActive('codeBlock'),
+  },
+];
+
+export { basicButtons, formatButtons, alignButtons, utilityButtons };

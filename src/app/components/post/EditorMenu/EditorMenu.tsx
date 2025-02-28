@@ -6,6 +6,7 @@ import {
   basicButtons,
   formatButtons,
   alignButtons,
+  utilityButtons,
 } from '../EditorMenuButton/buttonGroups';
 import type { Editor } from '@tiptap/react';
 import styles from './EditorMenu.module.scss';
@@ -24,6 +25,8 @@ const EditorMenu = ({ editor }: EditorMenuProps) => {
     basicButtons(editor),
     formatButtons(editor),
     alignButtons(editor),
+    utilityButtons(editor),
+
   ];
 
   return (

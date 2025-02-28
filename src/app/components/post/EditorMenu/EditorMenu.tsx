@@ -2,7 +2,7 @@
 
 import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
 import Select from '../../apply/Select/Select';
-import { basicButtons } from '../EditorMenuButton/buttonGroups';
+import { basicButtons, formatButtons } from '../EditorMenuButton/buttonGroups';
 import type { Editor } from '@tiptap/react';
 import styles from './EditorMenu.module.scss';
 
@@ -16,7 +16,7 @@ const EditorMenu = ({ editor }: EditorMenuProps) => {
     { value: 'markdown', label: '마크다운' },
   ];
 
-  const buttonGroups = [basicButtons(editor)];
+  const buttonGroups = [basicButtons(editor), formatButtons(editor)];
 
   return (
     <div className={styles.editorMenu}>

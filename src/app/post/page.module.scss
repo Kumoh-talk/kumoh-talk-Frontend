@@ -41,6 +41,14 @@
       min-height: 15rem;
       overflow-y: auto;
       padding-bottom: 2rem;
+
+      // heading
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 1.2rem 0;
+      }
     }
   }
 }

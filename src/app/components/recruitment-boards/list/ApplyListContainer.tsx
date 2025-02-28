@@ -1,6 +1,7 @@
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import ListTable from '@/app/components/recruitment-boards/list/ListTable';
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
+import styles from './applyListContainer.module.scss';
 
 export interface Props {
   id: string;
@@ -20,7 +21,7 @@ export default async function ApplyListContainer({
   applicantList,
 }: Props) {
   return (
-    <div style={{ width: '100%' }}>
+    <div className={styles.wrapper}>
       <RecruitmentBoardTitle
         title={title}
         type={boardType}

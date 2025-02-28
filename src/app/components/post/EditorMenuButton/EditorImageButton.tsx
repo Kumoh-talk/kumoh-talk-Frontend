@@ -16,9 +16,25 @@ const EditorImageButton = ({ editor }: EditorImageButtonProps) => {
     });
   };
 
+  const addImageToEditor = async (file: File) => {
+    const imageUrl = await convertToBase64(file);
+
+    if (imageUrl) {
+      editor.chain().focus().setImage({ src: imageUrl }).run();
+    }
+  };
+
+  const handleEditorImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    addImageToEditor(file);
+  };
+
   return (
     <label className={styles.editorMenuButton}>
-      <input type='file' accept='image/*' hidden onChange={() => {}} />
+      <input type='file' accept='image/*' hidden onChange={handleEditorImage} />
       <ImageSvg />
     </label>
   );

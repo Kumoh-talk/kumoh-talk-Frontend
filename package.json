@@ -12,6 +12,8 @@
     "@hookform/resolvers": "^3.10.0",
     "@mui/base": "^5.0.0-beta.68",
     "@tanstack/react-query": "^5.56.2",
+    "@tiptap/react": "^2.11.0",
+    "@tiptap/starter-kit": "^2.11.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "jsonwebtoken": "^9.0.2",

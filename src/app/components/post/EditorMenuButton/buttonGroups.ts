@@ -7,6 +7,9 @@ import HeadingTwoSvg from '@/app/assets/svg/Editor/HeadingTwoSvg';
 import HeadingThreeSvg from '@/app/assets/svg/Editor/HeadingThreeSvg';
 import OrderedListSvg from '@/app/assets/svg/Editor/OrderedListSvg';
 import BulletListSvg from '@/app/assets/svg/Editor/BulletListSvg';
+import AlignLeftSvg from '@/app/assets/svg/Editor/AlignLeftSvg';
+import AlignCenterSvg from '@/app/assets/svg/Editor/AlignCenterSvg';
+import AlignRightSvg from '@/app/assets/svg/Editor/AlignRightSvg';
 import type { Editor } from '@tiptap/react';
 import type { ButtonProps } from './EditorMenuButton';
 
@@ -61,4 +64,22 @@ const formatButtons = (editor: Editor): ButtonProps[] => [
   },
 ];
 
-export { basicButtons, formatButtons };
+const alignButtons = (editor: Editor): ButtonProps[] => [
+  {
+    icon: AlignLeftSvg,
+    command: () => editor.chain().focus().setTextAlign('left').run(),
+    isActive: () => editor.isActive({ textAlign: 'left' }),
+  },
+  {
+    icon: AlignCenterSvg,
+    command: () => editor.chain().focus().setTextAlign('center').run(),
+    isActive: () => editor.isActive({ textAlign: 'center' }),
+  },
+  {
+    icon: AlignRightSvg,
+    command: () => editor.chain().focus().setTextAlign('right').run(),
+    isActive: () => editor.isActive({ textAlign: 'right' }),
+  },
+];
+
+export { basicButtons, formatButtons, alignButtons };

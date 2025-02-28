@@ -50,6 +50,14 @@
         margin: 1.2rem 0;
       }
 
+      // horizontalRule
+      hr {
+        border: none;
+        border-top: 1px solid var(--color-gray-500);
+        cursor: pointer;
+        margin: 1rem 0;
+      }
+
       // bulletList, orderedList
       ul,
       ol {
@@ -59,6 +67,13 @@
         li {
           list-style: revert;
         }
+      }
+
+      // blockquote
+      blockquote {
+        border-left: 3px solid var(--color-gray-800);
+        margin: 1.5rem 0;
+        padding-left: 1rem;
       }
 
       // codeblock

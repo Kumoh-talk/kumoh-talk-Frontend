@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
+import Image from '@tiptap/extension-image';
 
 import Header from '../components/post/Header/Header';
 import EditorMenu from '../components/post/EditorMenu/EditorMenu';
@@ -15,6 +16,7 @@ export default function Post() {
     extensions: [
       StarterKit,
       Underline,
+      Image,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
@@ -26,8 +28,8 @@ export default function Post() {
   return (
     <>
       <Header />
+      <EditorMenu editor={editor} />
       <main className={styles.layout}>
-        <EditorMenu editor={editor} />
         <div className={styles.content}>
           <input className={styles.title} placeholder='제목을 입력하세요' />
           <div className={styles.editorContainer}>

@@ -1,6 +1,7 @@
 'use client';
 
 import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
+import EditorImageButton from '../EditorMenuButton/EditorImageButton';
 import Select from '../../apply/Select/Select';
 import {
   basicButtons,
@@ -26,11 +27,11 @@ const EditorMenu = ({ editor }: EditorMenuProps) => {
     formatButtons(editor),
     alignButtons(editor),
     utilityButtons(editor),
-
   ];
 
   return (
     <div className={styles.editorMenu}>
+      <EditorImageButton editor={editor} />
       <div className={styles.editorMenuDivider} />
       {buttonGroups.map((group) => (
         <>

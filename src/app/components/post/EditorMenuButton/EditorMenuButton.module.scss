@@ -26,3 +26,10 @@
     color: var(--color-gray-800);
   }
 }
+
+.editorMenuDivider {
+  width: 1px;
+  height: 1.25rem;
+  background-color: var(--color-gray-700);
+  margin: 0 0.5rem;
+}

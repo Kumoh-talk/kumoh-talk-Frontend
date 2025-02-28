@@ -1,6 +1,8 @@
 'use client';
 
+import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
 import Select from '../../apply/Select/Select';
+import { basicButtons } from '../EditorMenuButton/buttonGroups';
 import type { Editor } from '@tiptap/react';
 import styles from './EditorMenu.module.scss';
 
@@ -14,16 +16,24 @@ const EditorMenu = ({ editor }: EditorMenuProps) => {
     { value: 'markdown', label: '마크다운' },
   ];
 
+  const buttonGroups = [basicButtons(editor)];
+
   return (
     <div className={styles.editorMenu}>
-      <button
-        className={styles.editorMenuButton}
-        type='button'
-        onClick={() => {}}
-      >
-        에디너 메뉴 버튼
-      </button>
       <div className={styles.editorMenuDivider} />
+      {buttonGroups.map((group) => (
+        <>
+          {group.map((button, idx) => (
+            <EditorMenuButton
+              key={idx}
+              icon={button.icon}
+              command={button.command}
+              isActive={button.isActive}
+            />
+          ))}
+          <div className={styles.editorMenuDivider} />
+        </>
+      ))}
       <div className={styles.editorModeSelect}>
         <Select options={EditorMode} onChange={() => {}} />
       </div>

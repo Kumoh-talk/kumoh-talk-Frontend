@@ -10,6 +10,7 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { all, createLowlight } from 'lowlight';
 import Header from '../components/post/Header/Header';
 import EditorMenu from '../components/post/EditorMenu/EditorMenu';
+import HashTag from '../components/post/HashTag/HashTag';
 import styles from './page.module.scss';
 
 export default function Post() {
@@ -73,7 +74,7 @@ export default function Post() {
           <div className={styles.editorContainer}>
             <EditorContent editor={editor} />
           </div>
-          <div>해시태그</div>
+          <HashTag />
         </div>
       </main>
     </>

@@ -5,6 +5,8 @@ import UnderLineSvg from '@/app/assets/svg/Editor/UnderLineSvg';
 import HeadingOneSvg from '@/app/assets/svg/Editor/HeadingOneSvg';
 import HeadingTwoSvg from '@/app/assets/svg/Editor/HeadingTwoSvg';
 import HeadingThreeSvg from '@/app/assets/svg/Editor/HeadingThreeSvg';
+import OrderedListSvg from '@/app/assets/svg/Editor/OrderedListSvg';
+import BulletListSvg from '@/app/assets/svg/Editor/BulletListSvg';
 import type { Editor } from '@tiptap/react';
 import type { ButtonProps } from './EditorMenuButton';
 
@@ -46,6 +48,16 @@ const formatButtons = (editor: Editor): ButtonProps[] => [
     icon: HeadingThreeSvg,
     command: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
     isActive: () => editor.isActive('heading', { level: 3 }),
+  },
+  {
+    icon: OrderedListSvg,
+    command: () => editor.chain().focus().toggleOrderedList().run(),
+    isActive: () => editor.isActive('orderedList'),
+  },
+  {
+    icon: BulletListSvg,
+    command: () => editor.chain().focus().toggleBulletList().run(),
+    isActive: () => editor.isActive('bulletList'),
   },
 ];
 

@@ -19,7 +19,6 @@ export default function Post() {
   return (
     <>
       <Header />
-      <div>에디터 메뉴</div>
       <main className={styles.layout}>
         <EditorMenu editor={editor} />
         <div className={styles.content}>

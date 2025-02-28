@@ -49,6 +49,17 @@
       p {
         margin: 1.2rem 0;
       }
+
+      // bulletList, orderedList
+      ul,
+      ol {
+        padding: 0 1rem;
+        margin-left: 0.5rem;
+
+        li {
+          list-style: revert;
+        }
+      }
     }
   }
 }

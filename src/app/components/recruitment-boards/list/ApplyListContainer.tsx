@@ -1,5 +1,4 @@
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
-import { Suspense } from 'react';
 import ListTable from '@/app/components/recruitment-boards/list/ListTable';
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 
@@ -21,7 +20,7 @@ export default async function ApplyListContainer({
   applicantList,
 }: Props) {
   return (
-    <>
+    <div style={{ width: '100%' }}>
       <RecruitmentBoardTitle
         title={title}
         type={boardType}
@@ -36,6 +35,6 @@ export default async function ApplyListContainer({
         name={name}
         applicantList={applicantList}
       />
-    </>
+    </div>
   );
 }

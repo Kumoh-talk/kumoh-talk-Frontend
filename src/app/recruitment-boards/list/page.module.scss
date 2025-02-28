@@ -1,4 +1,7 @@
 .block {
   width: 50%;
   margin: 6rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

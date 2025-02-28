@@ -1,0 +1,51 @@
+@import 'mixin';
+
+.editor_tag {
+  @include title3(black-85);
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .text_tag {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: fit-content;
+
+    button {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      margin: 0 auto;
+    }
+
+    svg {
+      color: var(--color-gray-900);
+      width: 1.2rem;
+      height: 1.2rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .input_tag {
+    min-width: fit-content;
+    color: var(--color-gray-900);
+
+    span {
+      margin-right: 0.3rem;
+    }
+
+    input {
+      min-width: 4rem;
+      border: none;
+      outline: none;
+    }
+  }
+}

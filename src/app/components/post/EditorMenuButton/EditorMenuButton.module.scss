@@ -1,0 +1,40 @@
+@import 'mixin';
+
+.editorMenuButton {
+  @include title3(black-85);
+
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  padding: 0.5rem 0.5rem;
+  border: none;
+  background-color: var(--color-white);
+
+  &.active {
+    background-color: var(--color-blue-400);
+    color: var(--color-white);
+  }
+
+  &:hover {
+    background-color: var(--color-gray-300);
+    color: var(--color-black-85);
+  }
+
+  &.active:hover {
+    background-color: var(--color-blue-400);
+    color: var(--color-white);
+  }
+
+  &:disabled {
+    background: none;
+    color: var(--color-gray-800);
+  }
+}
+
+.editorMenuDivider {
+  width: 1px;
+  height: 1.25rem;
+  background-color: var(--color-gray-700);
+  margin: 0 0.5rem;
+}

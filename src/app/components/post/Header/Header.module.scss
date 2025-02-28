@@ -1,0 +1,14 @@
+@import 'mixin';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}

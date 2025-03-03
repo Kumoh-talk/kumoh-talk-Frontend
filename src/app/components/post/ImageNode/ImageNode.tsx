@@ -30,6 +30,40 @@ const CustomImage = Image.extend({
     };
   },
 
+  renderHTML({ node }) {
+    const { src, alt, title, width, height, margin, caption } = node.attrs;
+
+    return [
+      'div',
+      {
+        class: 'editorCustomImage',
+      },
+      [
+        'div',
+        {
+          class: 'editorCustomImageContainer',
+          style: `width: ${width}px; height: ${height}px; margin: ${margin};`,
+        },
+        [
+          'div',
+          {
+            class: 'editorCustomImageWrapper',
+          },
+          [
+            'img',
+            {
+              class: 'editorImage',
+              src,
+              alt,
+              title,
+            },
+          ],
+        ],
+        ['span', { class: 'editorCustomImageCaption' }, caption],
+      ],
+    ];
+  },
+
   addNodeView() {
     return ReactNodeViewRenderer(ImageComponent);
   },

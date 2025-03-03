@@ -25,6 +25,7 @@ const CustomImage = Image.extend({
       ...this.parent?.(),
       width: { default: '100%' },
       height: { default: 'auto' },
+      margin: { default: '0 auto' },
     };
   },
 

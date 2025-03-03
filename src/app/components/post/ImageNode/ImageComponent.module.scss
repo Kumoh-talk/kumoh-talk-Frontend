@@ -21,6 +21,34 @@
     width: 100%;
     height: auto;
   }
+
+  .resizeTrigger {
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: nesw-resize;
+  }
+
+  &:hover .resizeTrigger {
+    opacity: 1;
+  }
+
+  .resizeHandle {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 6px;
+    border: 2px solid black;
+    box-sizing: content-box;
+    background-color: white;
+    z-index: 100;
+    cursor: se-resize;
+
+    &:hover {
+      background-color: black;
+    }
+  }
 }
 
 .alignController {

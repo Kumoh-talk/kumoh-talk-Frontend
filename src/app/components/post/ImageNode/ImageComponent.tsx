@@ -39,6 +39,38 @@ const ImageComponent = ({
     );
   };
 
+  const resizeHandler = (
+    mouseDownEvent: React.MouseEvent<HTMLImageElement>
+  ) => {
+    const parent = (mouseDownEvent.target as HTMLElement).closest(
+      `.${styles.wrapper}`
+    );
+
+    const image = parent?.querySelector(`.${styles.postimage}`) ?? null;
+
+    if (image === null) return;
+
+    const startSize = { x: image.clientWidth, y: image.clientHeight };
+    const aspectRatio = startSize.x / startSize.y;
+    const startPosition = { x: mouseDownEvent.pageX, y: mouseDownEvent.pageY };
+
+    const onMouseMove = (mouseMoveEvent: MouseEvent) => {
+      const newWidth = startSize.x - startPosition.x + mouseMoveEvent.pageX;
+
+      updateAttributes({
+        width: newWidth,
+        height: newWidth / aspectRatio,
+      });
+    };
+
+    const onMouseUp = () => {
+      document.body.removeEventListener('mousemove', onMouseMove);
+    };
+
+    document.body.addEventListener('mousemove', onMouseMove);
+    document.body.addEventListener('mouseup', onMouseUp, { once: true });
+  };
+
   return (
     <NodeViewWrapper
       className={clsx(styles.wrapper, { [styles.selected]: selected })}
@@ -48,6 +80,9 @@ const ImageComponent = ({
 
         <div className={styles.imageWrapper}>
           <img className={styles.postimage} src={src} alt={alt} title={title} />
+          <div className={styles.resizeTrigger} onMouseDown={resizeHandler}>
+            <div className={styles.resizeHandle} />
+          </div>
         </div>
       </figure>
     </NodeViewWrapper>

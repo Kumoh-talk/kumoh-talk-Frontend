@@ -26,6 +26,7 @@ const CustomImage = Image.extend({
       width: { default: '100%' },
       height: { default: 'auto' },
       margin: { default: '0 auto' },
+      caption: { default: '' },
     };
   },
 

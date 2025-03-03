@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import clsx from 'clsx';
 import { NodeViewWrapper } from '@tiptap/react';
 import AlignLeftSvg from '@/app/assets/svg/Editor/AlignLeftSvg';
@@ -11,8 +12,10 @@ const ImageComponent = ({
   selected,
   updateAttributes,
 }: NodeViewProps) => {
-  const { src, alt, title, width, height, margin } = node.attrs;
+  const { src, alt, title, caption, width, height, margin } = node.attrs;
   const containerStyle = { width, height, margin };
+
+  const [imgCaption, setImgCaption] = useState(caption);
 
   const AlignController = () => {
     return (
@@ -71,6 +74,13 @@ const ImageComponent = ({
     document.body.addEventListener('mouseup', onMouseUp, { once: true });
   };
 
+  const handleCaptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCaption = e.target.value;
+
+    setImgCaption(newCaption);
+    updateAttributes({ caption: newCaption });
+  };
+
   return (
     <NodeViewWrapper
       className={clsx(styles.wrapper, { [styles.selected]: selected })}
@@ -84,6 +94,14 @@ const ImageComponent = ({
             <div className={styles.resizeHandle} />
           </div>
         </div>
+
+        {(imgCaption || selected) && (
+          <input
+            value={imgCaption}
+            placeholder='이미지를 설명해 보세요'
+            onChange={handleCaptionChange}
+          />
+        )}
       </figure>
     </NodeViewWrapper>
   );

@@ -49,6 +49,14 @@
       background-color: black;
     }
   }
+
+  input {
+    outline: none;
+    border: none;
+    margin-top: 0.5rem;
+    text-align: center;
+    color: var(--color-black-50);
+  }
 }
 
 .alignController {

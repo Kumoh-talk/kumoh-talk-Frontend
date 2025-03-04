@@ -5,7 +5,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
-import Image from '@tiptap/extension-image';
+import CustomImage from '../components/post/ImageNode/ImageNode';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { all, createLowlight } from 'lowlight';
 import Header from '../components/post/Header/Header';
@@ -17,13 +17,12 @@ export default function Post() {
   const [isMarkdwonMode, setIsMarkdwonMode] = useState(false);
 
   const lowlight = createLowlight(all);
-
   const editor = useEditor(
     {
       extensions: [
         StarterKit,
         Underline,
-        Image,
+        CustomImage,
         TextAlign.configure({
           types: ['heading', 'paragraph'],
         }),

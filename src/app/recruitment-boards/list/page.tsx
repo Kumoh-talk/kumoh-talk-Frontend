@@ -29,7 +29,7 @@ export default async function Page({
   );
 
   return (
-    <>
+    <div className={styles.page}>
       <Header title={`신청서 확인`} />
       <main className={styles.block}>
         <ApplyListContainer
@@ -46,6 +46,6 @@ export default async function Page({
         />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

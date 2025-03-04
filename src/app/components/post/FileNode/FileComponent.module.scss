@@ -1,0 +1,75 @@
+@import 'mixin';
+
+.fileContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+
+  .fileContent {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+    border: 1px solid var(--color-gray-500);
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        fill: var(--color-black-100);
+        color: transparent;
+      }
+    }
+
+    .desc {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 28rem;
+      height: 3.5rem;
+
+      .fileName {
+        @include title2(black-85);
+
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        overflow: hidden;
+
+        .name {
+          min-width: 0;
+          max-width: 70%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .type {
+          flex-shrink: 0;
+        }
+      }
+
+      .fileSize {
+        @include title3(secondary);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      cursor: pointer;
+      border: 2px solid var(--color-gray-900);
+    }
+
+    &.selected {
+      border: 2px solid black;
+    }
+  }
+}

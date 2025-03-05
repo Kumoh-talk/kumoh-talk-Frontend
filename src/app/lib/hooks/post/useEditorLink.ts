@@ -4,14 +4,14 @@ import type { Editor } from '@tiptap/react';
 const useEditorLinkState = (editor: Editor) => {
   const [linkUrl, setLinkUrl] = useState('');
   const [hasPreviousUrl, setHasPreviousUrl] = useState(false);
-  const [openInNewTab, setOpenInNewTab] = useState(true);
+  const [openInNewTab, setOpenInNewTab] = useState(false);
 
   useEffect(() => {
     const attributes = editor.getAttributes('link') || {};
 
     setLinkUrl(attributes.href || '');
     setHasPreviousUrl(!!attributes.href);
-    setOpenInNewTab(!!attributes.target);
+    setOpenInNewTab(attributes.target === '_blank');
   }, [editor]);
 
   return { linkUrl, setLinkUrl, hasPreviousUrl, openInNewTab, setOpenInNewTab };

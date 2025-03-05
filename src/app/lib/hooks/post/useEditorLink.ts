@@ -1,4 +1,5 @@
 import { useState, useEffect, MouseEvent } from 'react';
+import { getMetadata } from '../../apis/post/getMetadata';
 import type { Editor } from '@tiptap/react';
 
 const useEditorLinkState = (editor: Editor) => {
@@ -53,6 +54,22 @@ const useEditorLinkActions = (
     editor.chain().focus().insertContent(content).run();
   };
 
+  const insertLinkPreview = async () => {
+    try {
+      const ogData = await getMetadata(linkUrl);
+      if (!ogData) return;
+
+      const linkPreview = {
+        type: 'linkPreviewNode',
+        attrs: ogData,
+      };
+
+      editor?.commands.insertContent(linkPreview);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const setLink = (e: MouseEvent, callback?: () => void) => {
     e.preventDefault();
 
@@ -63,6 +80,8 @@ const useEditorLinkActions = (
     } else {
       setLinkAtText();
     }
+
+    insertLinkPreview();
 
     if (callback) {
       callback();

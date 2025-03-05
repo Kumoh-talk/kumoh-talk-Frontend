@@ -56,17 +56,25 @@ const useEditorLinkActions = (
 
   const insertLinkPreview = async () => {
     try {
+      const linkPreview = {
+        type: 'linkPreviewNode',
+        attrs: {
+          isLoading: true,
+          requestedUrl: linkUrl,
+        },
+      };
+
+      editor.commands.insertContent(linkPreview);
+
       const ogData = await getMetadata(linkUrl);
       if (!ogData) return;
 
-      const linkPreview = {
-        type: 'linkPreviewNode',
-        attrs: ogData,
-      };
-
-      editor?.commands.insertContent(linkPreview);
+      editor.commands.updateAttributes('linkPreviewNode', {
+        ...ogData,
+        isLoading: false,
+      });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

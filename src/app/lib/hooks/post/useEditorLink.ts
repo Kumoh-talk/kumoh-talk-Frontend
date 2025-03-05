@@ -53,7 +53,7 @@ const useEditorLinkActions = (
     editor.chain().focus().insertContent(content).run();
   };
 
-  const setLink = (e: MouseEvent) => {
+  const setLink = (e: MouseEvent, callback?: () => void) => {
     e.preventDefault();
 
     const isTextSelected = editor.state.selection.empty;
@@ -63,12 +63,20 @@ const useEditorLinkActions = (
     } else {
       setLinkAtText();
     }
+
+    if (callback) {
+      callback();
+    }
   };
 
-  const unsetLink = (e: MouseEvent) => {
+  const unsetLink = (e: MouseEvent, callback?: () => void) => {
     e.preventDefault();
 
     editor.chain().focus().extendMarkRange('link').unsetLink().run();
+
+    if (callback) {
+      callback();
+    }
   };
 
   return { setLink, unsetLink };

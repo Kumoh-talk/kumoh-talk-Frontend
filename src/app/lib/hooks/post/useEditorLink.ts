@@ -22,9 +22,17 @@ const useEditorLinkActions = (
   linkUrl: string,
   openInNewTab: boolean
 ) => {
-  const setLink = (e: MouseEvent) => {
-    e.preventDefault();
+  const setLinkAtText = () => {
+    const attrs = {
+      href: linkUrl,
+      target: openInNewTab ? '_blank' : '_self',
+      rel: 'noopener noreferrer',
+    };
 
+    editor.chain().focus().extendMarkRange('link').setLink(attrs).run();
+  };
+
+  const setLinkWithText = () => {
     const attrs = {
       href: linkUrl,
       target: openInNewTab ? '_blank' : '_self',
@@ -43,6 +51,18 @@ const useEditorLinkActions = (
     };
 
     editor.chain().focus().insertContent(content).run();
+  };
+
+  const setLink = (e: MouseEvent) => {
+    e.preventDefault();
+
+    const isTextSelected = editor.state.selection.empty;
+
+    if (isTextSelected) {
+      setLinkWithText();
+    } else {
+      setLinkAtText();
+    }
   };
 
   const unsetLink = (e: MouseEvent) => {

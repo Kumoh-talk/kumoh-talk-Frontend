@@ -6,7 +6,7 @@ import WelcomeBubble from './welcomeBubble/WelcomeBubble';
 import { parseJwt } from '@/app/lib/apis/auth';
 import Link from 'next/link';
 
-export default async function LoginArea() {
+export default function LoginArea() {
   const accessToken = cookies().get('accessToken')?.value;
 
   // 로그아웃 상태

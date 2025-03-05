@@ -2,15 +2,17 @@
 
 .articleCard,
 .articleCardLarge {
-  background: white;
+  background: var(--color-gray-700);
   border-radius: 1rem;
   width: 22.5rem;
+  height: 16rem;
 
   &Large {
     width: 30rem;
   }
 
   & > a {
+    background: white;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;

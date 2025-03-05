@@ -6,6 +6,7 @@ import { getRecruitmentBoardApplicantList } from '@/app/lib/apis/recruitment-boa
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 import { cookies } from 'next/headers';
 import ListPagination from '@/app/components/recruitment-boards/list/ListPagination';
+import { RecruitmentTag } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 
 export default async function Page({
   searchParams,
@@ -13,8 +14,8 @@ export default async function Page({
   searchParams: {
     id: string;
     title: string;
-    boardType: string;
-    tag: string;
+    boardType: RecruitmentTag;
+    tag: RecruitmentTag;
     name: string;
     page: string;
     sort: string;

@@ -13,7 +13,7 @@ export interface Props {
 
 export default function CategoryButton({ content, type }: Props) {
   const { state, setState } = useContext(TabsContext);
-  const value = textToType[content].toLowerCase();
+  const value = textToType[content as keyof typeof textToType].toLowerCase();
   const isSelected = state.type === value || state.tag === value;
 
   const onClick = () => {

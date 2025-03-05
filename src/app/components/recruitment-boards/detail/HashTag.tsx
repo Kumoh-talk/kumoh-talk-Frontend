@@ -1,9 +1,10 @@
 import styles from './hashTag.module.scss';
 import clsx from 'clsx';
 import { typeToText } from '@/app/lib/constants/tag/tagValues';
+import { RecruitmentTag } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 
 export interface Props {
-  type: string;
+  type: RecruitmentTag;
   size?: 'small' | 'large';
 }
 

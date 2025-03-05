@@ -9,9 +9,10 @@ import styles from './EditorMenuButton.module.scss';
 
 interface EditorLinkFormProps {
   editor: Editor;
+  close: () => void;
 }
 
-const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
+const EditorLinkForm = ({ editor, close }: EditorLinkFormProps) => {
   const { linkUrl, setLinkUrl, openInNewTab, setOpenInNewTab, hasPreviousUrl } =
     useEditorLinkState(editor);
 
@@ -47,7 +48,7 @@ const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
             type='submit'
             color='text-black-50'
             bgColor='bg-white'
-            onClick={unsetLink}
+            onClick={(e) => unsetLink(e, close)}
           >
             링크 제거
           </Button>
@@ -57,7 +58,7 @@ const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
           color='text-black-50'
           bgColor='bg-white'
           disabled={false}
-          onClick={setLink}
+          onClick={(e) => setLink(e, close)}
         >
           확인
         </Button>

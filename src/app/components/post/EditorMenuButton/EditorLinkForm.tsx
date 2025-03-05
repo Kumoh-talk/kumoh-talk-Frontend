@@ -22,6 +22,15 @@ const EditorLinkForm = ({ editor, close }: EditorLinkFormProps) => {
     openInNewTab
   );
 
+  const isLinkUrlValid = (url: string) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   return (
     <form>
       <input
@@ -57,7 +66,7 @@ const EditorLinkForm = ({ editor, close }: EditorLinkFormProps) => {
           type='submit'
           color='text-black-50'
           bgColor='bg-white'
-          disabled={false}
+          disabled={!isLinkUrlValid(linkUrl)}
           onClick={(e) => setLink(e, close)}
         >
           확인

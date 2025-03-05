@@ -2,6 +2,7 @@
 
 import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
 import EditorImageButton from '../EditorMenuButton/EditorImageButton';
+import EditorLinkButton from '../EditorMenuButton/EditorLinkButton';
 import EditorFileButton from '../EditorMenuButton/EditorFileButton';
 import Select from '../../apply/Select/Select';
 import {
@@ -39,6 +40,7 @@ const EditorMenu = ({
   return (
     <div className={styles.editorMenu}>
       <EditorImageButton editor={editor} />
+      <EditorLinkButton editor={editor} />
       <EditorFileButton editor={editor} />
 
       <div className={styles.editorMenuDivider} />

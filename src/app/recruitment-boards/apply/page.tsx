@@ -24,7 +24,7 @@ export default async function Page({
   const questions: QuestionsResponse = await getQuestions(id);
 
   return (
-    <>
+    <div className={styles.page}>
       <Header title={`${headerTitle} 신청`} />
       <main className={styles.block}>
         <ApplyBanner />
@@ -40,6 +40,6 @@ export default async function Page({
         />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

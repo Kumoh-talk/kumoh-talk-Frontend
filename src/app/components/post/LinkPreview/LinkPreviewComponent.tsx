@@ -10,37 +10,49 @@ export interface LinkPreviewInfo {
   ogDescription: string;
   ogUrl: string;
   requestedUrl: string;
+  isLoading: boolean;
 }
 
 const LinkPreviewComponent = ({ node, selected }: NodeViewProps) => {
-  const { ogImage, ogTitle, ogDescription, ogUrl } =
+  const { ogImage, ogTitle, ogDescription, ogUrl, isLoading } =
     (node.attrs as LinkPreviewInfo) || {};
 
   return (
     <NodeViewWrapper>
-      <figure
-        className={clsx(styles.linkPreviewContainer, {
-          [styles.selected]: selected,
-        })}
-        draggable={true}
-        data-drag-handle
-      >
-        <div className={styles.linkPreviewContent}>
-          <div className={styles.ogImage}>
-            <Image
-              src={ogImage}
-              alt={`${ogTitle}-image`}
-              fill
-              objectFit='cover'
-            />
-          </div>
-          <div className={styles.ogInfo}>
-            <span className={styles.ogTitle}>{ogTitle}</span>
-            <span className={styles.ogDescription}>{ogDescription}</span>
-            <span className={styles.ogUrl}>{ogUrl}</span>
+      {isLoading ? (
+        <div className={styles.skeleton}>
+          <div className={styles.skeletonImage} />
+          <div className={styles.skeletonInfo}>
+            <span className={styles.skeletonText} />
+            <span className={styles.skeletonText} />
+            <span className={styles.skeletonText} />
           </div>
         </div>
-      </figure>
+      ) : (
+        <figure
+          className={clsx(styles.linkPreviewContainer, {
+            [styles.selected]: selected,
+          })}
+          draggable={true}
+          data-drag-handle
+        >
+          <div className={styles.linkPreviewContent}>
+            <div className={styles.ogImage}>
+              <Image
+                src={ogImage}
+                alt={`${ogTitle}-image`}
+                fill
+                objectFit='cover'
+              />
+            </div>
+            <div className={styles.ogInfo}>
+              <span className={styles.ogTitle}>{ogTitle}</span>
+              <span className={styles.ogDescription}>{ogDescription}</span>
+              <span className={styles.ogUrl}>{ogUrl}</span>
+            </div>
+          </div>
+        </figure>
+      )}
     </NodeViewWrapper>
   );
 };

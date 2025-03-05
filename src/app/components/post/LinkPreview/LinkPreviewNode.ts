@@ -15,6 +15,7 @@ const LinkPreviewNode = Node.create({
       ogDescription: { default: '' },
       ogUrl: { default: '' },
       requestedUrl: { default: '' },
+      isLoading: { default: true },
     };
   },
 

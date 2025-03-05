@@ -15,8 +15,19 @@ const getMetadataFromUrl = async (url: string) => {
   return data?.result;
 };
 
+const getMetadataFromHostUrl = async (url: string) => {
+  const hostUrl = new URL(url).origin;
+  const result = await getMetadataFromUrl(hostUrl);
+
+  return result;
+};
+
 export async function getMetadata(url: string) {
-  const result = await getMetadataFromUrl(url);
+  let result = await getMetadataFromUrl(url);
+
+  if (!result || (!result.ogTitle && !result.ogDescription)) {
+    result = await getMetadataFromHostUrl(url);
+  }
 
   if (!result) return null;
 

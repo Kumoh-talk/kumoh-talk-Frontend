@@ -2,12 +2,13 @@ import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detai
 import ListTable from '@/app/components/recruitment-boards/list/ListTable';
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 import styles from './applyListContainer.module.scss';
+import { RecruitmentTag } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 
 export interface Props {
   id: string;
   title: string;
-  boardType: string;
-  tag: string;
+  boardType: RecruitmentTag;
+  tag: RecruitmentTag;
   name: string;
   applicantList: ApplyListApi;
 }

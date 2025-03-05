@@ -6,6 +6,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
 import CustomImage from '../components/post/ImageNode/ImageNode';
+import FileNode from '../components/post/FileNode/FileNode';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { all, createLowlight } from 'lowlight';
 import Header from '../components/post/Header/Header';
@@ -29,6 +30,7 @@ export default function Post() {
         CodeBlockLowlight.configure({
           lowlight,
         }),
+        FileNode,
       ],
       enablePasteRules: isMarkdwonMode,
       enableInputRules: isMarkdwonMode,

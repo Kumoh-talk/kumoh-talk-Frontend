@@ -2,6 +2,7 @@
 
 import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
 import EditorImageButton from '../EditorMenuButton/EditorImageButton';
+import EditorFileButton from '../EditorMenuButton/EditorFileButton';
 import Select from '../../apply/Select/Select';
 import {
   basicButtons,
@@ -38,6 +39,8 @@ const EditorMenu = ({
   return (
     <div className={styles.editorMenu}>
       <EditorImageButton editor={editor} />
+      <EditorFileButton editor={editor} />
+
       <div className={styles.editorMenuDivider} />
       {buttonGroups.map((group) => (
         <>

@@ -18,9 +18,8 @@ const FileComponent = ({ node, selected }: NodeViewProps) => {
     <NodeViewWrapper>
       <figure
         className={styles.fileContainer}
-        draggable={true}
+        draggable
         data-drag-handle
-        contentEditable='false'
       >
         <div
           className={clsx(styles.fileContent, {

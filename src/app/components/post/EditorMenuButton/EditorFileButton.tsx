@@ -11,7 +11,6 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
   const getFileInfo = (file: File): FileInfo => {
     const fileUrl = URL.createObjectURL(file);
     const fileSize = (file.size / (1024 * 1024)).toFixed(2) + 'MB';
-
     let fileName = file.name;
     let fileType = '';
 
@@ -25,12 +24,23 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
     return { fileUrl, fileSize, fileName, fileType };
   };
 
+  const insertFilePreview = (fileInfo: FileInfo) => {
+    const content = {
+      type: 'fileNode',
+      attrs: fileInfo,
+    };
+
+    editor?.commands.insertContent(content);
+  };
+
   const handleEditorFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
 
     const fileInfo = getFileInfo(file);
+
+    insertFilePreview(fileInfo);
   };
 
   return (

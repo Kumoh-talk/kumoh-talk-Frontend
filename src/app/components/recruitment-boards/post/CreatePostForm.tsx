@@ -19,6 +19,7 @@ export default function CreatePostForm() {
         type: 'description',
         isEssential: false,
         answerList: [],
+        error: ''
       },
     ]);
   };

@@ -15,13 +15,13 @@ export default async function SeminarList() {
   const articleList = [
     ...list.map((item) => <SeminarItem key={item.boardId} {...item} />),
     ...[
-      <li className={styles.dummy}></li>,
-      <li className={styles.dummy}></li>,
-      <li className={styles.dummy}></li>,
-      <li className={styles.dummy}></li>,
-      <li className={styles.dummy}></li>,
-      <li className={styles.dummy}></li>,
-      <li className={styles.dummy}></li>,
+      <li key={'dummy1'} className={styles.dummy}></li>,
+      <li key={'dummy2'} className={styles.dummy}></li>,
+      <li key={'dummy3'} className={styles.dummy}></li>,
+      <li key={'dummy4'} className={styles.dummy}></li>,
+      <li key={'dummy5'} className={styles.dummy}></li>,
+      <li key={'dummy6'} className={styles.dummy}></li>,
+      <li key={'dummy7'} className={styles.dummy}></li>,
     ],
   ].slice(0, 7);
 

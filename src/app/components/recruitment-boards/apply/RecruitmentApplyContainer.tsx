@@ -1,5 +1,6 @@
 import { RecruitmentBoardTitle } from '@/app/components/recruitment-boards/detail/RecruitmentBoardTitle';
 import BoardDetail from '@/app/components/recruitment-boards/apply/BoardDetail';
+import { typeToText } from '@/app/lib/constants/tag/tagValues';
 
 export interface Props {
   title: string;
@@ -18,8 +19,9 @@ export default function RecruitmentApplyContainer({
     <>
       <RecruitmentBoardTitle
         title={title}
-        type={boardType.toUpperCase()}
-        tag={tag}
+        type={boardType.toUpperCase() as keyof typeof typeToText}
+        tag={tag as keyof typeof typeToText}
+        name='주최자 이름'
       />
       <BoardDetail content={detail} />
     </>

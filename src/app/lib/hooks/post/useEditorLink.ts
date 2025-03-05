@@ -1,10 +1,18 @@
-import { useState, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import type { Editor } from '@tiptap/react';
 
-const useEditorLinkState = () => {
+const useEditorLinkState = (editor: Editor) => {
   const [linkUrl, setLinkUrl] = useState('');
   const [hasPreviousUrl, setHasPreviousUrl] = useState(false);
   const [openInNewTab, setOpenInNewTab] = useState(true);
+
+  useEffect(() => {
+    const attributes = editor.getAttributes('link') || {};
+
+    setLinkUrl(attributes.href || '');
+    setHasPreviousUrl(!!attributes.href);
+    setOpenInNewTab(!!attributes.target);
+  }, [editor]);
 
   return { linkUrl, setLinkUrl, hasPreviousUrl, openInNewTab, setOpenInNewTab };
 };

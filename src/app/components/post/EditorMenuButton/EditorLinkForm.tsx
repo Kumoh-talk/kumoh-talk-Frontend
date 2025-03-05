@@ -13,7 +13,7 @@ interface EditorLinkFormProps {
 
 const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
   const { linkUrl, setLinkUrl, openInNewTab, setOpenInNewTab, hasPreviousUrl } =
-    useEditorLinkState();
+    useEditorLinkState(editor);
 
   const { setLink } = useEditorLinkActions(editor, linkUrl, openInNewTab);
 

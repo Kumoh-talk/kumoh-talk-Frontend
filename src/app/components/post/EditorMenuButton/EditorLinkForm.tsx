@@ -15,7 +15,11 @@ const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
   const { linkUrl, setLinkUrl, openInNewTab, setOpenInNewTab, hasPreviousUrl } =
     useEditorLinkState(editor);
 
-  const { setLink } = useEditorLinkActions(editor, linkUrl, openInNewTab);
+  const { setLink, unsetLink } = useEditorLinkActions(
+    editor,
+    linkUrl,
+    openInNewTab
+  );
 
   return (
     <form>
@@ -43,7 +47,7 @@ const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
             type='submit'
             color='text-black-50'
             bgColor='bg-white'
-            onClick={() => {}}
+            onClick={unsetLink}
           >
             링크 제거
           </Button>

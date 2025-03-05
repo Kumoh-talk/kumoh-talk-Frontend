@@ -45,7 +45,13 @@ const useEditorLinkActions = (
     editor.chain().focus().insertContent(content).run();
   };
 
-  return { setLink };
+  const unsetLink = (e: MouseEvent) => {
+    e.preventDefault();
+
+    editor.chain().focus().extendMarkRange('link').unsetLink().run();
+  };
+
+  return { setLink, unsetLink };
 };
 
 export { useEditorLinkState, useEditorLinkActions };

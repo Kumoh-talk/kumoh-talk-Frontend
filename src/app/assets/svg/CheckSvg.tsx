@@ -1,17 +1,19 @@
-export default function CheckSvg() {
+export default function CheckSvg({ className = '' }: { className?: string }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='7'
-      height='8'
-      viewBox='0 0 8 9'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
       fill='none'
+      className={className}
     >
       <path
-        opacity='0.11'
-        d='M7.65629 0.614921C7.31393 0.393773 6.86296 0.501398 6.64903 0.855308L3.12082 6.69209L1.25137 4.35419C1.02096 4.06604 0.617279 4.00423 0.315955 4.21095C-0.0344444 4.45134 -0.105431 4.95295 0.163672 5.28702L2.54189 8.23944C2.70754 8.44508 2.95751 8.52993 3.1924 8.49067C3.42999 8.5079 3.6653 8.39254 3.80048 8.17694L7.88233 1.66671C8.10448 1.3124 8.00266 0.838662 7.65629 0.614921Z'
-        fill='black'
-        fillOpacity='0.5'
+        d='M18.6663 7L9.49967 16.1667L5.33301 12'
+        stroke='currentColor'
+        strokeWidth='1.25'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );

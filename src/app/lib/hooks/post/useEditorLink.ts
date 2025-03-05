@@ -54,6 +54,26 @@ const useEditorLinkActions = (
     editor.chain().focus().insertContent(content).run();
   };
 
+  const deleteLinkPreviewNodes = (targetUrl: string) => {
+    editor.commands.command(({ tr, state, dispatch }) => {
+      let deleted = false;
+
+      state.doc.descendants((node, pos) => {
+        if (
+          node.type.name === 'linkPreviewNode' &&
+          node.attrs.requestedUrl === targetUrl
+        ) {
+          if (dispatch) {
+            tr.delete(pos, pos + node.nodeSize);
+          }
+          deleted = true;
+        }
+      });
+
+      return deleted;
+    });
+  };
+
   const insertLinkPreview = async () => {
     try {
       const linkPreview = {
@@ -75,6 +95,7 @@ const useEditorLinkActions = (
       });
     } catch (error) {
       console.error(error);
+      deleteLinkPreviewNodes(linkUrl);
     }
   };
 

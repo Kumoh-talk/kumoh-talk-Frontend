@@ -30,7 +30,7 @@ const EditorLinkButton = ({ editor }: EditorLinkButtonProps) => {
         <LinkSvg />
       </button>
       <div className={clsx(styles.linkPanel, { [styles.show]: isOpen })}>
-        {isOpen && <EditorLinkForm />}
+        {isOpen && <EditorLinkForm editor={editor} />}
       </div>
     </div>
   );

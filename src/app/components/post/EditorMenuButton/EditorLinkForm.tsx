@@ -1,11 +1,21 @@
 import Button from '../../common/button/Button';
 import CheckSvg from '@/app/assets/svg/CheckSvg';
-import { useEditorLinkState } from '@/app/lib/hooks/post/useEditorLink';
+import {
+  useEditorLinkState,
+  useEditorLinkActions,
+} from '@/app/lib/hooks/post/useEditorLink';
+import type { Editor } from '@tiptap/react';
 import styles from './EditorMenuButton.module.scss';
 
-const EditorLinkForm = () => {
+interface EditorLinkFormProps {
+  editor: Editor;
+}
+
+const EditorLinkForm = ({ editor }: EditorLinkFormProps) => {
   const { linkUrl, setLinkUrl, openInNewTab, setOpenInNewTab, hasPreviousUrl } =
     useEditorLinkState();
+
+  const { setLink } = useEditorLinkActions(editor, linkUrl, openInNewTab);
 
   return (
     <form>
@@ -43,7 +53,7 @@ const EditorLinkForm = () => {
           color='text-black-50'
           bgColor='bg-white'
           disabled={false}
-          onClick={() => {}}
+          onClick={setLink}
         >
           확인
         </Button>

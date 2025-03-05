@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '../common/button/Button';
-import Modal from '../common/modal/Modal';
+import Modal from '../common/modal/ModalBackup';
 import styles from './signOutModal.module.scss';
 import { handleUnlink } from '@/app/lib/apis/profile/signOut';
 

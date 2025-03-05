@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { deleteRecruitmentBoardComment } from '../apis/recruitment-boards/recruitmentBoard';
+import {
+  deleteRecruitmentBoardComment,
+  reportRecruitmentBoardComment,
+} from '../apis/recruitment-boards/recruitmentBoard';
 
 export default function useCommentMoreBubble(
   commentId: number,
@@ -17,6 +20,11 @@ export default function useCommentMoreBubble(
     await deleteRecruitmentBoardComment(commentId);
     setIsOpen(false);
     window.location.reload();
+  };
+
+  const onReport = async () => {
+    await reportRecruitmentBoardComment(commentId, 1);
+    setIsOpen(false);
   };
 
   const onInsideClick = (event: React.MouseEvent) => {
@@ -44,5 +52,5 @@ export default function useCommentMoreBubble(
     };
   }, [isOpen]);
 
-  return { bubbleRef, isOpen, onModify, onDelete, onInsideClick };
+  return { bubbleRef, isOpen, onModify, onDelete, onReport, onInsideClick };
 }

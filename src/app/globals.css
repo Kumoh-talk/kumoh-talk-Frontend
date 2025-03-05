@@ -86,3 +86,7 @@ input {
     outline: none;
   }
 }
+
+.ProseMirror:focus-visible {
+  outline: none;
+}

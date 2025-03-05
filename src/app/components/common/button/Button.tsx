@@ -1,18 +1,16 @@
+import { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import type { Color } from '@/app/lib/types/color';
 import styles from './button.module.scss';
 
-type Props = {
+export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   size?: 'small' | 'medium' | 'large' | 'full';
   bgColor?: `bg-${Color}`;
   color?: `text-${Color}`;
-  onClick?: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    ...args: unknown[]
-  ) => unknown;
+  onClick?: (...args: any[]) => unknown;
   children: React.ReactNode;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+}
 
 export default function Button({
   className = '',

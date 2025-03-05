@@ -15,7 +15,7 @@ export interface ApplicantAnswer {
   answerList: Answer[];
 }
 
-interface Answer {
+export interface Answer {
   answerId: number;
   answerNumber: number;
   answer: string;

@@ -5,6 +5,7 @@ import Footer from '@/app/components/common/footer/Footer';
 import { getRecruitmentBoardApplicantList } from '@/app/lib/apis/recruitment-boards/list/list';
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 import { cookies } from 'next/headers';
+import ListPagination from '@/app/components/recruitment-boards/list/ListPagination';
 
 export default async function Page({
   searchParams,
@@ -28,7 +29,7 @@ export default async function Page({
   );
 
   return (
-    <>
+    <div className={styles.page}>
       <Header title={`신청서 확인`} />
       <main className={styles.block}>
         <ApplyListContainer
@@ -39,8 +40,12 @@ export default async function Page({
           name={name}
           applicantList={applicantList}
         />
+        <ListPagination
+          totalPage={applicantList.data.totalPage}
+          searchParams={searchParams}
+        />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,0 +1,21 @@
+@import 'mixin';
+
+.editorMenu {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  height: 4rem;
+  padding-left: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.editorMenuDivider {
+  width: 1px;
+  height: 1.25rem;
+  background-color: var(--color-gray-700);
+  margin: 0 0.5rem;
+}
+
+.editorModeSelect {
+  width: 7.5rem;
+}

@@ -7,14 +7,20 @@
   padding: 1rem 0.5rem;
   border-bottom: 3px solid rgba(217, 217, 217, 0.2);
 
-  p {
-    @include title3Emphasized(black-50);
-    width: 11%;
-    text-wrap: nowrap;
+  .name {
+    flex: 9;
+    text-align: left;
   }
 
-  p:last-child {
-    text-align: right;
-    width: 7%;
+  p {
+    @include title3Emphasized(black-50);
+    text-wrap: nowrap;
+    text-align: center;
   }
+}
+
+.grade,
+.studentId,
+.status {
+  flex: 5;
 }

@@ -119,3 +119,20 @@ export const deleteRecruitmentBoardComment = (commentId: number) => {
     credentials: 'include',
   });
 };
+
+export const reportRecruitmentBoardComment = (
+  commentId: number,
+  userId: number
+) => {
+  return _fetch(
+    `${baseUrl}/reports/recruitment-board/comments/${commentId}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    { commentId, userId }
+  );
+};

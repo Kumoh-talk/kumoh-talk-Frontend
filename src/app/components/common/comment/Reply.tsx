@@ -32,6 +32,7 @@ export default function Reply({
         onChange={onChange}
         value={content}
         ref={replyRef}
+        maxLength={500}
       />
       <div className={styles.buttonWrapper}>
         <Button bgColor="bg-white" color="text-black-85" onClick={onCancel}>

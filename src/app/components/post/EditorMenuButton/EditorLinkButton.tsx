@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import clsx from 'clsx';
 import LinkSvg from '@/app/assets/svg/Editor/LinkSvg';
+import EditorLinkForm from './EditorLinkForm';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import useOverlay from '@/app/lib/hooks/common/useOverlay';
 import type { Editor } from '@tiptap/react';
@@ -19,7 +20,7 @@ const EditorLinkButton = ({ editor }: EditorLinkButtonProps) => {
   useClickOutside(linkPanelRef, close);
 
   return (
-    <div ref={linkPanelRef}>
+    <div className={styles.linkWrapper} ref={linkPanelRef}>
       <button
         className={clsx(styles.editorMenuButton, {
           [styles.active]: editor.isActive('link'),
@@ -28,7 +29,9 @@ const EditorLinkButton = ({ editor }: EditorLinkButtonProps) => {
       >
         <LinkSvg />
       </button>
-      <div>{isOpen && <div>링크 제출 폼</div>}</div>
+      <div className={clsx(styles.linkPanel, { [styles.show]: isOpen })}>
+        {isOpen && <EditorLinkForm />}
+      </div>
     </div>
   );
 };

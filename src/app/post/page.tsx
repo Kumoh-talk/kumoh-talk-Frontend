@@ -8,6 +8,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import CustomImage from '../components/post/ImageNode/ImageNode';
 import FileNode from '../components/post/FileNode/FileNode';
 import Link from '@tiptap/extension-link';
+import LinkPreviewNode from '../components/post/LinkPreview/LinkPreviewNode';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { all, createLowlight } from 'lowlight';
 import Header from '../components/post/Header/Header';
@@ -35,6 +36,7 @@ export default function Post() {
           autolink: true,
           defaultProtocol: 'https',
         }),
+        LinkPreviewNode,
         FileNode,
       ],
       enablePasteRules: isMarkdwonMode,

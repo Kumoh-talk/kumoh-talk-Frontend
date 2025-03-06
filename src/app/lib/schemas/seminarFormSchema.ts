@@ -15,7 +15,6 @@ const ERROR_MSG = {
 };
 
 export const seminarFormSchema = z.object({
-  name: z.string().min(1, ERROR_MSG.required),
   department: z.enum(departmentValues),
   grade: z.enum(['1', '2', '3', '4']),
   studentId: z
@@ -33,6 +32,7 @@ export const seminarFormSchema = z.object({
 });
 
 export type SeminarFormValues = z.infer<typeof seminarFormSchema>;
+export type SeminarApplicationRequest = { name: string } & SeminarFormValues;
 
 export const validateSeminarForm = (formData: FormData) => {
   const formValues = Object.fromEntries(formData.entries());

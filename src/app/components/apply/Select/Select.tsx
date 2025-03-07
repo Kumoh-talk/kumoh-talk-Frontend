@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
+import useOverlay from '@/app/lib/hooks/common/useOverlay';
+import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import clsx from 'clsx';
 import ChevronDownSvg from '@/app/assets/svg/ChevronDownSvg';
 import styles from './Select.module.scss';
@@ -16,42 +18,22 @@ interface SelectProps {
 }
 
 const Select = ({ options, onChange }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<Option>(options[0]);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const { isOpen, close, toggle } = useOverlay();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useClickOutside(dropdownRef, close);
 
   const handleOptionSelect = (option: Option) => {
     setSelected(option);
-    setIsOpen(false);
+    close();
     onChange(option.value);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      window.addEventListener('click', handleClickOutside);
-    } else {
-      window.removeEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, [isOpen]);
-
   return (
     <div className={styles.container} ref={dropdownRef}>
-      <div className={styles.display} onClick={toggleDropdown}>
+      <div className={styles.display} onClick={toggle}>
         <span>{selected?.label}</span>
         <div className={styles.arrow}>
           <ChevronDownSvg />

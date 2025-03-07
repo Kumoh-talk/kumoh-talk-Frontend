@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useOverlay from '@/app/lib/hooks/common/useOverlay';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import clsx from 'clsx';
@@ -14,10 +14,11 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
+  defaultValue?: string;
   onChange: (value: string) => void;
 }
 
-const Select = ({ options, onChange }: SelectProps) => {
+const Select = ({ options, defaultValue, onChange }: SelectProps) => {
   const [selected, setSelected] = useState<Option>(options[0]);
 
   const { isOpen, close, toggle } = useOverlay();
@@ -30,6 +31,15 @@ const Select = ({ options, onChange }: SelectProps) => {
     close();
     onChange(option.value);
   };
+
+  useEffect(() => {
+    const getDefaultOption = () => {
+      return options.find((opt) => opt.value === defaultValue) || options[0];
+    };
+
+    const defaultOption = getDefaultOption();
+    setSelected(defaultOption);
+  }, []);
 
   return (
     <div className={styles.container} ref={dropdownRef}>

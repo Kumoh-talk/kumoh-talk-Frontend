@@ -20,7 +20,11 @@ const SelectField = ({ control, name, label, options }: SelectFieldProps) => {
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <Select options={options} onChange={field.onChange} />
+          <Select
+            options={options}
+            defaultValue={field.value}
+            onChange={field.onChange}
+          />
           <input type='hidden' name={field.name} value={field.value} />
           <FormMessage />
         </FormItem>

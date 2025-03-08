@@ -136,6 +136,8 @@ export async function POST(
     },
     await request.json(),
   );
+  
+  const resBody = await res.json();
 
   // 토큰 만료
   if (
@@ -154,7 +156,21 @@ export async function POST(
     );
   }
 
-  return NextResponse.json(await res.json(), { status: res.status });
+  const response = NextResponse.json(resBody, { status: res.status });
+  if (resBody.data?.accessToken) {
+    response.cookies.set('accessToken', resBody.data.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+    response.cookies.set('refreshToken', resBody.data.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+  }
+
+  return response;
 }
 
 export async function PUT(

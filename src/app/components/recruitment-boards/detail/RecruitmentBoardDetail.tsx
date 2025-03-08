@@ -6,6 +6,8 @@ import ApplyButton from '@/app/components/recruitment-boards/detail/ApplyButton'
 import ModifyButton from '@/app/components/recruitment-boards/detail/ModifyButton';
 import CheckApplicantButton from '@/app/components/recruitment-boards/detail/CheckApplicantButton';
 import styles from '@/app/recruitment-boards/detail/page.module.scss';
+import { cookies } from 'next/headers';
+import { parseJwt } from '@/app/lib/apis/auth';
 
 export default function RecruitmentBoardDetail({
   boardDetail,
@@ -18,6 +20,8 @@ export default function RecruitmentBoardDetail({
   writerUserId: number;
   boardId: string;
 }) {
+  const token = cookies().get('accessToken')?.value;
+  const jwt = token ? parseJwt(token) : null;
   const { success, data } = boardDetail;
 
   if (!data.title) {
@@ -42,6 +46,7 @@ export default function RecruitmentBoardDetail({
           title={boardDetail.data.title}
           detail={boardDetail.data.summary}
           tag={boardDetail.data.tag}
+          userRole={jwt && jwt.USER_ROLE}
         />
       )}
     </div>

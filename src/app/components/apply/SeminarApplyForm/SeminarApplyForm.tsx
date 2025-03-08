@@ -16,7 +16,7 @@ import styles from './SeminarApplyForm.module.scss';
 
 const SeminarApplyForm = () => {
   const [formState, formAction] = useFormState(submitAction, null);
-  const [isLoading ,setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const form = useFormAction<SeminarFormValues>({
     formState,
@@ -37,15 +37,19 @@ const SeminarApplyForm = () => {
         phoneNumber,
       });
 
-      setIsLoading(false);
       form.reset(initFormValues);
+      setIsLoading(false);
     };
 
     initFormValues();
   }, []);
 
   if (isLoading) {
-    return <p>로딩 중...</p>;
+    return (
+      <div className={styles.loaderWrapper}>
+        <div className={styles.loader} />
+      </div>
+    );
   }
 
   return (

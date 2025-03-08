@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useFormState } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import { FormProvider } from 'react-hook-form';
 import submitAction from '@/app/lib/apis/apply/submitAction';
 import { useFormAction } from '@/app/lib/hooks/apply/useFormAction';
@@ -18,10 +19,13 @@ const SeminarApplyForm = () => {
   const [formState, formAction] = useFormState(submitAction, null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const router = useRouter();
+
   const form = useFormAction<SeminarFormValues>({
     formState,
-    onSuccess: () => {
-      submitSeminarApplication(form.getValues());
+    onSuccess: async () => {
+      await submitSeminarApplication(form.getValues());
+      router.push('/');
     },
   });
 

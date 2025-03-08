@@ -1,7 +1,7 @@
 import { Control } from 'react-hook-form';
 import InputField from '../../apply/Field/InputField';
-import CheckboxField from '../../apply/Field/CheckboxField';
-import ChoiceField from '../../apply/Field/ChoiceField';
+import CheckboxField from '../post/Field/CheckboxField';
+import ChoiceField from '../post/Field/ChoiceField';
 import { Questions } from '@/app/lib/types/recruitmentBoards/apply/apply';
 
 export default function ParseTypeToField({

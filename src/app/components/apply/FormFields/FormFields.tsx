@@ -1,10 +1,10 @@
 'use client';
 
 import { useFormContext } from 'react-hook-form';
-import Checkbox from '../Checkbox/Checkbox';
 import Button from '@/app/components/common/button/Button';
 import InputField from '../Field/InputField';
 import SelectField from '../Field/SelectField';
+import CheckboxField from '../Field/CheckboxField';
 import { departments, grades } from '@/app/lib/constants/apply/selectValues';
 import { getUpcomingWeekdayDates } from '@/app/lib/utils/dateUtils';
 import styles from './FormFields.module.scss';
@@ -64,15 +64,19 @@ const FormFields = () => {
           label='예상 소요 시간'
         />
         <div className={styles.row}>
-          <Checkbox>야밤의 금오톡 게시글 작성 여부</Checkbox>
-          <Checkbox>
-            발표한 내용 유튜브 및 야밤의 금오톡 업로드 동의 여부
-          </Checkbox>
+          <CheckboxField
+            control={form.control}
+            name='isPostConsent'
+            label='야밤의 금오톡 게시글 작성 여부'
+          />
+          <CheckboxField
+            control={form.control}
+            name='isUploadConsent'
+            label='발표한 내용 유튜브 및 야밤의 금오톡 업로드 동의 여부'
+          />
         </div>
       </div>
-      <Button size='medium' onClick={() => {}}>
-        신청하기
-      </Button>
+      <Button size='medium'>신청하기</Button>
     </>
   );
 };

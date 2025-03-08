@@ -118,12 +118,14 @@ export default function Comment({
             </div>
           </div>
           <div className={styles.moreButton}>
-            <MoreButton
-              userName={userName}
-              commentId={commentId}
-              commentUserName={name}
-              setIsEdit={setIsEdit}
-            />
+            {!deletedAt ? (
+              <MoreButton
+                userName={userName}
+                commentId={commentId}
+                commentUserName={name}
+                setIsEdit={setIsEdit}
+              />
+            ) : null}
           </div>
         </div>
       </div>

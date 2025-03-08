@@ -32,7 +32,7 @@ export default async function Page({
   }
 
   return (
-    <>
+    <div className={styles.page}>
       <Header title={title} />
       <main className={styles.board}>
         <Suspense fallback={<p>Loading...</p>}>
@@ -46,6 +46,6 @@ export default async function Page({
         <Comment boardId={searchParams.id} />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

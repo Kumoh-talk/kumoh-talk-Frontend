@@ -1,3 +1,10 @@
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .board {
   width: 60%;
   margin: 0 auto;

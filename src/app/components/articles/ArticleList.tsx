@@ -37,7 +37,7 @@ export default async function ArticleList({
   try {
     const userInfoResponse = await getUserInfo(cookies().toString());
     const userInfo = (await userInfoResponse.json()).data;
-    isCanPost = userInfo?.role === 'ROLE_USER';
+    isCanPost = userInfo?.role === 'ROLE_ACTIVE_USER';
   } catch (error) {
     console.error('Error fetching data:', error);
   }

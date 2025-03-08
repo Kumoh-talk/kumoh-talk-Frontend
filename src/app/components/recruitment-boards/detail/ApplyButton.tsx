@@ -8,10 +8,19 @@ export interface Props {
   title: string;
   detail: string;
   tag: string;
+  userRole:
+    | 'ROLE_GUEST'
+    | 'ROLE_USER'
+    | 'ROLE_ACTIVE_USER'
+    | 'ROLE_ADMIN'
+    | null;
 }
-// TODO: 백엔드 api 완성되면 수정
-export default function ApplyButton({ title, detail, tag }: Props) {
+
+export default function ApplyButton({ title, detail, tag, userRole }: Props) {
   const params = useSearchParams();
+  if (userRole !== 'ROLE_ACTIVE_USER') {
+    return '로그인 후 신청 가능합니다.';
+  }
   const boardId = params.get('id');
   const boardType = params.get('boardType');
 

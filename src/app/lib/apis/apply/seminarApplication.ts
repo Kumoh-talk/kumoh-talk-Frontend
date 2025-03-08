@@ -29,6 +29,16 @@ const getMyInformation = () => {
   });
 };
 
+export const getMyAdditionalInformation = () => {
+  return _fetch(`${baseUrl}/userAdditionalInfos/me`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
+
 const getUsername = async () => {
   const response = await getMyInformation();
   const { name } = response.data;

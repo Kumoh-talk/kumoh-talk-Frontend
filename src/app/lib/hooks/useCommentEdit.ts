@@ -1,9 +1,9 @@
 import {
   ChangeEvent,
   Dispatch,
-  KeyboardEvent,
   SetStateAction,
   useState,
+  useTransition,
 } from 'react';
 import { patchRecruitmentBoardComment } from '../apis/recruitment-boards/recruitmentBoard';
 
@@ -17,7 +17,8 @@ type commentEditProps = {
 type commentEditType = [
   string,
   (e: ChangeEvent<HTMLTextAreaElement>) => void,
-  () => void
+  () => void,
+  boolean
 ];
 
 export default function useCommentEdit({
@@ -27,16 +28,19 @@ export default function useCommentEdit({
   setIsEdit,
 }: commentEditProps): commentEditType {
   const [content, setContent] = useState(currentComment);
+  const [isPending, startTransition] = useTransition();
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
 
-  const onSubmit = async () => {
-    await patchRecruitmentBoardComment(id, { groupId, content });
+  const onSubmit = () => {
+    startTransition(async () => {
+      await patchRecruitmentBoardComment(id, { groupId, content });
 
-    if (setIsEdit) setIsEdit(false);
+      if (setIsEdit) setIsEdit(false);
+    });
   };
 
-  return [content, onChange, onSubmit];
+  return [content, onChange, onSubmit, isPending];
 }

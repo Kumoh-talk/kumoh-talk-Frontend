@@ -25,12 +25,6 @@ function validateQuestionForm(
   form: PostForm[],
   setQuestionError: (state: string) => void
 ) {
-  // 질문의 갯수가 0개일 때 에러 메시지 출력
-  if (form.length === 0) {
-    setQuestionError('1개 이상의 질문을 추가해주세요');
-    return false;
-  }
-
   const hasError = form.some(({ question, type, answerList }) => {
     if (question === '') {
       setQuestionError('모든 질문 제목을 입력해주세요');

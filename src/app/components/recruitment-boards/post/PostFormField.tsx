@@ -87,7 +87,7 @@ export default function PostFormField({
       </div>
       <div className={styles.row}>
         <Button type='submit' size='full' disabled={isSubmitting}>
-          등록하기
+          {isSubmitting ? '등록중' : '등록하기'}
         </Button>
       </div>
     </div>

@@ -84,7 +84,7 @@ export default function usePostForm({ resolver }: { resolver: any }) {
 
     const response = await postRecruitmentBoard(formData);
 
-    if (response.status === 'true') {
+    if (response.success === 'true') {
       router.replace('/recruitment-boards');
     }
   };

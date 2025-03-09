@@ -57,6 +57,9 @@ export default function QuestionInputField({
               );
               setForm(newQuestionArr);
             }}
+            onKeyDown={(e) => {
+              e.key === 'Enter' && e.preventDefault();
+            }}
             placeholder='질문 제목을 입력하세요'
           />
           <div className={styles.select}>

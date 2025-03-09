@@ -59,7 +59,6 @@ export default function CheckboxField({
                       )
                     );
                   }
-                  console.log(field.value);
                 }}
               >
                 {value.answer}

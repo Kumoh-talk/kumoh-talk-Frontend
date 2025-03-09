@@ -45,10 +45,7 @@ export default function RecruitmentApplyForm({
 
   const onSubmit = async (data: { [key: string]: any }) => {
     const formData = parseFormDataToRequestBody(data);
-    console.log(formData);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     const response = await postApplication(recruitmentBoardId, formData);
-    console.log(response);
 
     if (response.success === 'true') {
       router.back();

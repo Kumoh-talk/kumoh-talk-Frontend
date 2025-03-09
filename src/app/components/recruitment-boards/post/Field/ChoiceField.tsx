@@ -45,7 +45,6 @@ export default function ChoiceField({
                       number: value.number,
                     },
                   ]);
-                  console.log(field.value);
                 }}
               >
                 {value.answer}

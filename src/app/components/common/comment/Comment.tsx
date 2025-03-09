@@ -33,7 +33,7 @@ export default function Comment({
   } = currentComment;
   const [isEdit, setIsEdit] = useState(false);
   const [isReply, setIsReply] = useState(false);
-  const [content, onChange, onSubmit] = useCommentEdit({
+  const [content, onChange, onSubmit, isPending] = useCommentEdit({
     id: commentId,
     currentComment: comment,
     setIsEdit,
@@ -78,13 +78,15 @@ export default function Comment({
                   />
                   <div className={styles.editButtonWrapper}>
                     <Button
-                      bgColor="bg-white"
-                      color="text-black-85"
+                      bgColor='bg-white'
+                      color='text-black-85'
                       onClick={() => setIsEdit(false)}
                     >
                       취소
                     </Button>
-                    <Button onClick={onSubmit}>수정</Button>
+                    <Button onClick={onSubmit} disabled={isPending}>
+                      {isPending ? '수정중...' : '수정'}
+                    </Button>
                   </div>
                 </div>
               ) : (

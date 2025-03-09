@@ -12,9 +12,10 @@
 }
 
 .item {
-  @include footnote(black-50);
+  @include subHeadline(black-50);
   cursor: pointer;
   padding: 0 0.5rem;
+  text-align: center;
 
   &:hover {
     color: var(--color-blue-400);

@@ -28,14 +28,11 @@ export default function ImageEditMenu({ isShow }: Props) {
     if (!image || !image.type.includes('image')) {
       return;
     }
-    console.log(image);
 
     const response: PresignedURLResponse = await getPresignedURL(image.name);
     const url = response.data;
-    console.log(url);
 
     const uploadProfileImageResponse = await uploadProfileImage(url, image);
-    console.log(uploadProfileImageResponse);
 
     const patchResponse: PatchProfileImageResponse = await patchProfileImage(
       url
@@ -60,8 +57,8 @@ export default function ImageEditMenu({ isShow }: Props) {
     <div className={styles.list}>
       <input
         ref={fileRef}
-        type="file"
-        accept="image/*"
+        type='file'
+        accept='image/*'
         className={styles.item}
         onChange={handleFileChange}
         hidden

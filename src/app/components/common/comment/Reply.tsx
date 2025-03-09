@@ -1,9 +1,7 @@
 'use client';
 
-import { postRecruitmentBoardComment } from '@/app/lib/apis/recruitment-boards/recruitmentBoard';
 import Button from '../button/Button';
 import styles from './reply.module.scss';
-import { useState } from 'react';
 import useReply from '@/app/lib/hooks/useReply';
 
 export interface Props {
@@ -19,7 +17,7 @@ export default function Reply({
   setIsReply,
   replyRef,
 }: Props) {
-  const { content, onChange, onCancel, onReply } = useReply(
+  const { content, onChange, onCancel, onReply, isPending } = useReply(
     boardId,
     parentId,
     setIsReply
@@ -28,17 +26,19 @@ export default function Reply({
   return (
     <div className={styles.replyWrapper}>
       <textarea
-        placeholder="답글을 입력하세요..."
+        placeholder='답글을 입력하세요...'
         onChange={onChange}
         value={content}
         ref={replyRef}
         maxLength={500}
       />
       <div className={styles.buttonWrapper}>
-        <Button bgColor="bg-white" color="text-black-85" onClick={onCancel}>
+        <Button bgColor='bg-white' color='text-black-85' onClick={onCancel}>
           취소
         </Button>
-        <Button onClick={onReply}>등록</Button>
+        <Button onClick={onReply} disabled={isPending}>
+          {isPending ? '등록중...' : '등록'}
+        </Button>
       </div>
     </div>
   );

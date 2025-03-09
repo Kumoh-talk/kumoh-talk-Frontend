@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export default function CommentInput({ boardId }: Props) {
-  const { comment, onChange, onSubmit } = useCommentInput(boardId);
+  const { comment, onChange, onSubmit, isPending } = useCommentInput(boardId);
 
   return (
     <div className={styles.editor}>
@@ -21,7 +21,9 @@ export default function CommentInput({ boardId }: Props) {
         onChange={onChange}
         maxLength={500}
       />
-      <Button onClick={onSubmit}>등록</Button>
+      <Button onClick={onSubmit} disabled={isPending}>
+        {isPending ? '등록중...' : '등록'}
+      </Button>
     </div>
   );
 }

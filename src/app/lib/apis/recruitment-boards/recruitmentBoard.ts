@@ -96,7 +96,6 @@ export const patchRecruitmentBoardComment = (
   commentId: number,
   body: Comment
 ) => {
-  console.log(body);
   return _fetch(
     `${baseUrl}/recruitment-board/comments/${commentId}`,
     {

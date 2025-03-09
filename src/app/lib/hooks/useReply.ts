@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { postRecruitmentBoardComment } from '../apis/recruitment-boards/recruitmentBoard';
 
 export default function useReply(
@@ -7,6 +7,7 @@ export default function useReply(
   setIsReply: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   const [content, setContent] = useState('');
+  const [isPending, startTransition] = useTransition();
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -17,13 +18,15 @@ export default function useReply(
     setIsReply(false);
   };
 
-  const onReply = async () => {
-    const response = await postRecruitmentBoardComment(boardId.toString(), {
-      content,
-      groupId: parentId,
-    });
+  const onReply = () => {
+    startTransition(async () => {
+      const response = await postRecruitmentBoardComment(boardId.toString(), {
+        content,
+        groupId: parentId,
+      });
 
-    window.location.reload();
+      window.location.reload();
+    });
   };
 
   return {
@@ -31,5 +34,6 @@ export default function useReply(
     onChange,
     onCancel,
     onReply,
+    isPending,
   };
 }

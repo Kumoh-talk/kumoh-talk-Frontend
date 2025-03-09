@@ -57,7 +57,7 @@ const InputField = ({
           <FormLabel>
             {label} &nbsp;{' '}
             {required && (
-              <span aria-label="required" style={{ color: '#ff7f00' }}>
+              <span aria-label='required' style={{ color: '#ff7f00' }}>
                 *
               </span>
             )}
@@ -66,6 +66,7 @@ const InputField = ({
             {...field}
             placeholder={placeholder}
             onChange={(e) => handleInput(e, field)}
+            onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
             type={type}
           />
           <FormMessage />

@@ -6,7 +6,7 @@ const HashTag = () => {
   const [tagList, setTagList] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
 
-  const MAX_TAG = 10;
+  const MAX_TAG = 5;
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (inputValue.trim() === '') return;

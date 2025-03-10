@@ -78,7 +78,11 @@ export default function Post() {
       />
       <main className={styles.layout}>
         <div className={styles.content}>
-          <input className={styles.title} placeholder='제목을 입력하세요' />
+          <input
+            className={styles.title}
+            maxLength={50}
+            placeholder='제목을 입력하세요'
+          />
           <div className={styles.editorContainer}>
             <EditorContent editor={editor} />
           </div>

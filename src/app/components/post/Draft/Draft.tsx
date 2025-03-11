@@ -1,3 +1,4 @@
+import DraftList from './DraftList';
 import Button from '../../common/button/Button';
 import styles from './Draft.module.scss';
 
@@ -11,7 +12,9 @@ const Draft = ({ close }: DraftProps) => {
       <div className={styles.head}>
         <h3>임시저장</h3>
       </div>
-      <div className={styles.draft}>임시 저장 목록</div>
+      <div className={styles.draft}>
+        <DraftList />
+      </div>
       <div className={styles.footer}>
         <Button
           className={styles.outlineButton}

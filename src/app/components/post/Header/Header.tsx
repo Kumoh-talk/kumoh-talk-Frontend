@@ -6,6 +6,7 @@ import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import Image from 'next/image';
 import Button from '../../common/button/Button';
 import logo from '@/app/assets/png/logo.png';
+import Draft from '../Draft/Draft';
 import styles from './Header.module.scss';
 
 type ModalType = 'draft' | 'publish';
@@ -15,6 +16,10 @@ const Header = () => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(modalRef, () => setActiveModal(null));
+
+  const handleClose = () => {
+    setActiveModal(null);
+  };
 
   return (
     <>
@@ -46,7 +51,9 @@ const Header = () => {
           ref={modalRef}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className={styles.layer}>모달</div>
+          <div className={styles.layer}>
+            <Draft close={handleClose} />
+          </div>
         </div>
       </div>
     </>

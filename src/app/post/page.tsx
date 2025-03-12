@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -11,6 +11,7 @@ import Link from '@tiptap/extension-link';
 import LinkPreviewNode from '../components/post/LinkPreview/LinkPreviewNode';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { all, createLowlight } from 'lowlight';
+import { usePreventUnload } from '../lib/hooks/common/usePreventUnload';
 import Header from '../components/post/Header/Header';
 import EditorMenu from '../components/post/EditorMenu/EditorMenu';
 import HashTag from '../components/post/HashTag/HashTag';
@@ -53,18 +54,7 @@ export default function Post() {
     );
   };
 
-  useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      event.returnValue = '';
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
+  usePreventUnload();
 
   if (!editor) return null;
 

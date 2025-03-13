@@ -6,6 +6,7 @@ import {
 
 export default function useCommentMoreBubble(
   commentId: number,
+  userId: number,
   setIsEdit: Dispatch<SetStateAction<boolean>>
 ) {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function useCommentMoreBubble(
   };
 
   const onReport = async () => {
-    await reportRecruitmentBoardComment(commentId, 1);
+    await reportRecruitmentBoardComment(commentId, userId);
     setIsOpen(false);
   };
 

@@ -24,7 +24,9 @@ export default function Post() {
   const editor = useEditor(
     {
       extensions: [
-        StarterKit,
+        StarterKit.configure({
+          codeBlock: false,
+        }),
         Underline,
         CustomImage,
         TextAlign.configure({

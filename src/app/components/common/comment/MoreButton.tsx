@@ -8,6 +8,7 @@ import useCommentMoreBubble from '@/app/lib/hooks/useCommentMoreBubble';
 import DeClareBubble from '../declareBubble/DeclareBubble';
 
 interface Props {
+  userId: number;
   userName?: string;
   commentId: number;
   commentUserName: string;
@@ -15,13 +16,14 @@ interface Props {
 }
 
 export default function MoreButton({
+  userId,
   userName,
   commentId,
   commentUserName,
   setIsEdit,
 }: Props) {
   const { bubbleRef, isOpen, onModify, onDelete, onReport, onInsideClick } =
-    useCommentMoreBubble(commentId, setIsEdit);
+    useCommentMoreBubble(commentId, userId, setIsEdit);
 
   const GetBubble = (userName?: string) => {
     if (userName === commentUserName) {

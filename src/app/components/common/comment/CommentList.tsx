@@ -4,16 +4,23 @@ import styles from './comment.module.scss';
 
 export interface Props {
   userName?: string;
+  userId: number;
   boardId: number;
   commentList: CommentListType;
 }
 
-export default function CommentList({ userName, boardId, commentList }: Props) {
+export default function CommentList({
+  userName,
+  userId,
+  boardId,
+  commentList,
+}: Props) {
   return (
     <div className={styles.commentList}>
       {commentList.commentInfoResponseList.map((comment) => (
         <Comment
           userName={userName}
+          userId={userId}
           boardId={boardId}
           currentComment={comment}
           key={comment.commentId}

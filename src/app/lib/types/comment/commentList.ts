@@ -11,6 +11,8 @@ export interface CommentList {
 export interface CommentInfoResponseList {
   commentId: number;
   groupId: number;
+  userId: number;
+  userProfileImageUrl: string;
   userNickname: string;
   content: string;
   createdAt: string;

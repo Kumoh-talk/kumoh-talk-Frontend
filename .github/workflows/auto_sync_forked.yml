@@ -1,0 +1,33 @@
+name: Synchronize to forked repo
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    name: Sync forked repo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with: 
+          token: ${{ secrets.FOR_AUTO_FORK_SYNC }}
+          fetch-depth: 0
+          ref: main
+
+      - name: Add remote-url
+        run: |
+          git remote add forked-repo https://chipsat2025:${{ secrets.FOR_AUTO_FORK_SYNC }}@github.com/chipsat2025/kumoh-talk-Frontend
+          git config user.name chipsat2025
+          git config user.email chipsat2024@gmail.com
+      
+      - name: Push changes to forked-repo 
+        run: |
+          git push -f forked-repo main
+      
+      - name: Clean up
+        run: |
+          git remote remove forked-repo
+          

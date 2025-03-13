@@ -44,4 +44,15 @@
       }
     }
   }
+
+  //temp: 임시 반응형
+  @media screen and (max-width: 68rem) {
+    width: 100%;
+  }
+  @include modile-seminar {
+    gap: 1rem;
+    & > header {
+      @include title1Emphasized;
+    }
+  }
 }

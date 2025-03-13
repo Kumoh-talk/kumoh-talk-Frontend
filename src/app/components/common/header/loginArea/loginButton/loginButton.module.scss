@@ -1,3 +1,5 @@
+@import 'mixin';
+
 button.login {
   background: transparent;
   border: none;
@@ -15,4 +17,9 @@ button.login {
   position: absolute;
   right: 107%;
   top: -0.75rem;
+
+  @include mobile-header {
+    right: -25%;
+    top: 120%;
+  }
 }

@@ -28,8 +28,6 @@ li.item {
       width: 0;
       flex: 1;
 
-      .title {
-      }
       .comment {
         @include footnote(red);
         margin-left: 0.625rem;
@@ -40,4 +38,10 @@ li.item {
     }
   }
   border-top: 1px solid var(--color-gray-600);
+
+  @include mobile-header {
+    .category {
+      display: none;
+    }
+  }
 }

@@ -4,4 +4,9 @@ section.article {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  
+  //temp: 임시 반응형
+  @media screen and (max-width: 40rem) {
+    zoom: 0.9;
+  }
 }

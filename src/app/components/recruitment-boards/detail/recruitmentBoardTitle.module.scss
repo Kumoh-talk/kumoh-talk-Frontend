@@ -26,3 +26,21 @@
     padding-bottom: 16px;
   }
 }
+
+@include mobile-header {
+  .titleBlock {
+    gap: 0.5rem;
+    padding-top: 1rem;
+
+    .titleBlockWrapper {
+      gap: 0.5rem;
+      .title {
+        @include title1Emphasized;
+      }
+
+      .tags {
+        zoom: 0.8;
+      }
+    }
+  }
+}

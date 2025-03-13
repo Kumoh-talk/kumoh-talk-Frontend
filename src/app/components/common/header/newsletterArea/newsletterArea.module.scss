@@ -20,4 +20,9 @@ button.newsletter {
   position: absolute;
   right: 107%;
   top: -0.5rem;
+
+  @include mobile-header {
+    right: 0%;
+    top: 120%;
+  }
 }

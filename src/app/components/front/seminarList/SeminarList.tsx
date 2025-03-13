@@ -2,6 +2,7 @@ import { BoardArticle } from '@/app/lib/types/board/board';
 import SeminarItem from './SeminarItem';
 import styles from './seminarList.module.scss';
 import { getBoardArticles } from '@/app/lib/apis/boards';
+import SeminarListMobile from './SeminarListMobile';
 
 export default async function SeminarList() {
   const list: BoardArticle[] = [];
@@ -25,5 +26,12 @@ export default async function SeminarList() {
     ],
   ].slice(0, 7);
 
-  return <section className={styles.container}>{articleList}</section>;
+  return (
+    <>
+      {/* desktop */}
+      <section className={styles.container}>{articleList}</section>
+      {/* mobile */}
+      <SeminarListMobile items={list} />
+    </>
+  );
 }

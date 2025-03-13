@@ -242,3 +242,16 @@
     color: var(--color-blue-400);
   }
 }
+
+//temp: 임시 반응형
+@mixin mobile-header {
+  @media screen and (max-width: 56rem) {
+    @content;
+  }
+}
+
+@mixin modile-seminar {
+  @media screen and (max-width: 44rem) {
+    @content;
+  }
+}

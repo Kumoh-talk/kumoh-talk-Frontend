@@ -27,17 +27,17 @@
     line-height: normal;
     letter-spacing: -0.16875rem; //-0.16875rem
 
-    @media screen and (max-width: 48rem) {
-      zoom: 0.9;
-    }
-    @media screen and (max-width: 36.25rem) {
+    @media screen and (max-width: 52rem) {
       zoom: 0.8;
     }
+    @media screen and (max-width: 38rem) {
+      zoom: 0.7;
+    }
     @media screen and (max-width: 32.5rem) {
-      zoom: 0.6;
+      zoom: 0.45;
     }
     @media screen and (max-width: 25.625rem) {
-      zoom: 0.5;
+      zoom: 0.4;
     }
 
     & > * {
@@ -73,7 +73,8 @@
     }
     .looking {
       background: #111;
-      box-shadow: 0.06925rem 0.1384375rem 0.1384375rem 0.1038125rem rgba(0, 0, 0, 0.25);
+      box-shadow: 0.06925rem 0.1384375rem 0.1384375rem 0.1038125rem
+        rgba(0, 0, 0, 0.25);
       width: 15.0625rem; //15.0625rem;
       height: 4.5625rem; //4.5625rem;
       transform: rotate(10.65deg);
@@ -97,7 +98,8 @@
     .for {
       border-radius: 2.4229375rem; //2.4229375rem;
       background: #083daf;
-      box-shadow: 0.06925rem 0.1384375rem 0.1384375rem 0.06925rem rgba(0, 0, 0, 0.25);
+      box-shadow: 0.06925rem 0.1384375rem 0.1384375rem 0.06925rem
+        rgba(0, 0, 0, 0.25);
       width: 8.5625rem; //8.5625rem;
       height: 4.5625rem; //4.5625rem;
       transform: rotate(4.223deg);
@@ -223,5 +225,20 @@
         }
       }
     }
+  }
+
+  //temp: 임시 반응형
+  @media screen and (max-width: 720px) {
+    position: relative;
+    width: calc(100% + 2rem);
+    border-radius: 0;
+
+    .bottom {
+      .introduce {
+        display: none;
+      }
+    }
+  }
+  @include mobile-header {
   }
 }

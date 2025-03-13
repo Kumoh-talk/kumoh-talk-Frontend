@@ -36,4 +36,22 @@
       background-color: #cecece;
     }
   }
+
+  //temp: 임시 반응형
+  @include mobile-header {
+    padding: 1rem 1rem;
+
+    .left {
+      @include title3Emphasized;
+    }
+
+    .right {
+      gap: 1rem;
+
+      .line,
+      & > button {
+        display: none;
+      }
+    }
+  }
 }

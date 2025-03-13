@@ -12,4 +12,12 @@ html:has(.main) {
   & > header {
     @include largeTitleEmphasized(black-85);
   }
+
+  @include mobile-header {
+    margin: 3.875rem 1rem 3rem;
+    padding-top: .5rem;
+    & > header {
+      display: none;
+    }
+  }
 }

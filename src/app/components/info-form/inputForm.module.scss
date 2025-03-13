@@ -32,3 +32,30 @@
     @include largeTitleEmphasized(black-85);
   }
 }
+
+@include mobile-header {
+  .container {
+    max-width: 100%;
+    width: 100%;
+    margin: 3.875rem 0 3rem;
+    padding: 0 1rem;
+    gap: 2rem;
+    .wrapper {
+      padding: 0;
+      gap: 2rem;
+
+      @media screen and (max-width: 30rem) {
+        .gradeWrapper {
+          flex-direction: column;
+          gap: 2rem;
+        }
+      }
+    }
+
+    img.headerImg {
+      width: 80%;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+}

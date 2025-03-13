@@ -8,6 +8,7 @@ import Button from '../../../button/Button';
 import { subscribe } from '@/app/lib/apis/newsletters';
 import useInputs from '@/app/lib/hooks/useInput';
 import UnionIcon from '@/app/assets/svg/UnionIcon';
+import { useMediaQueryMobileHeader } from '@/app/lib/hooks/useMediaQueryMobileHeader';
 
 export interface Props {
   className: string;
@@ -15,6 +16,8 @@ export interface Props {
 }
 
 export default function NewsletterBubble({ className, onClose }: Props) {
+  const isMobileHeader = useMediaQueryMobileHeader();
+
   const [state, onChange] = useInputs({
     email: '',
     sub_semina_notice: true,
@@ -52,7 +55,7 @@ export default function NewsletterBubble({ className, onClose }: Props) {
 
   return (
     <BasicBubble
-      direction="right-start"
+      direction={isMobileHeader ? 'top-end' : 'right-start'}
       className={clsx(className, styles.bubble)}
     >
       <CloseButton onClick={onClose} />

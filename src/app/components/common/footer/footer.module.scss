@@ -45,4 +45,22 @@ footer.footer {
       }
     }
   }
+
+  //temp: 임시 반응형
+  @include mobile-header {
+    padding: 3rem 1.25rem 1.5rem;
+    .bottom {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      .left {
+        flex-direction: column;
+        gap: 0.25rem;
+        .line {
+          display: none;
+        }
+      }
+    }
+  }
 }

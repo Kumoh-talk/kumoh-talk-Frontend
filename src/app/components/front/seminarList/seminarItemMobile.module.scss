@@ -1,0 +1,58 @@
+@import 'mixin';
+
+.container {
+  & > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    background-color: #aaa;
+    height: 16rem;
+  }
+
+  .new {
+    display: none;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    gap: 0.25rem;
+    max-width: calc(100% - 2rem);
+    padding: 0 2rem 2rem;
+
+    .title {
+      @include largeTitleEmphasized(white);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+    .sub {
+      @include textColor(white);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      display: inline-flex;
+
+      svg {
+        margin: 0 0.5rem;
+      }
+    }
+  }
+  //temp: 임시 반응형
+  @media screen and (max-width: 30rem) {
+    zoom: 0.9;
+  }
+  @media screen and (max-width: 24rem) {
+    zoom: 0.8;
+  }
+  @media screen and (max-width: 20rem) {
+    zoom: 0.7;
+    & > a {
+      height: 14rem;
+    }
+  }
+}

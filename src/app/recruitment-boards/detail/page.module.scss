@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .page {
   height: 100vh;
   display: flex;
@@ -9,6 +11,13 @@
   width: 60%;
   margin: 0 auto;
   margin-top: 12vh;
+
+  @include mobile-header {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 3.875rem 0 3rem;
+    padding: 0 1rem;
+  }
 }
 
 .buttonBlock {

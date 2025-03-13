@@ -9,6 +9,7 @@ import BasicBubble from '../../../../basicBubble/BasicBubble';
 import CloseButton from './CloseButton';
 import styles from './loginBubble.module.scss';
 import { usePathname } from 'next/navigation';
+import { useMediaQueryMobileHeader } from '@/app/lib/hooks/useMediaQueryMobileHeader';
 
 export interface Props {
   className: string;
@@ -39,6 +40,8 @@ const logins = [
 ];
 
 export default function LoginBubble({ className, onClose }: Props) {
+  const isMobileHeader = useMediaQueryMobileHeader();
+
   const pathname = usePathname();
   const loginButtons = logins.map((login) => (
     <a
@@ -52,7 +55,7 @@ export default function LoginBubble({ className, onClose }: Props) {
 
   return (
     <BasicBubble
-      direction="right-start"
+      direction={isMobileHeader ? 'top-end' : 'right-start'}
       className={clsx(className, styles.loginBubble)}
     >
       <CloseButton onClick={onClose} />

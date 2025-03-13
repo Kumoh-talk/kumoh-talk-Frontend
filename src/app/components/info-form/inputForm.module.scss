@@ -1,0 +1,34 @@
+@import 'mixin';
+
+.container {
+  max-width: 40.5rem;
+  width: 40.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 10rem auto;
+  .wrapper {
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    .gradeWrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+
+  img.headerImg {
+    width: 40.5rem;
+    height: auto;
+  }
+  .submit {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  h2 {
+    @include largeTitleEmphasized(black-85);
+  }
+}

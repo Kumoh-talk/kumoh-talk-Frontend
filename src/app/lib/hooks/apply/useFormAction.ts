@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { FormState } from '@/app/lib/types/apply/formState';
 import { FieldValues, useForm, UseFormProps } from 'react-hook-form';
 
@@ -9,13 +9,22 @@ type UseFormActionProps<
   TContext = any
 > = UseFormProps<TFieldValues, TContext> & {
   formState: FormState | null;
+  onSuccess?: () => void;
 };
 
 export function useFormAction<
   TFieldValues extends FieldValues = FieldValues,
   TContext = any
->({ formState, ...props }: UseFormActionProps<TFieldValues, TContext>) {
+>({
+  formState,
+  onSuccess: onSuccessFn,
+  ...props
+}: UseFormActionProps<TFieldValues, TContext>) {
   const form = useForm({ ...props });
+
+  const onSuccess = useCallback(() => {
+    onSuccessFn?.();
+  }, []);
 
   useEffect(() => {
     if (!formState || !hasState(formState)) return;
@@ -33,6 +42,7 @@ export function useFormAction<
         });
         break;
       case 'SUCCESS':
+        onSuccess();
         form.reset();
         break;
     }

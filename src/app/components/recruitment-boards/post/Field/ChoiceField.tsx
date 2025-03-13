@@ -1,8 +1,8 @@
 import { Control } from 'react-hook-form';
-import FormField from '../Form/FormField';
-import FormLabel from '../Form/FormLabel';
-import FormItem from '../Form/FormItem';
-import FormMessage from '../Form/FormMessage';
+import FormField from '../../../apply/Form/FormField';
+import FormLabel from '../../../apply/Form/FormLabel';
+import FormItem from '../../../apply/Form/FormItem';
+import FormMessage from '../../../apply/Form/FormMessage';
 import Choice from '../Choice/Choice';
 
 type Props = {
@@ -30,7 +30,7 @@ export default function ChoiceField({
             <FormLabel>
               {label}{' '}
               {required && (
-                <span aria-label="required" style={{ color: '#ff7f00' }}>
+                <span aria-label='required' style={{ color: '#ff7f00' }}>
                   *
                 </span>
               )}
@@ -45,7 +45,6 @@ export default function ChoiceField({
                       number: value.number,
                     },
                   ]);
-                  console.log(field.value);
                 }}
               >
                 {value.answer}

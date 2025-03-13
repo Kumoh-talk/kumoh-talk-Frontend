@@ -5,12 +5,12 @@ export const parseJwt = (token: string) => {
     atob(base64)
       .split('')
       .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-      .join(''),
+      .join('')
   );
 
   return JSON.parse(jsonPayload) as {
     USER_ID: number;
-    USER_ROLE: 'ROLE_GUEST' | 'ROLE_USER' | 'ROLE_ADMIN';
+    USER_ROLE: 'ROLE_GUEST' | 'ROLE_USER' | 'ROLE_ACTIVE_USER' | 'ROLE_ADMIN';
     iat: number;
     exp: number;
   };

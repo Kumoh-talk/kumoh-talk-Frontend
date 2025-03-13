@@ -1,74 +1,36 @@
-import { Control } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
+import Checkbox from '../Checkbox/Checkbox';
 import FormField from '../Form/FormField';
-import FormLabel from '../Form/FormLabel';
 import FormItem from '../Form/FormItem';
 import FormMessage from '../Form/FormMessage';
-import Checkbox from '../Checkbox/Checkbox';
 
-type Props = {
-  control: Control;
+interface CheckboxFieldProps {
+  control: Control<FieldValues, any>;
   name: string;
-  values: { answerId: number; number: number; answer: string }[];
   label: string;
-  required?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+}
 
-export default function CheckboxField({
-  control,
-  name,
-  values,
-  label,
-  required = false,
-}: Props) {
+const CheckboxField = ({ control, name, label }: CheckboxFieldProps) => {
   return (
     <FormField
       control={control}
       name={name}
-      render={({ field }) => {
-        // field.value가 배열이 아닐 수 있으므로 초기값 처리
-        const selectedValues = Array.isArray(field.value) ? field.value : [];
-        return (
-          <FormItem>
-            <FormLabel>
-              {label}{' '}
-              {required && (
-                <span aria-label="required" style={{ color: '#ff7f00' }}>
-                  *
-                </span>
-              )}
-            </FormLabel>
-            {values.map((value) => (
-              <Checkbox
-                key={value.answerId}
-                // 현재 선택된 값에 포함되어 있는지 여부로 checked 설정
-                checked={selectedValues.some(
-                  (selected) => selected.number === value.number
-                )}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    // 체크가 되면 기존 배열에 추가
-                    field.onChange([
-                      ...selectedValues,
-                      { number: value.number },
-                    ]);
-                  } else {
-                    // 체크 해제하면 배열에서 제거
-                    field.onChange(
-                      selectedValues.filter(
-                        ({ number }) => number !== value.number
-                      )
-                    );
-                  }
-                  console.log(field.value);
-                }}
-              >
-                {value.answer}
+      render={({ field }) => (
+        <FormItem>
+          <Controller
+            control={control}
+            name={name}
+            render={({ field }) => (
+              <Checkbox {...field} checked={field.value}>
+                {label}
               </Checkbox>
-            ))}
-            <FormMessage />
-          </FormItem>
-        );
-      }}
+            )}
+          />
+          <FormMessage />
+        </FormItem>
+      )}
     />
   );
-}
+};
+
+export default CheckboxField;

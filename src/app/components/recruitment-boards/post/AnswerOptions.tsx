@@ -22,6 +22,7 @@ export default function AnswerOptions({ question }: Props) {
   };
 
   const onkeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (e.key === 'Enter') {
       addAnswer();
     }

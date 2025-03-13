@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import styles from './imageEdit.module.scss';
 import PenSvg from '@/app/assets/svg/PenSvg';
 import ImageEditMenu from './ImageEditMenu';
+import Image from 'next/image';
 
 export default function ImageEdit({
   profileImageUrl,
@@ -33,10 +34,10 @@ export default function ImageEdit({
 
   return (
     <div className={styles.imageContainer}>
-      <img
+      <Image
         className={styles.image}
         src={profileImageUrl || '/images/defaultProfileImage.svg'}
-        alt="프로필 사진"
+        alt='프로필 사진'
         width={100}
         height={100}
       />

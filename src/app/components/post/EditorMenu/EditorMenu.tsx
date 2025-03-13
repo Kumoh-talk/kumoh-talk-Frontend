@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
 import EditorImageButton from '../EditorMenuButton/EditorImageButton';
 import EditorLinkButton from '../EditorMenuButton/EditorLinkButton';
@@ -44,11 +45,11 @@ const EditorMenu = ({
       <EditorFileButton editor={editor} />
 
       <div className={styles.editorMenuDivider} />
-      {buttonGroups.map((group) => (
-        <>
+      {buttonGroups.map((group, groupIdx) => (
+        <Fragment key={groupIdx}>
           {group.map((button, idx) => (
             <EditorMenuButton
-              key={idx}
+              key={`${groupIdx}-${idx}`}
               icon={button.icon}
               command={button.command}
               isActive={button.isActive}
@@ -56,7 +57,7 @@ const EditorMenu = ({
             />
           ))}
           <div className={styles.editorMenuDivider} />
-        </>
+        </Fragment>
       ))}
       <div className={styles.editorModeSelect}>
         <Select options={EditorMode} onChange={onModeChange} />

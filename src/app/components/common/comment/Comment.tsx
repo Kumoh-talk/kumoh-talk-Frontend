@@ -12,6 +12,7 @@ import Button from '../button/Button';
 
 export interface Props {
   userName?: string;
+  userId: number;
   boardId: number;
   currentComment: CommentInfoResponseList;
   parentComment?: CommentInfoResponseList | null;
@@ -19,12 +20,15 @@ export interface Props {
 
 export default function Comment({
   userName,
+  userId,
   boardId,
   currentComment,
   parentComment = null,
 }: Props) {
   const {
     commentId,
+    userId: commentUserId,
+    userProfileImageUrl,
     userNickname: name,
     content: comment,
     createdAt: date,
@@ -58,7 +62,7 @@ export default function Comment({
       <div className={styles.commentWrapper}>
         {parentComment && <div className={styles.leftPadding} />}
         <div className={styles.commentBlock}>
-          <ProfileImage />
+          <ProfileImage profileImageUrl={userProfileImageUrl} />
           <div className={styles.commentMain}>
             <div className={styles.commentTop}>
               <div className={styles.commentName}>{name}</div>
@@ -75,6 +79,7 @@ export default function Comment({
                     value={content}
                     onChange={onChange}
                     maxLength={500}
+                    disabled={!userId}
                   />
                   <div className={styles.editButtonWrapper}>
                     <Button
@@ -84,7 +89,7 @@ export default function Comment({
                     >
                       취소
                     </Button>
-                    <Button onClick={onSubmit} disabled={isPending}>
+                    <Button onClick={onSubmit} disabled={isPending || !userId}>
                       {isPending ? '수정중...' : '수정'}
                     </Button>
                   </div>
@@ -122,6 +127,7 @@ export default function Comment({
           <div className={styles.moreButton}>
             {!deletedAt ? (
               <MoreButton
+                userId={commentUserId}
                 userName={userName}
                 commentId={commentId}
                 commentUserName={name}
@@ -134,6 +140,7 @@ export default function Comment({
       <div>
         {isReply && (
           <Reply
+            userId={userId}
             boardId={boardId}
             parentId={commentId}
             setIsReply={setIsReply}
@@ -144,6 +151,7 @@ export default function Comment({
       {replyComments.map((replyComment) => (
         <Comment
           userName={userName}
+          userId={userId}
           boardId={boardId}
           currentComment={replyComment}
           key={replyComment.commentId}

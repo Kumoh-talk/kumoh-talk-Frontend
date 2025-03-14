@@ -18,7 +18,7 @@ export interface Props {
 
 export default function ApplyButton({ title, detail, tag, userRole }: Props) {
   const params = useSearchParams();
-  if (userRole !== 'ROLE_ACTIVE_USER') {
+  if (userRole === 'ROLE_GUEST') {
     return '로그인 후 신청 가능합니다.';
   }
   const boardId = params.get('id');

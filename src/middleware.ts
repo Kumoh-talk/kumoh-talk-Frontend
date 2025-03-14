@@ -158,7 +158,7 @@ const checkNeedSubmitAdditionalInfo = (
   const { nextUrl } = request;
 
   const isNeededAdditionalInfo = [
-    'recruitment-boards/post',
+    '/recruitment-boards/post',
     '/recruitment-boards/apply', // 멘토링/프로젝트/스터디 신청
     '/apply',
   ].includes(nextUrl.pathname);
@@ -180,7 +180,7 @@ const checkNeedSubmitAdditionalInfo = (
       redirect: nextUrl.pathname + (nextUrl.search ? `?${nextUrl.search}` : ''),
     });
 
-    const url = '/info-form?' + redirect.toString();
+    const url = new URL('/info-form?' + redirect.toString(), request.url);
 
     return NextResponse.redirect(url, {
       status: 302,

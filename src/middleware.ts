@@ -158,7 +158,7 @@ const checkNeedSubmitAdditionalInfo = (
   const { nextUrl } = request;
 
   const isNeededAdditionalInfo = [
-    'recruitment-boards/post',
+    '/recruitment-boards/post',
     '/recruitment-boards/apply', // 멘토링/프로젝트/스터디 신청
     '/apply',
   ].includes(nextUrl.pathname);

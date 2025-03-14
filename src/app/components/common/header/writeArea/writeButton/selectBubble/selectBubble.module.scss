@@ -1,0 +1,26 @@
+@import 'mixin';
+
+.loginBubble {
+  display: flex;
+  flex-direction: column;
+  section.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1rem;
+
+    .linkWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: fit-content;
+      gap: 1rem;
+      padding-bottom: 0.75rem;
+
+      .button {
+        min-width: max-content;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import 'mixin';
+
+button.login {
+  background: transparent;
+  border: none;
+  &:active {
+    outline: none;
+  }
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.bubble {
+  position: absolute;
+  right: 0%;
+  top: 120%;
+
+  @include mobile-header {
+    right: 0%;
+    top: 120%;
+  }
+}

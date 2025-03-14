@@ -81,7 +81,9 @@ export async function GET(
   }
 
   const res = await _fetch(
-    `${baseUrl}/${params.domain}/${params.func1}/${params.func2}?${searchParams.toString()}`,
+    `${baseUrl}/${params.domain}/${params.func1}/${
+      params.func2
+    }?${searchParams.toString()}`,
     {
       method: 'GET',
       headers,
@@ -120,7 +122,9 @@ export async function POST(
   }
 
   const res = await _fetch(
-    `${baseUrl}/${params.domain}/${params.func1}/${params.func2}?${searchParams.toString()}`,
+    `${baseUrl}/${params.domain}/${params.func1}/${
+      params.func2
+    }?${searchParams.toString()}`,
     {
       method: 'POST',
       headers,
@@ -140,7 +144,22 @@ export async function POST(
     );
   }
 
-  return NextResponse.json(await res.json(), { status: res.status });
+  const resBody = await res.json();
+  const response = NextResponse.json(resBody, { status: res.status });
+  if (resBody.data?.accessToken) {
+    response.cookies.set('accessToken', resBody.data.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+    response.cookies.set('refreshToken', resBody.data.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+  }
+
+  return response;
 }
 
 export async function PUT(
@@ -159,7 +178,9 @@ export async function PUT(
   }
 
   const res = await _fetch(
-    `${baseUrl}/${params.domain}/${params.func1}/${params.func2}?${searchParams.toString()}`,
+    `${baseUrl}/${params.domain}/${params.func1}/${
+      params.func2
+    }?${searchParams.toString()}`,
     {
       method: 'PUT',
       headers,
@@ -198,7 +219,9 @@ export async function PATCH(
   }
 
   const res = await _fetch(
-    `${baseUrl}/${params.domain}/${params.func1}/${params.func2}?${searchParams.toString()}`,
+    `${baseUrl}/${params.domain}/${params.func1}/${
+      params.func2
+    }?${searchParams.toString()}`,
     {
       method: 'PATCH',
       headers,
@@ -254,7 +277,9 @@ export async function DELETE(
   }
 
   const res = await _fetch(
-    `${baseUrl}/${params.domain}/${params.func1}/${params.func2}?${searchParams.toString()}`,
+    `${baseUrl}/${params.domain}/${params.func1}/${
+      params.func2
+    }?${searchParams.toString()}`,
     {
       method: 'DELETE',
       headers,

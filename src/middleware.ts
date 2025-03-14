@@ -180,7 +180,7 @@ const checkNeedSubmitAdditionalInfo = (
       redirect: nextUrl.pathname + (nextUrl.search ? `?${nextUrl.search}` : ''),
     });
 
-    const url = '/info-form?' + redirect.toString();
+    const url = new URL('/info-form?' + redirect.toString(), request.url);
 
     return NextResponse.redirect(url, {
       status: 302,

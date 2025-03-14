@@ -24,7 +24,7 @@ const convertCookieToHeaders = (cookies: string | null): HeadersInit =>
 const _fetch = async (
   url: string,
   options: RequestInit,
-  body?: string | any
+  body?: string | any,
 ) => {
   if (body && typeof body !== 'string') {
     options.body = JSON.stringify(body);
@@ -37,7 +37,7 @@ const refreshAndRetry = async (
   func: (request: NextRequest, params: any) => Promise<NextResponse>,
   params: any,
   accessToken?: string,
-  _refreshToken?: string
+  _refreshToken?: string,
 ) => {
   if (!accessToken || !_refreshToken) {
     return NextResponse.json({ status: 403 });
@@ -72,7 +72,7 @@ const refreshAndRetry = async (
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: UrlParams }
+  { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -92,7 +92,7 @@ export async function GET(
     {
       method: 'GET',
       headers,
-    }
+    },
   );
   const body = await res.json();
 
@@ -104,7 +104,7 @@ export async function GET(
       GET,
       { params },
       getCookie(cookies!, 'accessToken')!,
-      getCookie(cookies!, 'refreshToken')!
+      getCookie(cookies!, 'refreshToken')!,
     );
   }
 
@@ -113,7 +113,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: UrlParams }
+  { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -134,7 +134,7 @@ export async function POST(
       method: 'POST',
       headers,
     },
-    await request.json()
+    await request.json(),
   );
 
   // 토큰 만료
@@ -145,16 +145,31 @@ export async function POST(
       POST,
       { params },
       getCookie(cookies!, 'accessToken')!,
-      getCookie(cookies!, 'refreshToken')!
+      getCookie(cookies!, 'refreshToken')!,
     );
   }
 
-  return NextResponse.json(await res.json(), { status: res.status });
+  const resBody = await res.json();
+  const response = NextResponse.json(resBody, { status: res.status });
+  if (resBody.data?.accessToken) {
+    response.cookies.set('accessToken', resBody.data.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+    response.cookies.set('refreshToken', resBody.data.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+    });
+  }
+
+  return response;
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: UrlParams }
+  { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -175,7 +190,7 @@ export async function PUT(
       method: 'PUT',
       headers,
     },
-    await request.json()
+    await request.json(),
   );
 
   // 토큰 만료
@@ -186,7 +201,7 @@ export async function PUT(
       PUT,
       { params },
       getCookie(cookies!, 'accessToken')!,
-      getCookie(cookies!, 'refreshToken')!
+      getCookie(cookies!, 'refreshToken')!,
     );
   }
 
@@ -195,7 +210,7 @@ export async function PUT(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: UrlParams }
+  { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -216,7 +231,7 @@ export async function PATCH(
       method: 'PATCH',
       headers,
     },
-    await request.json()
+    await request.json(),
   );
 
   const resBody = await res.json();
@@ -230,7 +245,7 @@ export async function PATCH(
       PATCH,
       { params },
       getCookie(cookies!, 'accessToken')!,
-      getCookie(cookies!, 'refreshToken')!
+      getCookie(cookies!, 'refreshToken')!,
     );
   }
 
@@ -253,7 +268,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: UrlParams }
+  { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
   const headers = convertCookieToHeaders(cookies);
@@ -273,7 +288,7 @@ export async function DELETE(
     {
       method: 'DELETE',
       headers,
-    }
+    },
   );
 
   // 토큰 만료
@@ -284,7 +299,7 @@ export async function DELETE(
       DELETE,
       { params },
       getCookie(cookies!, 'accessToken')!,
-      getCookie(cookies!, 'refreshToken')!
+      getCookie(cookies!, 'refreshToken')!,
     );
   }
 

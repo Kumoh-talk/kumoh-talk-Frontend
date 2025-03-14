@@ -1,4 +1,8 @@
-import { formatPhoneNumber, formatNumber } from '@/app/lib/utils/formatters';
+import {
+  formatPhoneNumber,
+  formatNumber,
+  formatStudentId,
+} from '@/app/lib/utils/formatters';
 import Input from '../Input/Input';
 import FormField from '../Form/FormField';
 import FormItem from '../Form/FormItem';
@@ -14,7 +18,7 @@ type InputFieldProps = {
   control: Control<FieldValues, any>;
   name: string;
   label: string;
-  type?: 'text' | 'phone' | 'number' | 'date' | 'datetime-local';
+  type?: 'text' | 'phone' | 'number' | 'date' | 'datetime-local' | 'studentId';
   placeholder?: string;
   required?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
@@ -29,7 +33,7 @@ const InputField = ({
 }: InputFieldProps) => {
   const handleInput = (
     e: React.FormEvent<HTMLInputElement>,
-    field: ControllerRenderProps<FieldValues, string>
+    field: ControllerRenderProps<FieldValues, string>,
   ) => {
     const target = e.currentTarget;
 
@@ -45,6 +49,12 @@ const InputField = ({
       return;
     }
 
+    if (type === 'studentId') {
+      target.value = formatStudentId(target.value);
+      field.onChange(target.value);
+      return;
+    }
+
     field.onChange(target.value);
   };
 
@@ -57,7 +67,7 @@ const InputField = ({
           <FormLabel>
             {label} &nbsp;{' '}
             {required && (
-              <span aria-label='required' style={{ color: '#ff7f00' }}>
+              <span aria-label="required" style={{ color: '#ff7f00' }}>
                 *
               </span>
             )}

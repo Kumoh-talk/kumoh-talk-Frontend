@@ -20,7 +20,6 @@ export default async function ListContent({ id, applicant }: Props) {
   const applicationUserInfo: ApplicantUserInfoApi = await getApplicantUserInfo(
     userId
   );
-  console.log(applicationUserInfo.data);
   const {
     name: applicantUserName,
     profileImageUrl,

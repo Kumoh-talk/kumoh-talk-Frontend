@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
 const setCookieIntoResponse = (
   response: NextResponse,
   accessToken: string,
-  refreshToken: string,
+  refreshToken: string
 ): NextResponse => {
   response.cookies.set('accessToken', accessToken, {
     httpOnly: true, // xss 공격 방지
@@ -115,7 +115,7 @@ const isTokenExpired = (accessToken: string): boolean => {
 };
 
 const checkTokenExpired = async (
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse | null> => {
   const accessToken = request.cookies.get('accessToken');
   const _refreshToken = request.cookies.get('refreshToken');
@@ -132,12 +132,12 @@ const checkTokenExpired = async (
       request.cookies.set('refreshToken', data.refreshToken);
 
       const response = NextResponse.redirect(
-        new URL(request.nextUrl.pathname, request.url),
+        new URL(request.nextUrl.pathname, request.url)
       );
       return setCookieIntoResponse(
         response,
         data.accessToken,
-        data.refreshToken,
+        data.refreshToken
       );
     } catch (err) {
       console.error(`[checkTokenExpired] 토큰 재발급 실패 ${err}`);
@@ -153,13 +153,14 @@ const checkTokenExpired = async (
 };
 
 const checkNeedSubmitAdditionalInfo = (
-  request: NextRequest,
+  request: NextRequest
 ): NextResponse | null => {
   const { nextUrl } = request;
 
   const isNeededAdditionalInfo = [
-    '/recruitment-boards/apply', // 멘토링/프로젝트/스터디 신청
     '/recruitment-boards/post', // 멘토링/프로젝트/스터디 글 작성
+    '/recruitment-boards/apply', // 멘토링/프로젝트/스터디 신청
+    '/apply',
   ].includes(nextUrl.pathname);
 
   if (isNeededAdditionalInfo) {
@@ -179,7 +180,7 @@ const checkNeedSubmitAdditionalInfo = (
       redirect: nextUrl.pathname + (nextUrl.search ? `?${nextUrl.search}` : ''),
     });
 
-    const url = nextUrl.origin + '/info-form?' + redirect.toString();
+    const url = new URL('/info-form?' + redirect.toString(), request.url);
 
     return NextResponse.redirect(url, {
       status: 302,

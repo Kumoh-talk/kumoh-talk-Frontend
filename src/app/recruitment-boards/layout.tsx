@@ -8,7 +8,7 @@ export default function Layout({ children, applicationModal }: Props) {
     <>
       {children}
       {applicationModal}
-      <div id="applicationModal"></div>
+      <div id='applicationModal'></div>
     </>
   );
 }

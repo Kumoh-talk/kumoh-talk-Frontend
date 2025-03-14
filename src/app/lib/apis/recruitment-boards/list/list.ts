@@ -36,6 +36,7 @@ export const getRecruitmentBoardApplicantList = (
         'Content-Type': 'application/json',
         ...(cookie ? { Cookie: cookie ?? '' } : {}),
       },
+      next: { revalidate: 30 },
       credentials: 'include',
     }
   );

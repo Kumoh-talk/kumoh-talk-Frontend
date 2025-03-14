@@ -37,7 +37,8 @@ export default async function ArticleList({
   try {
     const userInfoResponse = await getUserInfo(cookies().toString());
     const userInfo = (await userInfoResponse.json()).data;
-    isCanPost = userInfo?.role === 'ROLE_ACTIVE_USER';
+    isCanPost =
+      userInfo?.role === 'ROLE_ACTIVE_USER' || userInfo?.role === 'ROLE_USER';
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -55,7 +56,7 @@ export default async function ArticleList({
       <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>
         <div className={styles.dummy}></div>
         <Pagination searchParams={searchParams} />
-        <Link className={styles.postButton} href="/recruitment-boards/post">
+        <Link className={styles.postButton} href='/recruitment-boards/post'>
           글쓰기
         </Link>
       </div>

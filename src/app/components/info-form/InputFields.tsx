@@ -46,13 +46,26 @@ export default function InputFields() {
             label="학과"
             options={departments}
           />
-          <InputField control={form.control} name="studentId" label="학번" />
+          <InputField
+            control={form.control}
+            type="studentId"
+            name="studentId"
+            label="학번"
+            placeholder="2500000000"
+          />
         </div>
-        <InputField control={form.control} name="email" label="이메일 주소" />
         <InputField
           control={form.control}
+          name="email"
+          label="이메일 주소"
+          placeholder="example@example.com"
+        />
+        <InputField
+          control={form.control}
+          type="phone"
           name="phoneNumber"
           label="전화번호"
+          placeholder="010-0000-0000"
         />
         <Button
           type="submit"

@@ -3,7 +3,7 @@ const formatPhoneNumber = (value: string) => {
     .replace(/[^0-9]/g, '')
     .replace(
       /(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/,
-      (_, p1, p2, p3) => `${p1}-${p2}-${p3}`
+      (_, p1, p2, p3) => `${p1}-${p2}-${p3}`,
     );
 };
 
@@ -14,4 +14,8 @@ const formatNumber = (value: string) => {
     .replace(/^$/g, '0');
 };
 
-export { formatPhoneNumber, formatNumber };
+const formatStudentId = (value: string) => {
+  return value.replace(/[^0-9]/g, '').slice(0, 12);
+};
+
+export { formatPhoneNumber, formatNumber, formatStudentId };

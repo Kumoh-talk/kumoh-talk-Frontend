@@ -11,8 +11,18 @@ export default function Footer() {
           alt="야밤의 금오톡 로고"
         />
         <div className={styles.terms}>
-          <Link href="/terms">이용약관</Link>
-          <Link href="/privacy">개인정보처리방침</Link>
+          <a
+            href="https://kyxxn.notion.site/1b89adb3262680c0bc80e781df5e97b8?pvs=4"
+            target="_blank"
+          >
+            이용약관
+          </a>
+          <a
+            href="https://kyxxn.notion.site/3b840683792f4726bbc756678a669fcf?pvs=4"
+            target="_blank"
+          >
+            개인정보처리방침
+          </a>
         </div>
       </div>
       <div className={styles.bottom}>

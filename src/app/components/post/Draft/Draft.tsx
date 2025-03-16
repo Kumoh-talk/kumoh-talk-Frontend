@@ -31,6 +31,13 @@ const Draft = ({ close }: DraftProps) => {
 
     try {
       const response = await postDraft(draft);
+      const { success } = response.data;
+
+      if (success === 'false') {
+        toast.error('작성 글 저장에 실패했습니다.');
+        return;
+      }
+
       close();
       toast.success('작성 중인 글이 저장되었습니다.');
     } catch (error) {
@@ -44,7 +51,7 @@ const Draft = ({ close }: DraftProps) => {
         <h3>임시저장</h3>
       </div>
       <div className={styles.draft}>
-        <DraftList />
+        <DraftList close={close} />
       </div>
       <div className={styles.footer}>
         <Button

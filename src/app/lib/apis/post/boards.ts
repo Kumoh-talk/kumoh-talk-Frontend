@@ -48,6 +48,16 @@ export const postDraft = ({
   );
 };
 
+export const getBoard = (boardId: number) => {
+  return _fetch(`${baseUrl}/boards/${boardId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
+
 export const getMyDrafts = () => {
   return _fetch(`${baseUrl}/boards/draft`, {
     method: 'GET',

@@ -34,6 +34,7 @@ export default function InputForm({ redirect }: { redirect?: string }) {
         const res = await submitMyAdditionalInfo(form.getValues());
         if (res.status === 200) {
           window.location.href = redirectUrl;
+          return;
         }
 
         const body = await res.json();

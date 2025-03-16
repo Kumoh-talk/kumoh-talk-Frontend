@@ -14,7 +14,8 @@
   align-items: center;
   gap: 0.5rem;
 
-  p {
+  p,
+  a {
     @include title1;
     cursor: pointer;
 
@@ -37,6 +38,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
 
   span {
     @include title2;
@@ -45,5 +47,13 @@
     &:hover {
       font-weight: bold;
     }
+  }
+
+  .category {
+    display: none;
+  }
+
+  &:hover .category {
+    display: flex;
   }
 }

@@ -56,3 +56,7 @@ export type RecruitmentByPageResponse = {
   pageSort: string;
   pageContents: RecruitmentArticle[];
 };
+
+export type RemoveRecruitmentResponse = {
+  success: boolean;
+};

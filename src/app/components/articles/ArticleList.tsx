@@ -59,11 +59,7 @@ export default async function ArticleList({
       </div>
       <ul className={styles.list}>{list}</ul>
       <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>
-        <div className={styles.dummy}></div>
         <Pagination searchParams={searchParams} />
-        <Link className={styles.postButton} href="/recruitment-boards/post">
-          글쓰기
-        </Link>
       </div>
     </div>
   );

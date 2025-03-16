@@ -10,7 +10,7 @@ export interface Props {
   boardType: RecruitmentTag;
   tag: RecruitmentTag;
   name: string;
-  applicantList: ApplyListApi;
+  pageContent: ApplyListApi;
 }
 
 export default async function ApplyListContainer({
@@ -19,7 +19,7 @@ export default async function ApplyListContainer({
   boardType,
   tag,
   name,
-  applicantList,
+  pageContent,
 }: Props) {
   return (
     <div className={styles.wrapper}>
@@ -35,7 +35,7 @@ export default async function ApplyListContainer({
         boardType={boardType}
         tag={tag}
         name={name}
-        applicantList={applicantList}
+        pageContent={pageContent}
       />
     </div>
   );

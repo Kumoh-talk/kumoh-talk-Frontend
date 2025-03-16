@@ -8,7 +8,7 @@ export interface ApplyList {
   pageNum: number;
   totalPage: number;
   pageSort: string;
-  applicantList: Applicant[];
+  pageContent: Applicant[];
 }
 
 export interface Applicant {

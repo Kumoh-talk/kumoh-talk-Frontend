@@ -34,7 +34,7 @@ export default function RecruitmentApplyForm({
   questions,
 }: Props) {
   const defaultValues = Object.fromEntries(
-    questions.map(({ questionId, type }) => [
+    questions?.map(({ questionId, type }) => [
       questionId,
       type === 'DESCRIPTION' ? '' : [],
     ])
@@ -49,9 +49,13 @@ export default function RecruitmentApplyForm({
 
     if (response.success === 'true') {
       router.back();
+    } else {
+      alert('이미 신청 이력이 있거나 신청 기간이 아닙니다.');
     }
   };
-  const onError = (error: any) => console.error(error);
+  const onError = (error: any) => {
+    console.log(error);
+  };
 
   return (
     <FormProvider {...formState}>

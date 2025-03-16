@@ -17,9 +17,8 @@ const _fetch = async (
     }
 
     return await response.json();
-  } catch (error) {
-    console.error(error);
-    return error;
+  } catch (error: any) {
+    return new Error(error);
   }
 };
 

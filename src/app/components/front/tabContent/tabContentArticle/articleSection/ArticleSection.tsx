@@ -22,7 +22,7 @@ export default async function ArticleSection({
   const listData: RecruitmentArticle[] = [];
   try {
     const res = await getRecruitmentArticlesByPage(category);
-    listData.push(...(res?.boardInfo ?? []));
+    listData.push(...(res?.pageContents ?? []));
   } catch (error) {
     console.error('Error fetching data:', error);
   }

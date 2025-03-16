@@ -4,7 +4,11 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import BasicBubble from '../../../basicBubble/BasicBubble';
 import styles from './welcomeBubble.module.scss';
-import { checkNickname, completeRegistration } from '@/app/lib/apis/user';
+import {
+  checkNickname,
+  completeRegistration,
+  logout,
+} from '@/app/lib/apis/user';
 
 export default function WelcomeBubble({ className }: { className?: string }) {
   const [nickname, setNickname] = useState('');
@@ -42,6 +46,18 @@ export default function WelcomeBubble({ className }: { className?: string }) {
       return;
     }
     window.location.reload();
+  };
+
+  const onClickLogout = async () => {
+    try {
+      const res = await (await logout()).json();
+      if (res.success == 'true') {
+        console.log('로그아웃 성공');
+      }
+      window.location.href = '/?logout=true';
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -88,6 +104,9 @@ export default function WelcomeBubble({ className }: { className?: string }) {
             onClick={submit}
           >
             입력완료
+          </button>
+          <button className={styles.logoutButton} onClick={onClickLogout}>
+            로그아웃
           </button>
         </section>
       </BasicBubble>

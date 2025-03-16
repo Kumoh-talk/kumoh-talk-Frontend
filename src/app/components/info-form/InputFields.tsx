@@ -65,7 +65,7 @@ export default function InputFields() {
           type="phone"
           name="phoneNumber"
           label="전화번호"
-          placeholder="010-0000-0000"
+          placeholder="-없이 숫자만 입력"
         />
         <Button
           type="submit"

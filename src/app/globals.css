@@ -87,6 +87,12 @@ input {
   }
 }
 
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
 .ProseMirror:focus-visible {
   outline: none;
 }

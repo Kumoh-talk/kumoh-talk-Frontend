@@ -28,4 +28,18 @@ section.card {
   justify-content: space-between;
   width: fit-content;
   gap: 1rem;
+
+  &.noArticle {
+    width: 100%;
+  }
+
+  .noArticle {
+    @include title3(black-50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 16rem;
+    text-align: center;
+  }
 }

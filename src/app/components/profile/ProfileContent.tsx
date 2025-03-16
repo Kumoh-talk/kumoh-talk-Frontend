@@ -16,6 +16,7 @@ import GithubSvg from '@/app/assets/svg/social/GithubSvg';
 import KakaoSvg from '@/app/assets/svg/social/KakaoSvg';
 import GoogleSvg from '@/app/assets/svg/social/GoogleSvg';
 import NaverSvg from '@/app/assets/svg/social/NaverSvg';
+import { ChevronRight, UserCircle2Icon } from 'lucide-react';
 
 const providerObj = {
   GITHUB: <GithubSvg />,
@@ -83,7 +84,22 @@ export default function ProfileContent() {
             email={additionalInfo.email}
           />
         ) : (
-          <div>정보를 등록해주세요.</div>
+          <div className={styles.requiredInfoWrapper}>
+            <div className={styles.requiredHeader}>
+              <UserCircle2Icon
+                style={{
+                  width: '4rem',
+                  height: '4rem',
+                  color: 'var(--color-gray-900)',
+                }}
+              />
+              정보를 등록해주세요.
+            </div>
+            <div className={styles.requiredInfo}>
+              추가 정보 입력{' '}
+              <ChevronRight style={{ width: '1rem', height: '1rem' }} />
+            </div>
+          </div>
         )}
         <SignOutContainer provider={myProfile.provider} />
       </div>

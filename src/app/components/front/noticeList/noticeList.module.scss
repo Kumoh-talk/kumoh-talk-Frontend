@@ -43,6 +43,10 @@
         margin-top: 0;
       }
     }
+
+    .noArticle {
+      @include title3(black-50);
+    }
   }
 
   //temp: 임시 반응형

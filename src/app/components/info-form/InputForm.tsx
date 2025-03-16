@@ -36,8 +36,12 @@ export default function InputForm({ redirect }: { redirect?: string }) {
               alert('토큰이 만료되었습니다. 재로그인해주세요.');
               router.push('/');
               return;
+            } else if (body.code == 'USER_0003') {
+              alert('이미 추가 정보를 입력하여 등록할 수 없습니다.');
             } else {
-              alert(`추가 정보를 제출하는 중 오류가 발생했습니다. (오류 코드: ${body.code})`);
+              alert(
+                `추가 정보를 제출하는 중 오류가 발생했습니다. (오류 코드: ${body.code})`,
+              );
               return;
             }
           }

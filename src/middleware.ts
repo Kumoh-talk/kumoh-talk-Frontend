@@ -32,8 +32,9 @@ export async function middleware(request: NextRequest) {
   }
 
   // 추가 정보 입력 필요 체크
-  const resCheckNeedSubmitAdditionalInfo =
-    checkNeedSubmitAdditionalInfo(request);
+  const resCheckNeedSubmitAdditionalInfo = await checkNeedSubmitAdditionalInfo(
+    request,
+  );
   if (resCheckNeedSubmitAdditionalInfo) {
     return resCheckNeedSubmitAdditionalInfo;
   }
@@ -152,9 +153,9 @@ const checkTokenExpired = async (
   return null;
 };
 
-const checkNeedSubmitAdditionalInfo = (
+const checkNeedSubmitAdditionalInfo = async (
   request: NextRequest,
-): NextResponse | null => {
+): Promise<NextResponse | null> => {
   const { nextUrl } = request;
 
   const isNeededAdditionalInfo = [
@@ -176,6 +177,23 @@ const checkNeedSubmitAdditionalInfo = (
     const { USER_ROLE: userRole } = parseJwt(accessToken);
     if (userRole === 'ROLE_ACTIVE_USER') {
       return null;
+    }
+    if (userRole === 'ROLE_ADMIN') {
+      // 어드민이면 수동으로 정보 체크
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            cookie: cookies,
+          },
+        },
+      );
+      const data = await res.json();
+      if (data.success == 'true') {
+        return null;
+      }
     }
     const redirect = new URLSearchParams({
       redirect: nextUrl.pathname + nextUrl.search,

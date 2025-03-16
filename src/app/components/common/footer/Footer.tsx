@@ -11,8 +11,18 @@ export default function Footer() {
           alt="야밤의 금오톡 로고"
         />
         <div className={styles.terms}>
-          <Link href="/terms">이용약관</Link>
-          <Link href="/privacy">개인정보처리방침</Link>
+          <a
+            href="https://kyxxn.notion.site/1b89adb3262680c0bc80e781df5e97b8?pvs=4"
+            target="_blank"
+          >
+            이용약관
+          </a>
+          <a
+            href="https://kyxxn.notion.site/3b840683792f4726bbc756678a669fcf?pvs=4"
+            target="_blank"
+          >
+            개인정보처리방침
+          </a>
         </div>
       </div>
       <div className={styles.bottom}>
@@ -31,7 +41,7 @@ export default function Footer() {
           <span>Contact us: kumoh.talk@google.com</span>
         </div>
         <div className={styles.right}>
-          <span>Copyright ⓒ 2024 야밤의금오톡 - All rights reserved</span>
+          <span>Copyright ⓒ 2024-2025 야밤의금오톡 - All rights reserved</span>
         </div>
       </div>
     </footer>

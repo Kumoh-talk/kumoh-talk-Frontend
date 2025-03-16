@@ -10,6 +10,11 @@ import {
 } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 import styles from './articleSection.module.scss';
 
+const iga = (str: string) => {
+  const last = str.charCodeAt(str.length - 1) - 44032;
+  return last % 28 !== 0 ? '이' : '가';
+};
+
 export default async function ArticleSection({
   title,
   category,
@@ -26,9 +31,17 @@ export default async function ArticleSection({
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-  const list = listData.map((article) => (
-    <ArticleCard key={article.boardId} size={size} {...article} />
-  ));
+  const list =
+    listData.length > 0 ? (
+      listData.map((article) => (
+        <ArticleCard key={article.boardId} size={size} {...article} />
+      ))
+    ) : (
+      <div className={styles.noArticle}>
+        진행중인 {title}
+        {iga(title)} 없습니다.
+      </div>
+    );
   return (
     <section className={styles.card}>
       <header>
@@ -39,7 +52,13 @@ export default async function ArticleSection({
         </Link>
       </header>
       <ScrollableList size={size}>
-        <ul className={clsx(styles.cardList, styles[size])}>{list}</ul>
+        <ul
+          className={clsx(styles.cardList, styles[size], {
+            [styles.noArticle]: listData.length === 0,
+          })}
+        >
+          {list}
+        </ul>
       </ScrollableList>
     </section>
   );

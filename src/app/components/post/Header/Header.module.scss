@@ -3,6 +3,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--color-gray-800);
 }
@@ -24,7 +25,7 @@
   justify-content: center;
   align-items: flex-end;
   background: rgba(255, 255, 255, 0.75);
-  z-index: 1;
+  z-index: 5;
   box-shadow: 0 -1px 5px 0px rgba(0, 0, 0, 0.03),
     0 -5px 13px 0px rgba(0, 0, 0, 0.04);
 

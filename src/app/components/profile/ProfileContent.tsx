@@ -74,20 +74,18 @@ export default function ProfileContent() {
           <span className={styles.title}>학사 정보</span>
         </div>
         {additionalInfo ? (
-          <>
-            <EducationInfo
-              studentStatus={additionalInfo.studentStatus}
-              grade={additionalInfo.grade}
-              studentId={additionalInfo.studentId}
-              department={additionalInfo.department}
-              phoneNumber={additionalInfo.phoneNumber}
-              email={additionalInfo.email}
-            />
-            <SignOutContainer provider={myProfile.provider} />
-          </>
+          <EducationInfo
+            studentStatus={additionalInfo.studentStatus}
+            grade={additionalInfo.grade}
+            studentId={additionalInfo.studentId}
+            department={additionalInfo.department}
+            phoneNumber={additionalInfo.phoneNumber}
+            email={additionalInfo.email}
+          />
         ) : (
           <div>정보를 등록해주세요.</div>
         )}
+        <SignOutContainer provider={myProfile.provider} />
       </div>
     </>
   );

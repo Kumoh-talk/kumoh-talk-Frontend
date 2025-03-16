@@ -16,6 +16,7 @@
 .welcomeBubble {
   display: flex;
   flex-direction: column;
+  zoom: 0.8;
 
   section.content {
     display: flex;
@@ -37,27 +38,40 @@
     }
     .inputWrapper {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
       justify-self: stretch;
-      gap: 3.75rem;
+      gap: 2rem;
       margin-bottom: 1rem;
 
-      input[type='text'] {
-        border-radius: 0.625rem;
-        @include textColor(gray-900);
-        font-size: 1.625rem;
-        line-height: 2rem;
-        letter-spacing: -3.5%;
-        font-weight: 400;
-        padding: 1rem;
-        border: none;
-        width: 0;
-        flex: 1;
-        box-shadow: 0px 0px 0px 0.5px #00000008, 0px 0.5px 2.5px 0px #00000026;
+      .fieldWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
 
-        &.error {
-          box-shadow: 0px 0px 0px 0.5px #ff0000aa, 0px 0.5px 2.5px 0px #ff000026;
+        .label {
+          @include largeTitle(gray-900);
+          width: 5rem;
+        }
+
+        input[type='text'] {
+          border-radius: 0.625rem;
+          @include textColor(gray-900);
+          font-size: 1.625rem;
+          line-height: 2rem;
+          letter-spacing: -3.5%;
+          font-weight: 400;
+          padding: 1rem;
+          border: none;
+          width: 0;
+          flex: 1;
+          box-shadow: 0px 0px 0px 0.5px #00000008, 0px 0.5px 2.5px 0px #00000026;
+
+          &.error {
+            box-shadow: 0px 0px 0px 0.5px #ff0000aa,
+              0px 0.5px 2.5px 0px #ff000026;
+          }
         }
       }
     }

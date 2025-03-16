@@ -22,7 +22,7 @@ export default async function Page({
   };
 }) {
   const { id, title, boardType, tag, name, page, sort } = searchParams;
-  const applicantList: ApplyListApi = await getRecruitmentBoardApplicantList(
+  const pageContent: ApplyListApi = await getRecruitmentBoardApplicantList(
     id,
     Number(page),
     sort,
@@ -39,10 +39,10 @@ export default async function Page({
           boardType={boardType}
           tag={tag}
           name={name}
-          applicantList={applicantList}
+          pageContent={pageContent}
         />
         <ListPagination
-          totalPage={applicantList.data.totalPage}
+          totalPage={pageContent.data.totalPage}
           searchParams={searchParams}
         />
       </main>

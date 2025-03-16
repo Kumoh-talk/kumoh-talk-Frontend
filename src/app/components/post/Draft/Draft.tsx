@@ -1,5 +1,6 @@
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { useCurrentEditor } from '@tiptap/react';
+import { toast } from 'react-toastify';
 import { postDraft } from '@/app/lib/apis/post/boards';
 import DraftList from './DraftList';
 import Button from '../../common/button/Button';
@@ -28,7 +29,13 @@ const Draft = ({ close }: DraftProps) => {
       draft.boardHeadImageUrl = boardHeadImageUrl;
     }
 
-    const response = await postDraft(draft);
+    try {
+      const response = await postDraft(draft);
+      close();
+      toast.success('작성 중인 글이 저장되었습니다.');
+    } catch (error) {
+      toast.error('작성 글 저장에 실패했습니다.');
+    }
   };
 
   return (

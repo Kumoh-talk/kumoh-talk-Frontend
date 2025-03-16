@@ -1,5 +1,7 @@
 'use client';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PostProvider from '../lib/contexts/post/PostProvider';
 import PostEditorProvider from '../lib/contexts/post/PostEditorProvider';
 import { usePreventUnload } from '../lib/hooks/common/usePreventUnload';
@@ -37,6 +39,13 @@ export default function Post() {
           slotAfter={<SlotAfter />}
         />
       </div>
+      <ToastContainer
+        position='bottom-center'
+        autoClose={3000}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
     </PostProvider>
   );
 }

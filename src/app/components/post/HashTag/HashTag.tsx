@@ -1,9 +1,10 @@
 import { useState, KeyboardEvent } from 'react';
+import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import XSvg from '@/app/assets/svg/Editor/XSvg';
 import styles from './HashTag.module.scss';
 
 const HashTag = () => {
-  const [tagList, setTagList] = useState<string[]>([]);
+  const { tagList, setTagList } = usePostContent();
   const [inputValue, setInputValue] = useState('');
 
   const MAX_TAG = 5;

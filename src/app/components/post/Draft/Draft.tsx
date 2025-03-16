@@ -1,5 +1,9 @@
+import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
+import { useCurrentEditor } from '@tiptap/react';
+import { postDraft } from '@/app/lib/apis/post/boards';
 import DraftList from './DraftList';
 import Button from '../../common/button/Button';
+import type { PostBoardsProps } from '@/app/lib/apis/post/boards';
 import styles from './Draft.module.scss';
 
 interface DraftProps {
@@ -7,6 +11,26 @@ interface DraftProps {
 }
 
 const Draft = ({ close }: DraftProps) => {
+  const { title, tagList, boardHeadImageUrl } = usePostContent();
+  const { editor } = useCurrentEditor();
+
+  const submitDraft = async () => {
+    if (!editor) return;
+
+    const draft: PostBoardsProps = {
+      title,
+      contents: editor?.getHTML(),
+      categoryName: tagList,
+      boardType: 'SEMINAR',
+    };
+
+    if (boardHeadImageUrl) {
+      draft.boardHeadImageUrl = boardHeadImageUrl;
+    }
+
+    const response = await postDraft(draft);
+  };
+
   return (
     <>
       <div className={styles.head}>
@@ -25,11 +49,12 @@ const Draft = ({ close }: DraftProps) => {
         >
           취소
         </Button>
-        <Button size='medium' onClick={() => {}}>
+        <Button size='medium' onClick={submitDraft}>
           임시 저장
         </Button>
       </div>
     </>
   );
 };
+
 export default Draft;

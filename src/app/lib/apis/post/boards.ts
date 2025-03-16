@@ -14,6 +14,40 @@ const _fetch = async (
   return response.json();
 };
 
+export interface PostBoardsProps {
+  title: string;
+  contents: string;
+  categoryName: string[];
+  boardType: string;
+  boardHeadImageUrl?: string;
+}
+
+export const postDraft = ({
+  title,
+  contents,
+  categoryName,
+  boardType,
+  boardHeadImageUrl,
+}: PostBoardsProps) => {
+  return _fetch(
+    `${baseUrl}/boards`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    {
+      title,
+      contents,
+      categoryName,
+      boardType,
+      boardHeadImageUrl,
+    }
+  );
+};
+
 export const getMyDrafts = () => {
   return _fetch(`${baseUrl}/boards/draft`, {
     method: 'GET',

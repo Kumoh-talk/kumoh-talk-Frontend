@@ -52,7 +52,7 @@ const Header = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.layer}>
-            <Draft close={handleClose} />
+            {activeModal === 'draft' && <Draft close={handleClose} />}
           </div>
         </div>
       </div>

@@ -54,5 +54,5 @@ export type RecruitmentByPageResponse = {
   pageNum: number;
   totalPage: number;
   pageSort: string;
-  boardInfo: RecruitmentArticle[];
+  pageContents: RecruitmentArticle[];
 };

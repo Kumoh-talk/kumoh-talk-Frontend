@@ -28,7 +28,7 @@ export default async function ArticleList({
     const page = parseInt(searchParams.page ?? '1');
 
     const res = await getRecruitmentArticlesByPage(category, page);
-    listData.push(...(res?.boardInfo ?? []));
+    listData.push(...(res?.pageContents ?? []));
   } catch (error) {
     console.error('Error fetching data:', error);
   }

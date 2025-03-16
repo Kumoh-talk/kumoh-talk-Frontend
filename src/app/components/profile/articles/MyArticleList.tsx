@@ -74,19 +74,25 @@ export default async function MyArticleList({
   }
 
   const list =
-    type === 'RECRUITMENT'
-      ? listData.map((article) => (
+    listData.length > 0 ? (
+      type === 'RECRUITMENT' ? (
+        listData.map((article) => (
           <MyRecruitmentArticleItem
             key={article.boardId}
             {...(article as RecruitmentArticle)}
           />
         ))
-      : listData.map((article) => (
+      ) : (
+        listData.map((article) => (
           <MyBoardArticleItem
             key={article.boardId}
             {...(article as BoardArticle)}
           />
-        ));
+        ))
+      )
+    ) : (
+      <div className={styles.noArticle}>작성한 게시글이 없습니다</div>
+    );
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>

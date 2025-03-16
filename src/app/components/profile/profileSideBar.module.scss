@@ -15,7 +15,7 @@
   gap: 0.5rem;
 
   p {
-    @include title2;
+    @include title1;
     cursor: pointer;
 
     &:hover {
@@ -39,7 +39,7 @@
   gap: 0.5rem;
 
   span {
-    @include title3;
+    @include title2;
     cursor: pointer;
 
     &:hover {

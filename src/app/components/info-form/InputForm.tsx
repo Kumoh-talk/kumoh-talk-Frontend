@@ -27,27 +27,31 @@ export default function InputForm({ redirect }: { redirect?: string }) {
       email: '',
     },
     onSuccess: async () => {
+      console.log('onSuccess');
       try {
+        const redirectUrl = (redirect?.startsWith('/') && redirect) || '/';
+
         const res = await submitMyAdditionalInfo(form.getValues());
-        if (res.status !== 200) {
-          const body = await res.json();
-          if (body) {
-            if (body.code == 'SECURITY_0004') {
-              alert('토큰이 만료되었습니다. 재로그인해주세요.');
-              router.push('/');
-              return;
-            } else if (body.code == 'USER_0003') {
-              alert('이미 추가 정보를 입력하여 등록할 수 없습니다.');
-            } else {
-              alert(
-                `추가 정보를 제출하는 중 오류가 발생했습니다. (오류 코드: ${body.code})`,
-              );
-              return;
-            }
-          }
+        if (res.status === 200) {
+          window.location.href = redirectUrl;
+        }
+
+        const body = await res.json();
+        if (!body) {
           throw new Error('알 수 없는 오류가 발생했습니다.');
         }
-        router.push((redirect?.startsWith('/') && redirect) || '/');
+
+        if (body.code == 'SECURITY_0004') {
+          alert('토큰이 만료되었습니다. 재로그인해주세요.');
+          window.location.href = '/';
+        } else if (body.code == 'USER_0003') {
+          alert('이미 추가 정보를 입력하여 등록할 수 없습니다.');
+          window.location.href = redirectUrl;
+        } else {
+          alert(
+            `추가 정보를 제출하는 중 오류가 발생했습니다. (오류 코드: ${body.code})`,
+          );
+        }
       } catch (e) {
         console.error(e);
         alert('추가 정보 입력에 실패했습니다.');

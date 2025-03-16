@@ -1,0 +1,72 @@
+@import 'mixin';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  max-width: 78rem;
+
+  .title {
+    @include largeTitleEmphasized();
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+
+    & > svg {
+      fill: var(--color-black-50);
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  ul.list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & > li:last-child {
+      border-bottom: 1px solid var(--color-gray-600);
+    }
+
+    .noArticle {
+      @include title3(black-85);
+      align-self: center;
+      padding: 3rem 0;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+
+    &.isGuest {
+      justify-content: center;
+      .dummy,
+      .postButton {
+        display: none;
+      }
+    }
+
+    .postButton {
+      @include title2(white);
+      background-color: var(--color-blue-300);
+      border-radius: 0.25rem;
+      padding: 0.375rem 1.5rem;
+      transition: filter 0.15s ease;
+      &:hover {
+        @include backEffect();
+      }
+    }
+  }
+}

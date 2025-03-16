@@ -43,6 +43,7 @@
   --color-text-red: #ff3b30;
   --color-text-black-85: var(--color-black-85);
   --color-text-black-50: var(--color-black-50);
+  --color-text-gray-900: var(--color-gray-900);
 
   /* background */
   --color-background-gray-500: var(--color-gray-500);

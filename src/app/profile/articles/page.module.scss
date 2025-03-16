@@ -1,0 +1,26 @@
+@import 'mixin';
+
+.page {
+  display: flex;
+  margin-top: 6rem;
+  margin-bottom: 12rem;
+}
+
+.provider {
+  scale: 0.7;
+}
+
+.sideBar {
+  flex: 1;
+  padding: 12rem 0 0 4rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  padding: 4rem 10rem;
+  position: relative;
+  left: -4rem;
+  gap: 6rem;
+}

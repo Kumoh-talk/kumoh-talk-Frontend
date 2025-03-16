@@ -43,9 +43,14 @@ export default async function ArticleList({
     console.error('Error fetching data:', error);
   }
 
-  const list = listData.map((article) => (
-    <ArticleItem key={article.boardId} {...article} />
-  ));
+  const list =
+    listData.length > 0 ? (
+      listData.map((article) => (
+        <ArticleItem key={article.boardId} {...article} />
+      ))
+    ) : (
+      <div className={styles.noArticle}>게시글이 없습니다</div>
+    );
   return (
     <div className={styles.wrapper}>
       <div className={styles.aside}>
@@ -56,7 +61,7 @@ export default async function ArticleList({
       <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>
         <div className={styles.dummy}></div>
         <Pagination searchParams={searchParams} />
-        <Link className={styles.postButton} href='/recruitment-boards/post'>
+        <Link className={styles.postButton} href="/recruitment-boards/post">
           글쓰기
         </Link>
       </div>

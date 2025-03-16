@@ -14,9 +14,14 @@ export default async function NoticeList() {
     console.error('Error fetching data:', error);
   }
 
-  const articleList = list
-    .map((item) => <NoticeItem key={item.boardId} {...item} />)
-    .slice(0, 7);
+  const articleList =
+    list.length > 0 ? (
+      list
+        .map((item) => <NoticeItem key={item.boardId} {...item} />)
+        .slice(0, 7)
+    ) : (
+      <div className={styles.noArticle}>공지사항이 없습니다.</div>
+    );
 
   return (
     <section className={styles.container}>

@@ -50,7 +50,7 @@ export default function ApplyBanner() {
         />
       </div>
       <div className={styles.bottom}>
-        <Link href={'apply/'}>
+        <Link href={'/apply'}>
           <button className={styles.apply}>신청하기</button>
         </Link>
         <div className={styles.introduce}>

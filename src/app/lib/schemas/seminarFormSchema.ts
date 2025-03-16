@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { departmentValues } from '@/app/lib/constants/apply/selectValues';
 
 const REGEX = {
-  studentId: /^\d{10}$/,
+  studentId: /^\d{8,10}$/,
   phoneNumber: /^010-\d{4}-\d{4}$/,
   preferredDate: /^\d{4}-\d{2}-\d{2}$/,
 };

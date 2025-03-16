@@ -30,7 +30,7 @@ export default function SelectBubble({ className, onClose }: Props) {
             className={styles.button}
             size="medium"
             onClick={() => {
-              router.push('/apply');
+              router.push('/post');
             }}
           >
             세미나

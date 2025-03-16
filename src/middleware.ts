@@ -161,6 +161,7 @@ const checkNeedSubmitAdditionalInfo = (
     '/recruitment-boards/post', // 멘토링/프로젝트/스터디 글 작성
     '/recruitment-boards/apply', // 멘토링/프로젝트/스터디 신청
     '/apply',
+    '/post',
   ].includes(nextUrl.pathname);
 
   if (isNeededAdditionalInfo) {

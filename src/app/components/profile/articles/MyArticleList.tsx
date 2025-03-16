@@ -11,6 +11,7 @@ import { BoardArticle, BoardType } from '@/app/lib/types/board/board';
 import { getMyBoardArticles } from '@/app/lib/apis/boards';
 import MyRecruitmentArticleItem from './MyRecruitmentArticleItem';
 import MyBoardArticleItem from './MyBoardArticleItem';
+import SideBarArrow from '@/app/assets/svg/SideBarArrow';
 import styles from './myArticleList.module.scss';
 
 const typeName = {
@@ -88,7 +89,10 @@ export default async function MyArticleList({
         ));
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>작성글 &gt; {typeName[category]}</h1>
+      <h1 className={styles.title}>
+        작성글
+        <SideBarArrow /> {typeName[category]}
+      </h1>
       <ul className={styles.list}>{list}</ul>
       <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>
         <div className={styles.dummy}></div>

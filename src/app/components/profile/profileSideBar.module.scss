@@ -40,6 +40,10 @@
   gap: 0.5rem;
   position: relative;
 
+  & > svg {
+    fill: var(--color-gray-800);
+  }
+
   span {
     @include title2;
     cursor: pointer;

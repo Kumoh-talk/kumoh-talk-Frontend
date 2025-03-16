@@ -23,7 +23,7 @@ export default async function ListTable({
   return (
     <div className={styles.list}>
       <ListTitle />
-      {pageContent.data.pageContent.map((applicant) => (
+      {pageContent.data?.pageContent?.map((applicant) => (
         <ListContent
           key={applicant.applicantId}
           id={id}

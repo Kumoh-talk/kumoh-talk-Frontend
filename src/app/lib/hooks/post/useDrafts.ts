@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useOptimistic  } from 'react';
 import { toast } from 'react-toastify';
 import { getMyDrafts, deleteBoard, getBoard } from '@/app/lib/apis/post/boards';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { useCurrentEditor } from '@tiptap/react';
-import type { DraftData } from '@/app/lib/types/post/boards';
+import type { DraftPreview, DraftContent } from '@/app/lib/types/post/boards';
 
 export const useDrafts = (close: () => void) => {
-  const [draftList, setDraftList] = useState([]);
+  const [draftList, setDraftList] = useState<DraftPreview[]>([]);
+  const [optimisticDraftList, setOptimisticDraftList] = useOptimistic(draftList);
   const [isLoading, setIsLoading] = useState(true);
 
   const { setBoardId, setTitle, setTagList, setBoardHeadImageUrl } = usePostContent();
   const { editor } = useCurrentEditor();
 
-  const applyDraft = ({ boardId, title, contents, categoryNames, boardHeadImageUrl }: DraftData) => {
+  const applyDraft = ({ boardId, title, contents, categoryNames, boardHeadImageUrl }: DraftContent) => {
     if (!editor) return;
 
     setBoardId(boardId);
@@ -35,22 +36,29 @@ export const useDrafts = (close: () => void) => {
     }
   };
 
+  const removeDraftById = (drafts: DraftPreview[], boardId: number) => {
+    return drafts.filter((draft) => draft.boardId !== boardId);
+  };
+
+  const restoreDraftList = () => {
+    setOptimisticDraftList(draftList);
+  };
+
   const handleDeleteDraft = async (boardId: number) => {
-    const isConfirmed = window.confirm('임시 저장 글을 정말 삭제하시겠습니까?');
+    setOptimisticDraftList((prev) => removeDraftById(prev, boardId));
 
-    if (isConfirmed) {
-      try {
-        const response = await deleteBoard(boardId);
+    try {
+      const response = await deleteBoard(boardId);
 
-        if ('success' in response) {
-          toast.success('삭제 성공.');
-          return;
-        }
-
-        toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
-      } catch (error) {
+      if ('success' in response) {
+        setDraftList((prev) => removeDraftById(prev, boardId));
+      } else {
+        restoreDraftList();
         toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
       }
+    } catch (error) {
+      restoreDraftList();
+      toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
     }
   };
 
@@ -66,5 +74,5 @@ export const useDrafts = (close: () => void) => {
     handleDraftList();
   }, []);
 
-  return { draftList, isLoading, loadDraft, handleDeleteDraft };
+  return { draftList, optimisticDraftList, isLoading, loadDraft, handleDeleteDraft };
 };

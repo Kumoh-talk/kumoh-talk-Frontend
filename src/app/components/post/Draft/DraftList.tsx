@@ -8,19 +8,21 @@ interface DraftListProps {
 }
 
 const DraftList = ({ close }: DraftListProps) => {
-  const { draftList, isLoading, loadDraft, handleDeleteDraft } = useDrafts(close);
+  const { draftList, optimisticDraftList, isLoading, loadDraft, handleDeleteDraft } = useDrafts(close);
+
+  const displayDraftList = optimisticDraftList.length > 0 ? optimisticDraftList : draftList;
 
   if (isLoading) {
     return <div className={styles.loader} />;
   }
 
-  if (draftList.length === 0) {
+  if (displayDraftList.length === 0) {
     return <p>임시 저장된 글이 없습니다.</p>;
   }
 
   return (
     <div className={styles.draftList}>
-      {draftList.map((draft) => {
+      {displayDraftList.map((draft) => {
         const { boardId, updatedAt, title } = draft;
 
         return (

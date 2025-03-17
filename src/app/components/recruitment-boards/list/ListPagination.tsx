@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export interface Props {
   totalPage: number;
-  searchParams: {
+  searchParams: Promise<{
     id?: string;
     title?: string;
     boardType?: string;
@@ -12,17 +12,17 @@ export interface Props {
     name?: string;
     page?: string;
     sort?: string;
-  };
+  }>;
 }
 
 export default async function ListPagination({
   totalPage,
   searchParams,
 }: Props) {
-  const params = new URLSearchParams(searchParams as Record<string, string>);
+  const params = new URLSearchParams(await searchParams);
   let maxPage = totalPage;
 
-  const page = parseInt(searchParams.page ?? '1');
+  const page = parseInt(params.get('page') ?? '1');
   const offset = Math.floor((page - 1) / 10) * 10;
   const pages = Array.from(
     { length: Math.min(10, maxPage - offset) },

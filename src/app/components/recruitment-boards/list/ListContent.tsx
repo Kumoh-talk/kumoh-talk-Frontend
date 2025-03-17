@@ -30,7 +30,7 @@ export default async function ListContent({ id, applicant }: Props) {
     <Link
       style={{ textDecoration: 'none' }}
       href={`./list/${applicantId}?id=${id}&applicantId=${userId}`}
-      passHref={true}
+      prefetch={false}
     >
       <div className={styles.contentBlock}>
         <div className={styles.profile}>

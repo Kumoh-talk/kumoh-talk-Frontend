@@ -59,6 +59,28 @@
         cursor: pointer;
       }
     }
+
+    .deleteBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: none;
+      border: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+
+      svg {
+        color: var(--color-gray-800);
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &:hover .deleteBtn {
+      opacity: 1;
+    }
   }
 }
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getMyDrafts } from '@/app/lib/apis/post/boards';
+import { getMyDrafts, deleteBoard } from '@/app/lib/apis/post/boards';
 import { getRelativeTime } from '@/app/lib/utils/post/dateFormatter';
 import { getBoard } from '@/app/lib/apis/post/boards';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { useCurrentEditor } from '@tiptap/react';
+import TrashSvg from '@/app/assets/svg/Editor/TrashSvg';
 import type { DraftData } from '@/app/lib/types/post/boards';
 import styles from './Draft.module.scss';
 
@@ -17,14 +18,18 @@ interface DraftItemProps {
   updatedAt: string;
   title: string;
   loadDraft: (boardId: number) => void;
+  onDelete : (boardId : number) => void;
 }
 
-const DraftItem = ({ boardId, updatedAt, title, loadDraft }: DraftItemProps) => {
+const DraftItem = ({ boardId, updatedAt, title, loadDraft, onDelete }: DraftItemProps) => {
   return (
     <div className={styles.draftItem}>
       <span className={styles.createdAt}>{updatedAt}</span>
       <button className={styles.title} onClick={() => loadDraft(boardId)}>
         {title}
+      </button>
+      <button className={styles.deleteBtn} onClick={() => onDelete(boardId)}>
+        <TrashSvg/>
       </button>
     </div>
   );
@@ -60,6 +65,25 @@ const DraftList = ({ close }: DraftListProps) => {
     }
   };
 
+  const handleDeleteDraft = async (boardId: number) => {
+    const isConfirmed = window.confirm('임시 저장 글을 정말 삭제하시겠습니까?');
+
+    if (isConfirmed) {
+      try {
+        const response = await deleteBoard(boardId);
+  
+        if ('success' in response) {
+          toast.success('삭제 성공.');
+          return;
+        }
+        
+        toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
+      } catch (error) {
+        toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
+      }
+    }
+  };
+
   useEffect(() => {
     const handleDraftList = async () => {
       const response = await getMyDrafts();
@@ -92,6 +116,7 @@ const DraftList = ({ close }: DraftListProps) => {
             updatedAt={getRelativeTime(updatedAt)}
             title={title}
             loadDraft={loadDraft}
+            onDelete={handleDeleteDraft}
           />
         );
       })}

@@ -29,7 +29,7 @@ export default async function ListContent({ id, applicant }: Props) {
   return (
     <Link
       style={{ textDecoration: 'none' }}
-      href={`./list/${applicantId}?id=${id}&applicantId=${userId}`}
+      href={`./list/${applicantId}?recruitmentBoardId=${id}&applicantUserId=${userId}`}
       prefetch={false}
     >
       <div className={styles.contentBlock}>

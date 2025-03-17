@@ -10,30 +10,21 @@ export interface Props {
     id: string;
   }>;
   searchParams: Promise<{
-    id: string;
-    applicantId: string;
+    recruitmentBoardId: string;
+    applicantUserId: string;
   }>;
 }
 
 export default async function Page({ params, searchParams }: Props) {
   try {
     const { id: applicantId } = await params;
-    const { id: recruitmentBoardId, applicantId: applicantUserId } =
-      await searchParams;
-
-    if (!applicantId || !recruitmentBoardId) {
-      throw new Error('필수 파라미터가 누락되었습니다');
-    }
+    const { recruitmentBoardId, applicantUserId } = await searchParams;
 
     const applicantDetail: ApplicantDetailApi = await getApplicantDetail(
       applicantId,
       recruitmentBoardId,
       cookies().toString()
     );
-
-    if (!applicantDetail) {
-      throw new Error('지원자 정보를 불러오는데 실패했습니다');
-    }
 
     return (
       <main className={styles.block}>

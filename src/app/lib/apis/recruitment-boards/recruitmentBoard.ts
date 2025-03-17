@@ -64,6 +64,16 @@ export const postRecruitmentBoard = (formData: {
   );
 };
 
+export const deleteRecruitmentBoard = (recruitmentBoardId: string) => {
+  return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  })
+}
+
 export const getRecruitmentBoardComment = (recruitmentBoardId: string) => {
   return _fetch(`${baseUrl}/recruitment-board/comments/${recruitmentBoardId}`, {
     method: 'GET',

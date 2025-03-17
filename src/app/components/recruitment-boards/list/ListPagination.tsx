@@ -43,7 +43,6 @@ export default async function ListPagination({
       );
     }
   );
-  console.log(pages);
 
   return (
     <div className={styles.pagination}>

@@ -1,12 +1,17 @@
 import Modal from '@/app/components/common/modal/Modal';
 import ApplicationPage from '@/app/recruitment-boards/list/[id]/page';
 
-export default function Page({
+export default async function Page({
   params,
   searchParams,
 }: {
-  params: any;
-  searchParams: any;
+  params: Promise<{
+    id: string;
+  }>;
+  searchParams: Promise<{
+    id: string;
+    applicantId: string;
+  }>;
 }) {
   return (
     <div>

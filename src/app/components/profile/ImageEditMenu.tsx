@@ -39,6 +39,8 @@ export default function ImageEditMenu({ isShow }: Props) {
     );
     if (patchResponse.success === 'true') {
       window.location.reload();
+    } else {
+      alert('파일명에 한글 혹은 특수문자가 포함되어 있습니다.');
     }
   };
 

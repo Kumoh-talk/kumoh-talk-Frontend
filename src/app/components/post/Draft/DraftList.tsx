@@ -5,35 +5,13 @@ import { getRelativeTime } from '@/app/lib/utils/post/dateFormatter';
 import { getBoard } from '@/app/lib/apis/post/boards';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { useCurrentEditor } from '@tiptap/react';
-import TrashSvg from '@/app/assets/svg/Editor/TrashSvg';
+import DraftItem from './DraftItem';
 import type { DraftData } from '@/app/lib/types/post/boards';
 import styles from './Draft.module.scss';
 
 interface DraftListProps {
   close: () => void;
 }
-
-interface DraftItemProps {
-  boardId: number;
-  updatedAt: string;
-  title: string;
-  loadDraft: (boardId: number) => void;
-  onDelete : (boardId : number) => void;
-}
-
-const DraftItem = ({ boardId, updatedAt, title, loadDraft, onDelete }: DraftItemProps) => {
-  return (
-    <div className={styles.draftItem}>
-      <span className={styles.createdAt}>{updatedAt}</span>
-      <button className={styles.title} onClick={() => loadDraft(boardId)}>
-        {title}
-      </button>
-      <button className={styles.deleteBtn} onClick={() => onDelete(boardId)}>
-        <TrashSvg/>
-      </button>
-    </div>
-  );
-};
 
 const DraftList = ({ close }: DraftListProps) => {
   const [draftList, setDraftList] = useState([]);

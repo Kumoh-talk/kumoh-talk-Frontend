@@ -1,4 +1,4 @@
-import { useState, useEffect, useOptimistic  } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getMyDrafts, deleteBoard, getBoard } from '@/app/lib/apis/post/boards';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
@@ -7,7 +7,6 @@ import type { DraftPreview, DraftContent } from '@/app/lib/types/post/boards';
 
 export const useDrafts = (close: () => void) => {
   const [draftList, setDraftList] = useState<DraftPreview[]>([]);
-  const [optimisticDraftList, setOptimisticDraftList] = useOptimistic(draftList);
   const [isLoading, setIsLoading] = useState(true);
 
   const { setBoardId, setTitle, setTagList, setBoardHeadImageUrl } = usePostContent();
@@ -40,24 +39,24 @@ export const useDrafts = (close: () => void) => {
     return drafts.filter((draft) => draft.boardId !== boardId);
   };
 
-  const restoreDraftList = () => {
-    setOptimisticDraftList(draftList);
+  const restoreDraftList = (prevDraftList : DraftPreview[]) => {
+    setDraftList(prevDraftList);
   };
 
   const handleDeleteDraft = async (boardId: number) => {
-    setOptimisticDraftList((prev) => removeDraftById(prev, boardId));
+    const prevDraftList = draftList;
+
+    setDraftList((prev) => removeDraftById(prev, boardId));
 
     try {
       const response = await deleteBoard(boardId);
 
-      if ('success' in response) {
-        setDraftList((prev) => removeDraftById(prev, boardId));
-      } else {
-        restoreDraftList();
+      if (response.success === 'false') {
+        restoreDraftList(prevDraftList);
         toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
       }
     } catch (error) {
-      restoreDraftList();
+      restoreDraftList(prevDraftList);
       toast.error('임시 저장 글 삭제 중 오류가 발생했습니다.');
     }
   };
@@ -74,5 +73,5 @@ export const useDrafts = (close: () => void) => {
     handleDraftList();
   }, []);
 
-  return { draftList, optimisticDraftList, isLoading, loadDraft, handleDeleteDraft };
+  return { draftList, isLoading, loadDraft, handleDeleteDraft };
 };

@@ -22,7 +22,6 @@ export default async function Page({
   const title = matchRecruitmentTitle(searchParams.boardType);
   const UserInfoResponse = await getUserInfo(cookies().toString());
   const userInfo: UserInfo = (await UserInfoResponse.json()).data;
-  console.log(userInfo);
   const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(
     searchParams.id
   );

@@ -8,6 +8,7 @@ import CheckApplicantButton from '@/app/components/recruitment-boards/detail/Che
 import styles from '@/app/recruitment-boards/detail/page.module.scss';
 import { cookies } from 'next/headers';
 import { parseJwt } from '@/app/lib/apis/auth';
+import DeleteButton from './DeleteButton';
 
 export default function RecruitmentBoardDetail({
   boardDetail,
@@ -40,6 +41,7 @@ export default function RecruitmentBoardDetail({
             tag={boardDetail.data.tag}
             name={boardDetail.data.host}
           />
+          <DeleteButton recruitmentBoardId={boardId} />
         </>
       ) : (
         <ApplyButton

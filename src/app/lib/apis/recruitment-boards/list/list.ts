@@ -59,7 +59,7 @@ export const getApplicantDetail = (
   cookie?: string
 ) => {
   return _fetch(
-    `${baseUrl}/applications/recruitment/${recruitmentBoardId}/${applicantId}`,
+    `${baseUrl}/applications/recruitment/${Number(recruitmentBoardId)}/${Number(applicantId)}`,
     {
       method: 'GET',
       headers: {

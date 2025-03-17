@@ -7,6 +7,7 @@ export interface Props {
 }
 
 export default function ListDetailTable({ applicantDetail }: Props) {
+  if (!applicantDetail) return null;
   const { applicantId, applicantAnswer } = applicantDetail.data;
 
   return (

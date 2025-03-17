@@ -16,20 +16,37 @@ export interface Props {
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const { id: applicantId } = await params;
-  const { id: recruitmentBoardId, applicantId: applicantUserId } =
-    await searchParams;
+  try {
+    const { id: applicantId } = await params;
+    const { id: recruitmentBoardId, applicantId: applicantUserId } =
+      await searchParams;
 
-  const applicantDetail: ApplicantDetailApi = await getApplicantDetail(
-    applicantId,
-    recruitmentBoardId,
-    cookies().toString()
-  );
+    if (!applicantId || !recruitmentBoardId) {
+      throw new Error('필수 파라미터가 누락되었습니다');
+    }
 
-  return (
-    <main className={styles.block}>
-      <ApplicationTitle applicantUserId={applicantUserId} />
-      <ListDetailTable applicantDetail={applicantDetail} />
-    </main>
-  );
+    const applicantDetail: ApplicantDetailApi = await getApplicantDetail(
+      applicantId,
+      recruitmentBoardId,
+      cookies().toString()
+    );
+
+    if (!applicantDetail) {
+      throw new Error('지원자 정보를 불러오는데 실패했습니다');
+    }
+
+    return (
+      <main className={styles.block}>
+        <ApplicationTitle applicantUserId={applicantUserId} />
+        <ListDetailTable applicantDetail={applicantDetail} />
+      </main>
+    );
+  } catch (error) {
+    console.error('Error in Page component:', error);
+    return (
+      <main className={styles.block}>
+        <div>오류가 발생했습니다. 잠시 후 다시 시도해주세요.</div>
+      </main>
+    );
+  }
 }

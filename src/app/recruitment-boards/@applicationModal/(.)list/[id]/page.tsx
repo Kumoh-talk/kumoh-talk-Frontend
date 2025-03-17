@@ -5,13 +5,13 @@ export default async function Page({
   params,
   searchParams,
 }: {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
-  searchParams: Promise<{
+  };
+  searchParams: {
     id: string;
     applicantId: string;
-  }>;
+  };
 }) {
   return (
     <div>

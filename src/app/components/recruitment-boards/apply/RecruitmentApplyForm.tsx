@@ -54,7 +54,7 @@ export default function RecruitmentApplyForm({
     }
   };
   const onError = (error: any) => {
-    console.log(error);
+    console.error(error);
   };
 
   return (

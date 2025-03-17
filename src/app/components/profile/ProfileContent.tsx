@@ -35,7 +35,6 @@ export default function ProfileContent() {
     const fetchProfile = async () => {
       try {
         const profileData = await getMyProfile();
-        console.log('Profile Data:', profileData);
 
         if (profileData?.data) {
           setMyProfile(profileData.data);

@@ -1,3 +1,5 @@
+'use client';
+
 import { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import type { Color } from '@/app/lib/types/color';

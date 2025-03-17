@@ -21,6 +21,7 @@
   --color-blue-400: #007aff;
   --color-blue-500: #0061db;
 
+  --color-red: #ff3b30;
   --color-orange: #ffa800;
   --color-yellow: #fed766;
   --color-purple: #6a50fa;
@@ -47,8 +48,6 @@
   /* background */
   --color-background-gray-500: var(--color-gray-500);
   --color-background-gray-600: var(--color-gray-600);
-
-  //TODO: 필요한 변수 있을 시 추가
 }
 
 @media (prefers-color-scheme: dark) {

@@ -17,7 +17,7 @@ const Header = () => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(modalRef, () => setActiveModal(null));
-  useAutoSave();
+  const { lastSavedAt } = useAutoSave();
 
   const handleClose = () => {
     setActiveModal(null);
@@ -34,6 +34,7 @@ const Header = () => {
           priority
         />
         <div className={styles.buttonGroup}>
+          {lastSavedAt && <span>{`자동 저장 완료 ${lastSavedAt}`}</span>}
           <Button
             className={styles.outlineButton}
             color='text-black-50'

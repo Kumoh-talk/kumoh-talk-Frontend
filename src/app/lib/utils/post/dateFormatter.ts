@@ -10,11 +10,9 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(relativeTime);
 
-const parseToKST = (timestamp: number[]): Dayjs => {
-  const [year, month, date, hour, minute, second] = timestamp;
-
-  const UTCTimestamp = Date.UTC(year, month - 1, date, hour, minute, second);
-  const KSTTimestamp = dayjs.utc(UTCTimestamp).tz('Asia/Seoul');
+const parseToKST = (timestamp: string): Dayjs => {
+  const UTCTimestamp = dayjs.utc(timestamp);
+  const KSTTimestamp = UTCTimestamp.tz('Asia/Seoul');
 
   return KSTTimestamp;
 };
@@ -34,7 +32,7 @@ const formatTime = (date: Dayjs): string => {
   return date.format('YYYY.MM.DD');
 };
 
-const getRelativeTime = (updatedAt: number[]): string => {
+const getRelativeTime = (updatedAt: string): string => {
   const date = parseToKST(updatedAt);
 
   return formatTime(date);

@@ -11,6 +11,11 @@ export const useSubmitDraft = (close: () => void) => {
   const submitDraft = useCallback(async () => {
     if (!editor) return;
 
+    if(title.length === 0){
+      toast.warn('제목을 작성해주세요.');
+      return;
+    }
+
     const handleSuccess = () => {
       close();
       toast.success('작성 중인 글이 저장되었습니다.');

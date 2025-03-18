@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, MouseEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import clsx from 'clsx';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import useAutoSave from '@/app/lib/hooks/post/useAutoSave';
@@ -17,22 +19,37 @@ const Header = () => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(modalRef, () => setActiveModal(null));
+
   const { lastSavedAt } = useAutoSave();
+
+  const router = useRouter();
 
   const handleClose = () => {
     setActiveModal(null);
   };
 
+  const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    const confirmLeave = confirm('페이지를 이동하시겠습니까? 변경사항이 저장되지 않을 수 있습니다.');
+
+    if (confirmLeave) {
+      router.push(href);
+    }
+  };
+
   return (
     <>
       <div className={styles.header}>
-        <Image
-          src={logo}
-          alt='세미나 신청 이미지'
-          width={32}
-          height={32}
-          priority
-        />
+        <Link href='/' onClick={(e) => handleNavigation(e, '/')}>
+          <Image
+            src={logo}
+            alt='세미나 신청 이미지'
+            width={32}
+            height={32}
+            priority
+          />
+        </Link>
         <div className={styles.buttonGroup}>
           {lastSavedAt && <span>{`자동 저장 완료 ${lastSavedAt}`}</span>}
           <Button

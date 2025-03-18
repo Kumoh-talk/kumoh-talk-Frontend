@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { getMyDrafts, deleteBoard, getBoard } from '@/app/lib/apis/post/boards';
+import { deleteBoard, getBoard } from '@/app/lib/apis/post/boards';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { useCurrentEditor } from '@tiptap/react';
+import useInfiniteFetcher from './useInfiniteFetcher';
 import type { DraftPreview, DraftContent } from '@/app/lib/types/post/boards';
 
 export const useDrafts = (close: () => void) => {
-  const [draftList, setDraftList] = useState<DraftPreview[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const { data: draftList, state, hasNextPage, setFetchState, fetchNextPage } = useInfiniteFetcher();
   const { setBoardId, setTitle, setTagList, setBoardHeadImageUrl } = usePostContent();
   const { editor } = useCurrentEditor();
 
@@ -40,13 +38,20 @@ export const useDrafts = (close: () => void) => {
   };
 
   const restoreDraftList = (prevDraftList : DraftPreview[]) => {
-    setDraftList(prevDraftList);
+    setFetchState((prev) => ({
+      ...prev,
+      data: prevDraftList,
+    }));
   };
 
   const handleDeleteDraft = async (boardId: number) => {
     const prevDraftList = draftList;
+    const updatedDraftList = removeDraftById(draftList, boardId);
 
-    setDraftList((prev) => removeDraftById(prev, boardId));
+    setFetchState((prev) => ({
+      ...prev,
+      data: updatedDraftList,
+    }));
 
     try {
       const response = await deleteBoard(boardId);
@@ -61,17 +66,5 @@ export const useDrafts = (close: () => void) => {
     }
   };
 
-  useEffect(() => {
-    const handleDraftList = async () => {
-      const response = await getMyDrafts();
-      const { pageContents } = response.data;
-
-      setDraftList(pageContents);
-      setIsLoading(false);
-    };
-
-    handleDraftList();
-  }, []);
-
-  return { draftList, isLoading, loadDraft, handleDeleteDraft };
+  return { draftList, state, hasNextPage, fetchNextPage, loadDraft, handleDeleteDraft };
 };

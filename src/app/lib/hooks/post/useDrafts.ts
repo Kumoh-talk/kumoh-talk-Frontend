@@ -7,7 +7,7 @@ import type { DraftPreview, DraftContent } from '@/app/lib/types/post/boards';
 
 export const useDrafts = (close: () => void) => {
   const { data: draftList, state, hasNextPage, setFetchState, fetchNextPage } = useInfiniteFetcher();
-  const { setBoardId, setTitle, setTagList, setBoardHeadImageUrl } = usePostContent();
+  const { boardId : curBoardId, setBoardId, setTitle, setTagList, setBoardHeadImageUrl } = usePostContent();
   const { editor } = useCurrentEditor();
 
   const applyDraft = ({ boardId, title, contents, categoryNames, boardHeadImageUrl }: DraftContent) => {
@@ -21,6 +21,11 @@ export const useDrafts = (close: () => void) => {
   };
 
   const loadDraft = async (boardId: number) => {
+    if(curBoardId === boardId){
+      toast.info('현재 작성 중인 글입니다.');
+      return;
+    }
+
     try {
       const response = await getBoard(boardId);
       const { title, contents, categoryNames, boardHeadImageUrl } = response.data;

@@ -7,15 +7,22 @@ import Button from '../../common/button/Button';
 import FormLabel from '../../apply/Form/FormLabel';
 import CreatePostForm from './CreatePostForm';
 
+const getButtonText = (isSubmitting: boolean, modifyId?: string) => {
+  if (modifyId) {
+    return isSubmitting ? '수정중' : '수정하기';
+  }
+  return isSubmitting ? '등록중' : '등록하기';
+};
+
 export default function PostFormField({
+  modifyId,
   questionError,
 }: {
+  modifyId?: string;
   questionError: string;
 }) {
   const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     control,
   } = useFormContext();
 
@@ -55,8 +62,9 @@ export default function PostFormField({
         <InputField
           control={control}
           name='recruitmentDeadline'
-          label='모집기한'
+          label='모집마감일'
           type='date'
+          min={new Date().toISOString().split('T')[0]}
         />
       </div>
       <div className={styles.row}>
@@ -65,12 +73,14 @@ export default function PostFormField({
           name='activityStart'
           label='활동시작일'
           type='date'
+          min={new Date().toISOString().split('T')[0]}
         />
         <InputField
           control={control}
           name='activityFinish'
           label='활동종료일'
           type='date'
+          min={new Date().toISOString().split('T')[0]}
         />
       </div>
       <div className={styles.row}>
@@ -87,7 +97,7 @@ export default function PostFormField({
       </div>
       <div className={styles.row}>
         <Button type='submit' size='full' disabled={isSubmitting}>
-          {isSubmitting ? '등록중' : '등록하기'}
+          {getButtonText(isSubmitting, modifyId)}
         </Button>
       </div>
     </div>

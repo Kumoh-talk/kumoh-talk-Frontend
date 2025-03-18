@@ -12,10 +12,10 @@ export default function ModifyButton() {
   return (
     <Link
       style={{ textDecoration: 'none' }}
-      href={`./modify?id=${boardId}`}
+      href={`./post?id=${boardId}`}
       passHref={true}
     >
-      <Button onClick={onModify} size={'large'}>
+      <Button onClick={onModify} size={'medium'}>
         수정하기
       </Button>
     </Link>

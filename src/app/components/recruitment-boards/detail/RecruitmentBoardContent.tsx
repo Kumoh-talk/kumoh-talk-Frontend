@@ -1,7 +1,6 @@
 import styles from './recruitmentBoardContent.module.scss';
 
 export interface Props {
-  categories: string[];
   target: string;
   recruitmentNum: number;
   recruitmentStart: string;
@@ -13,9 +12,7 @@ export interface Props {
   buttonBlock: JSX.Element;
 }
 
-// TODO: 백엔드 api 완성되면 수정
 export default function RecruitmentBoardContent({
-  categories,
   target,
   recruitmentNum,
   recruitmentStart,

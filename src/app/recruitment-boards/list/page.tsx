@@ -11,7 +11,7 @@ import { RecruitmentTag } from '@/app/lib/types/recruitmentBoards/recruitmentBoa
 export default async function Page({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     id: string;
     title: string;
     boardType: RecruitmentTag;
@@ -19,9 +19,9 @@ export default async function Page({
     name: string;
     page: string;
     sort: string;
-  };
+  }>;
 }) {
-  const { id, title, boardType, tag, name, page, sort } = searchParams;
+  const { id, title, boardType, tag, name, page, sort } = await searchParams;
   const pageContent: ApplyListApi = await getRecruitmentBoardApplicantList(
     id,
     Number(page),

@@ -10,26 +10,34 @@ export interface Props {
     id: string;
   }>;
   searchParams: Promise<{
-    id: string;
-    applicantId: string;
+    recruitmentBoardId: string;
+    applicantUserId: string;
   }>;
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const { id: applicantId } = await params;
-  const { id: recruitmentBoardId, applicantId: applicantUserId } =
-    await searchParams;
+  try {
+    const { id: applicantId } = await params;
+    const { recruitmentBoardId, applicantUserId } = await searchParams;
 
-  const applicantDetail: ApplicantDetailApi = await getApplicantDetail(
-    applicantId,
-    recruitmentBoardId,
-    cookies().toString()
-  );
+    const applicantDetail: ApplicantDetailApi = await getApplicantDetail(
+      applicantId,
+      recruitmentBoardId,
+      cookies().toString()
+    );
 
-  return (
-    <main className={styles.block}>
-      <ApplicationTitle applicantUserId={applicantUserId} />
-      <ListDetailTable applicantDetail={applicantDetail} />
-    </main>
-  );
+    return (
+      <main className={styles.block}>
+        <ApplicationTitle applicantUserId={applicantUserId} />
+        <ListDetailTable applicantDetail={applicantDetail} />
+      </main>
+    );
+  } catch (error) {
+    console.error('Error in Page component:', error);
+    return (
+      <main className={styles.block}>
+        <div>오류가 발생했습니다. 잠시 후 다시 시도해주세요.</div>
+      </main>
+    );
+  }
 }

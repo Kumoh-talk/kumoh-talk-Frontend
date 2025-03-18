@@ -11,7 +11,7 @@
   margin-bottom: 12rem;
 
   textarea {
-    @include subHeadline(black-100);
+    @include footnote(black-100);
     width: 100%;
     min-height: 80px;
     padding: 4px;
@@ -57,7 +57,7 @@
 }
 
 .input {
-  @include subHeadline(black-100);
+  @include footnote(black-100);
   flex: 1;
   padding: 8px 0;
   border: none;
@@ -104,11 +104,11 @@
   gap: 0.5rem;
 
   .commentName {
-    @include bodyEmphasized(black-85);
+    @include title3Emphasized(black-85);
   }
 
   .commentDate {
-    @include caption1(black-50);
+    @include footnote(black-50);
   }
 }
 

@@ -1,7 +1,8 @@
 'use client';
 
+import { getRecruitmentBoardQuestionForm } from '@/app/lib/apis/recruitment-boards/recruitmentBoard';
 import { PostForm } from '@/app/lib/types/recruitmentBoards/post/postForm';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const PostContext = createContext<{
   form: PostForm[];
@@ -25,10 +26,11 @@ export const PostContext = createContext<{
 });
 
 export interface Props {
+  boardId?: string;
   children: React.ReactNode;
 }
 
-export function PostProvider({ children }: Props) {
+export function PostProvider({ boardId, children }: Props) {
   const [form, setForm] = useState<PostForm[]>([
     {
       number: 1,
@@ -40,6 +42,26 @@ export function PostProvider({ children }: Props) {
     },
   ]);
   const [questionError, setQuestionError] = useState('');
+
+  useEffect(() => {
+    async function fetchQuestionForm() {
+      if (!boardId) {
+        return;
+      }
+
+      const { data } = await getRecruitmentBoardQuestionForm(boardId);
+      const questions = Object.keys(data)
+        .filter((key) => key !== 'questionId')
+        .map((key) => {
+          data[key].type = data[key].type.toLowerCase();
+
+          return data[key];
+        });
+      setForm(questions);
+    }
+
+    fetchQuestionForm();
+  }, [boardId]);
 
   return (
     <PostContext.Provider

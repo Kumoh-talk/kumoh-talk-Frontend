@@ -1,3 +1,5 @@
+import type { PostBoards, PatchBoards } from '@/app/lib/types/post/boards';
+
 const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 
 const _fetch = async (
@@ -14,21 +16,13 @@ const _fetch = async (
   return response.json();
 };
 
-export interface PostBoardsProps {
-  title: string;
-  contents: string;
-  categoryName: string[];
-  boardType: string;
-  boardHeadImageUrl?: string;
-}
-
 export const postDraft = ({
   title,
   contents,
   categoryName,
   boardType,
   boardHeadImageUrl,
-}: PostBoardsProps) => {
+}: PostBoards) => {
   return _fetch(
     `${baseUrl}/boards`,
     {
@@ -44,6 +38,33 @@ export const postDraft = ({
       categoryName,
       boardType,
       boardHeadImageUrl,
+    }
+  );
+};
+
+export const updateDraft = ({
+  id,
+  title,
+  contents,
+  categoryName,
+  boardHeadImageUrl,
+}: PatchBoards) => {
+  return _fetch(
+    `${baseUrl}/boards`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    {
+      id,
+      title,
+      contents,
+      categoryName,
+      boardHeadImageUrl,
+      isPublished: false,
     }
   );
 };

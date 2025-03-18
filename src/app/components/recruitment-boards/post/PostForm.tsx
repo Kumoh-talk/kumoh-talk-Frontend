@@ -9,11 +9,14 @@ import { PostBoard } from '@/app/lib/types/recruitmentBoards/post/postBoard';
 import Tabs from './Tabs';
 
 export default function PostForm({
+  modifyId,
   defaultValues,
 }: {
+  modifyId?: string;
   defaultValues: PostBoard;
 }) {
   const { formState, onSubmit, onError, questionError } = usePostForm({
+    boardId: modifyId,
     defaultValues,
     resolver: zodResolver(postFormSchema),
   });
@@ -22,7 +25,7 @@ export default function PostForm({
     <FormProvider {...formState}>
       <form onSubmit={formState.handleSubmit(onSubmit, onError)} noValidate>
         <Tabs />
-        <PostFormField questionError={questionError} />
+        <PostFormField modifyId={modifyId} questionError={questionError} />
       </form>
     </FormProvider>
   );

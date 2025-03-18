@@ -4,7 +4,10 @@ import { PostBoard } from '../../types/recruitmentBoards/post/postBoard';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { PostForm } from '../../types/recruitmentBoards/post/postForm';
-import { postRecruitmentBoard } from '../../apis/recruitment-boards/recruitmentBoard';
+import {
+  patchRecruitmentBoard,
+  postRecruitmentBoard,
+} from '../../apis/recruitment-boards/recruitmentBoard';
 
 function validateQuestionForm(
   form: PostForm[],
@@ -34,9 +37,11 @@ function validateQuestionForm(
 }
 
 export default function usePostForm({
+  boardId,
   defaultValues,
   resolver,
 }: {
+  boardId?: string;
   defaultValues: PostBoard;
   resolver: any;
 }) {
@@ -67,10 +72,20 @@ export default function usePostForm({
       formData.board.activityFinish
     ).toISOString();
 
-    console.log(formData);
-    return;
+    if (boardId) {
+      const response = await patchRecruitmentBoard(
+        boardId,
+        'published',
+        formData
+      );
 
-    const response = await postRecruitmentBoard(formData);
+      if (response.success === 'true') {
+        router.replace('/recruitment-boards');
+      }
+      return;
+    }
+
+    const response = await postRecruitmentBoard(formData, 'published');
 
     if (response.success === 'true') {
       router.replace('/recruitment-boards');

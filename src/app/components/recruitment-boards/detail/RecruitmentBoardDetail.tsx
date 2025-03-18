@@ -63,7 +63,6 @@ export default function RecruitmentBoardDetail({
         name={data.host}
       />
       <RecruitmentBoardContent
-        categories={[data.type, data.tag]}
         target={data.recruitmentTarget}
         recruitmentNum={data.recruitmentNum}
         recruitmentStart={dayjs(data.recruitmentStart).format(

@@ -21,7 +21,6 @@ export default function RecruitmentApplyContainer({
         title={title}
         type={boardType.toUpperCase() as keyof typeof typeToText}
         tag={tag as keyof typeof typeToText}
-        name='주최자 이름'
       />
       <BoardDetail content={detail} />
     </>

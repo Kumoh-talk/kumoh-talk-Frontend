@@ -12,8 +12,15 @@ export default function DeleteButton({
   const router = useRouter();
 
   const onDelete = async () => {
-    await deleteRecruitmentBoard(recruitmentBoardId);
-    router.back();
+    const response = await deleteRecruitmentBoard(recruitmentBoardId);
+
+    if (response.success === 'true') {
+      alert('게시물이 삭제되었습니다.');
+      router.replace('../');
+    } else {
+      alert('게시물 삭제에 실패했습니다.');
+      router.replace('../');
+    }
   };
 
   return (

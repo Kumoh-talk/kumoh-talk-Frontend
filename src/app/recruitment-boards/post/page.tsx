@@ -49,7 +49,7 @@ export default async function Page({
       <Header title='모집글 작성' />
       <div className={styles.form}>
         <PostProvider boardId={searchParams.id}>
-          <PostForm defaultValues={defaultValues} />
+          <PostForm modifyId={searchParams.id} defaultValues={defaultValues} />
         </PostProvider>
       </div>
     </div>

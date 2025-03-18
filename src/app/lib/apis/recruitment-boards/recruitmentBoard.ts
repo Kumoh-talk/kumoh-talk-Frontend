@@ -48,12 +48,15 @@ export const getRecruitmentBoardDetail = (recruitmentBoardId: string) => {
   });
 };
 
-export const postRecruitmentBoard = (formData: {
-  board: PostBoard;
-  form: PostForm[];
-}) => {
+export const postRecruitmentBoard = (
+  formData: {
+    board: PostBoard;
+    form: PostForm[];
+  },
+  status: string
+) => {
   return _fetch(
-    `${baseUrl}/recruitment-boards?status=published`,
+    `${baseUrl}/recruitment-boards?status=${status}`,
     {
       method: 'POST',
       headers: {
@@ -82,6 +85,27 @@ export const getRecruitmentBoardQuestionForm = (recruitmentBoardId: string) => {
     },
     credentials: 'include',
   });
+};
+
+export const patchRecruitmentBoard = (
+  recruitmentBoardId: string,
+  status: string,
+  formData: {
+    board: PostBoard;
+    form: PostForm[];
+  }
+) => {
+  return _fetch(
+    `${baseUrl}/recruitment-boards/${recruitmentBoardId}?status=${status}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(formData),
+    }
+  );
 };
 
 export const deleteRecruitmentBoard = (recruitmentBoardId: string) => {

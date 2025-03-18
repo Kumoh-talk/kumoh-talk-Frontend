@@ -32,10 +32,17 @@ const formatTime = (date: Dayjs): string => {
   return date.format('YYYY.MM.DD');
 };
 
+const getHHmmssFormat = (updatedAt: string | Date): string => {
+  const isoString = updatedAt instanceof Date ? updatedAt.toISOString() : updatedAt;
+  const date = parseToKST(isoString);
+
+  return date.format('HH:mm:ss');
+};
+
 const getRelativeTime = (updatedAt: string): string => {
   const date = parseToKST(updatedAt);
 
   return formatTime(date);
 };
 
-export { getRelativeTime };
+export { getRelativeTime, getHHmmssFormat };

@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import clsx from 'clsx';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
+import useAutoSave from '@/app/lib/hooks/post/useAutoSave';
 import Image from 'next/image';
 import Button from '../../common/button/Button';
 import logo from '@/app/assets/png/logo.png';
@@ -16,6 +17,7 @@ const Header = () => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(modalRef, () => setActiveModal(null));
+  useAutoSave();
 
   const handleClose = () => {
     setActiveModal(null);

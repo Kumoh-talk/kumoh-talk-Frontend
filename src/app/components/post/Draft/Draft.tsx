@@ -1,4 +1,6 @@
+import { useCallback } from 'react';
 import { useSubmitDraft } from '@/app/lib/hooks/post/useSubmitDraft';
+import { debounce } from 'es-toolkit';
 import DraftList from './DraftList';
 import Button from '../../common/button/Button';
 import styles from './Draft.module.scss';
@@ -9,6 +11,9 @@ interface DraftProps {
 
 const Draft = ({ close }: DraftProps) => {
   const { submitDraft } = useSubmitDraft(close);
+  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 1000), [
+    submitDraft,
+  ]);
 
   return (
     <>
@@ -28,7 +33,7 @@ const Draft = ({ close }: DraftProps) => {
         >
           취소
         </Button>
-        <Button size='medium' onClick={submitDraft}>
+        <Button size='medium' onClick={debouncedSubmitDraft}>
           임시 저장
         </Button>
       </div>

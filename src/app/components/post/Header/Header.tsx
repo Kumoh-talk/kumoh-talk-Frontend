@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, useRef, useCallback, MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { debounce } from 'es-toolkit';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useSubmitDraft } from '@/app/lib/hooks/post/useSubmitDraft';
@@ -31,6 +32,10 @@ const Header = () => {
 
   const { submitDraft } = useSubmitDraft(handleClose);
 
+  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 1000), [
+      submitDraft,
+    ]);
+
   const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
 
@@ -56,7 +61,7 @@ const Header = () => {
         <div className={styles.buttonGroup}>
           {lastSavedAt && <span>{`자동 저장 완료 ${lastSavedAt}`}</span>}
           <div className={styles.draft}>
-            <button className={styles.saveButton} onClick={submitDraft}>
+            <button className={styles.saveButton} onClick={debouncedSubmitDraft}>
               임시저장
             </button>
             <div className={styles.divider} />

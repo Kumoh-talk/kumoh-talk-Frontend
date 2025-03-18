@@ -4,6 +4,7 @@ import { useState, useRef, MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import clsx from 'clsx';
+import { useSubmitDraft } from '@/app/lib/hooks/post/useSubmitDraft';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import useAutoSave from '@/app/lib/hooks/post/useAutoSave';
 import Image from 'next/image';
@@ -27,6 +28,8 @@ const Header = () => {
   const handleClose = () => {
     setActiveModal(null);
   };
+
+  const { submitDraft } = useSubmitDraft(handleClose);
 
   const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -53,7 +56,7 @@ const Header = () => {
         <div className={styles.buttonGroup}>
           {lastSavedAt && <span>{`자동 저장 완료 ${lastSavedAt}`}</span>}
           <div className={styles.draft}>
-            <button className={styles.saveButton} onClick={() => {}}>
+            <button className={styles.saveButton} onClick={submitDraft}>
               임시저장
             </button>
             <div className={styles.divider} />

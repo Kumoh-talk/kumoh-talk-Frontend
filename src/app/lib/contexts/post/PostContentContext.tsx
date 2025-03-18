@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
 interface PostContentContextValue {
-  boardId: number;
+  boardId: number | null;
   setBoardId: (boadId: number) => void;
   title: string;
   setTitle: (title: string) => void;
@@ -16,7 +16,7 @@ const PostContentContext = createContext<PostContentContextValue | undefined>(
 );
 
 export const PostContentProvider = ({ children }: { children: React.ReactNode }) => {
-  const [boardId, setBoardId] = useState(0);
+  const [boardId, setBoardId] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [tagList, setTagList] = useState<string[]>([]);
   const [boardHeadImageUrl, setBoardHeadImageUrl] = useState('');

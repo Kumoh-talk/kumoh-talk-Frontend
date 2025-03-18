@@ -125,7 +125,7 @@ export default function Comment({
             </div>
           </div>
           <div className={styles.moreButton}>
-            {!deletedAt ? (
+            {!deletedAt && userId ? (
               <MoreButton
                 userId={commentUserId}
                 userName={userName}

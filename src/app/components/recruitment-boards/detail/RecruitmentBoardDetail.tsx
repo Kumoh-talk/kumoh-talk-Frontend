@@ -33,7 +33,7 @@ export default function RecruitmentBoardDetail({
     <div className={styles.buttonBlock}>
       {userId === writerUserId ? (
         <>
-          {/* <ModifyButton /> */}
+          <ModifyButton />
           <CheckApplicantButton
             id={boardId}
             title={boardDetail.data.title}

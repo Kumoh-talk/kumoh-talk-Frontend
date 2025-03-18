@@ -68,8 +68,18 @@ export const deleteBoard = (boardId: number) => {
   });
 };
 
-export const getMyDrafts = () => {
-  return _fetch(`${baseUrl}/boards/draft`, {
+export const getMyDrafts = (
+  page: number = 1,
+  size: number = 10,
+  sort: string = 'updatedAt,DESC'
+) => {
+  const query = new URLSearchParams({
+    page: page.toString(),
+    size: size.toString(),
+    sort,
+  });
+
+  return _fetch(`${baseUrl}/boards/draft?${query.toString()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

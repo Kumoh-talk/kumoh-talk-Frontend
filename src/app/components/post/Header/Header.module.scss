@@ -19,6 +19,37 @@
   }
 }
 
+.draft {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border: 1px solid var(--color-gray-800);
+  background-color: var(--color-white);
+  color: var(--color-black-50);
+  border-radius: 3px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--color-gray-300);
+  }
+
+  .saveButton,
+  .listButton {
+    @include body(black-50);
+
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .divider {
+    width: 1px;
+    height: 12px;
+    background-color: var(--color-gray-800);
+    margin: 0 0.8rem;
+  }
+}
+
 .overlay {
   position: fixed;
   bottom: 0;

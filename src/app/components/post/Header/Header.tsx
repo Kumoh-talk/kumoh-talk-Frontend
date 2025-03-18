@@ -52,17 +52,19 @@ const Header = () => {
         </Link>
         <div className={styles.buttonGroup}>
           {lastSavedAt && <span>{`자동 저장 완료 ${lastSavedAt}`}</span>}
-          <Button
-            className={styles.outlineButton}
-            color='text-black-50'
-            bgColor='bg-white'
-            onClick={() => setActiveModal('draft')}
-          >
-            임시저장
-          </Button>
-          <Button size='small' onClick={() => setActiveModal('publish')}>
-            게시하기
-          </Button>
+          <div className={styles.draft}>
+            <button className={styles.saveButton} onClick={() => {}}>
+              임시저장
+            </button>
+            <div className={styles.divider} />
+            <button
+              className={styles.listButton}
+              onClick={() => setActiveModal('draft')}
+            >
+              임시 글
+            </button>
+          </div>
+          <Button onClick={() => setActiveModal('publish')}>게시하기</Button>
         </div>
       </div>
       <div className={clsx(styles.overlay, { [styles.show]: activeModal })}>

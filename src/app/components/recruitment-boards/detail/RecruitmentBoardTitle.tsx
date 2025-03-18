@@ -6,7 +6,7 @@ export interface Props {
   title: string;
   type: RecruitmentTag;
   tag: RecruitmentTag;
-  name: string;
+  name?: string;
 }
 // TODO: 백엔드 api 완성되면 수정
 export function RecruitmentBoardTitle({ title, type, tag, name }: Props) {
@@ -19,7 +19,7 @@ export function RecruitmentBoardTitle({ title, type, tag, name }: Props) {
           <HashTag type={tag} />
         </div>
       </div>
-      <div className={styles.host}>{name} 주최</div>
+      <div className={styles.host}>{name && `${name} 주최`}</div>
     </div>
   );
 }

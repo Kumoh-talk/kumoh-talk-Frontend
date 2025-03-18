@@ -33,7 +33,7 @@ export default function RecruitmentBoardDetail({
     <div className={styles.buttonBlock}>
       {userId === writerUserId ? (
         <>
-          {/* <ModifyButton /> */}
+          <ModifyButton />
           <CheckApplicantButton
             id={boardId}
             title={boardDetail.data.title}
@@ -63,7 +63,6 @@ export default function RecruitmentBoardDetail({
         name={data.host}
       />
       <RecruitmentBoardContent
-        categories={[data.type, data.tag]}
         target={data.recruitmentTarget}
         recruitmentNum={data.recruitmentNum}
         recruitmentStart={dayjs(data.recruitmentStart).format(

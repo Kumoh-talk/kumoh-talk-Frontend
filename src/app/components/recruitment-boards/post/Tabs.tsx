@@ -7,20 +7,38 @@ export default function Tabs() {
   return (
     <div className={styles.tabs}>
       <div className={styles.types}>
-        <CategoryButton content="스터디" type="type" />
-        <CategoryButton content="프로젝트" type="type" />
-        <CategoryButton content="멘토링" type="type" />
+        <CategoryButton content='STUDY' type='type'>
+          스터디
+        </CategoryButton>
+        <CategoryButton content='PROJECT' type='type'>
+          프로젝트
+        </CategoryButton>
+        <CategoryButton content='MENTORING' type='type'>
+          멘토링
+        </CategoryButton>
       </div>
       <div className={styles.stick}>
-        <Image src={Stick} alt="stick" width={15} height={30} />
+        <Image src={Stick} alt='stick' width={15} height={30} />
       </div>
       <div className={styles.categories}>
-        <CategoryButton content="프론트" type="tag" />
-        <CategoryButton content="백엔드" type="tag" />
-        <CategoryButton content="인공지능" type="tag" />
-        <CategoryButton content="모바일" type="tag" />
-        <CategoryButton content="보안" type="tag" />
-        <CategoryButton content="기타" type="tag" />
+        <CategoryButton content='FRONTEND' type='tag'>
+          프론트
+        </CategoryButton>
+        <CategoryButton content='BACKEND' type='tag'>
+          백엔드
+        </CategoryButton>
+        <CategoryButton content='AI' type='tag'>
+          인공지능
+        </CategoryButton>
+        <CategoryButton content='MOBILE' type='tag'>
+          모바일
+        </CategoryButton>
+        <CategoryButton content='SECURITY' type='tag'>
+          보안
+        </CategoryButton>
+        <CategoryButton content='ETC' type='tag'>
+          기타
+        </CategoryButton>
       </div>
     </div>
   );

@@ -26,15 +26,18 @@ export const postFormSchema = z.object({
     .string()
     .min(1, ERROR_MSG.required)
     .max(1000, ERROR_MSG.exceed.thousand),
+  type: z.string().min(1, ERROR_MSG.required),
+  tag: z.string().min(1, ERROR_MSG.required),
   recruitmentTarget: z
     .string()
     .min(1, ERROR_MSG.required)
     .max(50, ERROR_MSG.exceed.recruitmentTarget),
   recruitmentNum: z.number().min(1, ERROR_MSG.numberRequired),
   currentMemberNum: z.number().min(1, ERROR_MSG.numberRequired),
-  recruitmentDeadline: z.string().min(1, ERROR_MSG.required),
-  activityStart: z.string().min(1, ERROR_MSG.required),
-  activityFinish: z.string().min(1, ERROR_MSG.required),
+  recruitmentStart: z.string().date(),
+  recruitmentDeadline: z.string().date(),
+  activityStart: z.string().date(),
+  activityFinish: z.string().date(),
   activityCycle: z
     .string()
     .min(1, ERROR_MSG.required)

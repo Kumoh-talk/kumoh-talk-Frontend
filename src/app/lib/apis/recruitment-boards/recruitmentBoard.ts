@@ -64,6 +64,26 @@ export const postRecruitmentBoard = (formData: {
   );
 };
 
+export const getRecruitmentBoardInfo = (recruitmentBoardId: string) => {
+  return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}/board`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
+
+export const getRecruitmentBoardQuestionForm = (recruitmentBoardId: string) => {
+  return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}/form`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
+
 export const deleteRecruitmentBoard = (recruitmentBoardId: string) => {
   return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}`, {
     method: 'DELETE',
@@ -71,8 +91,8 @@ export const deleteRecruitmentBoard = (recruitmentBoardId: string) => {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-  })
-}
+  });
+};
 
 export const getRecruitmentBoardComment = (recruitmentBoardId: string) => {
   return _fetch(`${baseUrl}/recruitment-board/comments/${recruitmentBoardId}`, {

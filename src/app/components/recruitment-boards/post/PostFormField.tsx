@@ -13,9 +13,7 @@ export default function PostFormField({
   questionError: string;
 }) {
   const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     control,
   } = useFormContext();
 
@@ -54,9 +52,17 @@ export default function PostFormField({
       <div className={styles.row}>
         <InputField
           control={control}
-          name='recruitmentDeadline'
-          label='모집기한'
+          name='recruitmentStart'
+          label='모집시작일'
           type='date'
+          min={new Date().toISOString().split('T')[0]}
+        />
+        <InputField
+          control={control}
+          name='recruitmentDeadline'
+          label='모집마감일'
+          type='date'
+          min={new Date().toISOString().split('T')[0]}
         />
       </div>
       <div className={styles.row}>
@@ -65,12 +71,14 @@ export default function PostFormField({
           name='activityStart'
           label='활동시작일'
           type='date'
+          min={new Date().toISOString().split('T')[0]}
         />
         <InputField
           control={control}
           name='activityFinish'
           label='활동종료일'
           type='date'
+          min={new Date().toISOString().split('T')[0]}
         />
       </div>
       <div className={styles.row}>

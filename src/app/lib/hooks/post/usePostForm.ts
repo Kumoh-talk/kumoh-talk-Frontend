@@ -1,25 +1,10 @@
 import { useContext } from 'react';
-import { TabsContext } from '@/app/components/recruitment-boards/post/TabsProvider';
 import { PostContext } from '@/app/components/recruitment-boards/post/PostProvider';
 import { PostBoard } from '../../types/recruitmentBoards/post/postBoard';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { PostForm } from '../../types/recruitmentBoards/post/postForm';
 import { postRecruitmentBoard } from '../../apis/recruitment-boards/recruitmentBoard';
-
-const defaultValues: PostBoard = {
-  title: '',
-  summary: '',
-  host: '',
-  content: '',
-  recruitmentTarget: '',
-  recruitmentNum: 0,
-  currentMemberNum: 0,
-  recruitmentDeadline: '',
-  activityStart: '',
-  activityFinish: '',
-  activityCycle: '',
-};
 
 function validateQuestionForm(
   form: PostForm[],
@@ -48,24 +33,30 @@ function validateQuestionForm(
   return !hasError;
 }
 
-export default function usePostForm({ resolver }: { resolver: any }) {
+export default function usePostForm({
+  defaultValues,
+  resolver,
+}: {
+  defaultValues: PostBoard;
+  resolver: any;
+}) {
   const router = useRouter();
-  const { state } = useContext(TabsContext);
   const { form, questionError, setQuestionError } = useContext(PostContext);
   const formState = useForm({ defaultValues, resolver });
 
   const onSubmit = async (data: PostBoard) => {
     if (!validateQuestionForm(form, setQuestionError)) {
+      console.log('폼 검증 에러');
       return;
     }
 
     const formData = {
-      board: {
-        ...state,
-        ...data,
-      },
+      board: data,
       form,
     };
+    formData.board.recruitmentStart = new Date(
+      formData.board.recruitmentStart
+    ).toISOString();
     formData.board.recruitmentDeadline = new Date(
       formData.board.recruitmentDeadline
     ).toISOString();
@@ -76,6 +67,9 @@ export default function usePostForm({ resolver }: { resolver: any }) {
       formData.board.activityFinish
     ).toISOString();
 
+    console.log(formData);
+    return;
+
     const response = await postRecruitmentBoard(formData);
 
     if (response.success === 'true') {
@@ -84,5 +78,5 @@ export default function usePostForm({ resolver }: { resolver: any }) {
   };
   const onError = (error: unknown) => console.log(error);
 
-  return { state, form, formState, onSubmit, onError, questionError };
+  return { form, formState, onSubmit, onError, questionError };
 }

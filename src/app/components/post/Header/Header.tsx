@@ -1,6 +1,12 @@
 'use client';
 
-import { useState, useRef, useCallback, MouseEvent } from 'react';
+import {
+  useState,
+  useRef,
+  useCallback,
+  useTransition,
+  MouseEvent,
+} from 'react';
 import { useRouter } from 'next/navigation';
 import { debounce } from 'es-toolkit';
 import Link from 'next/link';
@@ -18,23 +24,22 @@ type ModalType = 'draft' | 'publish';
 
 const Header = () => {
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
+  
   const modalRef = useRef<HTMLDivElement>(null);
-
-  useClickOutside(modalRef, () => setActiveModal(null));
-
-  const { lastSavedAt } = useAutoSave();
-
   const router = useRouter();
+  
+  const { lastSavedAt } = useAutoSave();
+  
+  useClickOutside(modalRef, () => setActiveModal(null));
 
   const handleClose = () => {
     setActiveModal(null);
   };
 
   const { submitDraft } = useSubmitDraft(handleClose);
-
-  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 1000), [
-      submitDraft,
-    ]);
+  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 200), [
+    submitDraft,
+  ]);
 
   const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();

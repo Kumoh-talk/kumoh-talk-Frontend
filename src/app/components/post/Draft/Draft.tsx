@@ -11,7 +11,7 @@ interface DraftProps {
 
 const Draft = ({ close }: DraftProps) => {
   const { submitDraft } = useSubmitDraft(close);
-  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 1000), [
+  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 200), [
     submitDraft,
   ]);
 

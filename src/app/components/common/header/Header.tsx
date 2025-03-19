@@ -15,9 +15,9 @@ export default function Header({ title = '' }: Props) {
   return (
     <Background className={styles.header} alwaysVisible={!!title}>
       <div className={styles.left}>
-        <Link href="/">야밤의 금오톡</Link>
+        <Link href='/'>야밤의 금오톡</Link>
         {title && (
-          <Link href="." className={styles.title}>
+          <Link href='.' className={styles.title}>
             {title}
           </Link>
         )}

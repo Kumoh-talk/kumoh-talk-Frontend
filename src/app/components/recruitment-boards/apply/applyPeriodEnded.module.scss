@@ -1,0 +1,41 @@
+@import 'mixin';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid var(--color-gray-800);
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 4rem;
+
+  h1 {
+    @include largeTitle;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    @include title3;
+    color: var(--color-black-50);
+    margin-bottom: 1rem;
+  }
+}
+
+.dateContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+
+  p {
+    @include title3;
+    display: inline-flex;
+    color: var(--color-black-50);
+    align-items: center;
+    gap: 0.5rem;
+  }
+}

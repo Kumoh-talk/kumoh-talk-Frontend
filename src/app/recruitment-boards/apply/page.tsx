@@ -34,6 +34,7 @@ export default async function Page({
   const { id, title, boardType, tag, detail } = searchParams;
   const headerTitle = matchRecruitmentTitle(searchParams.boardType);
   const questions: QuestionsResponse = await getQuestions(id);
+  const isQuestionsError = !questions.data;
 
   return (
     <div className={styles.page}>
@@ -49,6 +50,7 @@ export default async function Page({
         <RecruitmentApplyForm
           recruitmentBoardId={id}
           questions={questions.data}
+          isQuestionsError={isQuestionsError}
         />
       </main>
       <Footer />

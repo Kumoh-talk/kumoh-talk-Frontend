@@ -7,9 +7,11 @@ import { postApplication } from '@/app/lib/apis/recruitment-boards/apply/post';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { recruitmentApplySchema } from './../../../lib/schemas/recruitmentApplySchema';
+import ApplyPeriodEnded from './ApplyPeriodEnded';
 export interface Props {
   recruitmentBoardId: string;
   questions: Questions[];
+  isQuestionsError: boolean;
 }
 
 function parseFormDataToRequestBody(data: { [key: string]: string }) {
@@ -32,16 +34,23 @@ function parseFormDataToRequestBody(data: { [key: string]: string }) {
 export default function RecruitmentApplyForm({
   recruitmentBoardId,
   questions,
+  isQuestionsError,
 }: Props) {
-  const defaultValues = Object.fromEntries(
-    questions?.map(({ questionId, type }) => [
-      questionId,
-      type === 'DESCRIPTION' ? '' : [],
-    ])
-  );
+  const defaultValues = questions
+    ? Object.fromEntries(
+        questions?.map(({ questionId, type }) => [
+          questionId,
+          type === 'DESCRIPTION' ? '' : [],
+        ])
+      )
+    : {};
   const router = useRouter();
-  const schema = recruitmentApplySchema(questions);
+  const schema = questions && recruitmentApplySchema(questions);
   const formState = useForm({ defaultValues, resolver: zodResolver(schema) });
+
+  if (isQuestionsError) {
+    return <ApplyPeriodEnded recruitmentBoardId={recruitmentBoardId} />;
+  }
 
   const onSubmit = async (data: { [key: string]: any }) => {
     const formData = parseFormDataToRequestBody(data);

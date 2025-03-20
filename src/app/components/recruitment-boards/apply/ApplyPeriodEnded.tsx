@@ -1,4 +1,4 @@
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, CaptionsOff, Clock } from 'lucide-react';
 import Button from '../../common/button/Button';
 import styles from './applyPeriodEnded.module.scss';
 import { useEffect, useState } from 'react';
@@ -33,6 +33,7 @@ export default function ApplyPeriodEnded({
 
   return (
     <div className={styles.container}>
+      <CaptionsOff className={styles.offIcon} />
       <h1>현재 신청 기간이 아닙니다</h1>
       <p>
         이 모집글의 신청 기간이 종료되었거나 아직 시작되지 않았습니다. 신청

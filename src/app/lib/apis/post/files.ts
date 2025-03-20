@@ -60,3 +60,11 @@ export const postImage = (boardId: number, url: string) => {
     }
   );
 };
+
+export const putAttach = (attach : File, presignedUrl : string) => {
+  return fetch(presignedUrl, {
+    method: 'PUT',
+    body: attach,
+    headers: { 'Content-Type': attach.type },
+  });
+}

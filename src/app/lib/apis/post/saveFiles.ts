@@ -2,6 +2,7 @@ import {
   postPresignedUrl,
   putImage,
   postImage,
+  putAttach,
 } from '@/app/lib/apis/post/files';
 import {
   findImageNodes,
@@ -111,4 +112,20 @@ const getAttachPresignedURL = async (boardId: number, attachNodes: Array<any>) =
   }
 
   return presignedUrls;
+};
+
+const uploadAttach = async (attach: File, presignedUrl: string) => {
+  try {
+    await putAttach(attach, presignedUrl);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const uploadAttaches = async (attaches: File[], presignedUrls: string[]) => {
+  const uploadPromises = presignedUrls.map((url, idx) =>
+    uploadAttach(attaches[idx], url)
+  );
+
+  await Promise.all(uploadPromises);
 };

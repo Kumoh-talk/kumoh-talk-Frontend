@@ -31,4 +31,33 @@ const findImageNodes = (editor: Editor) => {
   return imageNodes;
 };
 
-export { includesCustomNode, findImageNodes };
+const convertBase64ToFile = (base64: string, fileName: string): File => {
+  const [header, data] = base64.split(',');
+  const mimeMatch = header.match(/:(.*?);/);
+
+  if (!mimeMatch) {
+    throw new Error('유효하지 않은 Base64 데이터입니다.');
+  }
+
+  const mime = mimeMatch[1];
+  const bstr = atob(data);
+  const n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  for (let i = 0; i < n; i++) {
+    u8arr[i] = bstr.charCodeAt(i);
+  }
+
+  return new File([u8arr], fileName, { type: mime });
+};
+
+const extractFilesFromImageNodes = (imageNodes: Array<any>): File[] => {
+  return imageNodes.map(({ node }) => {
+    const src = node.attrs.src;
+    const fileName = node.attrs.title;
+
+    return convertBase64ToFile(src, fileName);
+  });
+};
+
+export { includesCustomNode, findImageNodes, extractFilesFromImageNodes };

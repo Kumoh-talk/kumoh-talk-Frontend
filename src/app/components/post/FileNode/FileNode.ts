@@ -17,6 +17,27 @@ const FileNode = Node.create({
     };
   },
 
+  parseHTML() {
+    return [
+      {
+        tag: 'figure.editorFileContainer',
+        getAttrs: (el) => {
+          const link = el.querySelector('.editorFileContent');
+          const fileNameElement = el.querySelector('.editorFileName');
+          const fileTypeElement = el.querySelector('.editorFileType');
+          const fileSizeElement = el.querySelector('.editorFileSize');
+
+          return {
+            fileUrl: link?.getAttribute('href') || '',
+            fileName: fileNameElement?.textContent || '',
+            fileType: fileTypeElement?.textContent?.replace('.', '') || '',
+            fileSize: fileSizeElement?.textContent || '',
+          };
+        },
+      },
+    ];
+  },
+
   renderHTML({ node }) {
     const { fileName, fileType, fileSize, fileUrl } = node.attrs;
 

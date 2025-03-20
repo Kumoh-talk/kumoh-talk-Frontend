@@ -35,3 +35,11 @@ export const postPresignedUrl = (
     }
   );
 };
+
+export const putImage = (image: File, presignedUrl: string) => {
+  return fetch(presignedUrl, {
+    method: 'PUT',
+    body: image,
+    headers: { 'Content-Type': image.type },
+  });
+};

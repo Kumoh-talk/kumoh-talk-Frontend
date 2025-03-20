@@ -1,4 +1,4 @@
-import { postPresignedUrl } from '@/app/lib/apis/post/files';
+import { postPresignedUrl, putImage } from '@/app/lib/apis/post/files';
 
 const getPresignedUrl = async (boardId: number, imageNodes: Array<any>) => {
   const presignedUrls: string[] = [];
@@ -22,4 +22,20 @@ const getPresignedUrl = async (boardId: number, imageNodes: Array<any>) => {
   }
 
   return presignedUrls;
+};
+
+const uploadImage = async (image: File, presignedUrl: string) => {
+  try {
+    await putImage(image, presignedUrl);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const uploadImages = async (images: File[], presignedUrls: string[]) => {
+  const uploadPromises = presignedUrls.map((url, idx) =>
+    uploadImage(images[idx], url)
+  );
+
+  await Promise.all(uploadPromises);
 };

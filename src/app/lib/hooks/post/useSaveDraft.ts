@@ -35,6 +35,8 @@ export const useSaveDraft = (close: () => void) => {
         contents = await saveImages(editor, boardId);
       }
 
+      editor.commands.setContent(contents);
+
       await editDraft(
         {
           id: boardId,
@@ -60,6 +62,8 @@ export const useSaveDraft = (close: () => void) => {
       setBoardId(newBoardId);
 
       contents = await saveImages(editor, newBoardId);
+
+      editor.commands.setContent(contents);
 
       await editDraft(
         {

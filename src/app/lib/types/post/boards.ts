@@ -1,7 +1,7 @@
 export interface DraftPreview {
   boardId: number;
   title: string;
-  updatedAt: number[];
+  updatedAt: string;
 }
 
 export interface DraftContent {

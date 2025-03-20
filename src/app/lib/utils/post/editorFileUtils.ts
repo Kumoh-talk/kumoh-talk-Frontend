@@ -78,6 +78,26 @@ const extractFilesFromImageNodes = (imageNodes: Array<any>): File[] => {
   });
 };
 
+const convertBlobToFile = async (blobUrl: string, filename: string) => {
+  const response = await fetch(blobUrl);
+  const blob = await response.blob();
+
+  const file = new File([blob], filename, { type: blob.type });
+
+  return file;
+};
+
+const extractFilesFromAttachNodes = async (attachNodes: Array<any>) => {
+  const convertPromises = attachNodes.map(async ({ node }) => {
+    const fileUrl = node.attrs.fileUrl;
+    const fileName = node.attrs.fileName;
+
+    return await convertBlobToFile(fileUrl, fileName);
+  });
+
+  return await Promise.all(convertPromises);
+};
+
 const replaceUrls = (
   serializedHTML: string,
   imageNodes: Array<any>,
@@ -100,5 +120,6 @@ export {
   findImageNodes,
   findAttachNodes,
   extractFilesFromImageNodes,
+  extractFilesFromAttachNodes,
   replaceUrls,
 };

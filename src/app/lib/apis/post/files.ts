@@ -43,3 +43,20 @@ export const putImage = (image: File, presignedUrl: string) => {
     headers: { 'Content-Type': image.type },
   });
 };
+
+export const postImage = (boardId: number, url: string) => {
+  return _fetch(
+    `${baseUrl}/boards/files/images`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    {
+      boardId,
+      url,
+    }
+  );
+};

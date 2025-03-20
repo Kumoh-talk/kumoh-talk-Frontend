@@ -1,4 +1,8 @@
-import { postPresignedUrl, putImage } from '@/app/lib/apis/post/files';
+import {
+  postPresignedUrl,
+  putImage,
+  postImage,
+} from '@/app/lib/apis/post/files';
 
 const getPresignedUrl = async (boardId: number, imageNodes: Array<any>) => {
   const presignedUrls: string[] = [];
@@ -38,4 +42,24 @@ const uploadImages = async (images: File[], presignedUrls: string[]) => {
   );
 
   await Promise.all(uploadPromises);
+};
+
+const submitImageUrl = async (boardId: number, presignedUrl: string) => {
+  try {
+    const response = await postImage(boardId, presignedUrl);
+
+    if (response.success !== 'true') {
+      console.error(`이미지 업로드 실패`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const submitImageUrls = async (boardId: number, presignedUrls: string[]) => {
+  const submitPromises = presignedUrls.map((url) =>
+    submitImageUrl(boardId, url)
+  );
+
+  await Promise.all(submitPromises);
 };

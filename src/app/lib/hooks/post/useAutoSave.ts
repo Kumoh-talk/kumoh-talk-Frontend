@@ -3,12 +3,16 @@ import { debounce } from 'es-toolkit';
 import { useCurrentEditor } from '@tiptap/react';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
+import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
+import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
+import { saveImages } from '@/app/lib/apis/post/saveFiles';
 import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
 
 const useAutoSave = () => {
   const { boardId, setBoardId, title, tagList, boardHeadImageUrl } =
     usePostContent();
   const { editor } = useCurrentEditor();
+  const { initBoardId } = useInitBoardId();
   const contents = editor?.getHTML() || '<p></p>';
 
   const prevTitle = useRef<string>('');
@@ -30,27 +34,55 @@ const useAutoSave = () => {
       return;
     }
 
+    const customNode = includesCustomNode(editor);
+    let replacedContents = editor.getHTML();
+
     if (boardId) {
+      if (customNode){
+        replacedContents = await saveImages(editor, boardId);
+      }
+
       await editDraft({
         id: boardId,
         title,
-        contents: editor.getHTML(),
+        contents: replacedContents,
         categoryName: tagList,
-        boardHeadImageUrl,
-      });
-    } else {
-      const newBoardId = await createDraft({
-        title,
-        contents: editor.getHTML(),
-        categoryName: tagList,
-        boardType: 'SEMINAR',
         boardHeadImageUrl,
       });
 
-      if (newBoardId) {
-        setBoardId(newBoardId);
-      }
+      return;
     }
+
+    if (customNode) {
+      const newBoardId = await initBoardId();
+
+      if (!newBoardId) return;
+
+      setBoardId(newBoardId);
+
+      replacedContents = await saveImages(editor, newBoardId);
+
+      await editDraft({
+        id: newBoardId,
+        title,
+        contents: replacedContents,
+        categoryName: tagList,
+        boardHeadImageUrl,
+      });
+
+      return;
+    }
+
+    const newBoardId = await createDraft({
+      title,
+      contents: editor.getHTML(),
+      categoryName: tagList,
+      boardType: 'SEMINAR',
+      boardHeadImageUrl,
+    });
+
+    if (newBoardId) setBoardId(newBoardId);
+
     setLastSavedAt(getHHmmssFormat(new Date()));
   };
 
@@ -62,7 +94,7 @@ const useAutoSave = () => {
     return () => {
       debouncedSaveDraft.cancel();
     };
-  }, [title, contents, tagList, boardHeadImageUrl, debouncedSaveDraft]);
+  }, [title, contents, tagList, boardHeadImageUrl]);
 
   return {
     saveDraft: debouncedSaveDraft,

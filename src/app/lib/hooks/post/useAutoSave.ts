@@ -34,11 +34,11 @@ const useAutoSave = () => {
       return;
     }
 
-    const customNode = includesCustomNode(editor);
+    const imageNode = includesCustomNode(editor, 'IMAGE');
     let replacedContents = editor.getHTML();
 
     if (boardId) {
-      if (customNode){
+      if (imageNode){
         replacedContents = await saveImages(editor, boardId);
       }
 
@@ -53,7 +53,7 @@ const useAutoSave = () => {
       return;
     }
 
-    if (customNode) {
+    if (imageNode) {
       const newBoardId = await initBoardId();
 
       if (!newBoardId) return;

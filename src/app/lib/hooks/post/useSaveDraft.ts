@@ -27,11 +27,11 @@ export const useSaveDraft = (close: () => void) => {
       return;
     }
 
-    const customNode = includesCustomNode(editor);
+    const imageNode = includesCustomNode(editor, 'IMAGE');
     let contents = editor.getHTML();
 
     if (boardId) {
-      if (customNode){
+      if (imageNode){
         contents = await saveImages(editor, boardId);
       }
 
@@ -49,7 +49,7 @@ export const useSaveDraft = (close: () => void) => {
       return;
     }
 
-    if (customNode) {
+    if (imageNode) {
       const newBoardId = await initBoardId();
 
       if (!newBoardId) {

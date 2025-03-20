@@ -5,11 +5,13 @@ const CUSTOM_NODE = {
   ATTACH: 'fileNode',
 };
 
-const includesCustomNode = (editor: Editor) => {
+type CustomNode = keyof typeof CUSTOM_NODE;
+
+const includesCustomNode = (editor: Editor, customNode: CustomNode) => {
   let includes = false;
 
   editor.state.doc.descendants((node) => {
-    if (node.type.name === CUSTOM_NODE.IMAGE) {
+    if (node.type.name === CUSTOM_NODE[customNode]) {
       includes = true;
     }
   });

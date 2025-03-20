@@ -68,3 +68,20 @@ export const putAttach = (attach : File, presignedUrl : string) => {
     headers: { 'Content-Type': attach.type },
   });
 }
+
+export const patchAttach = (boardId : number, url : string) => {
+  return _fetch(
+    `${baseUrl}/boards/files/attach`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    {
+      boardId,
+      url,
+    }
+  );
+}

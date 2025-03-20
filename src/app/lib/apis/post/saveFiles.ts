@@ -3,6 +3,7 @@ import {
   putImage,
   postImage,
   putAttach,
+  patchAttach,
 } from '@/app/lib/apis/post/files';
 import {
   findImageNodes,
@@ -128,4 +129,24 @@ const uploadAttaches = async (attaches: File[], presignedUrls: string[]) => {
   );
 
   await Promise.all(uploadPromises);
+};
+
+const submitAttachUrl = async (boardId: number, presignedUrl: string) => {
+  try {
+    const response = await patchAttach(boardId, presignedUrl);
+
+    if (response.success !== 'true') {
+      console.error(`이미지 업로드 실패`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const submitAttachUrls = async (boardId: number, presignedUrls: string[]) => {
+  const submitPromises = presignedUrls.map((url) =>
+    submitAttachUrl(boardId, url)
+  );
+
+  await Promise.all(submitPromises);
 };

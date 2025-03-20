@@ -6,7 +6,7 @@ import {
 import {
   findImageNodes,
   extractFilesFromImageNodes,
-  replaceUrls
+  replaceUrls,
 } from '@/app/lib/utils/post/editorFileUtils';
 import type { Editor } from '@tiptap/react';
 
@@ -89,4 +89,26 @@ const saveImages = async (editor: Editor, boardId: number) => {
   return replacedHTML;
 };
 
-export { saveImages };
+const getAttachPresignedURL = async (boardId: number, attachNodes: Array<any>) => {
+  const presignedUrls: string[] = [];
+
+  for (const { node } of attachNodes) {
+    const fileName = node.attrs.fileName;
+
+    try {
+      const response = await postPresignedUrl(boardId, fileName, 'ATTACH');
+
+      if (response.success === 'true') {
+        const presignedURL = response.data;
+
+        presignedUrls.push(presignedURL);
+      } else {
+        console.error('Presigned URL 발급 실패');
+      }
+    } catch (error) {
+      console.error('Presigned URL 발급 실패');
+    }
+  }
+
+  return presignedUrls;
+};

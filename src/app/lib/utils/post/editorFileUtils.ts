@@ -60,4 +60,26 @@ const extractFilesFromImageNodes = (imageNodes: Array<any>): File[] => {
   });
 };
 
-export { includesCustomNode, findImageNodes, extractFilesFromImageNodes };
+const replaceUrls = (
+  serializedHTML: string,
+  imageNodes: Array<any>,
+  presignedUrls: string[]
+) => {
+  let replacedHTML = serializedHTML;
+
+  imageNodes.forEach((node, index) => {
+    const oldSrc = node.node.attrs.src;
+    const newSrc = presignedUrls[index].split('?')[0];
+
+    replacedHTML = replacedHTML.replace(oldSrc, newSrc);
+  });
+
+  return replacedHTML;
+};
+
+export {
+  includesCustomNode,
+  findImageNodes,
+  extractFilesFromImageNodes,
+  replaceUrls,
+};

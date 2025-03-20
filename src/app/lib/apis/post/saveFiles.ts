@@ -3,6 +3,12 @@ import {
   putImage,
   postImage,
 } from '@/app/lib/apis/post/files';
+import {
+  findImageNodes,
+  extractFilesFromImageNodes,
+  replaceUrls
+} from '@/app/lib/utils/post/editorFileUtils';
+import type { Editor } from '@tiptap/react';
 
 const getPresignedUrl = async (boardId: number, imageNodes: Array<any>) => {
   const presignedUrls: string[] = [];
@@ -63,3 +69,24 @@ const submitImageUrls = async (boardId: number, presignedUrls: string[]) => {
 
   await Promise.all(submitPromises);
 };
+
+const saveImages = async (editor: Editor, boardId: number) => {
+  const serializedHTML = editor.getHTML();
+  const customImageNodes = findImageNodes(editor);
+  const files = extractFilesFromImageNodes(customImageNodes);
+
+  const presignedUrls = await getPresignedUrl(boardId, customImageNodes);
+
+  await uploadImages(files, presignedUrls);
+  await submitImageUrls(boardId, presignedUrls);
+
+  const replacedHTML = replaceUrls(
+    serializedHTML,
+    customImageNodes,
+    presignedUrls
+  );
+
+  editor.commands.setContent(replacedHTML);
+};
+
+export { saveImages };

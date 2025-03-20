@@ -4,7 +4,7 @@ import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
-import { saveImages } from '@/app/lib/apis/post/saveFiles';
+import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
 
 export const useSaveDraft = (close: () => void) => {
   const { boardId, setBoardId, title, tagList, boardHeadImageUrl } =
@@ -28,14 +28,20 @@ export const useSaveDraft = (close: () => void) => {
     }
 
     const imageNode = includesCustomNode(editor, 'IMAGE');
+    const attachNode = includesCustomNode(editor, 'ATTACH');
+
     let contents = editor.getHTML();
 
     if (boardId) {
-      if (imageNode){
+      if (imageNode) {
         contents = await saveImages(editor, boardId);
+        editor.commands.setContent(contents);
       }
 
-      editor.commands.setContent(contents);
+      if (attachNode) {
+        contents = await saveAttaches(editor, boardId);
+        editor.commands.setContent(contents);
+      }
 
       await editDraft(
         {
@@ -51,7 +57,7 @@ export const useSaveDraft = (close: () => void) => {
       return;
     }
 
-    if (imageNode) {
+    if (imageNode || attachNode) {
       const newBoardId = await initBoardId();
 
       if (!newBoardId) {
@@ -61,9 +67,15 @@ export const useSaveDraft = (close: () => void) => {
 
       setBoardId(newBoardId);
 
-      contents = await saveImages(editor, newBoardId);
+      if (imageNode) {
+        contents = await saveImages(editor, newBoardId);
+        editor.commands.setContent(contents);
+      }
 
-      editor.commands.setContent(contents);
+      if (attachNode) {
+        contents = await saveAttaches(editor, newBoardId);
+        editor.commands.setContent(contents);
+      }
 
       await editDraft(
         {

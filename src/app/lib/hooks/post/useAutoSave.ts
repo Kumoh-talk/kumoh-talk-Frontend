@@ -5,7 +5,7 @@ import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
-import { saveImages } from '@/app/lib/apis/post/saveFiles';
+import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
 import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
 
 const useAutoSave = () => {
@@ -35,11 +35,19 @@ const useAutoSave = () => {
     }
 
     const imageNode = includesCustomNode(editor, 'IMAGE');
+    const attachNode = includesCustomNode(editor, 'ATTACH');
+
     let replacedContents = editor.getHTML();
 
     if (boardId) {
-      if (imageNode){
+      if (imageNode) {
         replacedContents = await saveImages(editor, boardId);
+        editor.commands.setContent(replacedContents);
+      }
+
+      if (attachNode) {
+        replacedContents = await saveAttaches(editor, boardId);
+        editor.commands.setContent(replacedContents);
       }
 
       await editDraft({
@@ -50,17 +58,27 @@ const useAutoSave = () => {
         boardHeadImageUrl,
       });
 
+      setLastSavedAt(getHHmmssFormat(new Date()));
+
       return;
     }
 
-    if (imageNode) {
+    if (imageNode || attachNode) {
       const newBoardId = await initBoardId();
 
       if (!newBoardId) return;
 
       setBoardId(newBoardId);
 
-      replacedContents = await saveImages(editor, newBoardId);
+      if (imageNode) {
+        replacedContents = await saveImages(editor, newBoardId);
+        editor.commands.setContent(replacedContents);
+      }
+
+      if (attachNode) {
+        replacedContents = await saveAttaches(editor, newBoardId);
+        editor.commands.setContent(replacedContents);
+      }
 
       await editDraft({
         id: newBoardId,
@@ -69,6 +87,8 @@ const useAutoSave = () => {
         categoryName: tagList,
         boardHeadImageUrl,
       });
+
+      setLastSavedAt(getHHmmssFormat(new Date()));
 
       return;
     }

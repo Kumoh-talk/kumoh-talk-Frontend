@@ -86,7 +86,7 @@ const saveImages = async (editor: Editor, boardId: number) => {
     presignedUrls
   );
 
-  editor.commands.setContent(replacedHTML);
+  return replacedHTML;
 };
 
 export { saveImages };

@@ -28,15 +28,18 @@ export const useSaveDraft = (close: () => void) => {
     }
 
     const customNode = includesCustomNode(editor);
+    let contents = editor.getHTML();
 
     if (boardId) {
-      if (customNode) saveImages(editor, boardId);
+      if (customNode){
+        contents = await saveImages(editor, boardId);
+      }
 
       await editDraft(
         {
           id: boardId,
           title,
-          contents: editor.getHTML(),
+          contents,
           categoryName: tagList,
           boardHeadImageUrl,
         },
@@ -56,12 +59,13 @@ export const useSaveDraft = (close: () => void) => {
 
       setBoardId(newBoardId);
 
-      await saveImages(editor, newBoardId);
+      contents = await saveImages(editor, newBoardId);
+
       await editDraft(
         {
           id: newBoardId,
           title,
-          contents: editor.getHTML(),
+          contents,
           categoryName: tagList,
           boardHeadImageUrl,
         },
@@ -74,7 +78,7 @@ export const useSaveDraft = (close: () => void) => {
     const newBoardId = await createDraft(
       {
         title,
-        contents: editor.getHTML(),
+        contents,
         categoryName: tagList,
         boardType: 'SEMINAR',
         boardHeadImageUrl,

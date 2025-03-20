@@ -20,7 +20,7 @@ const EditorImageButton = ({ editor }: EditorImageButtonProps) => {
     const imageUrl = await convertToBase64(file);
 
     if (imageUrl) {
-      editor.chain().focus().setImage({ src: imageUrl }).run();
+      editor.chain().focus().setImage({ src: imageUrl, title: file.name }).run();
     }
   };
 

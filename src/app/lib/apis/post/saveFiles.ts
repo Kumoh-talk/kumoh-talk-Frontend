@@ -7,8 +7,11 @@ import {
 } from '@/app/lib/apis/post/files';
 import {
   findImageNodes,
+  findAttachNodes,
   extractFilesFromImageNodes,
+  extractFilesFromAttachNodes,
   replaceUrls,
+  replaceAttachUrls
 } from '@/app/lib/utils/post/editorFileUtils';
 import type { Editor } from '@tiptap/react';
 
@@ -150,3 +153,24 @@ const submitAttachUrls = async (boardId: number, presignedUrls: string[]) => {
 
   await Promise.all(submitPromises);
 };
+
+const saveAttaches = async (editor: Editor, boardId: number) => {
+  const serializedHTML = editor.getHTML();
+  const attachNodes = findAttachNodes(editor);
+  
+  const attaches = await extractFilesFromAttachNodes(attachNodes);
+  const presignedUrls = await getAttachPresignedURL(boardId, attachNodes);
+
+  await uploadAttaches(attaches, presignedUrls);
+  await submitAttachUrls(boardId, presignedUrls);
+
+  const replacedHTML = replaceAttachUrls(
+    serializedHTML,
+    attachNodes,
+    presignedUrls
+  );
+
+  return replacedHTML;
+};
+
+export { saveImages, saveAttaches };

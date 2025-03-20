@@ -115,6 +115,23 @@ const replaceUrls = (
   return replacedHTML;
 };
 
+const replaceAttachUrls = (
+  serializedHTML: string,
+  attachNodes: Array<any>,
+  presignedUrls: string[]
+) => {
+  let replacedHTML = serializedHTML;
+
+  attachNodes.forEach((node, index) => {
+    const oldUrl = node.node.attrs.fileUrl;
+    const newUrl = presignedUrls[index].split('?')[0];
+
+    replacedHTML = replacedHTML.replace(oldUrl, newUrl);
+  });
+
+  return replacedHTML;
+};
+
 export {
   includesCustomNode,
   findImageNodes,
@@ -122,4 +139,5 @@ export {
   extractFilesFromImageNodes,
   extractFilesFromAttachNodes,
   replaceUrls,
+  replaceAttachUrls
 };

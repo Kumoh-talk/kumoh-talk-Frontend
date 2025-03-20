@@ -2,6 +2,7 @@ import type { Editor } from '@tiptap/react';
 
 const CUSTOM_NODE = {
   IMAGE: 'customImage',
+  FILE: 'fileNode',
 };
 
 const includesCustomNode = (editor: Editor) => {
@@ -29,6 +30,18 @@ const findImageNodes = (editor: Editor) => {
   });
 
   return imageNodes;
+};
+
+const findFileNode = (editor: Editor) => {
+  let fileNode = null;
+
+  editor.state.doc.descendants((node, pos) => {
+    if (node.type.name === CUSTOM_NODE.FILE) {
+      fileNode = { node, pos };
+    }
+  });
+
+  return fileNode;
 };
 
 const convertBase64ToFile = (base64: string, fileName: string): File => {
@@ -80,6 +93,7 @@ const replaceUrls = (
 export {
   includesCustomNode,
   findImageNodes,
+  findFileNode,
   extractFilesFromImageNodes,
   replaceUrls,
 };

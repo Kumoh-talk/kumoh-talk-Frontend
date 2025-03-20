@@ -1,3 +1,4 @@
+import { findFileNode } from '@/app/lib/utils/post/editorFileUtils';
 import FileSvg from '@/app/assets/svg/Editor/FileSvg';
 import type { Editor } from '@tiptap/react';
 import type { FileInfo } from '../FileNode/FileComponent';
@@ -33,13 +34,41 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
     editor?.commands.insertContent(content);
   };
 
+  const deleteFilePreview = () => {
+    editor.commands.command(({ tr, state, dispatch }) => {
+      let deleted = false;
+
+      state.doc.descendants((node, pos) => {
+        if (node.type.name === 'fileNode') {
+          if (dispatch) {
+            tr.delete(pos, pos + node.nodeSize);
+          }
+          deleted = true;
+        }
+      });
+
+      return deleted;
+    });
+  };
+
   const handleEditorFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
     if (!file) return;
 
-    const fileInfo = getFileInfo(file);
+    const fileNode = findFileNode(editor);
 
+    if (!fileNode) {
+      const fileInfo = getFileInfo(file);
+      insertFilePreview(fileInfo);
+      return;
+    }
+
+    const confirm = window.confirm('첨부파일은 하나만 저장됩니다. 새로운 파일로 교체하시겠습니까?');
+    if (!confirm) return;
+
+    deleteFilePreview();
+
+    const fileInfo = getFileInfo(file);
     insertFilePreview(fileInfo);
   };
 

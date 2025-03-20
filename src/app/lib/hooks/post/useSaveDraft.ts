@@ -31,7 +31,6 @@ export const useSaveDraft = (close: () => void) => {
           contents: editor.getHTML(),
           categoryName: tagList,
           boardHeadImageUrl,
-          editor,
         },
         { onSuccess: handleSuccess, onError: handleError }
       );
@@ -43,7 +42,6 @@ export const useSaveDraft = (close: () => void) => {
           categoryName: tagList,
           boardType: 'SEMINAR',
           boardHeadImageUrl,
-          editor,
         },
         { onSuccess: handleSuccess, onError: handleError }
       );

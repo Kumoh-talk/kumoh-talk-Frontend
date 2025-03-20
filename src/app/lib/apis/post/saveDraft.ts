@@ -1,27 +1,18 @@
 import { updateDraft, postDraft } from '@/app/lib/apis/post/boards';
 import type { PostBoards, PatchBoards } from '@/app/lib/types/post/boards';
-import type { Editor } from '@tiptap/react';
 
 interface SaveDraftCallbacks {
   onSuccess?: () => void;
   onError?: () => void;
 }
 
-interface CreateDraftOption extends PostBoards {
-  editor: Editor;
-}
-
-interface EditDraftOption extends PatchBoards {
-  editor: Editor;
-}
-
 export const createDraft = async (
-  { title, categoryName, boardHeadImageUrl, editor }: CreateDraftOption,
+  { title, contents, categoryName, boardHeadImageUrl }: PostBoards,
   { onSuccess, onError }: SaveDraftCallbacks = {}
 ) => {
   const postData: PostBoards = {
     title,
-    contents: editor.getHTML(),
+    contents,
     categoryName,
     boardType: 'SEMINAR',
   };
@@ -49,13 +40,13 @@ export const createDraft = async (
 };
 
 export const editDraft = async (
-  { id, title, categoryName, boardHeadImageUrl, editor }: EditDraftOption,
+  { id, title, contents, categoryName, boardHeadImageUrl }: PatchBoards,
   { onSuccess, onError }: SaveDraftCallbacks = {}
 ) => {
   const patchData: PatchBoards = {
     id,
     title,
-    contents: editor.getHTML(),
+    contents,
     categoryName,
   };
 

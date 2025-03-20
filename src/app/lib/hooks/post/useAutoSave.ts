@@ -37,7 +37,6 @@ const useAutoSave = () => {
         contents: editor.getHTML(),
         categoryName: tagList,
         boardHeadImageUrl,
-        editor,
       });
     } else {
       const newBoardId = await createDraft({
@@ -46,7 +45,6 @@ const useAutoSave = () => {
         categoryName: tagList,
         boardType: 'SEMINAR',
         boardHeadImageUrl,
-        editor,
       });
 
       if (newBoardId) {

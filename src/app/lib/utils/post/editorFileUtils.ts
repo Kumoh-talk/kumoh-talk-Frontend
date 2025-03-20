@@ -2,7 +2,7 @@ import type { Editor } from '@tiptap/react';
 
 const CUSTOM_NODE = {
   IMAGE: 'customImage',
-  FILE: 'fileNode',
+  ATTACH: 'fileNode',
 };
 
 const includesCustomNode = (editor: Editor) => {
@@ -32,16 +32,19 @@ const findImageNodes = (editor: Editor) => {
   return imageNodes;
 };
 
-const findFileNode = (editor: Editor) => {
-  let fileNode = null;
+const findAttachNodes = (editor: Editor) => {
+  const attachNodes: Array<any> = [];
 
   editor.state.doc.descendants((node, pos) => {
-    if (node.type.name === CUSTOM_NODE.FILE) {
-      fileNode = { node, pos };
+    if (
+      node.type.name === CUSTOM_NODE.ATTACH &&
+      node.attrs.fileUrl.startsWith('blob:')
+    ) {
+      attachNodes.push({ node, pos });
     }
   });
 
-  return fileNode;
+  return attachNodes;
 };
 
 const convertBase64ToFile = (base64: string, fileName: string): File => {
@@ -93,7 +96,7 @@ const replaceUrls = (
 export {
   includesCustomNode,
   findImageNodes,
-  findFileNode,
+  findAttachNodes,
   extractFilesFromImageNodes,
   replaceUrls,
 };

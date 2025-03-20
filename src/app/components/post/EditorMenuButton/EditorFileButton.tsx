@@ -1,4 +1,4 @@
-import { findFileNode } from '@/app/lib/utils/post/editorFileUtils';
+import { findAttachNodes } from '@/app/lib/utils/post/editorFileUtils';
 import FileSvg from '@/app/assets/svg/Editor/FileSvg';
 import type { Editor } from '@tiptap/react';
 import type { FileInfo } from '../FileNode/FileComponent';
@@ -55,9 +55,9 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const fileNode = findFileNode(editor);
+    const attachNodes = findAttachNodes(editor);
 
-    if (!fileNode) {
+    if (attachNodes.length === 0) {
       const fileInfo = getFileInfo(file);
       insertFilePreview(fileInfo);
       return;

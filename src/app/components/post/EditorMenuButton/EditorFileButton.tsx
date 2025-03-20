@@ -60,6 +60,7 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
     if (attachNodes.length === 0) {
       const fileInfo = getFileInfo(file);
       insertFilePreview(fileInfo);
+      event.target.value = '';
       return;
     }
 
@@ -70,6 +71,7 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
 
     const fileInfo = getFileInfo(file);
     insertFilePreview(fileInfo);
+    event.target.value = '';
   };
 
   return (

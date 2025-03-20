@@ -2,7 +2,7 @@ import { updateDraft, postDraft } from '@/app/lib/apis/post/boards';
 import type { PostBoards, PatchBoards } from '@/app/lib/types/post/boards';
 import type { Editor } from '@tiptap/react';
 
-interface SubmitDraftCallbacks {
+interface SaveDraftCallbacks {
   onSuccess?: () => void;
   onError?: () => void;
 }
@@ -17,7 +17,7 @@ interface EditDraftOption extends PatchBoards {
 
 export const createDraft = async (
   { title, categoryName, boardHeadImageUrl, editor }: CreateDraftOption,
-  { onSuccess, onError }: SubmitDraftCallbacks = {}
+  { onSuccess, onError }: SaveDraftCallbacks = {}
 ) => {
   const postData: PostBoards = {
     title,
@@ -50,7 +50,7 @@ export const createDraft = async (
 
 export const editDraft = async (
   { id, title, categoryName, boardHeadImageUrl, editor }: EditDraftOption,
-  { onSuccess, onError }: SubmitDraftCallbacks = {}
+  { onSuccess, onError }: SaveDraftCallbacks = {}
 ) => {
   const patchData: PatchBoards = {
     id,

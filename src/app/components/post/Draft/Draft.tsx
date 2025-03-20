@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { useSubmitDraft } from '@/app/lib/hooks/post/useSubmitDraft';
+import { useSaveDraft } from '@/app/lib/hooks/post/useSaveDraft';
 import { debounce } from 'es-toolkit';
 import DraftList from './DraftList';
 import Button from '../../common/button/Button';
@@ -10,10 +9,8 @@ interface DraftProps {
 }
 
 const Draft = ({ close }: DraftProps) => {
-  const { submitDraft } = useSubmitDraft(close);
-  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 200), [
-    submitDraft,
-  ]);
+  const { saveDraft } = useSaveDraft(close);
+  const debouncedSubmitDraft = debounce(saveDraft, 200);
 
   return (
     <>

@@ -1,17 +1,11 @@
 'use client';
 
-import {
-  useState,
-  useRef,
-  useCallback,
-  useTransition,
-  MouseEvent,
-} from 'react';
+import { useState, useRef, MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { debounce } from 'es-toolkit';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { useSubmitDraft } from '@/app/lib/hooks/post/useSubmitDraft';
+import { useSaveDraft } from '@/app/lib/hooks/post/useSaveDraft';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import useAutoSave from '@/app/lib/hooks/post/useAutoSave';
 import Image from 'next/image';
@@ -24,27 +18,27 @@ type ModalType = 'draft' | 'publish';
 
 const Header = () => {
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
-  
+
   const modalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  
+
   const { lastSavedAt } = useAutoSave();
-  
+
   useClickOutside(modalRef, () => setActiveModal(null));
 
   const handleClose = () => {
     setActiveModal(null);
   };
 
-  const { submitDraft } = useSubmitDraft(handleClose);
-  const debouncedSubmitDraft = useCallback(debounce(submitDraft, 200), [
-    submitDraft,
-  ]);
+  const { saveDraft } = useSaveDraft(handleClose);
+  const debouncedSubmitDraft = debounce(saveDraft, 200);
 
   const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
 
-    const confirmLeave = confirm('페이지를 이동하시겠습니까? 변경사항이 저장되지 않을 수 있습니다.');
+    const confirmLeave = confirm(
+      '페이지를 이동하시겠습니까? 변경사항이 저장되지 않을 수 있습니다.'
+    );
 
     if (confirmLeave) {
       router.push(href);
@@ -66,7 +60,10 @@ const Header = () => {
         <div className={styles.buttonGroup}>
           {lastSavedAt && <span>{`자동 저장 완료 ${lastSavedAt}`}</span>}
           <div className={styles.draft}>
-            <button className={styles.saveButton} onClick={debouncedSubmitDraft}>
+            <button
+              className={styles.saveButton}
+              onClick={debouncedSubmitDraft}
+            >
               임시저장
             </button>
             <div className={styles.divider} />

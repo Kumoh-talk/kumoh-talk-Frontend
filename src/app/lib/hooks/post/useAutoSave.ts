@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { debounce } from 'es-toolkit';
 import { useCurrentEditor } from '@tiptap/react';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
-import { createDraft, editDraft } from '@/app/lib/apis/post/submitDraft';
+import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
 
 const useAutoSave = () => {
@@ -18,7 +18,7 @@ const useAutoSave = () => {
 
   const [lastSavedAt, setLastSavedAt] = useState('');
 
-  const saveDraft = useCallback(async () => {
+  const saveDraft = async () => {
     if (!title.trim() || !contents.trim() || !editor) return;
 
     if (
@@ -54,12 +54,9 @@ const useAutoSave = () => {
       }
     }
     setLastSavedAt(getHHmmssFormat(new Date()));
-  }, [title, contents, tagList, boardHeadImageUrl]);
+  };
 
-  const debouncedSaveDraft = useCallback(
-    debounce(saveDraft, 5000, { edges: ['trailing'] }),
-    [saveDraft]
-  );
+  const debouncedSaveDraft = debounce(saveDraft, 5000, { edges: ['trailing'] });
 
   useEffect(() => {
     debouncedSaveDraft();

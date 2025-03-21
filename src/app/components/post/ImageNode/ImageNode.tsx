@@ -1,6 +1,7 @@
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import ImageComponent from './ImageComponent';
 import Image from '@tiptap/extension-image';
+import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -18,7 +19,7 @@ declare module '@tiptap/core' {
 }
 
 const CustomImage = Image.extend({
-  name: 'customImage',
+  name: CUSTOM_NODE.IMAGE,
 
   addAttributes() {
     return {
@@ -28,6 +29,30 @@ const CustomImage = Image.extend({
       margin: { default: '0 auto' },
       caption: { default: '' },
     };
+  },
+
+  parseHTML() {
+    return [
+      {
+        tag: 'div.editorCustomImage',
+        getAttrs: (el) => {
+          const container = el.querySelector('.editorCustomImageContainer') as HTMLElement | null;
+          const wrapper = container?.querySelector('.editorCustomImageWrapper') as HTMLElement | null;
+          const img = wrapper?.querySelector('.editorImage') as HTMLImageElement | null;
+          const caption = el.querySelector('.editorCustomImageCaption');
+
+          return {
+            src: img?.getAttribute('src') || '',
+            alt: img?.getAttribute('alt') || '',
+            title: img?.getAttribute('title') || '',
+            width: container?.style.width || '100%',
+            height: container?.style.height || 'auto',
+            margin: container?.style.margin || '0 auto',
+            caption: caption?.textContent || '',
+          };
+        },
+      },
+    ];
   },
 
   renderHTML({ node }) {
@@ -42,7 +67,7 @@ const CustomImage = Image.extend({
         'div',
         {
           class: 'editorCustomImageContainer',
-          style: `width: ${width}px; height: ${height}px; margin: ${margin};`,
+          style: `width: ${width}; height: ${height}; margin: ${margin};`,
         },
         [
           'div',

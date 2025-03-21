@@ -19,6 +19,31 @@ const LinkPreviewNode = Node.create({
     };
   },
 
+  parseHTML() {
+    return [
+      {
+        tag: 'figure.editorLinkPreviewContainer',
+        getAttrs: (el) => {
+          const anchor = el.querySelector('a.editorLinkPreviewContent');
+          const image = anchor?.querySelector('.editorLinkPreviewImage img');
+          const info = anchor?.querySelector('.editorLinkPreviewInfo');
+          const title = info?.querySelector('.editorLinkPreviewTitle');
+          const desc = info?.querySelector('.editorLinkPreviewDescription');
+          const url = info?.querySelector('.editorLinkPreviewUrl');
+
+          return {
+            ogImage: image?.getAttribute('src') || '',
+            ogTitle: title?.textContent || '',
+            ogDescription: desc?.textContent || '',
+            ogUrl: url?.textContent || '',
+            requestedUrl: anchor?.getAttribute('href') || '',
+            isLoading: false,
+          };
+        },
+      },
+    ];
+  },
+
   renderHTML({ node }) {
     const { ogImage, ogTitle, ogDescription, ogUrl, requestedUrl } = node.attrs;
 

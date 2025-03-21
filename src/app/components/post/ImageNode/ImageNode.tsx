@@ -1,6 +1,7 @@
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import ImageComponent from './ImageComponent';
 import Image from '@tiptap/extension-image';
+import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -18,7 +19,7 @@ declare module '@tiptap/core' {
 }
 
 const CustomImage = Image.extend({
-  name: 'customImage',
+  name: CUSTOM_NODE.IMAGE,
 
   addAttributes() {
     return {

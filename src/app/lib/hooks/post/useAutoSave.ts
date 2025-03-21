@@ -7,6 +7,7 @@ import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
 import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
 import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
+import { AUTO_SAVE_DELAY } from '@/app/lib/constants/post/board';
 
 const useAutoSave = () => {
   const { boardId, setBoardId, title, tagList, boardHeadImageUrl } =
@@ -106,7 +107,7 @@ const useAutoSave = () => {
     setLastSavedAt(getHHmmssFormat(new Date()));
   };
 
-  const debouncedSaveDraft = debounce(saveDraft, 5000, { edges: ['trailing'] });
+  const debouncedSaveDraft = debounce(saveDraft, AUTO_SAVE_DELAY, { edges: ['trailing'] });
 
   useEffect(() => {
     debouncedSaveDraft();

@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Button from '../../common/button/Button';
 import logo from '@/app/assets/png/logo.png';
 import Draft from '../Draft/Draft';
+import { MSG } from '@/app/lib/constants/post/board';
 import styles from './Header.module.scss';
 
 type ModalType = 'draft' | 'publish';
@@ -36,9 +37,7 @@ const Header = () => {
   const handleNavigation = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
 
-    const confirmLeave = confirm(
-      '페이지를 이동하시겠습니까? 변경사항이 저장되지 않을 수 있습니다.'
-    );
+    const confirmLeave = confirm(MSG.CONFIRM_LEAVE);
 
     if (confirmLeave) {
       router.push(href);

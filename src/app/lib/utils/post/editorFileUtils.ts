@@ -1,9 +1,5 @@
+import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
 import type { Editor } from '@tiptap/react';
-
-const CUSTOM_NODE = {
-  IMAGE: 'customImage',
-  ATTACH: 'fileNode',
-};
 
 type CustomNode = keyof typeof CUSTOM_NODE;
 

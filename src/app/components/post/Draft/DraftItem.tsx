@@ -1,4 +1,5 @@
 import TrashSvg from '@/app/assets/svg/Editor/TrashSvg';
+import { MSG } from '@/app/lib/constants/post/board';
 import styles from './Draft.module.scss';
 
 interface DraftItemProps {
@@ -14,7 +15,7 @@ const DraftItem = ({ boardId, updatedAt, title, loadDraft, onDelete }: DraftItem
     e.stopPropagation();
 
     setTimeout(() => {
-      const isConfirmed = window.confirm('임시 저장 글을 정말 삭제하시겠습니까?');
+      const isConfirmed = window.confirm(MSG.CONFIRM_DELETE);
 
       if (isConfirmed) {
         onDelete(boardId);

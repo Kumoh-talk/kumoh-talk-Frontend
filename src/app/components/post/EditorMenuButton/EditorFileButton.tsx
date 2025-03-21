@@ -1,5 +1,6 @@
 import { findAttachNodes } from '@/app/lib/utils/post/editorFileUtils';
 import FileSvg from '@/app/assets/svg/Editor/FileSvg';
+import { MSG, CUSTOM_NODE } from '@/app/lib/constants/post/board';
 import type { Editor } from '@tiptap/react';
 import type { FileInfo } from '../FileNode/FileComponent';
 import styles from './EditorMenuButton.module.scss';
@@ -27,7 +28,7 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
 
   const insertFilePreview = (fileInfo: FileInfo) => {
     const content = {
-      type: 'fileNode',
+      type: CUSTOM_NODE.ATTACH,
       attrs: fileInfo,
     };
 
@@ -39,7 +40,7 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
       let deleted = false;
 
       state.doc.descendants((node, pos) => {
-        if (node.type.name === 'fileNode') {
+        if (node.type.name === CUSTOM_NODE.ATTACH) {
           if (dispatch) {
             tr.delete(pos, pos + node.nodeSize);
           }
@@ -64,7 +65,7 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
       return;
     }
 
-    const confirm = window.confirm('첨부파일은 하나만 저장됩니다. 새로운 파일로 교체하시겠습니까?');
+    const confirm = window.confirm(MSG.CONFIRM_CHANGE_FILE);
     if (!confirm) return;
 
     deleteFilePreview();

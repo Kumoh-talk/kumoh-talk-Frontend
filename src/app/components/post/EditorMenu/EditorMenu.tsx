@@ -14,6 +14,7 @@ import {
   alignButtons,
   utilityButtons,
 } from '../EditorMenuButton/buttonGroups';
+import { MSG } from '@/app/lib/constants/post/board';
 import styles from './EditorMenu.module.scss';
 
 const EditorMenu = () => {
@@ -36,9 +37,7 @@ const EditorMenu = () => {
 
   const handleModeChange = (value: string) => {
     setIsMarkdownMode(value === 'markdown');
-    alert(
-      '작성 모드를 변경하시겠습니까?\n현재 서식이 유지되지 않을 수 있습니다.'
-    );
+    alert(MSG.ALERT_MODE_CHANGE);
   };
 
   return (

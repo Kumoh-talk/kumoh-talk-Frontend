@@ -1,9 +1,10 @@
 import { Node } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import FileComponent from './FileComponent';
+import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
 
 const FileNode = Node.create({
-  name: 'fileNode',
+  name: CUSTOM_NODE.ATTACH,
   group: 'block',
   atom: true,
   draggable: true,

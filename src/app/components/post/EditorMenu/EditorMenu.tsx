@@ -1,5 +1,8 @@
 'use client';
 
+import { Fragment } from 'react';
+import { useCurrentEditor } from '@tiptap/react';
+import { usePostMode } from '@/app/lib/contexts/post/PostModeContext';
 import { EditorMenuButton } from '../EditorMenuButton/EditorMenuButton';
 import EditorImageButton from '../EditorMenuButton/EditorImageButton';
 import EditorLinkButton from '../EditorMenuButton/EditorLinkButton';
@@ -11,31 +14,31 @@ import {
   alignButtons,
   utilityButtons,
 } from '../EditorMenuButton/buttonGroups';
-import type { Editor } from '@tiptap/react';
+import { MSG } from '@/app/lib/constants/post/board';
 import styles from './EditorMenu.module.scss';
 
-interface EditorMenuProps {
-  editor: Editor;
-  isMarkdwonMode: boolean;
-  onModeChange: (value: string) => void;
-}
+const EditorMenu = () => {
+  const { editor } = useCurrentEditor();
+  const { isMarkdownMode, setIsMarkdownMode } = usePostMode();
 
-const EditorMenu = ({
-  editor,
-  isMarkdwonMode,
-  onModeChange,
-}: EditorMenuProps) => {
+  if (!editor) return;
+
   const EditorMode = [
     { value: 'default', label: '기본모드' },
     { value: 'markdown', label: '마크다운' },
   ];
 
   const buttonGroups = [
-    basicButtons(editor, isMarkdwonMode),
-    formatButtons(editor, isMarkdwonMode),
-    alignButtons(editor, isMarkdwonMode),
-    utilityButtons(editor, isMarkdwonMode),
+    basicButtons(editor, isMarkdownMode),
+    formatButtons(editor, isMarkdownMode),
+    alignButtons(editor, isMarkdownMode),
+    utilityButtons(editor, isMarkdownMode),
   ];
+
+  const handleModeChange = (value: string) => {
+    setIsMarkdownMode(value === 'markdown');
+    alert(MSG.ALERT_MODE_CHANGE);
+  };
 
   return (
     <div className={styles.editorMenu}>
@@ -44,11 +47,11 @@ const EditorMenu = ({
       <EditorFileButton editor={editor} />
 
       <div className={styles.editorMenuDivider} />
-      {buttonGroups.map((group) => (
-        <>
+      {buttonGroups.map((group, groupIdx) => (
+        <Fragment key={groupIdx}>
           {group.map((button, idx) => (
             <EditorMenuButton
-              key={idx}
+              key={`${groupIdx}-${idx}`}
               icon={button.icon}
               command={button.command}
               isActive={button.isActive}
@@ -56,10 +59,10 @@ const EditorMenu = ({
             />
           ))}
           <div className={styles.editorMenuDivider} />
-        </>
+        </Fragment>
       ))}
       <div className={styles.editorModeSelect}>
-        <Select options={EditorMode} onChange={onModeChange} />
+        <Select options={EditorMode} onChange={handleModeChange} />
       </div>
     </div>
   );

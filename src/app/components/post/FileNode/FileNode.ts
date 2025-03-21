@@ -1,9 +1,10 @@
 import { Node } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import FileComponent from './FileComponent';
+import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
 
 const FileNode = Node.create({
-  name: 'fileNode',
+  name: CUSTOM_NODE.ATTACH,
   group: 'block',
   atom: true,
   draggable: true,
@@ -15,6 +16,27 @@ const FileNode = Node.create({
       fileSize: { default: null },
       fileUrl: { default: null },
     };
+  },
+
+  parseHTML() {
+    return [
+      {
+        tag: 'figure.editorFileContainer',
+        getAttrs: (el) => {
+          const link = el.querySelector('.editorFileContent');
+          const fileNameElement = el.querySelector('.editorFileName');
+          const fileTypeElement = el.querySelector('.editorFileType');
+          const fileSizeElement = el.querySelector('.editorFileSize');
+
+          return {
+            fileUrl: link?.getAttribute('href') || '',
+            fileName: fileNameElement?.textContent || '',
+            fileType: fileTypeElement?.textContent?.replace('.', '') || '',
+            fileSize: fileSizeElement?.textContent || '',
+          };
+        },
+      },
+    ];
   },
 
   renderHTML({ node }) {

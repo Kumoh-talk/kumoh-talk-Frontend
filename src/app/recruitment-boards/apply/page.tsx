@@ -28,7 +28,11 @@ export default async function Page({
     redirect(referer);
   }
   const jwt = parseJwt(cookies().get('accessToken')?.value as string);
-  if (jwt.USER_ROLE !== 'ROLE_ACTIVE_USER' && jwt.USER_ROLE !== 'ROLE_ADMIN') {
+  if (
+    jwt.USER_ROLE !== 'ROLE_ACTIVE_USER' &&
+    jwt.USER_ROLE !== 'ROLE_SEMINAR_WRITER' &&
+    jwt.USER_ROLE !== 'ROLE_ADMIN'
+  ) {
     redirect(referer);
   }
   const { id, title, boardType, tag, detail } = searchParams;

@@ -178,7 +178,7 @@ const checkNeedSubmitAdditionalInfo = async (
     if (userRole === 'ROLE_ACTIVE_USER') {
       return null;
     }
-    if (userRole === 'ROLE_ADMIN') {
+    if (userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER') {
       // 어드민이면 수동으로 정보 체크
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,

@@ -3,9 +3,15 @@ import Header from '../components/common/header/Header';
 import Footer from '../components/common/footer/Footer';
 import seminarApply from '@/app/assets/png/seminarApply.png';
 import SeminarApplyForm from '../components/apply/SeminarApplyForm/SeminarApplyForm';
+import checkUserRole from '../lib/utils/common/checkUserRole';
 import styles from './page.module.scss';
 
 export default function SeminarApply() {
+  checkUserRole({
+    allowedRoles: ['ROLE_ACTIVE_USER', 'ROLE_SEMINAR_WRITER', 'ROLE_ADMIN'],
+    redirectTo: '/',
+  });
+
   return (
     <>
       <Header title='세미나 신청' />

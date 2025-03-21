@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 
   .checkbox {
     width: 1rem;
@@ -14,7 +15,6 @@
     border: 0.4px solid var(--color-m-outline);
     border-radius: 0.25rem;
     background-color: var(--color-white);
-    position: relative;
 
     &:checked + .iconWrapper svg {
       display: block;

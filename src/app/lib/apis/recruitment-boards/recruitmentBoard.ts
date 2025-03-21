@@ -48,12 +48,15 @@ export const getRecruitmentBoardDetail = (recruitmentBoardId: string) => {
   });
 };
 
-export const postRecruitmentBoard = (formData: {
-  board: PostBoard;
-  form: PostForm[];
-}) => {
+export const postRecruitmentBoard = (
+  formData: {
+    board: PostBoard;
+    form: PostForm[];
+  },
+  status: string
+) => {
   return _fetch(
-    `${baseUrl}/recruitment-boards?status=published`,
+    `${baseUrl}/recruitment-boards?status=${status}`,
     {
       method: 'POST',
       headers: {
@@ -62,6 +65,57 @@ export const postRecruitmentBoard = (formData: {
     },
     formData
   );
+};
+
+export const getRecruitmentBoardInfo = (recruitmentBoardId: string) => {
+  return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}/board`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
+
+export const getRecruitmentBoardQuestionForm = (recruitmentBoardId: string) => {
+  return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}/form`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
+
+export const patchRecruitmentBoard = (
+  recruitmentBoardId: string,
+  status: string,
+  formData: {
+    board: PostBoard;
+    form: PostForm[];
+  }
+) => {
+  return _fetch(
+    `${baseUrl}/recruitment-boards/${recruitmentBoardId}?status=${status}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(formData),
+    }
+  );
+};
+
+export const deleteRecruitmentBoard = (recruitmentBoardId: string) => {
+  return _fetch(`${baseUrl}/recruitment-boards/${recruitmentBoardId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
 };
 
 export const getRecruitmentBoardComment = (recruitmentBoardId: string) => {
@@ -96,7 +150,6 @@ export const patchRecruitmentBoardComment = (
   commentId: number,
   body: Comment
 ) => {
-  console.log(body);
   return _fetch(
     `${baseUrl}/recruitment-board/comments/${commentId}`,
     {
@@ -120,6 +173,19 @@ export const deleteRecruitmentBoardComment = (commentId: number) => {
   });
 };
 
-export const reportRecruitmentBoardComment = (commentId: number) => {
-  console.log(`${commentId} 댓글을 신고`);
+export const reportRecruitmentBoardComment = (
+  commentId: number,
+  userId: number
+) => {
+  return _fetch(
+    `${baseUrl}/reports/recruitment-board/comments/${commentId}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    { commentId, userId }
+  );
 };

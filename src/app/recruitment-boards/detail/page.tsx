@@ -22,7 +22,6 @@ export default async function Page({
   const title = matchRecruitmentTitle(searchParams.boardType);
   const UserInfoResponse = await getUserInfo(cookies().toString());
   const userInfo: UserInfo = (await UserInfoResponse.json()).data;
-  console.log(userInfo);
   const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(
     searchParams.id
   );
@@ -32,7 +31,7 @@ export default async function Page({
   }
 
   return (
-    <>
+    <div className={styles.page}>
       <Header title={title} />
       <main className={styles.board}>
         <Suspense fallback={<p>Loading...</p>}>
@@ -46,6 +45,6 @@ export default async function Page({
         <Comment boardId={searchParams.id} />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

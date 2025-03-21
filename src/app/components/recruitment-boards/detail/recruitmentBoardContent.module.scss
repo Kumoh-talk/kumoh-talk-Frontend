@@ -41,9 +41,34 @@ section.section {
       @include title2(black-50);
     }
   }
-
 }
 
 .detail {
   @include title2(black-50);
+}
+
+@include mobile-header {
+  section.section {
+    gap: 1rem;
+
+    .header {
+      @include title2(black-85);
+      align-self: center;
+    }
+  }
+
+  .infoTable {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+
+    .item {
+      .label {
+        @include title3(black-85);
+      }
+      .body {
+        @include title3(black-50);
+      }
+    }
+  }
 }

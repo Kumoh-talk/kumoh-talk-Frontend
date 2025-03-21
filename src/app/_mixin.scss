@@ -144,6 +144,11 @@
     0px 0px 0px 0.5px rgba(0, 0, 0, 0.05);
 }
 
+@mixin buttonEffect() {
+  box-shadow: 0px 0.5px 2.5px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
+}
+
 @mixin editorContent {
   @include title2(black-85);
 
@@ -240,5 +245,18 @@
 
   a {
     color: var(--color-blue-400);
+  }
+}
+
+//temp: 임시 반응형
+@mixin mobile-header {
+  @media screen and (max-width: 56rem) {
+    @content;
+  }
+}
+
+@mixin modile-seminar {
+  @media screen and (max-width: 44rem) {
+    @content;
   }
 }

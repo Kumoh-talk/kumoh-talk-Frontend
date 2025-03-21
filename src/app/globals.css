@@ -21,6 +21,7 @@
   --color-blue-400: #007aff;
   --color-blue-500: #0061db;
 
+  --color-red: #ff3b30;
   --color-orange: #ffa800;
   --color-yellow: #fed766;
   --color-purple: #6a50fa;
@@ -43,12 +44,11 @@
   --color-text-red: #ff3b30;
   --color-text-black-85: var(--color-black-85);
   --color-text-black-50: var(--color-black-50);
+  --color-text-gray-900: var(--color-gray-900);
 
   /* background */
   --color-background-gray-500: var(--color-gray-500);
   --color-background-gray-600: var(--color-gray-600);
-
-  //TODO: 필요한 변수 있을 시 추가
 }
 
 @media (prefers-color-scheme: dark) {
@@ -85,6 +85,12 @@ input {
   &:focus {
     outline: none;
   }
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
 }
 
 .ProseMirror:focus-visible {

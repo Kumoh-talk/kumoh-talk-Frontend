@@ -1,11 +1,12 @@
 import styles from './recruitmentBoardTitle.module.scss';
 import HashTag from '@/app/components/recruitment-boards/detail/HashTag';
+import { RecruitmentTag } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 
 export interface Props {
   title: string;
-  type: string;
-  tag: string;
-  name: string;
+  type: RecruitmentTag;
+  tag: RecruitmentTag;
+  name?: string;
 }
 // TODO: 백엔드 api 완성되면 수정
 export function RecruitmentBoardTitle({ title, type, tag, name }: Props) {
@@ -18,7 +19,7 @@ export function RecruitmentBoardTitle({ title, type, tag, name }: Props) {
           <HashTag type={tag} />
         </div>
       </div>
-      <div className={styles.host}>{name} 주최</div>
+      <div className={styles.host}>{name && `${name} 주최`}</div>
     </div>
   );
 }

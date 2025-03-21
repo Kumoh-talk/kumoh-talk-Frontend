@@ -11,15 +11,17 @@
   top: 0;
   left: 0;
   backdrop-filter: blur(4px);
+  z-index: 1;
 }
 .welcomeBubble {
   display: flex;
   flex-direction: column;
+  zoom: 0.8;
 
   section.content {
     display: flex;
     flex-direction: column;
-    padding: 3.5rem 6.5rem;
+    padding: 3.5rem 6.5rem 3rem;
 
     .welcome {
       align-self: center;
@@ -36,27 +38,40 @@
     }
     .inputWrapper {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
       justify-self: stretch;
-      gap: 3.75rem;
+      gap: 1.5rem;
       margin-bottom: 1rem;
 
-      input[type='text'] {
-        border-radius: 0.625rem;
-        @include textColor(gray-900);
-        font-size: 1.625rem;
-        line-height: 2rem;
-        letter-spacing: -3.5%;
-        font-weight: 400;
-        padding: 1rem;
-        border: none;
-        width: 0;
-        flex: 1;
-        box-shadow: 0px 0px 0px 0.5px #00000008, 0px 0.5px 2.5px 0px #00000026;
+      .fieldWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
 
-        &.error {
-          box-shadow: 0px 0px 0px 0.5px #ff0000aa, 0px 0.5px 2.5px 0px #ff000026;
+        .label {
+          @include largeTitle(gray-900);
+          width: 5rem;
+        }
+
+        input[type='text'] {
+          border-radius: 0.625rem;
+          @include textColor(gray-900);
+          font-size: 1.625rem;
+          line-height: 2rem;
+          letter-spacing: -3.5%;
+          font-weight: 400;
+          padding: 1rem;
+          border: none;
+          width: 0;
+          flex: 1;
+          box-shadow: 0px 0px 0px 0.5px #00000008, 0px 0.5px 2.5px 0px #00000026;
+
+          &.error {
+            box-shadow: 0px 0px 0px 0.5px #ff0000aa,
+              0px 0.5px 2.5px 0px #ff000026;
+          }
         }
       }
     }
@@ -83,5 +98,44 @@
         color: var(--color-gray-400);
       }
     }
+    .logoutButton {
+      @include title2(black-50);
+      align-self: center;
+      border: none;
+      cursor: pointer;
+      padding: 0.75rem;
+      margin-top: 1rem;
+    }
+  }
+
+  @include mobile-header {
+    zoom: 0.9;
+  }
+  @media screen and (max-width: 48rem) {
+    zoom: 0.8;
+  }
+  @media screen and (max-width: 40rem) {
+    zoom: 0.7;
+  }
+  @media screen and (max-width: 34rem) {
+    zoom: 0.6;
+    section.content {
+      padding: 3rem 6rem;
+    }
+  }
+  @media screen and (max-width: 30rem) {
+    zoom: 0.5;
+    section.content {
+      padding: 2.5rem 5rem;
+    }
+  }
+  @media screen and (max-width: 26rem) {
+    zoom: 0.45;
+    section.content {
+      padding: 2.5rem 5rem;
+    }
+  }
+  @media screen and (max-width: 24rem) {
+    zoom: 0.4;
   }
 }

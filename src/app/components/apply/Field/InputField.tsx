@@ -1,4 +1,8 @@
-import { formatPhoneNumber, formatNumber } from '@/app/lib/utils/formatters';
+import {
+  formatPhoneNumber,
+  formatNumber,
+  formatStudentId,
+} from '@/app/lib/utils/formatters';
 import Input from '../Input/Input';
 import FormField from '../Form/FormField';
 import FormItem from '../Form/FormItem';
@@ -14,7 +18,7 @@ type InputFieldProps = {
   control: Control<FieldValues, any>;
   name: string;
   label: string;
-  type?: 'text' | 'phone' | 'number' | 'date' | 'datetime-local';
+  type?: 'text' | 'phone' | 'number' | 'date' | 'datetime-local' | 'studentId';
   placeholder?: string;
   required?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
@@ -29,7 +33,7 @@ const InputField = ({
 }: InputFieldProps) => {
   const handleInput = (
     e: React.FormEvent<HTMLInputElement>,
-    field: ControllerRenderProps<FieldValues, string>
+    field: ControllerRenderProps<FieldValues, string>,
   ) => {
     const target = e.currentTarget;
 
@@ -42,6 +46,12 @@ const InputField = ({
     if (type === 'number') {
       target.value = formatNumber(target.value);
       field.onChange(target.value === '' ? 0 : Number(target.value));
+      return;
+    }
+
+    if (type === 'studentId') {
+      target.value = formatStudentId(target.value);
+      field.onChange(target.value);
       return;
     }
 
@@ -66,6 +76,7 @@ const InputField = ({
             {...field}
             placeholder={placeholder}
             onChange={(e) => handleInput(e, field)}
+            onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
             type={type}
           />
           <FormMessage />

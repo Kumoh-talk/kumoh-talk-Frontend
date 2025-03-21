@@ -8,7 +8,8 @@ import NaverSvg from '@/app/assets/svg/social/NaverSvg';
 import BasicBubble from '../../../../basicBubble/BasicBubble';
 import CloseButton from './CloseButton';
 import styles from './loginBubble.module.scss';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useMediaQueryMobileHeader } from '@/app/lib/hooks/useMediaQueryMobileHeader';
 
 export interface Props {
   className: string;
@@ -39,11 +40,20 @@ const logins = [
 ];
 
 export default function LoginBubble({ className, onClose }: Props) {
+  const isMobileHeader = useMediaQueryMobileHeader();
+
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${pathname}${
+    searchParams.toString() ? '?' + searchParams.toString() : ''
+  }`;
+
   const loginButtons = logins.map((login) => (
     <a
       key={login.name}
-      href={`${process.env.NEXT_PUBLIC_API_URL}/api/users/oauth2/${login.name}?redirect-uri=${process.env.NEXT_PUBLIC_BASE_URL}${pathname}&mode=login`}
+      href={`${process.env.NEXT_PUBLIC_API_URL}/api/users/oauth2/${
+        login.name
+      }?redirect-uri=${encodeURIComponent(currentUrl)}&mode=login`}
       className={clsx(styles.loginButton, login.className)}
     >
       <login.svg />
@@ -52,7 +62,7 @@ export default function LoginBubble({ className, onClose }: Props) {
 
   return (
     <BasicBubble
-      direction="right-start"
+      direction={isMobileHeader ? 'top-end' : 'right-start'}
       className={clsx(className, styles.loginBubble)}
     >
       <CloseButton onClick={onClose} />

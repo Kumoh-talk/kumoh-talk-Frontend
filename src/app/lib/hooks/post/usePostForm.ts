@@ -1,36 +1,18 @@
 import { useContext } from 'react';
-import { TabsContext } from '@/app/components/recruitment-boards/post/TabsProvider';
 import { PostContext } from '@/app/components/recruitment-boards/post/PostProvider';
 import { PostBoard } from '../../types/recruitmentBoards/post/postBoard';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { PostForm } from '../../types/recruitmentBoards/post/postForm';
-import { postRecruitmentBoard } from '../../apis/recruitment-boards/recruitmentBoard';
-
-const defaultValues: PostBoard = {
-  title: '',
-  summary: '',
-  host: '',
-  content: '',
-  recruitmentTarget: '',
-  recruitmentNum: 0,
-  currentMemberNum: 0,
-  recruitmentDeadline: '',
-  activityStart: '',
-  activityFinish: '',
-  activityCycle: '',
-};
+import {
+  patchRecruitmentBoard,
+  postRecruitmentBoard,
+} from '../../apis/recruitment-boards/recruitmentBoard';
 
 function validateQuestionForm(
   form: PostForm[],
   setQuestionError: (state: string) => void
 ) {
-  // 질문의 갯수가 0개일 때 에러 메시지 출력
-  if (form.length === 0) {
-    setQuestionError('1개 이상의 질문을 추가해주세요');
-    return false;
-  }
-
   const hasError = form.some(({ question, type, answerList }) => {
     if (question === '') {
       setQuestionError('모든 질문 제목을 입력해주세요');
@@ -54,24 +36,32 @@ function validateQuestionForm(
   return !hasError;
 }
 
-export default function usePostForm({ resolver }: { resolver: any }) {
+export default function usePostForm({
+  boardId,
+  defaultValues,
+  resolver,
+}: {
+  boardId?: string;
+  defaultValues: PostBoard;
+  resolver: any;
+}) {
   const router = useRouter();
-  const { state } = useContext(TabsContext);
   const { form, questionError, setQuestionError } = useContext(PostContext);
   const formState = useForm({ defaultValues, resolver });
 
   const onSubmit = async (data: PostBoard) => {
     if (!validateQuestionForm(form, setQuestionError)) {
+      console.log('폼 검증 에러');
       return;
     }
 
     const formData = {
-      board: {
-        ...state,
-        ...data,
-      },
+      board: data,
       form,
     };
+    formData.board.recruitmentStart = new Date(
+      formData.board.recruitmentStart
+    ).toISOString();
     formData.board.recruitmentDeadline = new Date(
       formData.board.recruitmentDeadline
     ).toISOString();
@@ -82,13 +72,26 @@ export default function usePostForm({ resolver }: { resolver: any }) {
       formData.board.activityFinish
     ).toISOString();
 
-    const response = await postRecruitmentBoard(formData);
+    if (boardId) {
+      const response = await patchRecruitmentBoard(
+        boardId,
+        'published',
+        formData
+      );
 
-    if (response.status === 'true') {
+      if (response.success === 'true') {
+        router.replace('/recruitment-boards');
+      }
+      return;
+    }
+
+    const response = await postRecruitmentBoard(formData, 'published');
+
+    if (response.success === 'true') {
       router.replace('/recruitment-boards');
     }
   };
   const onError = (error: unknown) => console.log(error);
 
-  return { state, form, formState, onSubmit, onError, questionError };
+  return { form, formState, onSubmit, onError, questionError };
 }

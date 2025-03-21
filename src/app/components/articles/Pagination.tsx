@@ -25,7 +25,7 @@ export default async function Pagination({ searchParams }: Props) {
   const page = parseInt(searchParams.page ?? '1');
   const offset = Math.floor((page - 1) / 10) * 10;
   const pages = Array.from(
-    { length: Math.min(10, maxPage - offset) },
+    { length: Math.max(Math.min(10, maxPage - offset), 1) },
     (_, i) => {
       const pageNum = offset + i + 1;
       params.set('page', String(pageNum));

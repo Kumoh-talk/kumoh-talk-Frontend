@@ -14,7 +14,7 @@ export default function RecruitmentApplyFormField({ questions }: Props) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     control,
   } = useFormContext();
 
@@ -27,8 +27,8 @@ export default function RecruitmentApplyFormField({ questions }: Props) {
           </div>
         ))}
         <div className={styles.row}>
-          <Button type="submit" size="large">
-            지원하기
+          <Button type='submit' size='full' disabled={isSubmitting}>
+            {isSubmitting ? '지원중...' : '지원하기'}
           </Button>
         </div>
       </div>

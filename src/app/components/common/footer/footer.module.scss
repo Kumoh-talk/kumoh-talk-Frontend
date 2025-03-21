@@ -15,10 +15,6 @@ footer.footer {
     align-self: flex-start;
     gap: 1rem;
 
-    .logo {
-      width: 20px;
-    }
-
     .terms {
       display: flex;
       flex-direction: column;
@@ -42,6 +38,24 @@ footer.footer {
         background-color: var(--color-text-black-85);
         width: 1px;
         height: 1.083rem;
+      }
+    }
+  }
+
+  //temp: 임시 반응형
+  @include mobile-header {
+    padding: 3rem 1.25rem 1.5rem;
+    .bottom {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      .left {
+        flex-direction: column;
+        gap: 0.25rem;
+        .line {
+          display: none;
+        }
       }
     }
   }

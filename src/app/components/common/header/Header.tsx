@@ -5,6 +5,7 @@ import Background from './background/Background';
 import LoginArea from './loginArea/LoginArea';
 import styles from './header.module.scss';
 import NewsletterArea from './newsletterArea/NewsletterArea';
+import WriteArea from './writeArea/WriteArea';
 
 export interface Props {
   title?: string;
@@ -14,9 +15,9 @@ export default function Header({ title = '' }: Props) {
   return (
     <Background className={styles.header} alwaysVisible={!!title}>
       <div className={styles.left}>
-        <Link href="/">야밤의 금오톡</Link>
+        <Link href='/'>야밤의 금오톡</Link>
         {title && (
-          <Link href="." className={styles.title}>
+          <Link href='.' className={styles.title}>
             {title}
           </Link>
         )}
@@ -24,6 +25,7 @@ export default function Header({ title = '' }: Props) {
       <div className={styles.right}>
         <LoginArea />
         <NewsletterArea />
+        <WriteArea />
         <div className={styles.line}></div>
         {/* <SearchBar /> */}
         <Alert />

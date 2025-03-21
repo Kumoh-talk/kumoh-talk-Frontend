@@ -4,7 +4,11 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import BasicBubble from '../../../basicBubble/BasicBubble';
 import styles from './welcomeBubble.module.scss';
-import { checkNickname, completeRegistration } from '@/app/lib/apis/user';
+import {
+  checkNickname,
+  completeRegistration,
+  logout,
+} from '@/app/lib/apis/user';
 
 export default function WelcomeBubble({ className }: { className?: string }) {
   const [nickname, setNickname] = useState('');
@@ -42,7 +46,19 @@ export default function WelcomeBubble({ className }: { className?: string }) {
       return;
     }
     window.location.reload();
-  }
+  };
+
+  const onClickLogout = async () => {
+    try {
+      const res = await (await logout()).json();
+      if (res.success == 'true') {
+        console.log('로그아웃 성공');
+      }
+      window.location.href = '/?logout=true';
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -59,25 +75,38 @@ export default function WelcomeBubble({ className }: { className?: string }) {
           />
           <div className={styles.desc}>기본 정보를 입력해주세요!</div>
           <div className={styles.inputWrapper}>
-            <input
-              type="text"
-              name="nickname"
-              placeholder="닉네임"
-              value={nickname}
-              className={clsx({ [styles.error]: errorMsg })}
-              onChange={(e) => setNickname(e.target.value)}
-            />
-            <input
-              type="text"
-              name="name"
-              placeholder="이름"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <div className={styles.fieldWrapper}>
+              <span className={styles.label}>이름</span>
+              <input
+                type="text"
+                name="name"
+                placeholder="김금오"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className={styles.fieldWrapper}>
+              <span className={styles.label}>닉네임</span>
+              <input
+                type="text"
+                name="nickname"
+                placeholder="ㅇㅇ"
+                value={nickname}
+                className={clsx({ [styles.error]: errorMsg })}
+                onChange={(e) => setNickname(e.target.value)}
+              />
+            </div>
           </div>
           {errorMsg && <div className={styles.errorMsg}>{errorMsg}</div>}
-          <button className={styles.submitButton} disabled={!isAvailable} onClick={submit}>
+          <button
+            className={styles.submitButton}
+            disabled={!isAvailable}
+            onClick={submit}
+          >
             입력완료
+          </button>
+          <button className={styles.logoutButton} onClick={onClickLogout}>
+            로그아웃
           </button>
         </section>
       </BasicBubble>

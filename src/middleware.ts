@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import { Role } from './app/lib/types/user/userInfo';
 import jwt from 'jsonwebtoken';
 import { refreshToken } from './app/lib/apis/user';
+import { getCookie, parseJwt } from '@/app/lib/apis/auth';
 
 interface AccessToken {
   USER_ID: number;
@@ -28,6 +29,14 @@ export async function middleware(request: NextRequest) {
   const resCheckTokenExpired = await checkTokenExpired(request);
   if (resCheckTokenExpired) {
     return resCheckTokenExpired;
+  }
+
+  // 추가 정보 입력 필요 체크
+  const resCheckNeedSubmitAdditionalInfo = await checkNeedSubmitAdditionalInfo(
+    request,
+  );
+  if (resCheckNeedSubmitAdditionalInfo) {
+    return resCheckNeedSubmitAdditionalInfo;
   }
 
   return NextResponse.next();
@@ -142,6 +151,62 @@ const checkTokenExpired = async (
     }
   }
   return null;
+};
+
+const checkNeedSubmitAdditionalInfo = async (
+  request: NextRequest,
+): Promise<NextResponse | null> => {
+  const { nextUrl } = request;
+
+  const isNeededAdditionalInfo = [
+    '/recruitment-boards/post', // 멘토링/프로젝트/스터디 글 작성
+    '/recruitment-boards/apply', // 멘토링/프로젝트/스터디 신청
+    '/apply',
+    '/post',
+  ].includes(nextUrl.pathname);
+
+  if (isNeededAdditionalInfo) {
+    const cookies = request.headers.get('cookie')!;
+    const accessToken = getCookie(cookies, 'accessToken')!;
+
+    if (!accessToken) {
+      // 로그인 안한 경우
+      return null;
+    }
+
+    const { USER_ROLE: userRole } = parseJwt(accessToken);
+    if (userRole === 'ROLE_ACTIVE_USER') {
+      return null;
+    }
+    if (userRole === 'ROLE_ADMIN') {
+      // 어드민이면 수동으로 정보 체크
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            cookie: cookies,
+          },
+        },
+      );
+      const data = await res.json();
+      if (data.success == 'true') {
+        return null;
+      }
+    }
+    const redirect = new URLSearchParams({
+      redirect: nextUrl.pathname + nextUrl.search,
+    });
+
+    const url = new URL('/info-form?' + redirect.toString(), request.url);
+
+    return NextResponse.redirect(url, {
+      status: 302,
+    });
+  } else {
+    return null;
+  }
 };
 
 export const config = {

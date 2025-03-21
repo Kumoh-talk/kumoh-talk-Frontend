@@ -32,4 +32,18 @@ html:has(.main) {
     flex-direction: row;
     gap: 3rem;
   }
+
+  //temp: 임시 반응형
+  @include mobile-header {
+    padding-top: 3.875rem;
+    & > header .logo {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 68rem) {
+    .seminarNotice {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 }

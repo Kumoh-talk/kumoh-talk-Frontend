@@ -12,6 +12,7 @@ import Button from '../button/Button';
 
 export interface Props {
   userName?: string;
+  userId: number;
   boardId: number;
   currentComment: CommentInfoResponseList;
   parentComment?: CommentInfoResponseList | null;
@@ -19,12 +20,15 @@ export interface Props {
 
 export default function Comment({
   userName,
+  userId,
   boardId,
   currentComment,
   parentComment = null,
 }: Props) {
   const {
     commentId,
+    userId: commentUserId,
+    userProfileImageUrl,
     userNickname: name,
     content: comment,
     createdAt: date,
@@ -33,7 +37,7 @@ export default function Comment({
   } = currentComment;
   const [isEdit, setIsEdit] = useState(false);
   const [isReply, setIsReply] = useState(false);
-  const [content, onChange, onSubmit] = useCommentEdit({
+  const [content, onChange, onSubmit, isPending] = useCommentEdit({
     id: commentId,
     currentComment: comment,
     setIsEdit,
@@ -58,7 +62,7 @@ export default function Comment({
       <div className={styles.commentWrapper}>
         {parentComment && <div className={styles.leftPadding} />}
         <div className={styles.commentBlock}>
-          <ProfileImage />
+          <ProfileImage profileImageUrl={userProfileImageUrl} />
           <div className={styles.commentMain}>
             <div className={styles.commentTop}>
               <div className={styles.commentName}>{name}</div>
@@ -75,16 +79,19 @@ export default function Comment({
                     value={content}
                     onChange={onChange}
                     maxLength={500}
+                    disabled={!userId}
                   />
                   <div className={styles.editButtonWrapper}>
                     <Button
-                      bgColor="bg-white"
-                      color="text-black-85"
+                      bgColor='bg-white'
+                      color='text-black-85'
                       onClick={() => setIsEdit(false)}
                     >
                       취소
                     </Button>
-                    <Button onClick={onSubmit}>수정</Button>
+                    <Button onClick={onSubmit} disabled={isPending || !userId}>
+                      {isPending ? '수정중...' : '수정'}
+                    </Button>
                   </div>
                 </div>
               ) : (
@@ -118,18 +125,22 @@ export default function Comment({
             </div>
           </div>
           <div className={styles.moreButton}>
-            <MoreButton
-              userName={userName}
-              commentId={commentId}
-              commentUserName={name}
-              setIsEdit={setIsEdit}
-            />
+            {!deletedAt && userId ? (
+              <MoreButton
+                userId={commentUserId}
+                userName={userName}
+                commentId={commentId}
+                commentUserName={name}
+                setIsEdit={setIsEdit}
+              />
+            ) : null}
           </div>
         </div>
       </div>
       <div>
         {isReply && (
           <Reply
+            userId={userId}
             boardId={boardId}
             parentId={commentId}
             setIsReply={setIsReply}
@@ -140,6 +151,7 @@ export default function Comment({
       {replyComments.map((replyComment) => (
         <Comment
           userName={userName}
+          userId={userId}
           boardId={boardId}
           currentComment={replyComment}
           key={replyComment.commentId}

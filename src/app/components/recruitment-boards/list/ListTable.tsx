@@ -9,7 +9,7 @@ export interface Props {
   boardType: string;
   tag: string;
   name: string;
-  applicantList: ApplyListApi;
+  pageContent: ApplyListApi;
 }
 
 export default async function ListTable({
@@ -18,16 +18,12 @@ export default async function ListTable({
   boardType,
   tag,
   name,
-  applicantList,
+  pageContent,
 }: Props) {
-  if (!applicantList.data) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className={styles.list}>
       <ListTitle />
-      {applicantList.data.applicantList.map((applicant) => (
+      {pageContent.data?.pageContents?.map((applicant) => (
         <ListContent
           key={applicant.applicantId}
           id={id}

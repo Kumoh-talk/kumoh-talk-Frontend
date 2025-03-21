@@ -28,7 +28,7 @@ export default async function ArticleList({
     const page = parseInt(searchParams.page ?? '1');
 
     const res = await getRecruitmentArticlesByPage(category, page);
-    listData.push(...(res?.boardInfo ?? []));
+    listData.push(...(res?.pageContents ?? []));
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -37,14 +37,20 @@ export default async function ArticleList({
   try {
     const userInfoResponse = await getUserInfo(cookies().toString());
     const userInfo = (await userInfoResponse.json()).data;
-    isCanPost = userInfo?.role === 'ROLE_USER';
+    isCanPost =
+      userInfo?.role === 'ROLE_ACTIVE_USER' || userInfo?.role === 'ROLE_USER';
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 
-  const list = listData.map((article) => (
-    <ArticleItem key={article.boardId} {...article} />
-  ));
+  const list =
+    listData.length > 0 ? (
+      listData.map((article) => (
+        <ArticleItem key={article.boardId} {...article} />
+      ))
+    ) : (
+      <div className={styles.noArticle}>게시글이 없습니다</div>
+    );
   return (
     <div className={styles.wrapper}>
       <div className={styles.aside}>
@@ -53,11 +59,7 @@ export default async function ArticleList({
       </div>
       <ul className={styles.list}>{list}</ul>
       <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>
-        <div className={styles.dummy}></div>
         <Pagination searchParams={searchParams} />
-        <Link className={styles.postButton} href="/recruitment-boards/post">
-          글쓰기
-        </Link>
       </div>
     </div>
   );

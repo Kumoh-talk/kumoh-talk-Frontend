@@ -36,6 +36,7 @@ export const getRecruitmentBoardApplicantList = (
         'Content-Type': 'application/json',
         ...(cookie ? { Cookie: cookie ?? '' } : {}),
       },
+      next: { revalidate: 30 },
       credentials: 'include',
     }
   );
@@ -58,7 +59,7 @@ export const getApplicantDetail = (
   cookie?: string
 ) => {
   return _fetch(
-    `${baseUrl}/applications/recruitment/${recruitmentBoardId}/${applicantId}`,
+    `${baseUrl}/applications/recruitment/${recruitmentBoardId}/${Number(applicantId)}`,
     {
       method: 'GET',
       headers: {

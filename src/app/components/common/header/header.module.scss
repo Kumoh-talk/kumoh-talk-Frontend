@@ -10,6 +10,7 @@
   left: 0;
   z-index: 100;
   width: 100%;
+  height: 5rem;
 
   .left {
     @include largeTitleEmphasized;
@@ -34,6 +35,24 @@
       width: 1px;
       height: 1rem;
       background-color: #cecece;
+    }
+  }
+
+  //temp: 임시 반응형
+  @include mobile-header {
+    padding: 1rem 1rem;
+
+    .left {
+      @include title3Emphasized;
+    }
+
+    .right {
+      gap: 1rem;
+
+      .line,
+      & > button {
+        display: none;
+      }
     }
   }
 }

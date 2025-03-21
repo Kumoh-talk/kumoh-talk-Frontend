@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import useOverlay from '@/app/lib/hooks/common/useOverlay';
+import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import clsx from 'clsx';
 import ChevronDownSvg from '@/app/assets/svg/ChevronDownSvg';
 import styles from './Select.module.scss';
@@ -12,46 +14,36 @@ interface Option {
 
 interface SelectProps {
   options: Option[];
+  defaultValue?: string;
   onChange: (value: string) => void;
 }
 
-const Select = ({ options, onChange }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Select = ({ options, defaultValue, onChange }: SelectProps) => {
   const [selected, setSelected] = useState<Option>(options[0]);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const { isOpen, close, toggle } = useOverlay();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useClickOutside(dropdownRef, close);
 
   const handleOptionSelect = (option: Option) => {
     setSelected(option);
-    setIsOpen(false);
+    close();
     onChange(option.value);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
+    const getDefaultOption = () => {
+      return options.find((opt) => opt.value === defaultValue) || options[0];
     };
 
-    if (isOpen) {
-      window.addEventListener('click', handleClickOutside);
-    } else {
-      window.removeEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, [isOpen]);
+    const defaultOption = getDefaultOption();
+    setSelected(defaultOption);
+  }, []);
 
   return (
     <div className={styles.container} ref={dropdownRef}>
-      <div className={styles.display} onClick={toggleDropdown}>
+      <div className={styles.display} onClick={toggle}>
         <span>{selected?.label}</span>
         <div className={styles.arrow}>
           <ChevronDownSvg />

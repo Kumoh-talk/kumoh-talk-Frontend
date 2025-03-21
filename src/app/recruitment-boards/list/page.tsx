@@ -5,22 +5,24 @@ import Footer from '@/app/components/common/footer/Footer';
 import { getRecruitmentBoardApplicantList } from '@/app/lib/apis/recruitment-boards/list/list';
 import { ApplyListApi } from '@/app/lib/types/recruitmentBoards/applyList';
 import { cookies } from 'next/headers';
+import ListPagination from '@/app/components/recruitment-boards/list/ListPagination';
+import { RecruitmentTag } from '@/app/lib/types/recruitmentBoards/recruitmentBoards';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     id: string;
     title: string;
-    boardType: string;
-    tag: string;
+    boardType: RecruitmentTag;
+    tag: RecruitmentTag;
     name: string;
     page: string;
     sort: string;
-  };
+  }>;
 }) {
-  const { id, title, boardType, tag, name, page, sort } = searchParams;
-  const applicantList: ApplyListApi = await getRecruitmentBoardApplicantList(
+  const { id, title, boardType, tag, name, page, sort } = await searchParams;
+  const pageContent: ApplyListApi = await getRecruitmentBoardApplicantList(
     id,
     Number(page),
     sort,
@@ -28,7 +30,7 @@ export default async function Page({
   );
 
   return (
-    <>
+    <div className={styles.page}>
       <Header title={`신청서 확인`} />
       <main className={styles.block}>
         <ApplyListContainer
@@ -37,10 +39,14 @@ export default async function Page({
           boardType={boardType}
           tag={tag}
           name={name}
-          applicantList={applicantList}
+          pageContent={pageContent}
+        />
+        <ListPagination
+          totalPage={pageContent.data.totalPage}
+          searchParams={searchParams}
         />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

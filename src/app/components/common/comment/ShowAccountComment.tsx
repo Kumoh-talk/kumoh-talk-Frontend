@@ -10,9 +10,5 @@ export default function ShowAccountComment({
     return null;
   }
 
-  return (
-    <div className={styles.head}>
-      댓글 {commentList.commentInfoResponseList.length}
-    </div>
-  );
+  return <div className={styles.head}>댓글 {commentList.commentsCount}</div>;
 }

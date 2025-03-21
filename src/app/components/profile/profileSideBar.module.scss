@@ -14,8 +14,9 @@
   align-items: center;
   gap: 0.5rem;
 
-  p {
-    @include title2;
+  p,
+  a {
+    @include title1;
     cursor: pointer;
 
     &:hover {
@@ -37,13 +38,26 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
+
+  & > svg {
+    fill: var(--color-gray-800);
+  }
 
   span {
-    @include title3;
+    @include title2;
     cursor: pointer;
 
     &:hover {
       font-weight: bold;
     }
+  }
+
+  .category {
+    display: none;
+  }
+
+  &:hover .category {
+    display: flex;
   }
 }

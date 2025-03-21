@@ -72,4 +72,13 @@
   &.text-black-85 {
     color: var(--color-black-85);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-gray-900);
+
+    &:hover {
+      background-color: var(--color-gray-900);
+    }
+  }
 }

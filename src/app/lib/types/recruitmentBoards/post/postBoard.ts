@@ -3,9 +3,12 @@ export interface PostBoard {
   summary: string;
   host: string;
   content: string;
+  type: string;
+  tag: string;
   recruitmentTarget: string;
   recruitmentNum: number;
   currentMemberNum: number;
+  recruitmentStart: string;
   recruitmentDeadline: string;
   activityStart: string;
   activityFinish: string;

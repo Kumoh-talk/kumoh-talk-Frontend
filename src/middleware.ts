@@ -39,8 +39,9 @@ export async function middleware(request: NextRequest) {
     return resCheckNeedSubmitAdditionalInfo;
   }
 
-   // 공지 사항 작성 권한 체크
-  const resCheckAdminAccessForNoticePost = checkAdminAccessForNoticePost(request);
+  // 공지 사항 작성 권한 체크
+  const resCheckAdminAccessForNoticePost =
+    checkAdminAccessForNoticePost(request);
   if (resCheckAdminAccessForNoticePost) {
     return resCheckAdminAccessForNoticePost;
   }
@@ -181,26 +182,30 @@ const checkNeedSubmitAdditionalInfo = async (
     }
 
     const { USER_ROLE: userRole } = parseJwt(accessToken);
-    if (userRole === 'ROLE_ACTIVE_USER') {
+    if (
+      userRole === 'ROLE_ACTIVE_USER' ||
+      userRole === 'ROLE_ADMIN' ||
+      userRole === 'ROLE_SEMINAR_WRITER'
+    ) {
       return null;
     }
-    if (userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER') {
-      // 어드민이면 수동으로 정보 체크
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            cookie: cookies,
-          },
-        },
-      );
-      const data = await res.json();
-      if (data.success == 'true') {
-        return null;
-      }
-    }
+    // if (userRole === 'ROLE_ACTIVE_USER' || userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER') {
+    //   // 어드민이면 수동으로 정보 체크
+    //   const res = await fetch(
+    //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,
+    //     {
+    //       method: 'GET',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         cookie: cookies,
+    //       },
+    //     },
+    //   );
+    //   const data = await res.json();
+    //   if (data.success == 'true') {
+    //     return null;
+    //   }
+    // }
     const redirect = new URLSearchParams({
       redirect: nextUrl.pathname + nextUrl.search,
     });
@@ -215,10 +220,15 @@ const checkNeedSubmitAdditionalInfo = async (
   }
 };
 
-const checkAdminAccessForNoticePost = (request: NextRequest): NextResponse | null => {
+const checkAdminAccessForNoticePost = (
+  request: NextRequest,
+): NextResponse | null => {
   const { nextUrl } = request;
 
-  if (nextUrl.pathname === '/post' && nextUrl.searchParams.get('type') === 'notice') {
+  if (
+    nextUrl.pathname === '/post' &&
+    nextUrl.searchParams.get('type') === 'notice'
+  ) {
     const cookies = request.headers.get('cookie')!;
     const accessToken = getCookie(cookies, 'accessToken')!;
 

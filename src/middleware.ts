@@ -181,12 +181,16 @@ const checkNeedSubmitAdditionalInfo = async (
       return null;
     }
 
-    const { USER_ROLE: userRole } = parseJwt(accessToken);
+    const { USER_ROLE: userRole, USER_ID: id } = parseJwt(accessToken);
+    console.log(
+      `[checkNeedSubmitAdditionalInfo] id: ${id}, userRole: ${userRole}`,
+    );
     if (
       userRole === 'ROLE_ACTIVE_USER' ||
       userRole === 'ROLE_ADMIN' ||
       userRole === 'ROLE_SEMINAR_WRITER'
     ) {
+      console.log(`[checkNeedSubmitAdditionalInfo] pass`);
       return null;
     }
     // if (userRole === 'ROLE_ACTIVE_USER' || userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER') {
@@ -212,6 +216,7 @@ const checkNeedSubmitAdditionalInfo = async (
 
     const url = new URL('/info-form?' + redirect.toString(), request.url);
 
+    console.log(`[checkNeedSubmitAdditionalInfo] redirected`);
     return NextResponse.redirect(url, {
       status: 302,
     });

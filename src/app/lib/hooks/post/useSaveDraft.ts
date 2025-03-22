@@ -4,7 +4,7 @@ import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
-import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
+import { saveImages, saveAttaches, getReplacedContents } from '@/app/lib/apis/post/saveFiles';
 
 export const useSaveDraft = (close: () => void) => {
   const { boardId, setBoardId, title, tagList, boardHeadImageUrl, boardType } =
@@ -34,7 +34,7 @@ export const useSaveDraft = (close: () => void) => {
 
     if (boardId) {
       if (imageNode) {
-        contents = await saveImages(editor, boardId);
+        contents = await getReplacedContents(editor, boardId);
         editor.commands.setContent(contents);
       }
 
@@ -68,7 +68,7 @@ export const useSaveDraft = (close: () => void) => {
       setBoardId(newBoardId);
 
       if (imageNode) {
-        contents = await saveImages(editor, newBoardId);
+        contents = await getReplacedContents(editor, newBoardId);
         editor.commands.setContent(contents);
       }
 

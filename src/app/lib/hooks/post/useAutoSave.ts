@@ -5,7 +5,7 @@ import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
-import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
+import { saveImages, saveAttaches, getReplacedContents } from '@/app/lib/apis/post/saveFiles';
 import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
 import { AUTO_SAVE_DELAY } from '@/app/lib/constants/post/board';
 
@@ -42,7 +42,7 @@ const useAutoSave = () => {
 
     if (boardId) {
       if (imageNode) {
-        replacedContents = await saveImages(editor, boardId);
+        replacedContents = await getReplacedContents(editor, boardId);
         editor.commands.setContent(replacedContents);
       }
 
@@ -72,7 +72,7 @@ const useAutoSave = () => {
       setBoardId(newBoardId);
 
       if (imageNode) {
-        replacedContents = await saveImages(editor, newBoardId);
+        replacedContents = await getReplacedContents(editor, newBoardId);
         editor.commands.setContent(replacedContents);
       }
 

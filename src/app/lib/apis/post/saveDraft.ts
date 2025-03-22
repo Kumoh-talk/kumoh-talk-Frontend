@@ -7,14 +7,14 @@ interface SaveDraftCallbacks {
 }
 
 export const createDraft = async (
-  { title, contents, categoryName, boardHeadImageUrl }: PostBoards,
+  { title, contents, categoryName, boardHeadImageUrl, boardType }: PostBoards,
   { onSuccess, onError }: SaveDraftCallbacks = {}
 ) => {
   const postData: PostBoards = {
     title,
     contents,
     categoryName,
-    boardType: 'SEMINAR',
+    boardType,
   };
 
   if (boardHeadImageUrl) {

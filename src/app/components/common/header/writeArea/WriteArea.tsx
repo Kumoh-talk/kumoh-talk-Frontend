@@ -8,14 +8,14 @@ export default function WriteArea() {
 
   // 로그아웃 상태 or 기본 정보 입력 안 된 상태
   if (!accessToken || parseJwt(accessToken).USER_ROLE === 'ROLE_GUEST') {
-    return (
-      <></>
-    );
+    return <></>;
   }
+
+  const isAdmin = parseJwt(accessToken).USER_ROLE === 'ROLE_ADMIN';
 
   return (
     <div className={styles.loginArea}>
-      <WriteButton />
+      <WriteButton isAdmin={isAdmin} />
     </div>
   );
 }

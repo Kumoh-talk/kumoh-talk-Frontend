@@ -12,6 +12,7 @@ export interface Props {
     | 'ROLE_GUEST'
     | 'ROLE_USER'
     | 'ROLE_ACTIVE_USER'
+    | 'ROLE_SEMINAR_WRITER'
     | 'ROLE_ADMIN'
     | null;
 }
@@ -21,7 +22,8 @@ export default function ApplyButton({ title, detail, tag, userRole }: Props) {
   if (
     userRole !== 'ROLE_ACTIVE_USER' &&
     userRole !== 'ROLE_USER' &&
-    userRole !== 'ROLE_ADMIN'
+    userRole !== 'ROLE_ADMIN' &&
+    userRole !== 'ROLE_SEMINAR_WRITER'
   ) {
     return '로그인 후 신청 가능합니다.';
   }

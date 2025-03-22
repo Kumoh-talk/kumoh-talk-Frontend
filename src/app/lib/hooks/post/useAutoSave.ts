@@ -10,7 +10,7 @@ import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
 import { AUTO_SAVE_DELAY } from '@/app/lib/constants/post/board';
 
 const useAutoSave = () => {
-  const { boardId, setBoardId, title, tagList, boardHeadImageUrl } =
+  const { boardId, setBoardId, title, tagList, boardHeadImageUrl, boardType } =
     usePostContent();
   const { editor } = useCurrentEditor();
   const { initBoardId } = useInitBoardId();
@@ -98,8 +98,8 @@ const useAutoSave = () => {
       title,
       contents: editor.getHTML(),
       categoryName: tagList,
-      boardType: 'SEMINAR',
       boardHeadImageUrl,
+      boardType,
     });
 
     if (newBoardId) setBoardId(newBoardId);

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 interface PostContentContextValue {
   boardId: number | null;
@@ -9,6 +10,7 @@ interface PostContentContextValue {
   setTagList: (tags: string[]) => void;
   boardHeadImageUrl: string;
   setBoardHeadImageUrl: (url: string) => void;
+  boardType : 'SEMINAR' | 'NOTICE',
 }
 
 const PostContentContext = createContext<PostContentContextValue | undefined>(
@@ -21,6 +23,9 @@ export const PostContentProvider = ({ children }: { children: React.ReactNode })
   const [tagList, setTagList] = useState<string[]>([]);
   const [boardHeadImageUrl, setBoardHeadImageUrl] = useState('');
 
+  const searchParams = useSearchParams();
+  const boardType = searchParams.get('type') === 'notice' ? 'NOTICE' : 'SEMINAR';
+
   return (
     <PostContentContext.Provider
       value={{
@@ -32,6 +37,7 @@ export const PostContentProvider = ({ children }: { children: React.ReactNode })
         setTagList,
         boardHeadImageUrl,
         setBoardHeadImageUrl,
+        boardType,
       }}
     >
       {children}

@@ -7,7 +7,7 @@ import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
 import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
 
 export const useSaveDraft = (close: () => void) => {
-  const { boardId, setBoardId, title, tagList, boardHeadImageUrl } =
+  const { boardId, setBoardId, title, tagList, boardHeadImageUrl, boardType } =
     usePostContent();
   const { editor } = useCurrentEditor();
   const { initBoardId } = useInitBoardId();
@@ -96,8 +96,8 @@ export const useSaveDraft = (close: () => void) => {
         title,
         contents,
         categoryName: tagList,
-        boardType: 'SEMINAR',
         boardHeadImageUrl,
+        boardType,
       },
       { onSuccess: handleSuccess, onError: handleError }
     );

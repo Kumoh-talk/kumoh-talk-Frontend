@@ -2,6 +2,7 @@ import { ReactNodeViewRenderer } from '@tiptap/react';
 import ImageComponent from './ImageComponent';
 import Image from '@tiptap/extension-image';
 import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -29,6 +30,42 @@ const CustomImage = Image.extend({
       margin: { default: '0 auto' },
       caption: { default: '' },
     };
+  },
+
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        key: new PluginKey('pasteImage'),
+        props: {
+          handlePaste: (view, event, slice) => {
+            const clipboardData = event.clipboardData;
+            if (!clipboardData) return false;
+
+            const items = Array.from(clipboardData.items);
+            const imageItem = items.find(
+              (item) => item.type.indexOf('image') === 0
+            );
+            if (!imageItem) return false;
+
+            const file = imageItem.getAsFile();
+            if (!file) return false;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const result = e.target?.result;
+              if (typeof result === 'string') {
+                this.editor.commands.setImage({ src: result });
+              } else {
+                console.error('Unexpected result type:', result);
+              }
+            };
+            reader.readAsDataURL(file);
+
+            return true;
+          },
+        },
+      }),
+    ];
   },
 
   parseHTML() {

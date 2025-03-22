@@ -50,11 +50,21 @@ const CustomImage = Image.extend({
             const file = imageItem.getAsFile();
             if (!file) return false;
 
+            const mimeType = file.type;
+            const ext = mimeType.split('/')[1] || 'png';
+            let fileName = '';
+
+            if (file.name && file.name.trim() !== '') {
+              fileName = file.name;
+            } else {
+              fileName === `image-${Date.now()}.${ext}`;
+            }
+
             const reader = new FileReader();
             reader.onload = (e) => {
               const result = e.target?.result;
               if (typeof result === 'string') {
-                this.editor.commands.setImage({ src: result });
+                this.editor.commands.setImage({ src: result, title: fileName });
               } else {
                 console.error('Unexpected result type:', result);
               }

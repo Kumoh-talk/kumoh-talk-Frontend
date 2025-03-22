@@ -90,7 +90,7 @@ export default function WelcomeBubble({ className }: { className?: string }) {
               <input
                 type="text"
                 name="nickname"
-                placeholder="ㅇㅇ"
+                placeholder="개발자"
                 value={nickname}
                 className={clsx({ [styles.error]: errorMsg })}
                 onChange={(e) => setNickname(e.target.value)}

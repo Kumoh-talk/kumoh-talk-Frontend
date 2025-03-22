@@ -5,7 +5,13 @@ import SelectBubble from './selectBubble/SelectBubble';
 import styles from './writeButton.module.scss';
 import Button from '../../../button/Button';
 
-export default function WriteButton({ isAdmin }: { isAdmin: boolean }) {
+export default function WriteButton({
+  isAdmin,
+  isSeminarWriter,
+}: {
+  isAdmin: boolean;
+  isSeminarWriter: boolean;
+}) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -17,6 +23,7 @@ export default function WriteButton({ isAdmin }: { isAdmin: boolean }) {
         <SelectBubble
           className={styles.bubble}
           isAdmin={isAdmin}
+          isSeminarWriter={isSeminarWriter}
           onClose={() => setIsActive(false)}
         />
       )}

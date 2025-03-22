@@ -11,11 +11,15 @@ export default function WriteArea() {
     return <></>;
   }
 
-  const isAdmin = parseJwt(accessToken).USER_ROLE === 'ROLE_ADMIN';
+  const userRole = parseJwt(accessToken).USER_ROLE;
+
+  const isAdmin = userRole === 'ROLE_ADMIN';
+  const isSeminarWriter =
+    userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER';
 
   return (
     <div className={styles.loginArea}>
-      <WriteButton isAdmin={isAdmin} />
+      <WriteButton isAdmin={isAdmin} isSeminarWriter={isSeminarWriter} />
     </div>
   );
 }

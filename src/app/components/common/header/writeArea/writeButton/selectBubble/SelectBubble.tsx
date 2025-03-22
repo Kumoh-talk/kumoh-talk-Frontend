@@ -10,11 +10,17 @@ import Button from '@/app/components/common/button/Button';
 
 export interface Props {
   className: string;
-  isAdmin : boolean;
+  isAdmin: boolean;
+  isSeminarWriter: boolean;
   onClose: () => void;
 }
 
-export default function SelectBubble({ className, isAdmin, onClose }: Props) {
+export default function SelectBubble({
+  className,
+  isAdmin,
+  isSeminarWriter,
+  onClose,
+}: Props) {
   const isMobileHeader = useMediaQueryMobileHeader();
   const router = useRouter();
 
@@ -29,7 +35,7 @@ export default function SelectBubble({ className, isAdmin, onClose }: Props) {
           {isAdmin && (
             <Button
               className={styles.button}
-              size='medium'
+              size="medium"
               onClick={() => {
                 router.push('/post?type=notice');
               }}
@@ -39,16 +45,16 @@ export default function SelectBubble({ className, isAdmin, onClose }: Props) {
           )}
           <Button
             className={styles.button}
-            size='medium'
+            size="medium"
             onClick={() => {
-              router.push('/post');
+              router.push(isSeminarWriter ? '/post' : '/apply');
             }}
           >
             세미나
           </Button>
           <Button
             className={styles.button}
-            size='medium'
+            size="medium"
             onClick={() => {
               router.push('/recruitment-boards/post');
             }}

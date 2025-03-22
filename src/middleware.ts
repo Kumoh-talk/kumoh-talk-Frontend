@@ -39,6 +39,12 @@ export async function middleware(request: NextRequest) {
     return resCheckNeedSubmitAdditionalInfo;
   }
 
+   // 공지 사항 작성 권한 체크
+  const resCheckAdminAccessForNoticePost = checkAdminAccessForNoticePost(request);
+  if (resCheckAdminAccessForNoticePost) {
+    return resCheckAdminAccessForNoticePost;
+  }
+
   return NextResponse.next();
 }
 
@@ -207,6 +213,29 @@ const checkNeedSubmitAdditionalInfo = async (
   } else {
     return null;
   }
+};
+
+const checkAdminAccessForNoticePost = (request: NextRequest): NextResponse | null => {
+  const { nextUrl } = request;
+
+  if (nextUrl.pathname === '/post' && nextUrl.searchParams.get('type') === 'notice') {
+    const cookies = request.headers.get('cookie')!;
+    const accessToken = getCookie(cookies, 'accessToken')!;
+
+    if (!accessToken) return null;
+
+    const { USER_ROLE: userRole } = parseJwt(accessToken);
+
+    if (userRole !== 'ROLE_ADMIN') {
+      const homeUrl = new URL('/', request.url);
+
+      return NextResponse.redirect(homeUrl, {
+        status: 302,
+      });
+    }
+  }
+
+  return null;
 };
 
 export const config = {

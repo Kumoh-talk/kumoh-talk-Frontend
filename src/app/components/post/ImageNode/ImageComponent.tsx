@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { NodeViewWrapper } from '@tiptap/react';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
@@ -91,6 +91,14 @@ const ImageComponent = ({
       setBoardHeadImageUrl(src);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (boardHeadImageUrl === src) {
+        setBoardHeadImageUrl('');
+      }
+    };
+  }, [boardHeadImageUrl]);
 
   return (
     <NodeViewWrapper

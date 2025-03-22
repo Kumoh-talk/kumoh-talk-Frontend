@@ -65,9 +65,38 @@ const CustomImage = Image.extend({
           },
         },
       }),
+      new Plugin({
+        key: new PluginKey('dropImage'),
+        props: {
+          handleDrop: (view, event, slice) => {
+            const dataTransfer = event.dataTransfer;
+            if (!dataTransfer) return false;
+
+            const files = dataTransfer.files;
+            if (!files || files.length === 0) return false;
+
+            const imageFile = Array.from(files).find(
+              (file) => file.type.indexOf('image') === 0
+            );
+            if (!imageFile) return false;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const result = e.target?.result;
+              if (typeof result === 'string') {
+                this.editor.commands.setImage({ src: result });
+              } else {
+                console.error('Unexpected result type:', result);
+              }
+            };
+            reader.readAsDataURL(imageFile);
+
+            return true;
+          },
+        },
+      }),
     ];
   },
-
   parseHTML() {
     return [
       {

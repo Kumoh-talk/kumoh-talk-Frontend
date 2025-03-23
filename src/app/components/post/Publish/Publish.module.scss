@@ -1,0 +1,132 @@
+@import 'mixin';
+
+.head {
+  @include title2(black-85);
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  border-bottom: 2px solid var(--color-black-85);
+}
+
+.publish {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  gap: 5rem;
+  padding-top: 3rem;
+}
+
+.infoContainer {
+  flex: 1;
+}
+
+.title {
+  display: block;
+  text-align: left;
+  font-weight: normal;
+  font-size: 2rem;
+  line-height: 2rem;
+  letter-spacing: -0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  margin-bottom: 1.8rem;
+}
+
+.tagList {
+  @include title2(secondary);
+  
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  .text_tag {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: fit-content;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-gray-600);
+
+  .name {
+    @include title3Emphasized();
+    width: 4rem;
+    text-align: left;
+  }
+
+  .detail {
+    @include title3();
+  }
+}
+
+.headImage {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
+  height: 14rem;
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  color: var(--color-gray-900);
+  cursor: pointer;
+
+  svg {
+    color: var(--color-gray-800);
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.minusButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: black;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &.show {
+    display: flex;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    color: var(--color-white);
+    margin: 0;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--color-gray-600);
+}

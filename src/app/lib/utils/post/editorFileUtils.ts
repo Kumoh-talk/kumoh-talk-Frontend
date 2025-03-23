@@ -45,6 +45,14 @@ const findAttachNodes = (editor: Editor) => {
   return attachNodes;
 };
 
+const findBoardHeadImageUrl = (contents : string) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(contents, 'text/html');
+  const headImage = doc.querySelector('img.editorImage[data-is-head-image="true"]');
+
+  return headImage ? headImage.getAttribute('src') : null;
+}
+
 const convertBase64ToFile = (base64: string, fileName: string): File => {
   const [header, data] = base64.split(',');
   const mimeMatch = header.match(/:(.*?);/);
@@ -132,6 +140,7 @@ export {
   includesCustomNode,
   findImageNodes,
   findAttachNodes,
+  findBoardHeadImageUrl,
   extractFilesFromImageNodes,
   extractFilesFromAttachNodes,
   replaceUrls,

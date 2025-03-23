@@ -3,15 +3,18 @@
 import { useState, useRef, MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { debounce } from 'es-toolkit';
+import { toast } from 'react-toastify';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useSaveDraft } from '@/app/lib/hooks/post/useSaveDraft';
+import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import useClickOutside from '@/app/lib/hooks/common/useClickOutside';
 import useAutoSave from '@/app/lib/hooks/post/useAutoSave';
 import Image from 'next/image';
 import Button from '../../common/button/Button';
 import logo from '@/app/assets/png/logo.png';
 import Draft from '../Draft/Draft';
+import Publish from '../Publish/Publish';
 import { MSG } from '@/app/lib/constants/post/board';
 import styles from './Header.module.scss';
 
@@ -23,6 +26,7 @@ const Header = () => {
   const modalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const { title } = usePostContent();
   const { lastSavedAt } = useAutoSave();
 
   useClickOutside(modalRef, () => setActiveModal(null));
@@ -43,6 +47,15 @@ const Header = () => {
       router.push(href);
     }
   };
+
+  const handlePublish = () => {
+    if(title === ''){
+      toast.warn('제목을 입력해주세요.');
+      return;
+    }
+
+    setActiveModal('publish');
+  }
 
   return (
     <>
@@ -73,7 +86,7 @@ const Header = () => {
               임시 글
             </button>
           </div>
-          <Button onClick={() => setActiveModal('publish')}>게시하기</Button>
+          <Button onClick={handlePublish}>게시하기</Button>
         </div>
       </div>
       <div className={clsx(styles.overlay, { [styles.show]: activeModal })}>
@@ -83,7 +96,11 @@ const Header = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.layer}>
-            {activeModal === 'draft' && <Draft close={handleClose} />}
+            {activeModal === 'draft' ? (
+              <Draft close={handleClose} />
+            ) : (
+              <Publish close={handleClose} />
+            )}
           </div>
         </div>
       </div>

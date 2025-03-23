@@ -75,6 +75,30 @@ const submitImageUrls = async (boardId: number, presignedUrls: string[]) => {
   await Promise.all(submitPromises);
 };
 
+const saveImage = async (boardId: number, file: File) => {
+  try {
+    const presignedResponse = await postPresignedUrl(boardId, file.name, 'IMAGE');
+
+    if (presignedResponse.success !== 'true') {
+      throw new Error('Presigned URL 요청 실패');
+    }
+    const presignedUrl = presignedResponse.data;
+
+    await putImage(file, presignedUrl);
+
+    const submitResponse = await postImage(boardId, presignedUrl);
+
+    if (submitResponse.success !== 'true') {
+      throw new Error('이미지 등록(Submit) 실패');
+    }
+
+    return presignedUrl;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const saveImages = async (editor: Editor, boardId: number) => {
   const customImageNodes = findImageNodes(editor);
   const files = extractFilesFromImageNodes(customImageNodes);
@@ -179,4 +203,4 @@ const saveAttaches = async (editor: Editor, boardId: number) => {
   return replacedHTML;
 };
 
-export { saveImages, saveAttaches, getReplacedContents };
+export { saveImage, saveImages, saveAttaches, getReplacedContents };

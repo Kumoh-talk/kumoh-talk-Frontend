@@ -16,7 +16,7 @@ export const useDrafts = (close: () => void) => {
     setBoardId(boardId);
     setTitle(title);
     setTagList(categoryNames);
-    setBoardHeadImageUrl(boardHeadImageUrl);
+    setBoardHeadImageUrl(boardHeadImageUrl?.split('?')[0] || '');
     editor.commands.setContent(contents);
   };
 

@@ -76,7 +76,6 @@ const submitImageUrls = async (boardId: number, presignedUrls: string[]) => {
 };
 
 const saveImages = async (editor: Editor, boardId: number) => {
-  const serializedHTML = editor.getHTML();
   const customImageNodes = findImageNodes(editor);
   const files = extractFilesFromImageNodes(customImageNodes);
 
@@ -85,6 +84,13 @@ const saveImages = async (editor: Editor, boardId: number) => {
   await uploadImages(files, presignedUrls);
   await submitImageUrls(boardId, presignedUrls);
 
+  return { customImageNodes, presignedUrls };
+};
+
+const getReplacedContents = async (editor: Editor, boardId: number) => {
+  const serializedHTML = editor.getHTML();
+  const { customImageNodes, presignedUrls } = await saveImages(editor, boardId);
+
   const replacedHTML = replaceUrls(
     serializedHTML,
     customImageNodes,
@@ -92,7 +98,7 @@ const saveImages = async (editor: Editor, boardId: number) => {
   );
 
   return replacedHTML;
-};
+}
 
 const getAttachPresignedURL = async (boardId: number, attachNodes: Array<any>) => {
   const presignedUrls: string[] = [];
@@ -173,4 +179,4 @@ const saveAttaches = async (editor: Editor, boardId: number) => {
   return replacedHTML;
 };
 
-export { saveImages, saveAttaches };
+export { saveImages, saveAttaches, getReplacedContents };

@@ -3,11 +3,11 @@ import { useCurrentEditor } from '@tiptap/react';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
-import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
-import { saveImages, saveAttaches, getReplacedContents } from '@/app/lib/apis/post/saveFiles';
+import { includesCustomNode, findBoardHeadImageUrl } from '@/app/lib/utils/post/editorFileUtils';
+import { saveAttaches, getReplacedContents } from '@/app/lib/apis/post/saveFiles';
 
 export const useSaveDraft = (close: () => void) => {
-  const { boardId, setBoardId, title, tagList, boardHeadImageUrl, boardType } =
+  const { boardId, setBoardId, title, tagList, setBoardHeadImageUrl, boardType } =
     usePostContent();
   const { editor } = useCurrentEditor();
   const { initBoardId } = useInitBoardId();
@@ -31,10 +31,13 @@ export const useSaveDraft = (close: () => void) => {
     const attachNode = includesCustomNode(editor, 'ATTACH');
 
     let contents = editor.getHTML();
+    let boardHeadImageUrl = '';
 
     if (boardId) {
       if (imageNode) {
         contents = await getReplacedContents(editor, boardId);
+        boardHeadImageUrl = findBoardHeadImageUrl(contents) ?? '';
+        setBoardHeadImageUrl(boardHeadImageUrl);
         editor.commands.setContent(contents);
       }
 
@@ -69,6 +72,8 @@ export const useSaveDraft = (close: () => void) => {
 
       if (imageNode) {
         contents = await getReplacedContents(editor, newBoardId);
+        boardHeadImageUrl = findBoardHeadImageUrl(contents) ?? '';
+        setBoardHeadImageUrl(boardHeadImageUrl);
         editor.commands.setContent(contents);
       }
 

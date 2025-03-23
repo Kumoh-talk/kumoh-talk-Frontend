@@ -1,6 +1,8 @@
-import { useState } from 'react';
 import clsx from 'clsx';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
+import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
+import { saveImage } from '@/app/lib/apis/post/saveFiles';
+import { usePublish } from '@/app/lib/hooks/post/usePublish';
 import Button from '../../common/button/Button';
 import PlusSvg from '@/app/assets/svg/Editor/PlusSvg';
 import MinusSvg from '@/app/assets/svg/Editor/MinusSvg';
@@ -11,17 +13,36 @@ interface PublishProps {
 }
 
 const Publish = ({ close }: PublishProps) => {
-  const { boardId, title, tagList, boardHeadImageUrl, setBoardHeadImageUrl } =
+  const { boardId, setBoardId, title, tagList, boardHeadImageUrl, setBoardHeadImageUrl } =
     usePostContent();
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const { initBoardId } = useInitBoardId();
+  const { publishBoard } = usePublish();
+  
+
+  const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
     if (!file) return;
+  
+    try {
+      let currentBoardId: number;
 
-    const reader = new FileReader();
-    reader.onload = () => setBoardHeadImageUrl(reader.result as string);
-    reader.readAsDataURL(file);
+      if (boardId === null) {
+        const newBoardId = await initBoardId();
+
+        if (newBoardId === null) return;
+        
+        setBoardId(newBoardId);
+        currentBoardId = newBoardId;
+      } else {
+        currentBoardId = boardId;
+      }
+
+      const savedImageUrl = await saveImage(currentBoardId, file);
+      setBoardHeadImageUrl(savedImageUrl.split('?')[0]);
+    } catch (error) {
+      console.error('이미지 저장 처리 중 오류 발생:', error);
+    }
   };
 
   const deleteImage = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -97,7 +118,7 @@ const Publish = ({ close }: PublishProps) => {
         >
           취소
         </Button>
-        <Button size='medium' onClick={() => {}}>
+        <Button size='medium' onClick={publishBoard}>
           게시하기
         </Button>
       </div>

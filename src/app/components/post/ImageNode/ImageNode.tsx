@@ -29,6 +29,7 @@ const CustomImage = Image.extend({
       height: { default: 'auto' },
       margin: { default: '0 auto' },
       caption: { default: '' },
+      isBoardHeadImage: { default: false },
     };
   },
 
@@ -107,6 +108,7 @@ const CustomImage = Image.extend({
       }),
     ];
   },
+
   parseHTML() {
     return [
       {
@@ -125,6 +127,7 @@ const CustomImage = Image.extend({
             height: container?.style.height || 'auto',
             margin: container?.style.margin || '0 auto',
             caption: caption?.textContent || '',
+            isBoardHeadImage : img?.getAttribute('data-is-head-image') || false
           };
         },
       },
@@ -132,7 +135,7 @@ const CustomImage = Image.extend({
   },
 
   renderHTML({ node }) {
-    const { src, alt, title, width, height, margin, caption } = node.attrs;
+    const { src, alt, title, width, height, margin, caption, isBoardHeadImage } = node.attrs;
 
     return [
       'div',
@@ -157,6 +160,7 @@ const CustomImage = Image.extend({
               src,
               alt,
               title,
+              'data-is-head-image' : isBoardHeadImage
             },
           ],
         ],

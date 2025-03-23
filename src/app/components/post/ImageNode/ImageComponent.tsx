@@ -84,20 +84,20 @@ const ImageComponent = ({
     updateAttributes({ caption: newCaption });
   };
 
-  const toggleBoardHeadImageUrl = () => {
+  const toggleBoardHeadImage = () => {
     if (boardHeadImageUrl === src) {
+      updateAttributes({ isBoardHeadImage: false });
       setBoardHeadImageUrl('');
     } else {
+      updateAttributes({ isBoardHeadImage: true });
       setBoardHeadImageUrl(src);
     }
   };
 
   useEffect(() => {
-    return () => {
-      if (boardHeadImageUrl === src) {
-        setBoardHeadImageUrl('');
-      }
-    };
+    if (boardHeadImageUrl !== src) {
+      updateAttributes({ isBoardHeadImage: false });
+    }
   }, [boardHeadImageUrl]);
 
   return (
@@ -117,7 +117,7 @@ const ImageComponent = ({
               className={clsx(styles.headImageChip, {
                 [styles.active]: boardHeadImageUrl === src,
               })}
-              onClick={toggleBoardHeadImageUrl}
+              onClick={toggleBoardHeadImage}
             >
               {boardHeadImageUrl === src ? (
                 <div>

@@ -1,0 +1,8 @@
+@import 'mixin';
+
+.layout {
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+  min-height: 40rem;
+}

@@ -69,6 +69,33 @@ export const updateDraft = ({
   );
 };
 
+export const patchDraft = ({
+  id,
+  title,
+  contents,
+  categoryName,
+  boardHeadImageUrl,
+}: PatchBoards) => {
+  return _fetch(
+    `${baseUrl}/boards`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    },
+    {
+      id,
+      title,
+      contents,
+      categoryName,
+      boardHeadImageUrl,
+      isPublished: true,
+    }
+  );
+};
+
 export const getBoard = (boardId: number) => {
   return _fetch(`${baseUrl}/boards/${boardId}`, {
     method: 'GET',

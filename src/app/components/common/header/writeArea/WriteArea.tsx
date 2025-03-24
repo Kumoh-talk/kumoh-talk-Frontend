@@ -15,7 +15,9 @@ export default function WriteArea() {
 
   const isAdmin = userRole === 'ROLE_ADMIN';
   const isSeminarWriter =
-    userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER';
+  userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER';
+  
+  console.log("🚀 ~ WriteArea ~ isAdmin:", isAdmin);
 
   return (
     <div className={styles.loginArea}>

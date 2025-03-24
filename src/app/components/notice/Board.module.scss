@@ -1,0 +1,275 @@
+@import 'mixin';
+
+.noticeBoard {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  width: 70%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 1.5rem;
+
+  .logo {
+    align-self: center;
+    height: 3rem;
+  }
+
+  .bannerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .articleContainer {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .articleTitle {
+    @include largeTitleEmphasized(black-85);
+
+    margin-bottom: 1rem;
+  }
+
+  .articleInfo {
+    @include body(black-50);
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .author {
+    margin-right: 1rem;
+  }
+
+  .views {
+    margin-right: 1rem;
+  }
+
+  .date {
+    margin-right: 1rem;
+  }
+
+  .url {
+    @include body(black-50);
+
+    border: none;
+    background: none;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+
+  .moreVertical {
+    position: relative;
+    border: none;
+    background: none;
+  }
+
+  .modifyBubble {
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    z-index: 10;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  .divider {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 2rem;
+  }
+
+  .contents {
+    @include editorContent;
+
+    // CustomImageNode
+    :global(.editorCustomImage) {
+      height: fit-content;
+    }
+
+    :global(.editorCustomImageContainer) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    :global(.editorCustomImageWrapper) {
+      width: 100%;
+      height: auto;
+    }
+
+    :global(.editorImage) {
+      width: 100%;
+      height: auto;
+    }
+
+    :global(.editorCustomImageCaption) {
+      @include title3(black-50);
+
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    // CustomLinkPreview
+    :global(.editorLinkPreviewContainer) {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    :global(.editorLinkPreviewContent) {
+      display: flex;
+      align-items: center;
+      min-width: 100%;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.17);
+      border: 1px solid var(--color-gray-500);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    :global(.editorLinkPreviewImage) {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20%;
+      aspect-ratio: 1/1;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        border: none;
+      }
+    }
+
+    :global(.editorLinkPreviewInfo) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      flex: 1;
+      height: 100%;
+      padding: 0.8rem 1.6rem;
+      max-width: 80%;
+
+      span {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      :global(.editorLinkPreviewTitle) {
+        @include title1(black-85);
+      }
+
+      :global(.editorLinkPreviewDescription) {
+        @include title3(secondary);
+      }
+
+      :global(.editorLinkPreviewUrl) {
+        @include callout(secondary);
+      }
+    }
+
+    // CustomFileNode
+    :global(.editorFileContainer) {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    :global(.editorFileContent) {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 60%;
+      padding: 1rem;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.07);
+      border: 1px solid var(--color-gray-500);
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        cursor: pointer;
+        border: 2px solid var(--color-gray-900);
+      }
+
+      &.selected {
+        border: 2px solid black;
+      }
+    }
+
+    :global(.editorFileIcon) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        fill: var(--color-black-100);
+        color: transparent;
+      }
+    }
+
+    :global(.editorFileDescription) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      flex: 1;
+      min-width: 0;
+
+      :global(.editorFileNameWrapper) {
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        overflow: hidden;
+
+        :global(.editorFileName) {
+          @include title2(black-85);
+
+          overflow: hidden;
+        }
+
+        :global(.editorFileType) {
+          @include title2(black-85);
+
+          flex-shrink: 1;
+        }
+      }
+
+      :global(.editorFileSize) {
+        @include title3(secondary);
+      }
+    }
+  }
+
+  .categoryNames {
+    @include title3(gray-900);
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+    flex-wrap: wrap;
+
+    .category {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      min-width: fit-content;
+    }
+  }
+}

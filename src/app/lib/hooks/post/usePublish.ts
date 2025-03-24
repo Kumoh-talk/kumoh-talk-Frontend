@@ -1,31 +1,29 @@
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useCurrentEditor } from '@tiptap/react';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
-import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
+import { publishDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { includesCustomNode, findBoardHeadImageUrl } from '@/app/lib/utils/post/editorFileUtils';
 import { saveAttaches, getReplacedContents } from '@/app/lib/apis/post/saveFiles';
 
-export const useSaveDraft = (close: () => void) => {
+export const usePublish = () => {
   const { boardId, setBoardId, title, tagList, setBoardHeadImageUrl, boardType } =
     usePostContent();
   const { editor } = useCurrentEditor();
   const { initBoardId } = useInitBoardId();
-
+  const router = useRouter();
+  
   const handleSuccess = () => {
+    toast.success('작성 중인 글이 게시되었습니다.');
     close();
-    toast.success('작성 중인 글이 저장되었습니다.');
+    router.push('/');
   };
 
-  const handleError = () => toast.error('작성 글 저장에 실패했습니다.');
+  const handleError = () => toast.error('작성 글 게시 중 오류가 생겼습니다.');
 
-  const saveDraft = async () => {
+  const publishBoard = async () => {
     if (!editor) return;
-
-    if (title.length === 0) {
-      toast.warn('제목을 작성해주세요.');
-      return;
-    }
 
     const imageNode = includesCustomNode(editor, 'IMAGE');
     const attachNode = includesCustomNode(editor, 'ATTACH');
@@ -46,7 +44,7 @@ export const useSaveDraft = (close: () => void) => {
         editor.commands.setContent(contents);
       }
 
-      await editDraft(
+      await publishDraft(
         {
           id: boardId,
           title,
@@ -64,7 +62,7 @@ export const useSaveDraft = (close: () => void) => {
       const newBoardId = await initBoardId();
 
       if (!newBoardId) {
-        toast.error('작성 글 저장에 실패했습니다.');
+        toast.error('작성 글 게시 중 오류가 생겼습니다.');
         return;
       }
 
@@ -82,7 +80,7 @@ export const useSaveDraft = (close: () => void) => {
         editor.commands.setContent(contents);
       }
 
-      await editDraft(
+      await publishDraft(
         {
           id: newBoardId,
           title,
@@ -96,19 +94,26 @@ export const useSaveDraft = (close: () => void) => {
       return;
     }
 
-    const newBoardId = await createDraft(
+    const newBoardId = await initBoardId();
+
+    if (!newBoardId) {
+      toast.error('작성 글 게시 중 오류가 생겼습니다.');
+      return;
+    }
+
+    setBoardId(newBoardId);
+
+    await publishDraft(
       {
+        id: newBoardId,
         title,
         contents,
         categoryName: tagList,
         boardHeadImageUrl,
-        boardType,
       },
       { onSuccess: handleSuccess, onError: handleError }
     );
-
-    if (newBoardId) setBoardId(newBoardId);
   };
 
-  return { saveDraft };
+  return { publishBoard };
 };

@@ -14,6 +14,8 @@ export default function WriteButton({
 }) {
   const [isActive, setIsActive] = useState(false);
 
+  console.log("🚀 ~ isAdmin:", isAdmin);
+
   return (
     <>
       <Button className={styles.login} onClick={() => setIsActive(true)}>

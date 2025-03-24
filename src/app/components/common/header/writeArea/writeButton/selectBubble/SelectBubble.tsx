@@ -23,6 +23,8 @@ export default function SelectBubble({
 }: Props) {
   const isMobileHeader = useMediaQueryMobileHeader();
   const router = useRouter();
+  
+  console.log("🚀 ~ isAdmin:", isAdmin);
 
   return (
     <BasicBubble

@@ -59,9 +59,6 @@ export default function usePostForm({
       board: data,
       form,
     };
-    formData.board.recruitmentStart = new Date(
-      formData.board.recruitmentStart
-    ).toISOString();
     formData.board.recruitmentDeadline = new Date(
       formData.board.recruitmentDeadline
     ).toISOString();

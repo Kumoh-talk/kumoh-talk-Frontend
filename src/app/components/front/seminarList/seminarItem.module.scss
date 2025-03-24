@@ -7,9 +7,27 @@
     justify-content: center;
     align-items: center;
     border-radius: 1.125rem;
-    background-color: #aaa;
     width: 100%;
     height: 100%;
+    position: relative;
+  }
+  .thumbWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 1.125rem;
+    overflow: hidden;
+    background-color: #aaa;
+
+    .thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .5;
+    }
   }
 
   .new {

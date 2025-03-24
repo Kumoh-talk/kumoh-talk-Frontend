@@ -19,6 +19,15 @@ export default function SeminarItem(props: BoardItemProps) {
   return (
     <li className={styles.container}>
       <Link href={`/notice/${props.boardId}`}>
+        <div className={styles.thumbWrapper}>
+          {props.headImageUrl && (
+            <img
+              className={styles.thumbnail}
+              src={props.headImageUrl}
+              alt="썸네일"
+            />
+          )}
+        </div>
         <div className={styles.new}>NEW</div>
         <div className={styles.info}>
           <span className={styles.title}>{props.title}</span>

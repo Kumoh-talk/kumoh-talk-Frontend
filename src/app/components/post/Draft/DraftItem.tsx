@@ -1,3 +1,5 @@
+import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
+import { toast } from 'react-toastify';
 import TrashSvg from '@/app/assets/svg/Editor/TrashSvg';
 import { MSG } from '@/app/lib/constants/post/board';
 import styles from './Draft.module.scss';
@@ -11,7 +13,14 @@ interface DraftItemProps {
 }
 
 const DraftItem = ({ boardId, updatedAt, title, loadDraft, onDelete }: DraftItemProps) => {
+  const {boardId: curBoardId} = usePostContent();
+  
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(boardId === curBoardId){
+      toast.warn('현재 작성 중인 글입니다.');
+      return;
+    }
+
     e.stopPropagation();
 
     setTimeout(() => {

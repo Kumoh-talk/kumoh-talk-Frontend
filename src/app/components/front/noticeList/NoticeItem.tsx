@@ -5,7 +5,7 @@ import styles from './noticeItem.module.scss';
 export default function NoticeItem(props: BoardItemProps) {
   return (
     <li className={styles.container}>
-      <Link href={`/apply/${props.boardId}`}>
+      <Link href={`/notice/${props.boardId}`}>
         <div className={styles.titleWrapper}>
           <span className={styles.title}>{props.title}</span>
           <div className={styles.new}>N</div>

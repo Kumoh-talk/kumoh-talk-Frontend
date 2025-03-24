@@ -4,14 +4,14 @@ import { useCurrentEditor } from '@tiptap/react';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { createDraft, editDraft } from '@/app/lib/apis/post/saveDraft';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
-import { includesCustomNode } from '@/app/lib/utils/post/editorFileUtils';
-import { saveImages, saveAttaches } from '@/app/lib/apis/post/saveFiles';
+import { includesCustomNode, findBoardHeadImageUrl } from '@/app/lib/utils/post/editorFileUtils';
+import { saveAttaches, getReplacedContents } from '@/app/lib/apis/post/saveFiles';
 import { getHHmmssFormat } from '@/app/lib/utils/post/dateFormatter';
 import { AUTO_SAVE_DELAY } from '@/app/lib/constants/post/board';
 
 const useAutoSave = () => {
-  const { boardId, setBoardId, title, tagList, boardHeadImageUrl } =
-    usePostContent();
+  const { boardId, setBoardId, title, tagList, boardHeadImageUrl, setBoardHeadImageUrl, boardType } 
+    = usePostContent();
   const { editor } = useCurrentEditor();
   const { initBoardId } = useInitBoardId();
   const contents = editor?.getHTML() || '<p></p>';
@@ -39,10 +39,13 @@ const useAutoSave = () => {
     const attachNode = includesCustomNode(editor, 'ATTACH');
 
     let replacedContents = editor.getHTML();
+    let boardHeadImage = '';
 
     if (boardId) {
       if (imageNode) {
-        replacedContents = await saveImages(editor, boardId);
+        replacedContents = await getReplacedContents(editor, boardId);
+        boardHeadImage = findBoardHeadImageUrl(replacedContents) ?? '';
+        setBoardHeadImageUrl(boardHeadImage);
         editor.commands.setContent(replacedContents);
       }
 
@@ -56,7 +59,7 @@ const useAutoSave = () => {
         title,
         contents: replacedContents,
         categoryName: tagList,
-        boardHeadImageUrl,
+        boardHeadImageUrl: boardHeadImage,
       });
 
       setLastSavedAt(getHHmmssFormat(new Date()));
@@ -72,7 +75,9 @@ const useAutoSave = () => {
       setBoardId(newBoardId);
 
       if (imageNode) {
-        replacedContents = await saveImages(editor, newBoardId);
+        replacedContents = await getReplacedContents(editor, newBoardId);
+        boardHeadImage = findBoardHeadImageUrl(replacedContents) ?? '';
+        setBoardHeadImageUrl(boardHeadImage);
         editor.commands.setContent(replacedContents);
       }
 
@@ -86,7 +91,7 @@ const useAutoSave = () => {
         title,
         contents: replacedContents,
         categoryName: tagList,
-        boardHeadImageUrl,
+        boardHeadImageUrl: boardHeadImage,
       });
 
       setLastSavedAt(getHHmmssFormat(new Date()));
@@ -98,8 +103,8 @@ const useAutoSave = () => {
       title,
       contents: editor.getHTML(),
       categoryName: tagList,
-      boardType: 'SEMINAR',
       boardHeadImageUrl,
+      boardType,
     });
 
     if (newBoardId) setBoardId(newBoardId);

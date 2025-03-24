@@ -10,12 +10,7 @@ export const parseJwt = (token: string) => {
 
   return JSON.parse(jsonPayload) as {
     USER_ID: number;
-    USER_ROLE:
-      | 'ROLE_GUEST'
-      | 'ROLE_USER'
-      | 'ROLE_ACTIVE_USER'
-      | 'ROLE_SEMINAR_WRITER'
-      | 'ROLE_ADMIN';
+    USER_ROLE: 'ROLE_GUEST' | 'ROLE_USER' | 'ROLE_ACTIVE_USER' | 'ROLE_SEMINAR_WRITER' | 'ROLE_ADMIN';
     iat: number;
     exp: number;
   };

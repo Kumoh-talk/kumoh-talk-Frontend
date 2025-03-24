@@ -1,4 +1,4 @@
-import { updateDraft, postDraft } from '@/app/lib/apis/post/boards';
+import { updateDraft, postDraft, patchDraft } from '@/app/lib/apis/post/boards';
 import type { PostBoards, PatchBoards } from '@/app/lib/types/post/boards';
 
 interface SaveDraftCallbacks {
@@ -7,14 +7,14 @@ interface SaveDraftCallbacks {
 }
 
 export const createDraft = async (
-  { title, contents, categoryName, boardHeadImageUrl }: PostBoards,
+  { title, contents, categoryName, boardHeadImageUrl, boardType }: PostBoards,
   { onSuccess, onError }: SaveDraftCallbacks = {}
 ) => {
   const postData: PostBoards = {
     title,
     contents,
     categoryName,
-    boardType: 'SEMINAR',
+    boardType,
   };
 
   if (boardHeadImageUrl) {
@@ -56,6 +56,35 @@ export const editDraft = async (
 
   try {
     const response = await updateDraft(patchData);
+
+    if (response.success === 'true') {
+      onSuccess?.();
+    } else {
+      onError?.();
+    }
+  } catch (error) {
+    console.error(error);
+    onError?.();
+  }
+};
+
+export const publishDraft = async (
+  { id, title, contents, categoryName, boardHeadImageUrl }: PatchBoards,
+  { onSuccess, onError }: SaveDraftCallbacks = {}
+) => {
+  const patchData: PatchBoards = {
+    id,
+    title,
+    contents,
+    categoryName,
+  };
+
+  if (boardHeadImageUrl) {
+    patchData.boardHeadImageUrl = boardHeadImageUrl;
+  }
+
+  try {
+    const response = await patchDraft(patchData);
 
     if (response.success === 'true') {
       onSuccess?.();

@@ -3,7 +3,7 @@ import { postDraft } from '@/app/lib/apis/post/boards';
 import type { PostBoards } from '@/app/lib/types/post/boards';
 
 export const useInitBoardId = () => {
-  const { title, boardId } = usePostContent();
+  const { boardId, title, boardType } = usePostContent();
 
   const initBoardId = async () => {
     if (boardId) return;
@@ -12,7 +12,7 @@ export const useInitBoardId = () => {
       title,
       contents: '<p></p>',
       categoryName: [],
-      boardType: 'SEMINAR',
+      boardType,
     };
 
     try {

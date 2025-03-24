@@ -45,4 +45,18 @@ const getRelativeTime = (updatedAt: string): string => {
   return formatTime(date);
 };
 
-export { getRelativeTime, getHHmmssFormat };
+const getFullDate = (updatedAt: number[]): string => {
+  if (!Array.isArray(updatedAt) || updatedAt.length < 6) return '날짜 오류';
+
+  const [year, month, day, hour, minute] = updatedAt;
+  const date = dayjs()
+    .year(year)
+    .month(month - 1)
+    .date(day)
+    .hour(hour)
+    .minute(minute);
+
+  return date.format('YYYY.MM.DD A h:mm');
+};
+
+export { getRelativeTime, getHHmmssFormat, getFullDate };

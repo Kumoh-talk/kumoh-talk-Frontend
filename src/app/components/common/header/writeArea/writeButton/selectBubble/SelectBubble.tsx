@@ -10,13 +10,21 @@ import Button from '@/app/components/common/button/Button';
 
 export interface Props {
   className: string;
+  isAdmin: boolean;
+  isSeminarWriter: boolean;
   onClose: () => void;
 }
 
-export default function SelectBubble({ className, onClose }: Props) {
+export default function SelectBubble({
+  className,
+  isAdmin,
+  isSeminarWriter,
+  onClose,
+}: Props) {
   const isMobileHeader = useMediaQueryMobileHeader();
-
   const router = useRouter();
+  
+  console.log("🚀 ~ isAdmin:", isAdmin);
 
   return (
     <BasicBubble
@@ -26,11 +34,22 @@ export default function SelectBubble({ className, onClose }: Props) {
       <CloseButton onClick={onClose} />
       <section className={styles.content}>
         <div className={styles.linkWrapper}>
+          {isAdmin && (
+            <Button
+              className={styles.button}
+              size="medium"
+              onClick={() => {
+                router.push('/post?type=notice');
+              }}
+            >
+              공지사항
+            </Button>
+          )}
           <Button
             className={styles.button}
             size="medium"
             onClick={() => {
-              router.push('/post');
+              router.push(isSeminarWriter ? '/post' : '/apply');
             }}
           >
             세미나

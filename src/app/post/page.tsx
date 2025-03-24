@@ -1,7 +1,9 @@
 'use client';
 
+import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSearchParams } from 'next/navigation';
 import PostProvider from '../lib/contexts/post/PostProvider';
 import PostEditorProvider from '../lib/contexts/post/PostEditorProvider';
 import { usePreventUnload } from '../lib/hooks/common/usePreventUnload';
@@ -9,13 +11,19 @@ import Header from '../components/post/Header/Header';
 import EditorMenu from '../components/post/EditorMenu/EditorMenu';
 import Title from '../components/post/Title/Title';
 import HashTag from '../components/post/HashTag/HashTag';
+import BoardInitializer from '../components/post/BoardInit/BoardInit';
 import styles from './page.module.scss';
 
-export default function Post() {
+function PostContent() {
   usePreventUnload();
+
+  const searchParams = useSearchParams();
+  const boardIdParam = searchParams.get('boardId');
+  const boardId = boardIdParam ? parseInt(boardIdParam, 10) : null;
 
   const SlotBefore = () => (
     <>
+      {boardId && <BoardInitializer boardId={boardId} />}
       <Header />
       <EditorMenu />
       <div className={styles.content}>
@@ -47,5 +55,13 @@ export default function Post() {
         draggable
       />
     </PostProvider>
+  );
+}
+
+export default function Post() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PostContent />
+    </Suspense>
   );
 }

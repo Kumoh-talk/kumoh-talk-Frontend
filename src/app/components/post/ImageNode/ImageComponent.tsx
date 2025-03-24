@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { NodeViewWrapper } from '@tiptap/react';
+import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import AlignLeftSvg from '@/app/assets/svg/Editor/AlignLeftSvg';
 import AlignCenterSvg from '@/app/assets/svg/Editor/AlignCenterSvg';
 import AlignRightSvg from '@/app/assets/svg/Editor/AlignRightSvg';
@@ -16,6 +17,8 @@ const ImageComponent = ({
   const containerStyle = { width, height, margin };
 
   const [imgCaption, setImgCaption] = useState(caption);
+
+  const { boardHeadImageUrl, setBoardHeadImageUrl } = usePostContent();
 
   const AlignController = () => {
     return (
@@ -81,6 +84,22 @@ const ImageComponent = ({
     updateAttributes({ caption: newCaption });
   };
 
+  const toggleBoardHeadImage = () => {
+    if (boardHeadImageUrl === src) {
+      updateAttributes({ isBoardHeadImage: false });
+      setBoardHeadImageUrl('');
+    } else {
+      updateAttributes({ isBoardHeadImage: true });
+      setBoardHeadImageUrl(src);
+    }
+  };
+
+  useEffect(() => {
+    if (boardHeadImageUrl !== src) {
+      updateAttributes({ isBoardHeadImage: false });
+    }
+  }, [boardHeadImageUrl]);
+
   return (
     <NodeViewWrapper
       className={clsx(styles.wrapper, { [styles.selected]: selected })}
@@ -93,6 +112,26 @@ const ImageComponent = ({
           <div className={styles.resizeTrigger} onMouseDown={resizeHandler}>
             <div className={styles.resizeHandle} />
           </div>
+          {selected && (
+            <div
+              className={clsx(styles.headImageChip, {
+                [styles.active]: boardHeadImageUrl === src,
+              })}
+              onClick={toggleBoardHeadImage}
+            >
+              {boardHeadImageUrl === src ? (
+                <div>
+                  <span>✔</span>
+                  <span>대표</span>
+                </div>
+              ) : (
+                <div>
+                  <span>○</span>
+                  <span>대표</span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {(imgCaption || selected) && (

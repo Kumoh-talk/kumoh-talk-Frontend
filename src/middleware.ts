@@ -39,6 +39,13 @@ export async function middleware(request: NextRequest) {
     return resCheckNeedSubmitAdditionalInfo;
   }
 
+  // 공지 사항 작성 권한 체크
+  const resCheckAdminAccessForNoticePost =
+    checkAdminAccessForNoticePost(request);
+  if (resCheckAdminAccessForNoticePost) {
+    return resCheckAdminAccessForNoticePost;
+  }
+
   return NextResponse.next();
 }
 
@@ -174,39 +181,76 @@ const checkNeedSubmitAdditionalInfo = async (
       return null;
     }
 
-    const { USER_ROLE: userRole } = parseJwt(accessToken);
-    if (userRole === 'ROLE_ACTIVE_USER') {
+    const { USER_ROLE: userRole, USER_ID: id } = parseJwt(accessToken);
+    console.log(
+      `[checkNeedSubmitAdditionalInfo] id: ${id}, userRole: ${userRole}`,
+    );
+    if (
+      userRole === 'ROLE_ACTIVE_USER' ||
+      userRole === 'ROLE_ADMIN' ||
+      userRole === 'ROLE_SEMINAR_WRITER'
+    ) {
+      console.log(`[checkNeedSubmitAdditionalInfo] pass`);
       return null;
     }
-    if (userRole === 'ROLE_ADMIN') {
-      // 어드민이면 수동으로 정보 체크
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            cookie: cookies,
-          },
-        },
-      );
-      const data = await res.json();
-      if (data.success == 'true') {
-        return null;
-      }
-    }
+    // if (userRole === 'ROLE_ACTIVE_USER' || userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SEMINAR_WRITER') {
+    //   // 어드민이면 수동으로 정보 체크
+    //   const res = await fetch(
+    //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/userAdditionalInfos/me`,
+    //     {
+    //       method: 'GET',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         cookie: cookies,
+    //       },
+    //     },
+    //   );
+    //   const data = await res.json();
+    //   if (data.success == 'true') {
+    //     return null;
+    //   }
+    // }
     const redirect = new URLSearchParams({
       redirect: nextUrl.pathname + nextUrl.search,
     });
 
     const url = new URL('/info-form?' + redirect.toString(), request.url);
 
+    console.log(`[checkNeedSubmitAdditionalInfo] redirected`);
     return NextResponse.redirect(url, {
       status: 302,
     });
   } else {
     return null;
   }
+};
+
+const checkAdminAccessForNoticePost = (
+  request: NextRequest,
+): NextResponse | null => {
+  const { nextUrl } = request;
+
+  if (
+    nextUrl.pathname === '/post' &&
+    nextUrl.searchParams.get('type') === 'notice'
+  ) {
+    const cookies = request.headers.get('cookie')!;
+    const accessToken = getCookie(cookies, 'accessToken')!;
+
+    if (!accessToken) return null;
+
+    const { USER_ROLE: userRole } = parseJwt(accessToken);
+
+    if (userRole !== 'ROLE_ADMIN') {
+      const homeUrl = new URL('/', request.url);
+
+      return NextResponse.redirect(homeUrl, {
+        status: 302,
+      });
+    }
+  }
+
+  return null;
 };
 
 export const config = {

@@ -34,7 +34,6 @@ export const postFormSchema = z.object({
     .max(50, ERROR_MSG.exceed.recruitmentTarget),
   recruitmentNum: z.number().min(1, ERROR_MSG.numberRequired),
   currentMemberNum: z.number().min(1, ERROR_MSG.numberRequired),
-  recruitmentStart: z.string().date(),
   recruitmentDeadline: z.string().date(),
   activityStart: z.string().date(),
   activityFinish: z.string().date(),

@@ -40,6 +40,10 @@ const Board = ({ boardId }: BoardProps) => {
     setShowBubble((prev) => !prev);
   };
 
+  const handleModify = async () => {
+    router.push(`/post?boardId=${boardId}`);
+  };
+
   const handleDelete = async () => {
     const confirmed = window.confirm('정말로 이 게시글을 삭제하시겠습니까?');
 
@@ -124,7 +128,7 @@ const Board = ({ boardId }: BoardProps) => {
             {showBubble && isAdmin && (
               <div className={styles.modifyBubble}>
                 <ModifyBubble
-                  onModify={() => {}}
+                  onModify={handleModify}
                   onDelete={handleDelete}
                 />
               </div>

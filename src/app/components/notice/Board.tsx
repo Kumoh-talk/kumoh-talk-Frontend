@@ -1,10 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import DOMPurify from 'dompurify';
 import ApplyBanner from '@/app/components/front/applyBanner/ApplyBanner';
+import MoreVerticalSvg from '@/app/assets/svg/Editor/MoreVerticalSvg';
+import ModifyBubble from '@/app/components/common/modifyBubble/ModifyBubble';
 import { getFullDate } from '@/app/lib/utils/post/dateFormatter';
-import { getBoard } from '@/app/lib/apis/notice/notice';
+import {
+  getBoard,
+  getMyInformation,
+  deleteBoard,
+} from '@/app/lib/apis/notice/notice';
 import styles from './Board.module.scss';
 
 interface BoardProps {
@@ -23,25 +30,51 @@ interface BoardData {
 
 const Board = ({ boardId }: BoardProps) => {
   const [boardData, setBoardData] = useState<BoardData | null>(null);
+  const [showBubble, setShowBubble] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
+
+  const toggleBubble = () => {
+    setShowBubble((prev) => !prev);
+  };
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm('정말로 이 게시글을 삭제하시겠습니까?');
+
+    if (confirmed) {
+      try {
+        await deleteBoard(boardId);
+        alert('게시글이 삭제되었습니다.');
+        router.push('/');
+      } catch (err) {
+        alert('게시글 삭제에 실패했습니다.');
+      }
+    }
+  };
 
   useEffect(() => {
-    const fetchBoardData = async () => {
+    const fetchBoardData= async () => {
       try {
         const boardResponse = await getBoard(boardId);
+        const userResponse = await getMyInformation();
 
         if (boardResponse?.data) {
           setBoardData(boardResponse.data);
         } else {
           setError(true);
         }
+
+        if (userResponse?.data?.role === 'ROLE_ADMIN') {
+          setIsAdmin(true);
+        }
       } catch (err) {
         setError(true);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchBoardData();
   }, [boardId]);
@@ -81,6 +114,21 @@ const Board = ({ boardId }: BoardProps) => {
           <span className={styles.date}>{getFullDate(updatedAt)}</span>
           <button className={styles.url} type='button' onClick={handleCopyUrl}>
             URL 복사하기
+          </button>
+          <button
+            className={styles.moreVertical}
+            type='button'
+            onClick={toggleBubble}
+          >
+            <MoreVerticalSvg />
+            {showBubble && isAdmin && (
+              <div className={styles.modifyBubble}>
+                <ModifyBubble
+                  onModify={() => {}}
+                  onDelete={handleDelete}
+                />
+              </div>
+            )}
           </button>
         </div>
         <hr className={styles.divider} />

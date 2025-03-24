@@ -61,6 +61,22 @@
     margin-right: 1rem;
   }
 
+  .moreVertical {
+    position: relative;
+    border: none;
+    background: none;
+  }
+
+  .modifyBubble {
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    z-index: 10;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
   .divider {
     border: none;
     border-bottom: 1px solid #ddd;

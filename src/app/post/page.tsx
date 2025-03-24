@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation';
@@ -13,7 +14,7 @@ import HashTag from '../components/post/HashTag/HashTag';
 import BoardInitializer from '../components/post/BoardInit/BoardInit';
 import styles from './page.module.scss';
 
-export default function Post() {
+function PostContent() {
   usePreventUnload();
 
   const searchParams = useSearchParams();
@@ -54,5 +55,13 @@ export default function Post() {
         draggable
       />
     </PostProvider>
+  );
+}
+
+export default function Post() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PostContent />
+    </Suspense>
   );
 }

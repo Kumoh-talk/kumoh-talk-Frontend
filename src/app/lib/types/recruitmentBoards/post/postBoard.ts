@@ -8,7 +8,6 @@ export interface PostBoard {
   recruitmentTarget: string;
   recruitmentNum: number;
   currentMemberNum: number;
-  recruitmentStart: string;
   recruitmentDeadline: string;
   activityStart: string;
   activityFinish: string;

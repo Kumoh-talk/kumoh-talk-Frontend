@@ -26,7 +26,6 @@ export default async function Page({
     recruitmentTarget: '',
     recruitmentNum: 0,
     currentMemberNum: 0,
-    recruitmentStart: '',
     recruitmentDeadline: '',
     activityStart: '',
     activityFinish: '',
@@ -36,8 +35,6 @@ export default async function Page({
   if (searchParams.id) {
     const { data } = await getRecruitmentBoardInfo(searchParams.id);
     defaultValues = data;
-    defaultValues.recruitmentStart =
-      defaultValues.recruitmentStart.split('T')[0];
     defaultValues.recruitmentDeadline =
       defaultValues.recruitmentDeadline.split('T')[0];
     defaultValues.activityStart = defaultValues.activityStart.split('T')[0];

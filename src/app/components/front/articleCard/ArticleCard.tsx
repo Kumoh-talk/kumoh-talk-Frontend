@@ -42,11 +42,11 @@ export default function ArticleCard({
           </div>
           <div className={styles.targetWrapper}>
             <div>
-              모집대상
+              <span className={styles.label}>모집대상</span>
               <span>{recruitmentTarget}</span>
             </div>
             <div>
-              모집인원
+              <span className={styles.label}>모집인원</span>
               <span>
                 <span className={styles.currentCount}></span>
                 {currentMemberNum}/{recruitmentNum}
@@ -55,7 +55,7 @@ export default function ArticleCard({
           </div>
           <div className={styles.durationWrapper}>
             <div>
-              신청기간
+              <span className={styles.label}>신청기간</span>
               <span>
                 {new Date(recruitmentStart).toLocaleDateString('sv-SE')}~
                 {new Date(recruitmentDeadline).toLocaleDateString('sv-SE')}

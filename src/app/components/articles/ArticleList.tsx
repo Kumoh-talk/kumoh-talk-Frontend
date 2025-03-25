@@ -25,9 +25,10 @@ export default async function ArticleList({
   try {
     const category = (searchParams.category?.toUpperCase() ??
       'MENTORING') as RecruitmentType;
+    const order = (searchParams.order ?? 'desc') as 'asc' | 'desc';
     const page = parseInt(searchParams.page ?? '1');
 
-    const res = await getRecruitmentArticlesByPage(category, page);
+    const res = await getRecruitmentArticlesByPage(category, page, 15, order);
     listData.push(...(res?.pageContents ?? []));
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -55,7 +56,7 @@ export default async function ArticleList({
     <div className={styles.wrapper}>
       <div className={styles.aside}>
         <CategoryList searchParams={searchParams} />
-        <ArticleOrder />
+        <ArticleOrder searchParams={searchParams} />
       </div>
       <ul className={styles.list}>{list}</ul>
       <div className={clsx(styles.bottom, { [styles.isGuest]: !isCanPost })}>

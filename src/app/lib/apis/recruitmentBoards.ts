@@ -8,13 +8,14 @@ export const getRecruitmentArticlesByPage = async (
   category: RecruitmentType = 'MENTORING',
   page: number = 1,
   size: number = 15,
+  order: 'asc' | 'desc' = 'desc',
 ) => {
   try {
     const query = new URLSearchParams({
       recruitmentBoardType: category,
       size: size.toString(),
       page: page.toString(),
-      sort: 'createdAt,DESC',
+      sort: `createdAt,${order.toUpperCase()}`,
     });
     const response = await fetch(
       `${

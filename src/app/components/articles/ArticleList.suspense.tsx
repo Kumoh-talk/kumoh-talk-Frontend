@@ -13,7 +13,7 @@ export default function ArticleListSuspense({
     <div className={styles.wrapper}>
       <div className={styles.aside}>
         <CategoryList searchParams={searchParams} />
-        <ArticleOrder />
+        <ArticleOrder searchParams={searchParams} />
       </div>
       <ul className={styles.list}>
         <div className={styles.line}></div>

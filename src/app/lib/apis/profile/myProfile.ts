@@ -26,7 +26,7 @@ export const getMyProfile = () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Referer: 'https://kumoh-talk.com/*',
+      referer: 'https://kumoh-talk.com/*',
     },
     credentials: 'include',
   });

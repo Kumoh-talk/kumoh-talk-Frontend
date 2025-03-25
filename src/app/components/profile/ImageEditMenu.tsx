@@ -33,6 +33,7 @@ export default function ImageEditMenu({ isShow }: Props) {
     const url = response.data;
 
     const uploadProfileImageResponse = await uploadProfileImage(url, image);
+    console.log(url, uploadProfileImageResponse);
 
     const patchResponse: PatchProfileImageResponse = await patchProfileImage(
       url

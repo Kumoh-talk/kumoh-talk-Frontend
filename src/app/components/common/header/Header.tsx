@@ -9,11 +9,12 @@ import WriteArea from './writeArea/WriteArea';
 
 export interface Props {
   title?: string;
+  alwaysVisible?: boolean;
 }
 
-export default function Header({ title = '' }: Props) {
+export default function Header({ title = '', alwaysVisible = true }: Props) {
   return (
-    <Background className={styles.header} alwaysVisible={!!title}>
+    <Background className={styles.header} alwaysVisible={alwaysVisible}>
       <div className={styles.left}>
         <Link href='/'>야밤의 금오톡</Link>
         {title && (

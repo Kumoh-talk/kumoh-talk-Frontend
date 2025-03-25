@@ -12,7 +12,7 @@ import NoticeListSuspense from './components/front/noticeList/NoticeList.suspens
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header alwaysVisible={false} />
       <main className={styles.main}>
         <header>
           <div className={styles.logo}></div>

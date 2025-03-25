@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import DOMPurify from 'dompurify';
-import ApplyBanner from '@/app/components/front/applyBanner/ApplyBanner';
 import MoreVerticalSvg from '@/app/assets/svg/Editor/MoreVerticalSvg';
 import ModifyBubble from '@/app/components/common/modifyBubble/ModifyBubble';
 import { getFullDate } from '@/app/lib/utils/post/dateFormatter';
@@ -59,7 +58,7 @@ const Board = ({ boardId }: BoardProps) => {
   };
 
   useEffect(() => {
-    const fetchBoardData= async () => {
+    const fetchBoardData = async () => {
       try {
         const boardResponse = await getBoard(boardId);
         const userResponse = await getMyInformation();
@@ -78,17 +77,25 @@ const Board = ({ boardId }: BoardProps) => {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchBoardData();
   }, [boardId]);
 
   if (loading) {
-    return <div>로딩중...</div>;
+    return (
+      <div className={styles.loaderWrapper}>
+        <div className={styles.loader} />
+      </div>
+    );
   }
 
   if (error || !boardData) {
-    return <div>게시글 정보를 불러올 수 없습니다.</div>;
+    return (
+      <div className={styles.loaderWrapper}>
+        게시글 정보를 불러올 수 없습니다.
+      </div>
+    );
   }
 
   const { username, title, contents, view, categoryNames, updatedAt } =
@@ -103,53 +110,42 @@ const Board = ({ boardId }: BoardProps) => {
   };
 
   return (
-    <div className={styles.noticeBoard}>
-      <header>
-        <div className={styles.logo}></div>
-        <div className={styles.bannerWrapper}>
-          <ApplyBanner />
-        </div>
-      </header>
-      <article className={styles.articleContainer}>
-        <h1 className={styles.articleTitle}>{title}</h1>
-        <div className={styles.articleInfo}>
-          <span className={styles.author}>{username}</span>
-          <span className={styles.views}>조회수 {view}</span>
-          <span className={styles.date}>{getFullDate(updatedAt)}</span>
-          <button className={styles.url} type='button' onClick={handleCopyUrl}>
-            URL 복사하기
-          </button>
-          <button
-            className={styles.moreVertical}
-            type='button'
-            onClick={toggleBubble}
-          >
-            <MoreVerticalSvg />
-            {showBubble && isAdmin && (
-              <div className={styles.modifyBubble}>
-                <ModifyBubble
-                  onModify={handleModify}
-                  onDelete={handleDelete}
-                />
-              </div>
-            )}
-          </button>
-        </div>
-        <hr className={styles.divider} />
-        <div
-          className={styles.contents}
-          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-        />
-        <div className={styles.categoryNames}>
-          {categoryNames.map((category) => (
-            <span className={styles.category} key={category}>
-              <span>#</span>
-              <span>{category}</span>
-            </span>
-          ))}
-        </div>
-      </article>
-    </div>
+    <article className={styles.noticeBoard}>
+      <h1 className={styles.articleTitle}>{title}</h1>
+      <div className={styles.articleInfo}>
+        <span className={styles.author}>{username}</span>
+        <span className={styles.views}>조회수 {view}</span>
+        <span className={styles.date}>{getFullDate(updatedAt)}</span>
+        <button className={styles.url} type='button' onClick={handleCopyUrl}>
+          URL 복사하기
+        </button>
+        <button
+          className={styles.moreVertical}
+          type='button'
+          onClick={toggleBubble}
+        >
+          <MoreVerticalSvg />
+          {showBubble && isAdmin && (
+            <div className={styles.modifyBubble}>
+              <ModifyBubble onModify={handleModify} onDelete={handleDelete} />
+            </div>
+          )}
+        </button>
+      </div>
+      <hr className={styles.divider} />
+      <div
+        className={styles.contents}
+        dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+      />
+      <div className={styles.categoryNames}>
+        {categoryNames.map((category) => (
+          <span className={styles.category} key={category}>
+            <span>#</span>
+            <span>{category}</span>
+          </span>
+        ))}
+      </div>
+    </article>
   );
 };
 

@@ -10,7 +10,7 @@ import CloseButton from './CloseButton';
 import styles from './loginBubble.module.scss';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useMediaQueryMobileHeader } from '@/app/lib/hooks/useMediaQueryMobileHeader';
-
+import Image from 'next/image';
 export interface Props {
   className: string;
   onClose: () => void;
@@ -67,10 +67,12 @@ export default function LoginBubble({ className, onClose }: Props) {
     >
       <CloseButton onClick={onClose} />
       <section className={styles.content}>
-        <img
+        <Image
           className={styles.logo}
-          src="/images/logo_dark_2x.webp"
-          alt="금오톡 로고"
+          src='/images/logo_dark_2x.webp'
+          alt='금오톡 로고'
+          width={40}
+          height={40}
         />
         <div className={styles.line}></div>
         <div className={styles.socialWrapper}>{loginButtons}</div>

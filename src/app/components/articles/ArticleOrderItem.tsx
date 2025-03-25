@@ -1,34 +1,29 @@
-import clsx from 'clsx';
-import styles from './categoryTab.module.scss';
 import Link from 'next/link';
+import styles from './articleOrder.module.scss';
+import clsx from 'clsx';
 
 export interface Props {
   name: string;
-  categoryId: string;
+  order: string;
   selected: boolean;
   searchParams: { category?: string; page?: string; order?: string };
 }
 
-export default function CategoryTab({
+export default function ArticleOrderItem({
   name,
-  categoryId,
+  order,
   selected,
   searchParams,
 }: Props) {
   const params = new URLSearchParams(searchParams as Record<string, string>);
-  params.set('category', categoryId);
-  params.delete('page');
   params.delete('order');
+  params.set('order', order);
   const url = params.toString();
   return (
-    <li className={styles.tab}>
+    <li>
       <Link
         href={`?${url}`}
-        className={clsx(
-          styles.button,
-          { [styles.selected]: selected },
-          styles[categoryId],
-        )}
+        className={clsx(styles.link, { [styles.selected]: selected })}
       >
         {name}
       </Link>

@@ -93,7 +93,13 @@ const Board = ({ boardId }: BoardProps) => {
   if (error || !boardData) {
     return (
       <div className={styles.loaderWrapper}>
-        게시글 정보를 불러올 수 없습니다.
+        <p>게시글 정보를 불러올 수 없습니다. 인적사항을 작성해주세요.</p>
+        <button
+          className={styles.redirectButton}
+          onClick={() => router.push('/profile')}
+        >
+          인적사항 작성하러 가기
+        </button>
       </div>
     );
   }

@@ -36,10 +36,12 @@
       gap: 0.5rem;
       .title {
         @include title1Emphasized;
+        flex: 4;
       }
 
       .tags {
         zoom: 0.8;
+        flex: 2;
       }
     }
   }

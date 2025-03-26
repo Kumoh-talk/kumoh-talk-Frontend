@@ -10,15 +10,16 @@
   }
 
   .titleWrapper {
-    display: inline;
+    display: flex;
     flex: 1;
     width: 0;
+
     .title {
       @include title2Emphasized(black-85);
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      word-break: break-all;
+      flex: 1;
     }
 
     .new {

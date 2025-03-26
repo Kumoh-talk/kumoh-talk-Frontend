@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '야밤의금오톡 프로필',
     description: '야밤의금오톡 프로필 페이지입니다.',
-    images: ['/images/logo_thumbnail.png'],
+    images: ['/images/logo_thumbnail_v1.png'],
   },
 };
 

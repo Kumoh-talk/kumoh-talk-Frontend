@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '야밤의금오톡 신청서 확인',
     description: '야밤의금오톡에 등록된 신청서를 확인해보세요',
-    images: ['/images/logo_thumbnail.webp'],
+    images: ['/images/logo_thumbnail.png'],
   },
 };
 

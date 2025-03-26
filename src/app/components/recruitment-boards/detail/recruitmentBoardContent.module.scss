@@ -39,6 +39,7 @@ section.section {
     }
     .body {
       @include title2(black-50);
+      width: inherit;
     }
   }
 }

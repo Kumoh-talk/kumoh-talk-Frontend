@@ -96,7 +96,7 @@ const Board = ({ boardId }: BoardProps) => {
         <p>게시글 정보를 불러올 수 없습니다. 인적사항을 작성해주세요.</p>
         <button
           className={styles.redirectButton}
-          onClick={() => router.push('/profile')}
+          onClick={() => router.replace('/profile')}
         >
           인적사항 작성하러 가기
         </button>

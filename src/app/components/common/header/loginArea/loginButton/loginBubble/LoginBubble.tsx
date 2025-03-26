@@ -17,11 +17,11 @@ export interface Props {
 }
 
 const logins = [
-  {
-    name: 'google',
-    className: styles.google,
-    svg: GoogleSvg,
-  },
+  // {
+  //   name: 'google',
+  //   className: styles.google,
+  //   svg: GoogleSvg,
+  // },
   {
     name: 'github',
     className: styles.github,

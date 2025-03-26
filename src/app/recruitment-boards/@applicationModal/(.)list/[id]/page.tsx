@@ -26,7 +26,7 @@ export async function generateMetadata({
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      images: ['/logo_dark_2.webp'],
+      images: ['/images/logo_dark_2.webp'],
     },
   };
 }

@@ -65,15 +65,13 @@ export default function RecruitmentBoardDetail({
       <RecruitmentBoardContent
         target={data.recruitmentTarget}
         recruitmentNum={data.recruitmentNum}
-        recruitmentStart={dayjs(data.recruitmentStart).format(
-          'YYYY.MM.DD HH:mm'
-        )}
+        recruitmentStart={dayjs(data.recruitmentStart).format('YYYY.MM.DD')}
         recruitmentDeadline={dayjs(data.recruitmentDeadline).format(
-          'YYYY.MM.DD HH:mm'
+          'YYYY.MM.DD'
         )}
         activity={data.activityCycle}
-        activityStart={dayjs(data.activityStart).format('YYYY.MM.DD HH:mm')}
-        activityFinish={dayjs(data.activityFinish).format('YYYY.MM.DD HH:mm')}
+        activityStart={dayjs(data.activityStart).format('YYYY.MM.DD')}
+        activityFinish={dayjs(data.activityFinish).format('YYYY.MM.DD')}
         detail={data.content}
         buttonBlock={buttonBlock}
       />

@@ -55,9 +55,12 @@
       text-overflow: ellipsis;
       word-break: break-all;
       display: inline-flex;
+      align-items: center;
 
       svg {
-        margin: 0 0.5rem;
+        width : 18px;
+        height : 18px;
+        margin: 0 0.3rem;
       }
     }
   }

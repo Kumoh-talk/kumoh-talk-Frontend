@@ -113,6 +113,12 @@
   .contents {
     @include editorContent;
 
+    p:empty::after {
+      content: '';
+      display: block;
+      height: 1rem;
+    }
+
     // CustomImageNode
     :global(.editorCustomImage) {
       height: fit-content;

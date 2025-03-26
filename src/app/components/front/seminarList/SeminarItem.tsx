@@ -1,4 +1,4 @@
-import SeminarCommentSvg from '@/app/assets/svg/SeminarCommentSvg';
+import BoardViewSvg from '@/app/assets/svg/BoardViewSvg';
 import styles from './seminarItem.module.scss';
 import Link from 'next/link';
 
@@ -24,7 +24,7 @@ export default function SeminarItem(props: BoardItemProps) {
             <img
               className={styles.thumbnail}
               src={props.headImageUrl}
-              alt="썸네일"
+              alt='썸네일'
             />
           )}
         </div>
@@ -33,7 +33,7 @@ export default function SeminarItem(props: BoardItemProps) {
           <span className={styles.title}>{props.title}</span>
           <span className={styles.sub}>
             <span className={styles.author}>{props.userName}</span>
-            <SeminarCommentSvg />
+            <BoardViewSvg />
             <span>{props.view}</span>
           </span>
         </div>

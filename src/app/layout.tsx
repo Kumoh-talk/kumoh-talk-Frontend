@@ -10,8 +10,13 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: '야밤의 금오톡',
-  description: '',
+  title: '야밤의금오톡',
+  description: '야밤의금오톡 홈페이지입니다.',
+  openGraph: {
+    title: '야밤의금오톡',
+    description: '야밤의금오톡 홈페이지입니다.',
+    images: ['/images/logo_thumbnail.png'],
+  },
 };
 
 export default function RootLayout({
@@ -20,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang='ko'>
       <body className={pretendard.className}>{children}</body>
     </html>
   );

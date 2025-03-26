@@ -33,7 +33,7 @@ export async function generateMetadata({
       openGraph: {
         title: `야밤의금오톡`,
         description: `야밤의금오톡`,
-        images: ['/images/logo_dark_2.webp'],
+        images: ['/images/logo_thumbnail.webp'],
       },
     };
   }
@@ -48,7 +48,7 @@ export async function generateMetadata({
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      images: ['/images/logo_dark_2x.webp'],
+      images: ['/images/logo_thumbnail.webp'],
     },
   };
 }

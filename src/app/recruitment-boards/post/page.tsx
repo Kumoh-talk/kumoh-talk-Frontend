@@ -6,6 +6,17 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { PostBoard } from '@/app/lib/types/recruitmentBoards/post/postBoard';
 import { getRecruitmentBoardInfo } from '@/app/lib/apis/recruitment-boards/recruitmentBoard';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '야밤의금오톡 모집글 작성',
+  description: '야밤의금오톡 모집글 작성 페이지입니다.',
+  openGraph: {
+    title: '야밤의금오톡 모집글 작성',
+    description: '야밤의금오톡 모집글 작성 페이지입니다.',
+    images: ['/logo_dark_2.webp'],
+  },
+};
 
 export default async function Page({
   searchParams,

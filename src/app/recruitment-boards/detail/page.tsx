@@ -14,6 +14,45 @@ import { UserInfo } from '@/app/lib/types/user/userInfo';
 import { getUserInfo } from '@/app/lib/apis/user';
 import { cookies } from 'next/headers';
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: {
+    id: string;
+    boardType: string;
+  };
+}) {
+  const { id, boardType } = searchParams;
+  const titleFromBoardType = matchRecruitmentTitle(boardType);
+  const boardDetail: RecruitmentBoardsApi = await getRecruitmentBoardDetail(id);
+
+  if (!boardDetail.data) {
+    return {
+      title: `야밤의금오톡`,
+      description: `야밤의금오톡`,
+      openGraph: {
+        title: `야밤의금오톡`,
+        description: `야밤의금오톡`,
+        images: ['/logo_dark_2.webp'],
+      },
+    };
+  }
+
+  const boardTitle = boardDetail.data.title;
+  const metaTitle = `야밤의금오톡 : ${boardTitle}`;
+  const metaDescription = boardDetail.data.summary;
+
+  return {
+    title: metaTitle,
+    description: metaDescription,
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+      images: ['/logo_dark_2.webp'],
+    },
+  };
+}
+
 export default async function Page({
   searchParams,
 }: {

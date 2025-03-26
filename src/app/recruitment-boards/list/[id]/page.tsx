@@ -6,19 +6,19 @@ import { ApplicantDetailApi } from '@/app/lib/types/recruitmentBoards/applicantD
 import { cookies } from 'next/headers';
 
 export interface Props {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
-  searchParams: Promise<{
+  };
+  searchParams: {
     recruitmentBoardId: string;
     applicantUserId: string;
-  }>;
+  };
 }
 
 export default async function Page({ params, searchParams }: Props) {
   try {
-    const { id: applicantId } = await params;
-    const { recruitmentBoardId, applicantUserId } = await searchParams;
+    const { id: applicantId } = params;
+    const { recruitmentBoardId, applicantUserId } = searchParams;
 
     const applicantDetail: ApplicantDetailApi = await getApplicantDetail(
       applicantId,

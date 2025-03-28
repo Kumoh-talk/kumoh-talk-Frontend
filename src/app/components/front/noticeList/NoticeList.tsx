@@ -27,7 +27,7 @@ export default async function NoticeList() {
     <section className={styles.container}>
       <header>
         <span>공지사항</span>
-        <Link href="/recruitment-boards?category=mentor">
+        <Link href="/notice">
           더 보기
           <PageMoreSvg />
         </Link>

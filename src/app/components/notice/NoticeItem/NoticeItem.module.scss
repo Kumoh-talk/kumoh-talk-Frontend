@@ -1,8 +1,6 @@
 @import 'mixin';
 
 .item {
-  @include title3(black-85);
-
   display: flex;
   align-items: center;
   width: 100%;
@@ -10,6 +8,8 @@
   border-top: 1px solid var(--color-gray-600);
 
   .title {
+    @include title3(black-85);
+
     flex: 3;
     padding-left: 0.5rem;
     overflow: hidden;
@@ -25,6 +25,8 @@
   .datetime,
   .view,
   .like {
+    @include title3(black-50);
+
     text-align: center;
     min-width: fit-content;
   }

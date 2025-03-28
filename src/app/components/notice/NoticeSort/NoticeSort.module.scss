@@ -1,0 +1,13 @@
+@import 'mixin';
+
+.sort {
+  @include body(secondary);
+
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  .selected {
+    @include bodyEmphasized(black-85);
+  }
+}

@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import ProfileSideBar from '../components/profile/ProfileSideBar';
 import styles from './page.module.scss';
 import ProfileContent from '../components/profile/ProfileContent';
@@ -11,9 +10,7 @@ export default function Page() {
         <ProfileSideBar />
       </div>
       <div className={styles.content}>
-        <Suspense fallback={<div>로딩중...</div>}>
-          <ProfileContent />
-        </Suspense>
+        <ProfileContent />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
+import { toast } from 'react-toastify';
 import { findAttachNodes } from '@/app/lib/utils/post/editorFileUtils';
 import FileSvg from '@/app/assets/svg/Editor/FileSvg';
 import { MSG, CUSTOM_NODE } from '@/app/lib/constants/post/board';
+import { MAX_ATTACH_SIZE } from '@/app/lib/constants/common/file';
 import type { Editor } from '@tiptap/react';
 import type { FileInfo } from '../FileNode/FileComponent';
 import styles from './EditorMenuButton.module.scss';
@@ -55,6 +57,12 @@ const EditorFileButton = ({ editor }: EditorFileButtonProps) => {
   const handleEditorFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    if (file.size > MAX_ATTACH_SIZE) {
+      toast.warn('50MB 이하의 파일을 업로드 해주세요.');
+      event.target.value = '';
+      return;
+    }
 
     const attachNodes = findAttachNodes(editor);
 

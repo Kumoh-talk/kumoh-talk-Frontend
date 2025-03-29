@@ -1,8 +1,10 @@
+import { toast } from 'react-toastify';
 import clsx from 'clsx';
 import { usePostContent } from '@/app/lib/contexts/post/PostContentContext';
 import { useInitBoardId } from '@/app/lib/hooks/post/useInitBoardId';
 import { saveImage } from '@/app/lib/apis/post/saveFiles';
 import { usePublish } from '@/app/lib/hooks/post/usePublish';
+import { MAX_IMAGE_SIZE } from '@/app/lib/constants/common/file';
 import Button from '../../common/button/Button';
 import PlusSvg from '@/app/assets/svg/Editor/PlusSvg';
 import MinusSvg from '@/app/assets/svg/Editor/MinusSvg';
@@ -18,12 +20,17 @@ const Publish = ({ close }: PublishProps) => {
 
   const { initBoardId } = useInitBoardId();
   const { publishBoard } = usePublish();
-  
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-  
+    
+    if (file.size > MAX_IMAGE_SIZE) {
+      toast.warn('10MB 이하의 이미지를 업로드 해주세요.');
+      event.target.value = '';
+      return;
+    }
+
     try {
       let currentBoardId: number;
 

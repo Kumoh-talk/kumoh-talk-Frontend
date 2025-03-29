@@ -3,18 +3,18 @@ import ApplyBanner from '@/app/components/front/applyBanner/ApplyBanner';
 import Board from '@/app/components/notice/Board';
 import styles from './page.module.scss';
 
-interface NoticePageProps {
+interface SeminarPageProps {
   params: {
     id: string;
   };
 }
 
-export default function Notice({ params }: NoticePageProps) {
+export default function Seminar({ params }: SeminarPageProps) {
   const { id } = params;
 
   return (
     <>
-      <Header title='공지사항' alwaysVisible={false} />
+      <Header title='세미나' alwaysVisible={false} />
       <main className={styles.main}>
         <header>
           <div className={styles.logo}></div>

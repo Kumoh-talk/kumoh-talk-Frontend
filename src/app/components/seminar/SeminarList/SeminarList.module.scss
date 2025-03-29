@@ -1,0 +1,19 @@
+@import 'mixin';
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 37.625rem;
+
+  & > li:last-child {
+    border-bottom: 1px solid var(--color-gray-600);
+  }
+
+  .empty {
+    @include title3(black-85);
+
+    align-self: center;
+    padding: 3rem 0;
+  }
+}

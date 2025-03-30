@@ -1,7 +1,9 @@
 import { ReactNodeViewRenderer } from '@tiptap/react';
+import { toast } from 'react-toastify';
 import ImageComponent from './ImageComponent';
 import Image from '@tiptap/extension-image';
 import { CUSTOM_NODE } from '@/app/lib/constants/post/board';
+import { MAX_IMAGE_SIZE } from '@/app/lib/constants/common/file';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
 
 declare module '@tiptap/core' {
@@ -51,6 +53,11 @@ const CustomImage = Image.extend({
             const file = imageItem.getAsFile();
             if (!file) return false;
 
+            if (file.size > MAX_IMAGE_SIZE) {
+              toast.warn('이미지는 10MB 이하만 업로드할 수 있습니다.');
+              return true;
+            }
+
             const mimeType = file.type;
             const ext = mimeType.split('/')[1] || 'png';
             let fileName = '';
@@ -91,6 +98,11 @@ const CustomImage = Image.extend({
             );
             if (!imageFile) return false;
 
+            if (imageFile.size > MAX_IMAGE_SIZE) {
+              toast.warn('이미지는 10MB 이하만 업로드할 수 있습니다.');
+              return true;
+            }
+
             const reader = new FileReader();
             reader.onload = (e) => {
               const result = e.target?.result;
@@ -127,7 +139,7 @@ const CustomImage = Image.extend({
             height: container?.style.height || 'auto',
             margin: container?.style.margin || '0 auto',
             caption: caption?.textContent || '',
-            isBoardHeadImage : img?.getAttribute('data-is-head-image') || false
+            isBoardHeadImage: img?.getAttribute('data-is-head-image') || false,
           };
         },
       },
@@ -160,7 +172,7 @@ const CustomImage = Image.extend({
               src,
               alt,
               title,
-              'data-is-head-image' : isBoardHeadImage
+              'data-is-head-image': isBoardHeadImage,
             },
           ],
         ],

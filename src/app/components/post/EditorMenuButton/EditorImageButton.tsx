@@ -1,4 +1,6 @@
+import { toast } from 'react-toastify';
 import ImageSvg from '@/app/assets/svg/Editor/ImageSvg';
+import { MAX_IMAGE_SIZE } from '@/app/lib/constants/common/file';
 import type { Editor } from '@tiptap/react';
 import styles from './EditorMenuButton.module.scss';
 
@@ -32,6 +34,12 @@ const EditorImageButton = ({ editor }: EditorImageButtonProps) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      toast.warn('10MB 이하의 이미지를 업로드 해주세요.');
+      event.target.value = '';
+      return;
+    }
 
     addImageToEditor(file);
     event.target.value = '';

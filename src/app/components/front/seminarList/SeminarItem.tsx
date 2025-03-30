@@ -18,7 +18,7 @@ export interface BoardItemProps {
 export default function SeminarItem(props: BoardItemProps) {
   return (
     <li className={styles.container}>
-      <Link href={`/notice/${props.boardId}`}>
+      <Link href={`/seminar/${props.boardId}`}>
         <div className={styles.thumbWrapper}>
           {props.headImageUrl && (
             <img

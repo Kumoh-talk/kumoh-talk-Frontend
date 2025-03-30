@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { MAX_IMAGE_SIZE } from '@/app/lib/constants/common/file';
 import styles from './imageEditMenu.module.scss';
 import {
   deleteProfileImage,
@@ -19,9 +20,16 @@ export default function ImageEditMenu({ isShow }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      handleUpload(e.target.files[0]);
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    if (file.size > MAX_IMAGE_SIZE) {
+      alert('10MB 이하의 이미지를 업로드 해주세요.');
+      e.target.value = '';
+      return;
     }
+
+    handleUpload(file);
   };
 
   const handleUpload = async (image: File) => {

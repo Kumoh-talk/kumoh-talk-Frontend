@@ -3,6 +3,7 @@
 import EducationInfo from './EducationInfo';
 import ProfileInfo from './ProfileInfo';
 import SignOutContainer from './SignOutContainer';
+import Loader from '@/app/components/common/loader/Loader';
 import { useState, useEffect } from 'react';
 import { UserInfo } from '@/app/lib/types/user/userInfo';
 import { AdditionalInfo } from '@/app/lib/types/user/userInfo';
@@ -52,7 +53,7 @@ export default function ProfileContent() {
   }, []);
 
   if (!myProfile) {
-    return <div>로딩중...</div>;
+    return <Loader />;
   }
 
   return (

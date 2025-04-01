@@ -1,69 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCookie, parseJwt } from '@/app/lib/apis/auth';
-import { refreshToken } from '@/app/lib/apis/user';
+import {
+  _fetch,
+  convertCookieToHeaders,
+  refreshAndRetry,
+  setResponseTokenCookie,
+} from '@/app/lib/utils/routeFunctions';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
 
 type UrlParams = { domain: string; func1: string; func2: string };
-
-const convertCookieToHeaders = (cookies: string | null): HeadersInit =>
-  cookies
-    ? {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${getCookie(cookies, 'accessToken')}`,
-      }
-    : {
-        'Content-Type': 'application/json',
-      };
-
-const _fetch = async (
-  url: string,
-  options: RequestInit,
-  body?: string | any,
-) => {
-  if (body && typeof body !== 'string') {
-    options.body = JSON.stringify(body);
-  }
-  return await fetch(url, options);
-};
-
-const refreshAndRetry = async (
-  request: NextRequest,
-  func: (request: NextRequest, params: any) => Promise<NextResponse>,
-  params: any,
-  accessToken?: string,
-  _refreshToken?: string,
-) => {
-  if (!accessToken || !_refreshToken) {
-    return NextResponse.json({ status: 403 });
-  }
-
-  const newTokenRes = await refreshToken(accessToken, _refreshToken!);
-
-  if (newTokenRes.status === 200) {
-    const body = await newTokenRes.json();
-    const tokenBody: {
-      accessToken: string;
-      refreshToken: string;
-    } = body.data;
-
-    const res2 = await func(request, params);
-
-    res2.cookies.set('accessToken', tokenBody.accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
-    res2.cookies.set('refreshToken', tokenBody.refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
-    return res2;
-  } else {
-    return NextResponse.json({ status: 403 });
-  }
-};
 
 export async function GET(
   request: NextRequest,
@@ -147,16 +93,11 @@ export async function POST(
   const resBody = await res.json();
   const response = NextResponse.json(resBody, { status: res.status });
   if (resBody.data?.accessToken) {
-    response.cookies.set('accessToken', resBody.data.accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
-    response.cookies.set('refreshToken', resBody.data.refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
+    setResponseTokenCookie(
+      response,
+      resBody.data.accessToken,
+      resBody.data.refreshToken,
+    );
   }
 
   return response;
@@ -246,16 +187,11 @@ export async function PATCH(
 
   const response = NextResponse.json(resBody, { status: res.status });
   if (resBody.data?.accessToken) {
-    response.cookies.set('accessToken', resBody.data.accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
-    response.cookies.set('refreshToken', resBody.data.refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-    });
+    setResponseTokenCookie(
+      response,
+      resBody.data.accessToken,
+      resBody.data.refreshToken,
+    );
   }
 
   return response;

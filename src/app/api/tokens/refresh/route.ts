@@ -1,18 +1,7 @@
-import { getCookie } from '@/app/lib/apis/auth';
+import { _fetch } from '@/app/lib/utils/routeFunctions';
 import { NextRequest, NextResponse } from 'next/server';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
-
-const _fetch = async (
-  url: string,
-  options: RequestInit,
-  body?: string | any,
-) => {
-  if (body && typeof body !== 'string') {
-    options.body = JSON.stringify(body);
-  }
-  return await fetch(url, options);
-};
 
 export async function POST(request: NextRequest) {
   const { accessToken, refreshToken } = await request.json();

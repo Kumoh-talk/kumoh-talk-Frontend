@@ -4,6 +4,7 @@ import { Role } from './app/lib/types/user/userInfo';
 import jwt from 'jsonwebtoken';
 import { refreshToken } from './app/lib/apis/user';
 import { getCookie, parseJwt } from '@/app/lib/apis/auth';
+import { setResponseCookie } from './app/lib/utils/routeFunctions';
 
 interface AccessToken {
   USER_ID: number;
@@ -49,25 +50,6 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-const setCookieIntoResponse = (
-  response: NextResponse,
-  accessToken: string,
-  refreshToken: string,
-): NextResponse => {
-  response.cookies.set('accessToken', accessToken, {
-    httpOnly: true, // xss 공격 방지
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-  });
-  response.cookies.set('refreshToken', refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-  });
-
-  return response;
-};
-
 const checkLoginSuccess = (request: NextRequest): NextResponse | null => {
   const { nextUrl } = request;
 
@@ -81,7 +63,7 @@ const checkLoginSuccess = (request: NextRequest): NextResponse | null => {
     const response = NextResponse.redirect(nextUrl.toString(), {
       status: 302,
     });
-    return setCookieIntoResponse(response, accessToken, refreshToken);
+    return setResponseCookie(response, accessToken, refreshToken);
   } else {
     return null;
   }
@@ -142,7 +124,7 @@ const checkTokenExpired = async (
       const response = NextResponse.redirect(
         new URL(request.nextUrl.pathname, request.url),
       );
-      return setCookieIntoResponse(
+      return setResponseCookie(
         response,
         data.accessToken,
         data.refreshToken,

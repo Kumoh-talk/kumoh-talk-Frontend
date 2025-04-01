@@ -4,7 +4,7 @@ import { Role } from './app/lib/types/user/userInfo';
 import jwt from 'jsonwebtoken';
 import { refreshToken } from './app/lib/apis/user';
 import { getCookie, parseJwt } from '@/app/lib/apis/auth';
-import { setResponseCookie } from './app/lib/utils/routeFunctions';
+import { setResponseTokenCookie } from './app/lib/utils/routeFunctions';
 
 interface AccessToken {
   USER_ID: number;
@@ -63,7 +63,7 @@ const checkLoginSuccess = (request: NextRequest): NextResponse | null => {
     const response = NextResponse.redirect(nextUrl.toString(), {
       status: 302,
     });
-    return setResponseCookie(response, accessToken, refreshToken);
+    return setResponseTokenCookie(response, accessToken, refreshToken);
   } else {
     return null;
   }
@@ -124,7 +124,7 @@ const checkTokenExpired = async (
       const response = NextResponse.redirect(
         new URL(request.nextUrl.pathname, request.url),
       );
-      return setResponseCookie(
+      return setResponseTokenCookie(
         response,
         data.accessToken,
         data.refreshToken,

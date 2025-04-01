@@ -47,6 +47,8 @@ export const setResponseTokenCookie = (
 ) => {
   setResponseCookie(response, 'accessToken', accessToken);
   setResponseCookie(response, 'refreshToken', refreshToken);
+
+  return response;
 };
 
 export const refreshAndRetry = async (

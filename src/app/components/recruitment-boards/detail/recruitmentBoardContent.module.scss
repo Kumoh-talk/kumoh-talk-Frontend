@@ -46,6 +46,8 @@ section.section {
 
 .detail {
   @include title2(black-50);
+  overflow-x: auto;
+  white-space: pre-wrap;
 }
 
 @include mobile-header {

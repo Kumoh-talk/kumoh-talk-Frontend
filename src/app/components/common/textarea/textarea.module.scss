@@ -1,0 +1,30 @@
+@import 'mixin';
+
+.textarea {
+  @include body(black-85);
+
+  width: 100%;
+  min-height: 6rem;
+  max-height: 20rem;
+  border: 0.2px solid var(--color-black-25);
+  padding: 0.8rem 0.8rem;
+  resize: vertical;
+
+  &::placeholder {
+    @include body(black-50);
+  }
+
+  &:focus {
+    border: 0.2px solid var(--color-black-100);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}

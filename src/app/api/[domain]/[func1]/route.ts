@@ -15,7 +15,7 @@ export async function GET(
   isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -60,7 +60,7 @@ export async function POST(
   isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -115,7 +115,7 @@ export async function PUT(
   isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -160,7 +160,7 @@ export async function PATCH(
   isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -217,7 +217,7 @@ export async function DELETE(
   isRefreshTokenEnabled = true,
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 

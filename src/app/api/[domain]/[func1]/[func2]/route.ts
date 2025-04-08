@@ -16,7 +16,7 @@ export async function GET(
   { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -57,7 +57,7 @@ export async function POST(
   { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -108,7 +108,7 @@ export async function PUT(
   { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -149,7 +149,7 @@ export async function PATCH(
   { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -202,7 +202,7 @@ export async function DELETE(
   { params }: { params: UrlParams },
 ): Promise<NextResponse> {
   const cookies = request.headers.get('cookie');
-  const headers = convertCookieToHeaders(cookies);
+  const headers = await convertCookieToHeaders(cookies);
 
   const searchParams = request.nextUrl.searchParams;
 

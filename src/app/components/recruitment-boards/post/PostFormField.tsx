@@ -6,6 +6,7 @@ import styles from './postFormFiled.module.scss';
 import Button from '../../common/button/Button';
 import FormLabel from '../../apply/Form/FormLabel';
 import CreatePostForm from './CreatePostForm';
+import TextareaField from '../../apply/Field/TextareaField';
 
 const getButtonText = (isSubmitting: boolean, modifyId?: string) => {
   if (modifyId) {
@@ -87,7 +88,7 @@ export default function PostFormField({
         <InputField control={control} name='activityCycle' label='활동주기' />
       </div>
       <div className={styles.row}>
-        <InputField control={control} name='content' label='세부내용' />
+        <TextareaField control={control} name='content' label='세부내용' />
       </div>
       <div className={styles.postFormCreate}>
         <FormLabel>신청폼 만들기</FormLabel>

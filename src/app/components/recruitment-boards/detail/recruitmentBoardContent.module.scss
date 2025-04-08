@@ -1,5 +1,12 @@
 @import 'mixin';
 
+@font-face {
+  font-family: 'PretendardVariable';
+  src: url('/PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900; /* 가변 폰트인 경우 */
+  font-display: swap;
+}
+
 .tableContainer {
   margin-top: 1.25rem;
   display: flex;
@@ -46,7 +53,7 @@ section.section {
 
 .detail {
   @include title2(black-50);
-  overflow-x: auto;
+  font-family: 'PretendardVariable';
   white-space: pre-wrap;
 }
 

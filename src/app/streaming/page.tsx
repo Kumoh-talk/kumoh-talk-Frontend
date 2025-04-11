@@ -58,7 +58,6 @@ export default function Page() {
           <PageMoreSvg />
         </Link>
       </div>
-      <div className={styles.searchSection}>검색 기능</div>
       <div className={styles.streamingList}>
         {streamingList.map((streaming) => (
           <StreamingCard key={streaming.streamingId} {...streaming} />

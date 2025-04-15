@@ -3,6 +3,7 @@ import ChattingTabs from '@/app/components/streaming/[id]/ChattingTabs';
 import ChattingTabProvider from '@/app/components/streaming/[id]/ChattingTabProvider';
 import ChattingList from '@/app/components/streaming/[id]/ChattingList';
 import ChattingInput from '@/app/components/streaming/[id]/ChattingInput';
+import VideoStreaming from '@/app/components/streaming/[id]/VideoStreaming';
 
 const chatList = [
   {
@@ -61,7 +62,7 @@ export default function Page() {
     <div className={styles.container}>
       <div className={styles.streamingWrapper}>
         <div className={styles.streamingTitle}>JPA란 무엇인가?</div>
-        <div className={styles.streamingVideo}>스트리밍 탭</div>
+        <VideoStreaming />
         <div className={styles.caption}>
           안녕하세요. 저는 JPA란 무엇인가?에 대해서 발표하게 된 김컴공입니다.
         </div>

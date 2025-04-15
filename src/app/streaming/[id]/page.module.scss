@@ -1,0 +1,117 @@
+@import 'mixin';
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  border-left: 1px solid var(--color-gray-800);
+  border-right: 1px solid var(--color-gray-800);
+}
+
+.streamingWrapper {
+  flex: 5;
+}
+
+.streamingTitle {
+  @include title2Emphasized;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.streamingVideo {
+  aspect-ratio: 16 / 9;
+}
+
+.caption {
+  @include title2Emphasized;
+  padding: 0.75rem 1.25rem;
+  background-color: white;
+  border-top: 1px solid var(--color-gray-800);
+}
+
+.summaryWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-gray-800);
+}
+
+.summary {
+  @include title3;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-gray-500);
+  border-radius: 15px;
+}
+
+.sideTapWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border-left: 1px solid var(--color-gray-800);
+}
+
+.subVideo {
+  aspect-ratio: 16 / 9;
+  background-color: orange;
+}
+
+.chattingWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.chattingSection {
+  height: inherit;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chattingList {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 1rem;
+
+  .chattingItem {
+    .chattingUser {
+      @include bodyEmphasized;
+      text-wrap: nowrap;
+    }
+
+    .chattingContent {
+      @include body;
+      color: var(--color-black-85);
+      text-wrap: wrap;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.chattingInput {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid var(--color-gray-800);
+
+  > input {
+    @include body;
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-gray-800);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-gray-800);
+    }
+  }
+}

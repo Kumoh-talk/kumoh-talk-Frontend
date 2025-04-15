@@ -72,23 +72,3 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.chattingInput {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  border-top: 1px solid var(--color-gray-800);
-
-  > input {
-    @include body;
-    flex: 1;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid var(--color-gray-800);
-
-    &:focus {
-      outline: none;
-      border-color: var(--color-gray-800);
-    }
-  }
-}

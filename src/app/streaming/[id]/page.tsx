@@ -2,6 +2,7 @@ import styles from './page.module.scss';
 import ChattingTabs from '@/app/components/streaming/[id]/ChattingTabs';
 import ChattingTabProvider from '@/app/components/streaming/[id]/ChattingTabProvider';
 import ChattingList from '@/app/components/streaming/[id]/ChattingList';
+import ChattingInput from '@/app/components/streaming/[id]/ChattingInput';
 
 const chatList = [
   {
@@ -81,9 +82,7 @@ export default function Page() {
           </div>
           <div className={styles.chattingSection}>
             <ChattingList chatList={chatList} />
-            <div className={styles.chattingInput}>
-              <input type='text' placeholder='채팅을 입력하세요.' />
-            </div>
+            <ChattingInput />
           </div>
         </ChattingTabProvider>
       </div>

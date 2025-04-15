@@ -73,29 +73,6 @@
   justify-content: space-between;
 }
 
-.chattingList {
-  flex: 1;
-  overflow-y: scroll;
-  padding: 1rem;
-
-  .chattingItem {
-    .chattingUser {
-      @include bodyEmphasized;
-      text-wrap: nowrap;
-    }
-
-    .chattingContent {
-      @include body;
-      color: var(--color-black-85);
-      text-wrap: wrap;
-    }
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
 .chattingInput {
   display: flex;
   align-items: center;

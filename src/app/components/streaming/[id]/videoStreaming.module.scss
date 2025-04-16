@@ -1,7 +1,54 @@
 .streamingVideo {
-  aspect-ratio: 16 / 9;
+  position: relative;
+  width: 100%;
+  background-color: #000;
+  overflow: hidden;
 }
 
 .videoPlayer {
   width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background-color: #000;
+}
+
+.controls {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 12px;
+  border-radius: 5px;
+
+  button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #ccc;
+    }
+  }
+
+  select {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 4px 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #ccc;
+    }
+  }
 }

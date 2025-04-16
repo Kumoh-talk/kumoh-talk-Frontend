@@ -1,9 +1,9 @@
 import styles from './page.module.scss';
 import ChattingTabs from '@/app/components/streaming/[id]/ChattingTabs';
 import ChattingTabProvider from '@/app/components/streaming/[id]/ChattingTabProvider';
-import ChattingList from '@/app/components/streaming/[id]/ChattingList';
 import ChattingInput from '@/app/components/streaming/[id]/ChattingInput';
 import VideoStreaming from '@/app/components/streaming/[id]/VideoStreaming';
+import TabViewer from '@/app/components/streaming/[id]/TabViewer';
 
 const chatList = [
   {
@@ -82,7 +82,7 @@ export default function Page() {
             <ChattingTabs />
           </div>
           <div className={styles.chattingSection}>
-            <ChattingList chatList={chatList} />
+            <TabViewer chatList={chatList} />
             <ChattingInput />
           </div>
         </ChattingTabProvider>

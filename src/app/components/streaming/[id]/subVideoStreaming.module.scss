@@ -1,0 +1,14 @@
+.streamingVideo {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.videoPlayer {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background-color: #000;
+}

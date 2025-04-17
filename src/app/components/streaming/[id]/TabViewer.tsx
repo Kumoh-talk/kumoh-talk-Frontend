@@ -8,6 +8,7 @@ import QnASection from './QnASection';
 interface Props {
   chatList: {
     chatId: number;
+    socketId: number;
     name: string;
     content: string;
     time: string;

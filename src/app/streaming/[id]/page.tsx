@@ -55,6 +55,115 @@ const chatList = [
     content: '악의적 사용자 제제좀요 ㅠ',
     time: '08:30',
   },
+  {
+    chatId: 8,
+    name: '카멜레온케이스',
+    content:
+      '자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액',
+    time: '08:20',
+  },
+  {
+    chatId: 9,
+    name: '카멜레온케이스',
+    content:
+      '자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액',
+    time: '08:20',
+  },
+  {
+    chatId: 10,
+    name: '카멜레온케이스',
+    content:
+      '자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액',
+    time: '08:20',
+  },
+  {
+    chatId: 11,
+    name: '카멜레온케이스',
+    content:
+      '자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액',
+    time: '08:20',
+  },
+  {
+    chatId: 12,
+    name: '카멜레온케이스',
+    content:
+      '자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액',
+    time: '08:20',
+  },
+  {
+    chatId: 13,
+    name: '카멜레온케이스',
+    content:
+      '자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액 자바 어려워 빼애애애애액',
+    time: '08:20',
+  },
+];
+
+const qnaList = [
+  {
+    qnaId: 0,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 1,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 2,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 3,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 4,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 5,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 6,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
+  {
+    qnaId: 7,
+    name: '자바스크립트최고',
+    content: 'JPA란 무엇인가요?',
+    time: '02:13',
+    likes: 10,
+    isAnswered: false,
+  },
 ];
 
 export default function Page() {
@@ -82,7 +191,7 @@ export default function Page() {
             <ChattingTabs />
           </div>
           <div className={styles.chattingSection}>
-            <TabViewer chatList={chatList} />
+            <TabViewer chatList={chatList} qnaList={qnaList} />
             <ChattingInput />
           </div>
         </ChattingTabProvider>

@@ -12,9 +12,17 @@ interface Props {
     content: string;
     time: string;
   }[];
+  qnaList: {
+    qnaId: number;
+    name: string;
+    content: string;
+    time: string;
+    likes: number;
+    isAnswered: boolean;
+  }[];
 }
 
-export default function TabViewer({ chatList }: Props) {
+export default function TabViewer({ chatList, qnaList }: Props) {
   const { tab, setTab } = useContext(ChattingTabContext);
 
   return (
@@ -22,7 +30,7 @@ export default function TabViewer({ chatList }: Props) {
       {tab === 'chatting' ? (
         <ChattingList chatList={chatList} />
       ) : (
-        <QnASection />
+        <QnASection qnaList={qnaList} />
       )}
     </>
   );

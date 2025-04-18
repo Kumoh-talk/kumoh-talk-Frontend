@@ -3,15 +3,22 @@
 .container {
   display: flex;
   justify-content: center;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 5rem;
   border-left: 1px solid var(--color-gray-800);
+  min-height: calc(100vh - 5rem);
+  max-height: calc(100vh - 5rem);
   border-right: 1px solid var(--color-gray-800);
+  overflow: hidden;
 }
 
 .streamingWrapper {
   flex: 5;
+  height: calc(100vh - 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .streamingTitle {
@@ -30,17 +37,17 @@
 .summaryWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 1.5rem;
   border-top: 1px solid var(--color-gray-800);
-}
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1;
+  min-height: 120px;
 
-.summary {
-  @include title3;
-  padding: 0.75rem 1.25rem;
-  background-color: var(--color-gray-500);
-  border-radius: 15px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .sideTapWrapper {
@@ -51,22 +58,12 @@
   border-left: 1px solid var(--color-gray-800);
 }
 
-.subVideo {
-  aspect-ratio: 16 / 9;
-  background-color: orange;
-}
-
-.chattingWrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 .chattingSection {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: calc(100vh - 300px);
-  max-height: calc(100vh - 300px);
+  min-height: calc(100vh - 5rem - (300px * (9 / 16)));
+  max-height: calc(100vh - 5rem - (300px * (9 / 16)));
   overflow: hidden;
 }

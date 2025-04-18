@@ -6,8 +6,6 @@ import Hls, { type Level } from 'hls.js';
 
 export default function SubVideoStreaming() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [hlsInstance, setHlsInstance] = useState<Hls | null>(null);
-  const [levels, setLevels] = useState<Level[]>([]);
   const videoUrl =
     'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8';
 
@@ -34,13 +32,6 @@ export default function SubVideoStreaming() {
       }
     }
   }, [videoUrl]);
-
-  const handleQualityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedLevel = parseInt(event.target.value, 10);
-    if (hlsInstance) {
-      hlsInstance.currentLevel = selectedLevel;
-    }
-  };
 
   return (
     <div className={styles.streamingVideo}>

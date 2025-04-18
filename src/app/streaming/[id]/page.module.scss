@@ -27,13 +27,6 @@
   border-bottom: 1px solid var(--color-gray-800);
 }
 
-.caption {
-  @include title2Emphasized;
-  padding: 0.75rem 1.25rem;
-  background-color: white;
-  border-top: 1px solid var(--color-gray-800);
-}
-
 .summaryWrapper {
   display: flex;
   flex-direction: column;

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './videoStreaming.module.scss';
 import Hls, { type Level } from 'hls.js';
+import Caption from './Caption';
 
 export default function VideoStreaming() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -35,6 +36,10 @@ export default function VideoStreaming() {
   return (
     <div className={styles.streamingVideo}>
       <video ref={videoRef} className={styles.videoPlayer} controls muted />
+      <div className={styles.overlay}>
+        <div className={styles.top}></div>
+        <Caption />
+      </div>
     </div>
   );
 }

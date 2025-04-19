@@ -1,0 +1,61 @@
+@import 'mixin';
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  border-left: 1px solid var(--color-gray-800);
+  min-height: calc(100vh - 5rem);
+  max-height: calc(100vh - 5rem);
+  border-right: 1px solid var(--color-gray-800);
+  overflow: hidden;
+}
+
+.streamingWrapper {
+  flex: 5;
+  height: calc(100vh - 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.streamingTitle {
+  @include title2Emphasized;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.summaryWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1;
+  min-height: 120px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.sideTapWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border-left: 1px solid var(--color-gray-800);
+}
+
+.chattingSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 5rem - (300px * (9 / 16)));
+  max-height: calc(100vh - 5rem - (300px * (9 / 16)));
+  overflow: hidden;
+}

@@ -89,7 +89,8 @@ input {
 
 input,
 button,
-textarea {
+textarea,
+pre {
   font-family: inherit;
 }
 

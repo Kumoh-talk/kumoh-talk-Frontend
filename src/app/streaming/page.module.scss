@@ -1,0 +1,42 @@
+@import 'mixin';
+
+.container {
+  min-height: 100vh;
+  margin-top: 5rem;
+  padding: 2rem 2rem;
+  width: 100%;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+
+    > a {
+      @include title3Emphasized;
+      color: var(--color-gray-900);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  @include mobile-streaming {
+    padding: 0;
+
+    .title {
+      padding: 1rem 1rem;
+    }
+  }
+}
+
+.streamingList {
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @include mobile-streaming {
+    padding: 0;
+  }
+}

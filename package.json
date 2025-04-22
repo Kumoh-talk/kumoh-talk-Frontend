@@ -23,6 +23,7 @@
     "dayjs": "^1.11.13",
     "dompurify": "^3.2.4",
     "es-toolkit": "^1.33.0",
+    "hls.js": "^1.6.2",
     "jsonwebtoken": "^9.0.2",
     "lowlight": "^3.3.0",
     "lucide-react": "^0.469.0",

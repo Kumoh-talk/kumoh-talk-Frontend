@@ -260,3 +260,9 @@
     @content;
   }
 }
+
+@mixin mobile-streaming {
+  @media screen and (max-width: 48rem) {
+    @content;
+  }
+}

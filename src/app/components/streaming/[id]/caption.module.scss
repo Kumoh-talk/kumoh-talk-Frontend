@@ -1,0 +1,8 @@
+@import 'mixin';
+
+.caption {
+  @include title1(white);
+  padding: 0.25rem;
+  background-color: var(--color-black-50);
+  margin-bottom: 2rem;
+}

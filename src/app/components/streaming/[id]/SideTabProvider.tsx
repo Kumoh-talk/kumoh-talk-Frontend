@@ -2,7 +2,7 @@
 
 import { createContext, useState } from 'react';
 
-export const ChattingTabContext = createContext<{
+export const SideTabContext = createContext<{
   tab: string;
   setTab: (tab: string) => void;
 }>({
@@ -14,12 +14,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function ChattingTabProvider({ children }: Props) {
+export default function SideTabProvider({ children }: Props) {
   const [tab, setTab] = useState('chatting');
 
   return (
-    <ChattingTabContext.Provider value={{ tab, setTab }}>
+    <SideTabContext.Provider value={{ tab, setTab }}>
       {children}
-    </ChattingTabContext.Provider>
+    </SideTabContext.Provider>
   );
 }

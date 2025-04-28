@@ -115,70 +115,76 @@ const chatList = [
   },
 ];
 
-const qnaList = [
+const bookmarkList = [
   {
-    qnaId: 0,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
+    bookmarkId: 0,
+    userId: 0,
+    vodId: 0,
+    title: 'JPA 목차',
     time: '02:13',
-    likes: 10,
-    isAnswered: false,
   },
   {
-    qnaId: 1,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
-    time: '02:13',
-    likes: 10,
-    isAnswered: false,
+    bookmarkId: 1,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
   },
   {
-    qnaId: 2,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
+    bookmarkId: 2,
+    userId: 0,
+    vodId: 0,
+    title: 'JPA 목차',
     time: '02:13',
-    likes: 10,
-    isAnswered: false,
   },
   {
-    qnaId: 3,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
-    time: '02:13',
-    likes: 10,
-    isAnswered: false,
+    bookmarkId: 3,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
   },
   {
-    qnaId: 4,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
+    bookmarkId: 4,
+    userId: 0,
+    vodId: 0,
+    title: 'JPA 목차',
     time: '02:13',
-    likes: 10,
-    isAnswered: false,
   },
   {
-    qnaId: 5,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
-    time: '02:13',
-    likes: 10,
-    isAnswered: false,
+    bookmarkId: 5,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
   },
   {
-    qnaId: 6,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
-    time: '02:13',
-    likes: 10,
-    isAnswered: false,
+    bookmarkId: 6,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
   },
   {
-    qnaId: 7,
-    name: '자바스크립트최고',
-    content: 'JPA란 무엇인가요?',
-    time: '02:13',
-    likes: 10,
-    isAnswered: false,
+    bookmarkId: 7,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
+  },
+  {
+    bookmarkId: 8,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
+  },
+  {
+    bookmarkId: 9,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
   },
 ];
 
@@ -196,8 +202,8 @@ export default function Page() {
         <SubVideoStreaming />
         <SideTabProvider>
           <div className={styles.chattingSection}>
-            <SideTab tabs={['채팅', 'Q&A']} />
-            <TabViewer chatList={chatList} qnaList={qnaList} />
+            <SideTab tabs={['채팅', '북마크']} />
+            <TabViewer chatList={chatList} bookmarkList={bookmarkList} />
             <ChattingInput />
           </div>
         </SideTabProvider>

@@ -1,0 +1,46 @@
+@import 'mixin';
+
+.addBookmarkField {
+  margin-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  background-color: var(--color-gray-500);
+  border: 1px solid var(--color-gray-800);
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  @include title3;
+  color: var(--color-black-50);
+}
+
+.inputField {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  > input {
+    @include body;
+    padding: 0.25rem 0.25rem;
+    border-radius: 4px;
+    background-color: white;
+    border: 1px solid var(--color-gray-800);
+    flex: 4;
+
+    &:focus {
+      border: 1px double var(--color-gray-800);
+    }
+  }
+
+  > button {
+    flex: 2;
+    text-wrap: nowrap;
+  }
+}

@@ -1,0 +1,32 @@
+@import 'mixin';
+
+.bookmarkCard {
+  border: 1px solid var(--color-gray-800);
+  border-radius: 8px;
+  padding: 1rem 0.625rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  @include title3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.right {
+  @include title3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-black-50);
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

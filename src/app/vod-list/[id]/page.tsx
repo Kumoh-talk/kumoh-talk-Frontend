@@ -158,6 +158,34 @@ const bookmarkList = [
     title: 'JDBC에 대해서',
     time: '05:40',
   },
+  {
+    bookmarkId: 6,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
+  },
+  {
+    bookmarkId: 7,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
+  },
+  {
+    bookmarkId: 8,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
+  },
+  {
+    bookmarkId: 9,
+    userId: 1,
+    vodId: 1,
+    title: 'JDBC에 대해서',
+    time: '05:40',
+  },
 ];
 
 export default function Page() {

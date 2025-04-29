@@ -2,6 +2,7 @@
 
 import {
   ChangeEvent,
+  KeyboardEvent,
   useContext,
   useRef,
   useState,
@@ -29,6 +30,12 @@ export default function ChattingInput() {
     });
   };
 
+  const onKeyDownEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleChattingSubmit();
+    }
+  };
+
   return (
     <>
       {tab === 'chatting' ? (
@@ -40,6 +47,7 @@ export default function ChattingInput() {
             name='content'
             value={content}
             onChange={handleChatting}
+            onKeyDown={onKeyDownEnter}
           />
           {content && (
             <button

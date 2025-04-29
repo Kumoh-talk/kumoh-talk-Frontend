@@ -27,6 +27,7 @@ export default function QnASection({ qnaList }: Props) {
   const onSubmit = async (data: unknown) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
+    formState.setValue('content', '');
   };
 
   const onError = (error: unknown) => {

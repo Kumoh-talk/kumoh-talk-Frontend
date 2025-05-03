@@ -5,6 +5,7 @@ import ChattingInput from "@/app/components/streaming/[id]/ChattingInput";
 import VideoStreaming from "@/app/components/streaming/[id]/VideoStreaming";
 import TabViewer from "@/app/components/streaming/[id]/TabViewer";
 import SummarySection from "@/app/components/streaming/[id]/SummarySection";
+import UtilityTab from "@/app/components/streaming/[id]/UtilityTab";
 
 const chatList = [
   {
@@ -197,6 +198,7 @@ export default function Page() {
             <SideTab tabs={["채팅", "Q&A"]} />
             <TabViewer chatList={chatList} qnaList={qnaList} />
             <ChattingInput />
+            <UtilityTab />
           </div>
         </SideTabProvider>
       </div>

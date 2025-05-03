@@ -1,0 +1,50 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  z-index: 50;
+  position: absolute;
+  background-color: #fff;
+  width: 90%;
+  max-width: 32rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #6b7280; /* gray-500 */
+  cursor: pointer;
+
+  &:hover {
+    color: #374151; /* gray-800 */
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.content {
+  color: #374151; /* gray-700 */
+  line-height: 1.5;
+
+  max-height: 300px;
+  overflow-y: auto;
+  scroll-behavior: contain;
+}

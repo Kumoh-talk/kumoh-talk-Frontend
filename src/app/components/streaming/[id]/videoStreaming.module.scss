@@ -1,4 +1,4 @@
-@import 'mixin';
+@import "mixin";
 
 .streamingVideo {
   position: relative;
@@ -31,4 +31,10 @@
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
+
+  .top {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 }

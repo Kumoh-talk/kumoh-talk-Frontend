@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import styles from './videoStreaming.module.scss';
-import Hls, { type Level } from 'hls.js';
-import Caption from './Caption';
+import { useEffect, useRef, useState } from "react";
+import styles from "./videoStreaming.module.scss";
+import Hls, { type Level } from "hls.js";
+import Caption from "./Caption";
+import SubVideoStreaming from "./subVideoStreaming";
 
 export default function VideoStreaming() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const videoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+  const videoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
 
   useEffect(() => {
     if (videoRef.current) {
@@ -23,10 +24,10 @@ export default function VideoStreaming() {
           hls.destroy();
         };
       } else if (
-        videoRef.current.canPlayType('application/vnd.apple.mpegurl')
+        videoRef.current.canPlayType("application/vnd.apple.mpegurl")
       ) {
         videoRef.current.src = videoUrl;
-        videoRef.current.addEventListener('loadedmetadata', () => {
+        videoRef.current.addEventListener("loadedmetadata", () => {
           videoRef.current?.play();
         });
       }
@@ -37,7 +38,9 @@ export default function VideoStreaming() {
     <div className={styles.streamingVideo}>
       <video ref={videoRef} className={styles.videoPlayer} controls muted />
       <div className={styles.overlay}>
-        <div className={styles.top}></div>
+        <div className={styles.top}>
+          <SubVideoStreaming />
+        </div>
         <Caption />
       </div>
     </div>

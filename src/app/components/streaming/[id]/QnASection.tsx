@@ -1,19 +1,13 @@
 'use client';
 
+import { Qna } from '@/app/lib/types/streaming/streaming';
 import QnACard from './QnACard';
 import QnAField from './QnAField';
 import styles from './qnaSection.module.scss';
 import { FormProvider, useForm } from 'react-hook-form';
 
 interface Props {
-  qnaList: {
-    qnaId: number;
-    name: string;
-    content: string;
-    time: string;
-    likes: number;
-    isAnswered: boolean;
-  }[];
+  qnaList: Qna[];
 }
 
 const defaultValues = {
@@ -27,6 +21,7 @@ export default function QnASection({ qnaList }: Props) {
   const onSubmit = async (data: unknown) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
+    formState.setValue('content', '');
   };
 
   const onError = (error: unknown) => {

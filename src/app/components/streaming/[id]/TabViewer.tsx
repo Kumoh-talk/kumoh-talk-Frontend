@@ -5,30 +5,13 @@ import { SideTabContext } from './SideTabProvider';
 import ChattingList from './ChattingList';
 import QnASection from './QnASection';
 import BookmarkSection from '../../vod-list/[id]/BookmarkSection';
+import { Chat, Qna } from '@/app/lib/types/streaming/streaming';
+import { Bookmark } from '@/app/lib/types/streaming/vod';
 
 interface Props {
-  chatList?: {
-    chatId: number;
-    socketId: number;
-    name: string;
-    content: string;
-    time: string;
-  }[];
-  qnaList?: {
-    qnaId: number;
-    name: string;
-    content: string;
-    time: string;
-    likes: number;
-    isAnswered: boolean;
-  }[];
-  bookmarkList?: {
-    bookmarkId: number;
-    userId: number;
-    vodId: number;
-    title: string;
-    time: string;
-  }[];
+  chatList?: Chat[];
+  qnaList?: Qna[];
+  bookmarkList?: Bookmark[];
 }
 
 export default function TabViewer({ chatList, qnaList, bookmarkList }: Props) {

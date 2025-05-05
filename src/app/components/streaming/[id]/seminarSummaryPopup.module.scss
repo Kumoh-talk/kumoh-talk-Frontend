@@ -13,16 +13,21 @@
   background-color: #fff;
   width: 90%;
   max-width: 32rem;
-  padding: 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: grab;
+  margin-bottom: 1rem;
+  padding-top: 1.5rem;
 }
 
 .closeButton {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: none;
   border: none;
   font-size: 1.25rem;
@@ -37,7 +42,6 @@
 .title {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
 }
 
 .content {

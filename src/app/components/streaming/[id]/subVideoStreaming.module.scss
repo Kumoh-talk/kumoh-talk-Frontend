@@ -1,6 +1,7 @@
-@import "mixin";
+@import 'mixin';
 
 .streamingVideo {
+  z-index: 2;
   position: relative;
   width: 256px;
   height: 144px;
@@ -9,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   @include laptop {
     width: 192px;

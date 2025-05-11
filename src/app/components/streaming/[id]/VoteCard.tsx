@@ -1,4 +1,10 @@
-import styles from './voteCard.module.scss';
+"use client";
+
+import { useState } from "react";
+import Button from "../../common/button/Button";
+import styles from "./voteCard.module.scss";
+import clsx from "clsx";
+import { ChevronUp, X } from "lucide-react";
 
 interface Props {
   vote: {
@@ -9,15 +15,31 @@ interface Props {
       content: string;
     }[];
   };
+  initialVote: boolean;
+  isShow: boolean;
+  handleClose: () => void;
+  handleOpen: () => void;
 }
 
-export default function VoteCard({ vote }: Props) {
+export default function VoteCard({
+  vote,
+  initialVote,
+  isShow,
+  handleClose,
+  handleOpen,
+}: Props) {
   const { name, multiple, select } = vote;
 
   return (
-    <div className={styles.container}>
+    <div
+      className={clsx(styles.container, isShow ? styles.show : styles.hide)}
+      style={{ display: initialVote ? "none" : "flex" }}
+    >
       <div className={styles.header}>
         <h2>투표</h2>
+        <button onClick={isShow ? handleClose : handleOpen}>
+          <X />
+        </button>
       </div>
       <div className={styles.content}>
         <h3>{name}</h3>
@@ -27,17 +49,25 @@ export default function VoteCard({ vote }: Props) {
               <div>
                 <input
                   className={styles.selectButton}
-                  type='radio'
-                  name='vote'
+                  type="radio"
+                  name="vote"
                   value={item.id}
                 />
               </div>
               <div>
                 <p>{item.content}</p>
-                <progress max='100' value='70' />
+                <progress max="100" value="70" />
               </div>
             </div>
           ))}
+          <div className={styles.actions}>
+            <Button bgColor="bg-white" color="text-black-85">
+              선택하기
+            </Button>
+            <Button bgColor="bg-white" color="text-black-85">
+              결과보기
+            </Button>
+          </div>
         </form>
       </div>
     </div>

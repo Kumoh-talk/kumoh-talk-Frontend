@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import styles from './videoStreaming.module.scss';
-import Hls, { type Level } from 'hls.js';
-import Caption from './Caption';
-import SubVideoStreaming from './subVideoStreaming';
+import { useEffect, useRef, useState } from "react";
+import styles from "./videoStreaming.module.scss";
+import Hls, { type Level } from "hls.js";
+import Caption from "./Caption";
+import SubVideoStreaming from "./subVideoStreaming";
 
 export default function VideoStreaming() {
   const [mainScreenUrl, setMainScreenUrl] = useState(
-    'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+    "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
   );
   const [subScreenUrl, setSubScreenUrl] = useState(
-    'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8'
+    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
   );
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -30,10 +30,10 @@ export default function VideoStreaming() {
           hls.destroy();
         };
       } else if (
-        videoRef.current.canPlayType('application/vnd.apple.mpegurl')
+        videoRef.current.canPlayType("application/vnd.apple.mpegurl")
       ) {
         videoRef.current.src = mainScreenUrl;
-        videoRef.current.addEventListener('loadedmetadata', () => {
+        videoRef.current.addEventListener("loadedmetadata", () => {
           videoRef.current?.play();
         });
       }

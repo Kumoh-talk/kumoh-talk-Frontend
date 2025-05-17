@@ -1,4 +1,4 @@
-@import 'mixin';
+@import "mixin";
 
 .chattingList {
   flex: 1;
@@ -25,5 +25,9 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @include mobile-streaming {
+    min-height: 0;
   }
 }

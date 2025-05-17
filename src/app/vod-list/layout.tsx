@@ -1,5 +1,5 @@
-import Footer from '../components/common/footer/Footer';
-import Header from '../components/common/header/Header';
+import Footer from "../components/common/footer/Footer";
+import Header from "../components/common/header/Header";
 
 interface Props {
   children: React.ReactNode;
@@ -8,9 +8,8 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <div>
-      <Header title='다시보기' />
+      <Header title="다시보기" />
       {children}
-      <Footer />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-@import "mixin";
+@import 'mixin';
 
 .container {
   display: flex;
@@ -15,8 +15,6 @@
   @include mobile-streaming {
     width: 100%;
     flex-direction: column;
-    min-height: 0;
-    max-height: calc(100vh - 5rem);
   }
 }
 
@@ -28,7 +26,7 @@
   justify-content: space-between;
 
   @include mobile-streaming {
-    flex: 2;
+    flex: none;
     height: 100%;
   }
 }
@@ -66,7 +64,6 @@
   border-left: 1px solid var(--color-gray-800);
 
   @include mobile-streaming {
-    flex: 4;
     min-width: 0;
     width: 100%;
     overflow: hidden;

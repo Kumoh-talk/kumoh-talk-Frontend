@@ -1,3 +1,4 @@
+import { Chat } from '@/app/lib/types/streaming/streaming';
 import styles from './chattingList.module.scss';
 
 const nameColors = [
@@ -20,13 +21,7 @@ const nameColors = [
 ];
 
 interface Props {
-  chatList: {
-    chatId: number;
-    socketId: number;
-    name: string;
-    content: string;
-    time: string;
-  }[];
+  chatList: Chat[];
 }
 
 export default function ChattingList({ chatList }: Props) {

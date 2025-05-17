@@ -5,15 +5,10 @@ import Button from '../../common/button/Button';
 import BookmarkCard from './BookmarkCard';
 import styles from './bookmarkSection.module.scss';
 import AddBookmarkField from './AddBookmarkField';
+import { Bookmark } from '@/app/lib/types/streaming/vod';
 
 interface Props {
-  bookmarkList: {
-    bookmarkId: number;
-    userId: number;
-    vodId: number;
-    title: string;
-    time: string;
-  }[];
+  bookmarkList: Bookmark[];
 }
 
 export default function BookmarkSection({ bookmarkList }: Props) {

@@ -10,7 +10,7 @@
   min-height: calc(100vh - 5rem);
   max-height: calc(100vh - 5rem);
   border-right: 1px solid var(--color-gray-800);
-  overflow: hidden;
+  overflow: auto;
 
   @include mobile-streaming {
     width: 100%;

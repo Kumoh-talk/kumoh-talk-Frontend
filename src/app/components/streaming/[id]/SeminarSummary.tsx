@@ -1,4 +1,4 @@
-import styles from "./SeminarSummary.module.scss";
+import styles from './SeminarSummary.module.scss';
 
 interface Props {
   summary: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import styles from './SeminarSummaryPopup.module.scss';
 import SeminarSummary from './SeminarSummary';
 import WikiCard from './WikiCard';
@@ -17,54 +17,13 @@ export default function SeminarSummaryPopup({
   content,
 }: SeminarSummaryPopupProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-  const [dragging, setDragging] = useState(false);
-  const [position, setPosition] = useState({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  });
-  const offsetRef = useRef({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!dragging) return;
-      const newX = e.clientX - offsetRef.current.x;
-      const newY = e.clientY - offsetRef.current.y;
-      setPosition({ x: newX, y: newY });
-    };
-    const handleMouseUp = () => setDragging(false);
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [dragging]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!modalRef.current) return;
-    setDragging(true);
-    const rect = modalRef.current.getBoundingClientRect();
-    offsetRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    };
-  };
 
   if (!isOpen) return null;
 
   return (
     <div className={styles.overlay}>
-      <div
-        ref={modalRef}
-        className={styles.modal}
-        style={{ left: position.x, top: position.y }}
-      >
-        <div className={styles.header} onMouseDown={handleMouseDown}>
+      <div ref={modalRef} className={styles.modal}>
+        <div className={styles.header}>
           <h2 className={styles.title}>세미나 요약</h2>
           <button
             onClick={onClose}

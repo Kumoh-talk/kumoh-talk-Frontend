@@ -1,11 +1,12 @@
+'use client';
+
 import styles from './page.module.scss';
 import SideTab from '@/app/components/streaming/[id]/SideTab';
 import SideTabProvider from '@/app/components/streaming/[id]/SideTabProvider';
 import ChattingInput from '@/app/components/streaming/[id]/ChattingInput';
 import VideoStreaming from '@/app/components/streaming/[id]/VideoStreaming';
 import TabViewer from '@/app/components/streaming/[id]/TabViewer';
-import SubVideoStreaming from '@/app/components/streaming/[id]/subVideoStreaming';
-import SummarySection from '@/app/components/streaming/[id]/SummarySection';
+import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
 
 const chatList = [
   {
@@ -130,62 +131,6 @@ const bookmarkList = [
     title: 'JDBC에 대해서',
     time: '05:40',
   },
-  {
-    bookmarkId: 2,
-    userId: 0,
-    vodId: 0,
-    title: 'JPA 목차',
-    time: '02:13',
-  },
-  {
-    bookmarkId: 3,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
-  {
-    bookmarkId: 4,
-    userId: 0,
-    vodId: 0,
-    title: 'JPA 목차',
-    time: '02:13',
-  },
-  {
-    bookmarkId: 5,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
-  {
-    bookmarkId: 6,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
-  {
-    bookmarkId: 7,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
-  {
-    bookmarkId: 8,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
-  {
-    bookmarkId: 9,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
 ];
 
 export default function Page() {
@@ -194,17 +139,14 @@ export default function Page() {
       <div className={styles.streamingWrapper}>
         <VideoStreaming />
         <div className={styles.streamingTitle}>JPA란 무엇인가?</div>
-        <div className={styles.summaryWrapper}>
-          <SummarySection summary='JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨. JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨. JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨. JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨. JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨. JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨. JDBC를 직접 사용하면 SQL문 작성, 데이터 매핑 등이 번거롭고 유지보수가 어려웠음. 이를 해결하기 위해 EJB(Entity Bean) → Hibernate 등의 ORM 등장 → JPA(Java Persistence API)로 표준화됨. Spring과 결합하여 생산성이 크게 향상되면서 JPA가 대중적으로 널리 사용됨.' />
-        </div>
       </div>
       <div className={styles.sideTapWrapper}>
-        <SubVideoStreaming />
         <SideTabProvider>
           <div className={styles.chattingSection}>
             <SideTab tabs={['채팅', '북마크']} />
             <TabViewer chatList={chatList} bookmarkList={bookmarkList} />
             <ChattingInput />
+            <UtilityTab />
           </div>
         </SideTabProvider>
       </div>

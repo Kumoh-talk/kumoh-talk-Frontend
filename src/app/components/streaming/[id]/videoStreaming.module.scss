@@ -21,6 +21,7 @@
 }
 
 .overlay {
+  z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
@@ -31,4 +32,10 @@
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
+
+  .top {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 }

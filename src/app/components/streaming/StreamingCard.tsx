@@ -6,7 +6,7 @@ interface Props {
   streamingId: number;
   title: string;
   subTitle: string;
-  presentor: string;
+  presenter: string;
   viewers: number;
 }
 
@@ -14,7 +14,7 @@ export default function StreamingCard({
   streamingId,
   title,
   subTitle,
-  presentor,
+  presenter,
   viewers,
 }: Props) {
   return (
@@ -29,8 +29,8 @@ export default function StreamingCard({
         <div className={styles.info}>
           <h3 className={styles.title}>{title}</h3>
           <h3 className={styles.subTitle}>{subTitle}</h3>
-          <div className={styles.presentor}>
-            <User2 /> &nbsp;{presentor}
+          <div className={styles.presenter}>
+            <User2 /> &nbsp;{presenter}
           </div>
         </div>
       </div>

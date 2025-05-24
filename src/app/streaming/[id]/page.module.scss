@@ -10,7 +10,11 @@
   min-height: calc(100vh - 5rem);
   max-height: calc(100vh - 5rem);
   border-right: 1px solid var(--color-gray-800);
-  overflow: hidden;
+
+  @include mobile-streaming {
+    width: 100%;
+    flex-direction: column;
+  }
 }
 
 .streamingWrapper {
@@ -19,6 +23,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @include mobile-streaming {
+    flex: none;
+    height: 100%;
+  }
 }
 
 .streamingTitle {
@@ -40,6 +49,10 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @include mobile-streaming {
+    display: none;
+  }
 }
 
 .sideTapWrapper {
@@ -48,6 +61,12 @@
   flex-direction: column;
   min-width: 300px;
   border-left: 1px solid var(--color-gray-800);
+
+  @include mobile-streaming {
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 .chattingSection {
@@ -55,7 +74,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: calc(100vh - 5rem - (300px * (9 / 16)));
-  max-height: calc(100vh - 5rem - (300px * (9 / 16)));
-  overflow: hidden;
+  min-height: calc(100vh - 5rem);
+  max-height: calc(100vh - 5rem);
+
+  @include mobile-streaming {
+    min-height: 0;
+    max-height: 100%;
+  }
 }

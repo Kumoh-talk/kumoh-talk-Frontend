@@ -1,0 +1,34 @@
+@import 'mixin';
+
+.container {
+  position: absolute;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+  width: 180px;
+  height: 240px;
+
+  overflow-y: auto;
+  scroll-behavior: contain;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.title {
+  @include title3Emphasized;
+}
+
+.subTitle {
+  @include bodyEmphasized;
+}
+
+.content {
+  @include callout;
+}

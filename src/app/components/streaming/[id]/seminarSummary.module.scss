@@ -2,4 +2,26 @@
 
 .summary {
   @include body;
+  position: relative;
+
+  .content {
+    max-height: 120px;
+    overflow-y: auto;
+    scroll-behavior: contain;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .wikiTerm {
+    color: var(--color-blue-400);
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+  }
+}
+
+.wikiCardContainer {
+  z-index: 1000;
 }

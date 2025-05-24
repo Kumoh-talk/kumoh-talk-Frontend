@@ -46,12 +46,4 @@
 .content {
   color: var(--color-text-black-85);
   line-height: 1.5;
-
-  max-height: 120px;
-  overflow-y: auto;
-  scroll-behavior: contain;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }

@@ -1,7 +1,9 @@
-@import "mixin";
+@import 'mixin';
 
 .container {
-  z-index: 20;
+  position: absolute;
+  bottom: 100%;
+  z-index: 102;
   border-radius: 16px;
   background-color: white;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -10,17 +12,21 @@
   flex-direction: column;
   padding: 1.5rem;
   gap: 1.5rem;
-  width: 24rem;
-  max-height: 36rem;
+  width: 120px;
+  max-height: 300px;
 
   overflow-y: auto;
   scroll-behavior: contain;
 }
 
 .title {
-  @include title2Emphasized;
+  @include title3Emphasized;
 }
 
 .subTitle {
-  @include title3Emphasized;
+  @include bodyEmphasized;
+}
+
+.content {
+  @include callout;
 }

@@ -18,11 +18,11 @@ export default function WikiCard({ info }: Props) {
       </div>
       <div className={styles.generalWrapper}>
         <h3 className={styles.subTitle}>쉬운 설명</h3>
-        <span>{general}</span>
+        <span className={styles.content}>{general}</span>
       </div>
       <div className={styles.expertWrapper}>
         <h3 className={styles.subTitle}>상세 설명</h3>
-        <span>{expert}</span>
+        <span className={styles.content}>{expert}</span>
       </div>
     </div>
   );

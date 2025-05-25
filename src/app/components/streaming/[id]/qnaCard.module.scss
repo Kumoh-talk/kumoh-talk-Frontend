@@ -45,6 +45,26 @@
       align-items: center;
       gap: 0.25rem;
     }
+
+    .iconButton {
+      cursor: pointer;
+      border: none;
+      background: none;
+
+      &:hover {
+        &.thumbsUp {
+          color: var(--color-purple);
+        }
+
+        &.check {
+          color: var(--color-blue-400);
+        }
+
+        &.close {
+          color: var(--color-red);
+        }
+      }
+    }
   }
 }
 

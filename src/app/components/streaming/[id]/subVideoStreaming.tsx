@@ -20,6 +20,7 @@ export default function SubVideoStreaming({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleChangeScreen = () => {
+    console.log('화면 변경');
     setMainScreenUrl(subScreenUrl);
     setSubScreenUrl(mainScreenUrl);
   };

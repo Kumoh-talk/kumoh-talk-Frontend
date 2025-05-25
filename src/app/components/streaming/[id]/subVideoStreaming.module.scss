@@ -1,8 +1,6 @@
-@import "mixin";
+@import 'mixin';
 
 .streamingVideo {
-  z-index: 2;
-  position: relative;
   width: 256px;
   height: 144px;
   background-color: #000;
@@ -11,10 +9,16 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  pointer-events: auto;
 
   @include laptop {
     width: 192px;
     height: 108px;
+  }
+
+  @include mobile-streaming {
+    width: 128px;
+    height: 72px;
   }
 }
 

@@ -1,15 +1,9 @@
 import { Check, ThumbsUp, X } from 'lucide-react';
 import styles from './qnaCard.module.scss';
 import clsx from 'clsx';
+import { Qna } from '@/app/lib/types/streaming/streaming';
 
-interface Props {
-  qnaId: number;
-  name: string;
-  content: string;
-  time: string;
-  likes: number;
-  isAnswered: boolean;
-}
+interface Props extends Qna {}
 
 export default function QnACard({
   qnaId,
@@ -17,7 +11,7 @@ export default function QnACard({
   content,
   time,
   likes,
-  isAnswered,
+  anonymous,
 }: Props) {
   const handleThumbsUp = (qnaId: number) => {
     console.log(`${qnaId}번 질문 따봉`);

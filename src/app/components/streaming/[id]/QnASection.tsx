@@ -5,17 +5,15 @@ import QnACard from './QnACard';
 import QnAField from './QnAField';
 import styles from './qnaSection.module.scss';
 import { FormProvider, useForm } from 'react-hook-form';
-
-interface Props {
-  qnaList: Qna[];
-}
+import useSocketStore from '@/app/lib/stores/socketStore';
 
 const defaultValues = {
   content: '',
   isAnonymity: false,
 };
 
-export default function QnASection({ qnaList }: Props) {
+export default function QnASection() {
+  const { qnaList } = useSocketStore();
   const formState = useForm({ defaultValues });
 
   const onSubmit = async (data: unknown) => {

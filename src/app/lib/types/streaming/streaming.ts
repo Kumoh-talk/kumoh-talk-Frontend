@@ -8,7 +8,6 @@ export type Streaming = {
 
 export type Chat = {
   chatId: number;
-  socketId: number;
   name: string;
   content: string;
   time: string;
@@ -20,5 +19,5 @@ export type Qna = {
   content: string;
   time: string;
   likes: number;
-  isAnswered: boolean;
+  anonymous: boolean;
 };

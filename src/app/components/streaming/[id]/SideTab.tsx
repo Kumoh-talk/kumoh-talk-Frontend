@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import styles from './chattingTabs.module.scss';
+import styles from './sideTab.module.scss';
 import { SideTabContext } from './SideTabProvider';
 import clsx from 'clsx';
 

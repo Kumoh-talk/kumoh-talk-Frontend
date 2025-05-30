@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .tabs {
   display: flex;
   justify-content: space-between;
@@ -5,13 +7,14 @@
   border-bottom: 1px solid var(--color-gray-800);
 
   > button {
+    @include title2Emphasized;
     flex: 1;
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: var(--color-gray-800);
+    background-color: var(--color-gray-700);
     border: none;
 
     &:hover {
@@ -19,7 +22,7 @@
     }
 
     &:active {
-      background-color: var(--color-gray-800);
+      background-color: var(--color-gray-500);
     }
 
     &:not(:last-child) {

@@ -4,8 +4,12 @@ import useSocketStore from '../../stores/socketStore';
 import { WEBSOCKET_URL } from '../../constants/common/path';
 import { useEffect } from 'react';
 
-export default function useSocketConnect() {
-  const { setStompClient, setSocketId } = useSocketStore();
+export interface useSocketConnectProps {
+  streamId: string;
+}
+
+export default function useSocketConnect({ streamId }: useSocketConnectProps) {
+  const { setStompClient, setStreamId, setSocketId } = useSocketStore();
 
   const onConnect = () => {
     const client = Stomp.over(function () {
@@ -14,6 +18,7 @@ export default function useSocketConnect() {
 
     client.connect({}, () => {
       setStompClient(client);
+      setStreamId(Number(streamId));
       setSocketId(Math.floor(Math.random() * 7));
     });
   };

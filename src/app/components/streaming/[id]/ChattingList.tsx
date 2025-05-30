@@ -31,7 +31,7 @@ export default function ChattingList() {
             className={styles.chattingUser}
             style={{ color: nameColors[socketId % nameColors.length] }}
           >
-            {chat.name}: &nbsp;
+            {chat.nickname}: &nbsp;
           </span>
           <span className={styles.chattingContent}>{chat.content}</span>
         </div>

@@ -5,6 +5,8 @@ import { Chat, Qna } from '../types/streaming/streaming';
 interface StompSlice {
   stompClient: CompatClient | null;
   setStompClient: (client: CompatClient | null) => void;
+  streamId: number;
+  setStreamId: (number: number) => void;
   socketId: number;
   setSocketId: (number: number) => void;
 }
@@ -17,6 +19,8 @@ interface ChatSlice {
 interface QnaSlice {
   qnaList: Qna[];
   addQna: (newQna: Qna) => void;
+  likeQna: (qnaId: number) => void;
+  myLikedQna: number[];
   deleteQna: (qnaId: number) => void;
 }
 
@@ -25,6 +29,8 @@ const createStompSlice: StateCreator<StompSlice, [], [], StompSlice> = (
 ) => ({
   stompClient: null,
   setStompClient: (client) => set({ stompClient: client }),
+  streamId: 0,
+  setStreamId: (number) => set({ streamId: number }),
   socketId: 0,
   setSocketId: (number) => set({ socketId: number }),
 });
@@ -41,6 +47,13 @@ const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
   qnaList: [],
   addQna: (newQna: Qna) =>
     set((state) => ({ qnaList: [...state.qnaList, newQna] })),
+  likeQna: (qnaId: number) =>
+    set((state) => ({
+      qnaList: state.qnaList.map((qna) =>
+        qna.qnaId === qnaId ? { ...qna, likes: qna.likes + 1 } : qna
+      ),
+    })),
+  myLikedQna: [],
   deleteQna: (qnaId: number) =>
     set((state) => ({
       qnaList: state.qnaList.filter((qna) => qna.qnaId !== qnaId),

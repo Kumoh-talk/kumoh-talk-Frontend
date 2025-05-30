@@ -9,6 +9,7 @@ import TabViewer from '@/app/components/streaming/[id]/TabViewer';
 import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
 import useSocketConnect from '@/app/lib/hooks/socket/useSocketConnect';
 import useChatSubscription from '@/app/lib/hooks/socket/useChatSubscription';
+import useQnaSubscription from '@/app/lib/hooks/socket/useQnaSubscription';
 
 interface Props {
   params: {
@@ -19,8 +20,9 @@ interface Props {
 export default function Page({ params }: Props) {
   const { id } = params;
 
-  useSocketConnect();
+  useSocketConnect({ streamId: id });
   useChatSubscription({ chatId: id });
+  useQnaSubscription({ qnaId: id });
 
   return (
     <div className={styles.container}>
@@ -33,7 +35,7 @@ export default function Page({ params }: Props) {
           <div className={styles.chattingSection}>
             <SideTab tabs={['채팅', 'Q&A']} />
             <TabViewer />
-            <ChattingInput chatId={id} />
+            <ChattingInput />
             <UtilityTab />
           </div>
         </SideTabProvider>

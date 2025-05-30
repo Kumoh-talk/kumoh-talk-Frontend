@@ -14,16 +14,12 @@ import { Send } from 'lucide-react';
 import useSocketStore from '@/app/lib/stores/socketStore';
 import { END_POINTS } from '@/app/lib/constants/common/path';
 
-interface Props {
-  chatId: string;
-}
-
-export default function ChattingInput({ chatId }: Props) {
+export default function ChattingInput() {
   const chattingInputRef = useRef<HTMLInputElement | null>(null);
   const { tab } = useContext(SideTabContext);
   const [content, setContent] = useState('');
   const [isPending, startTransition] = useTransition();
-  const { stompClient } = useSocketStore();
+  const { stompClient, streamId } = useSocketStore();
 
   const handleChatting = (e: ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value);
@@ -33,10 +29,10 @@ export default function ChattingInput({ chatId }: Props) {
     if (stompClient) {
       startTransition(async () => {
         stompClient.send(
-          END_POINTS.PUBLISH.CREATE_CHAT(chatId),
+          END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
           {},
           JSON.stringify({
-            name: '대용진',
+            nickname: '대용진',
             content,
           })
         );

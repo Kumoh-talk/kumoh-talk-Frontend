@@ -49,9 +49,11 @@ const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
     set((state) => ({ qnaList: [...state.qnaList, newQna] })),
   likeQna: (qnaId: number) =>
     set((state) => ({
-      qnaList: state.qnaList.map((qna) =>
-        qna.qnaId === qnaId ? { ...qna, likes: qna.likes + 1 } : qna
-      ),
+      qnaList: state.qnaList
+        .map((qna) =>
+          qna.qnaId === qnaId ? { ...qna, likes: qna.likes + 1 } : qna
+        )
+        .sort((a, b) => b.likes - a.likes),
     })),
   myLikedQna: [],
   deleteQna: (qnaId: number) =>

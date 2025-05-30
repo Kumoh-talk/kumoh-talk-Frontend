@@ -67,7 +67,7 @@ export default function QnACard({
           </button>
         </div>
       </div>
-      <div className={styles.content}>{content}</div>
+      <pre className={styles.content}>{content}</pre>
     </div>
   );
 }

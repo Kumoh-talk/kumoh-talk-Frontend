@@ -6,7 +6,7 @@ import styles from './qnaField.module.scss';
 
 interface QnAFormValues {
   content: string;
-  isAnonymity: boolean;
+  anonymous: boolean;
 }
 
 export default function QnAField() {
@@ -17,11 +17,11 @@ export default function QnAField() {
     watch,
   } = useFormContext<QnAFormValues>();
 
-  const isAnonymity = watch('isAnonymity', false);
+  const anonymous = watch('anonymous', false);
 
   const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
-    setValue('isAnonymity', checked);
+    setValue('anonymous', checked);
   };
 
   return (
@@ -33,7 +33,7 @@ export default function QnAField() {
       />
       <div className={styles.actions}>
         <div className={styles.anonymitySwitch}>
-          <Switch checked={isAnonymity} onChange={handleSwitchChange} />
+          <Switch checked={anonymous} onChange={handleSwitchChange} />
           <p>익명</p>
         </div>
         <Button type='submit' disabled={isSubmitting}>

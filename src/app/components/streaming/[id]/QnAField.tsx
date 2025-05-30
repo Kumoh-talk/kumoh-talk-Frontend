@@ -18,6 +18,7 @@ export default function QnAField() {
   } = useFormContext<QnAFormValues>();
 
   const anonymous = watch('anonymous', false);
+  const content = watch('content', '');
 
   const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
@@ -26,11 +27,15 @@ export default function QnAField() {
 
   return (
     <>
-      <textarea
-        className={styles.qnaInput}
-        placeholder='질문을 입력하세요.'
-        {...register('content')}
-      />
+      <div className={styles.qnaInputWrapper}>
+        <textarea
+          className={styles.qnaInput}
+          placeholder='질문을 입력하세요.'
+          {...register('content')}
+          maxLength={200}
+        />
+        <div className={styles.charCountLabel}>{content.length} / 200</div>
+      </div>
       <div className={styles.actions}>
         <div className={styles.anonymitySwitch}>
           <Switch checked={anonymous} onChange={handleSwitchChange} />

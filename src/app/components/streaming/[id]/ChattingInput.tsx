@@ -60,6 +60,7 @@ export default function ChattingInput() {
             value={content}
             onChange={handleChatting}
             onKeyDown={onKeyDownEnter}
+            maxLength={200}
           />
           {content && (
             <button

@@ -28,7 +28,14 @@ export default function SubVideoStreaming({
   useEffect(() => {
     if (videoRef.current) {
       if (Hls.isSupported()) {
-        const hls = new Hls();
+        const hls = new Hls({
+          xhrSetup: (xhr, url) => {
+            if (url.endsWith('.ts')) {
+              const separator = url.includes('?') ? '&' : '?';
+              xhr.open('GET', url + separator + 'tsQuery', true);
+            }
+          },
+        });
         hls.loadSource(subScreenUrl);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {

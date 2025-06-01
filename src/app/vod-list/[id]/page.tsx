@@ -158,7 +158,6 @@ export default async function Page({ params }: Props) {
         <SideTabProvider>
           <div className={styles.chattingSection}>
             <BookmarkSection bookmarkList={bookmarkList} />
-            <ChattingInput />
             <UtilityTab />
           </div>
         </SideTabProvider>

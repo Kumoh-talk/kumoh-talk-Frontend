@@ -6,13 +6,23 @@ import Hls, { type Level } from 'hls.js';
 import Caption from './Caption';
 import SubVideoStreaming from './SubVideoStreaming';
 
-export default function VideoStreaming() {
-  const [mainScreenUrl, setMainScreenUrl] = useState(
-    'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
-  );
-  const [subScreenUrl, setSubScreenUrl] = useState(
-    'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8'
-  );
+interface Props {
+  camUrl: string;
+  camTsQuery: string;
+  slideUrl: string;
+  slideTsQuery: string;
+}
+
+export default function VideoStreaming({
+  camUrl,
+  camTsQuery,
+  slideUrl,
+  slideTsQuery,
+}: Props) {
+  const [mainScreenUrl, setMainScreenUrl] = useState(slideUrl);
+  const [mainScreenTsQuery, setMainScreenTsQuery] = useState(slideTsQuery);
+  const [subScreenUrl, setSubScreenUrl] = useState(camUrl);
+  const [subScreenTsQuery, setSubScreenTsQuery] = useState(camTsQuery);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -23,7 +33,7 @@ export default function VideoStreaming() {
           xhrSetup: (xhr, url) => {
             if (url.endsWith('.ts')) {
               const separator = url.includes('?') ? '&' : '?';
-              xhr.open('GET', url + separator + 'tsQuery', true);
+              xhr.open('GET', url + separator + mainScreenTsQuery, true);
             }
           },
         });
@@ -53,9 +63,13 @@ export default function VideoStreaming() {
         <div className={styles.top}>
           <SubVideoStreaming
             mainScreenUrl={mainScreenUrl}
+            mainScreenTsQuery={mainScreenTsQuery}
             subScreenUrl={subScreenUrl}
+            subScreenTsQuery={subScreenTsQuery}
             setMainScreenUrl={setMainScreenUrl}
+            setMainScreenTsQuery={setMainScreenTsQuery}
             setSubScreenUrl={setSubScreenUrl}
+            setSubScreenTsQuery={setSubScreenTsQuery}
           />
         </div>
         <Caption />

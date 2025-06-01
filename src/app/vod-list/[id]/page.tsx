@@ -1,12 +1,11 @@
-'use client';
-
 import styles from './page.module.scss';
-import SideTab from '@/app/components/streaming/[id]/SideTab';
 import SideTabProvider from '@/app/components/streaming/[id]/SideTabProvider';
 import ChattingInput from '@/app/components/streaming/[id]/ChattingInput';
 import VideoStreaming from '@/app/components/streaming/[id]/VideoStreaming';
-import TabViewer from '@/app/components/streaming/[id]/TabViewer';
 import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
+import { getVodDetail } from '@/app/lib/apis/vod/vod';
+import BookmarkSection from '@/app/components/vod-list/[id]/BookmarkSection';
+import { VodDetail } from '@/app/lib/types/streaming/vod';
 
 const chatList = [
   {
@@ -133,18 +132,32 @@ const bookmarkList = [
   },
 ];
 
-export default function Page() {
+interface Props {
+  params: {
+    id: string;
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const { id } = params;
+
+  const vodDetail = (await getVodDetail(id)) as VodDetail;
+
   return (
     <div className={styles.container}>
       <div className={styles.streamingWrapper}>
-        <VideoStreaming />
+        <VideoStreaming
+          camUrl={vodDetail.camUrl}
+          camTsQuery={vodDetail.camTsQuery}
+          slideUrl={vodDetail.slideUrl}
+          slideTsQuery={vodDetail.slideTsQuery}
+        />
         <div className={styles.streamingTitle}>JPA란 무엇인가?</div>
       </div>
       <div className={styles.sideTapWrapper}>
         <SideTabProvider>
           <div className={styles.chattingSection}>
-            <SideTab tabs={['채팅', '북마크']} />
-            <TabViewer chatList={chatList} bookmarkList={bookmarkList} />
+            <BookmarkSection bookmarkList={bookmarkList} />
             <ChattingInput />
             <UtilityTab />
           </div>

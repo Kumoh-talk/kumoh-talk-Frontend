@@ -6,16 +6,24 @@ import Hls, { type Level } from 'hls.js';
 
 interface Props {
   mainScreenUrl: string;
+  mainScreenTsQuery: string;
   subScreenUrl: string;
+  subScreenTsQuery: string;
   setMainScreenUrl: Dispatch<SetStateAction<string>>;
+  setMainScreenTsQuery: Dispatch<SetStateAction<string>>;
   setSubScreenUrl: Dispatch<SetStateAction<string>>;
+  setSubScreenTsQuery: Dispatch<SetStateAction<string>>;
 }
 
 export default function SubVideoStreaming({
   mainScreenUrl,
+  mainScreenTsQuery,
   subScreenUrl,
+  subScreenTsQuery,
   setMainScreenUrl,
+  setMainScreenTsQuery,
   setSubScreenUrl,
+  setSubScreenTsQuery,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -32,7 +40,7 @@ export default function SubVideoStreaming({
           xhrSetup: (xhr, url) => {
             if (url.endsWith('.ts')) {
               const separator = url.includes('?') ? '&' : '?';
-              xhr.open('GET', url + separator + 'tsQuery', true);
+              xhr.open('GET', url + separator + subScreenTsQuery, true);
             }
           },
         });

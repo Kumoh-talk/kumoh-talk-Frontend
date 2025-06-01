@@ -22,10 +22,7 @@ const useQnaSubscription = (props: useChatSubscriptionProps) => {
         END_POINTS.SUBSCRIBE.NEW_QNA(qnaId),
         (message) => {
           const newQna: Qna = {
-            qnaId: 0,
             ...JSON.parse(message.body),
-            time: '01:11',
-            likes: 0,
           };
           addQna(newQna);
         }

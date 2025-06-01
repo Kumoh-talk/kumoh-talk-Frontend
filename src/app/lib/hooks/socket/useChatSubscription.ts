@@ -18,9 +18,7 @@ const useChatSubscription = (props: useChatSubscriptionProps) => {
         END_POINTS.SUBSCRIBE.NEW_CHAT(chatId),
         (message) => {
           const newMessage = {
-            chatId: 0,
             ...JSON.parse(message.body),
-            time: '01:11',
           };
           addChatMessage(newMessage);
         }

@@ -24,7 +24,6 @@ export default function QnASection() {
   const onSubmit = async (data: addQnaRequestDto) => {
     if (stompClient) {
       const newQna = {
-        nickname: '대용진',
         ...data,
       };
       console.log(newQna);

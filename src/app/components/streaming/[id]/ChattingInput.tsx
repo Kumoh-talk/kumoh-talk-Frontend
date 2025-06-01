@@ -32,7 +32,6 @@ export default function ChattingInput() {
           END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
           {},
           JSON.stringify({
-            nickname: '대용진',
             content,
           })
         );

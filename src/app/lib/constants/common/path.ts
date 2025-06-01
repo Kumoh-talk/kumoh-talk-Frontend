@@ -4,13 +4,15 @@ export const END_POINTS = {
   PUBLISH: {
     CREATE_CHAT: (chatId: string) => `/app/streaming/${chatId}/add-chat`,
     CREATE_QNA: (qnaId: string) => `/app/streaming/${qnaId}/add-qna`,
-    LIKED_QNA: (qnaId: string) => `/app/streaming/${qnaId}/liked-qna`,
-    DELETE_QNA: (qnaId: string) => `/app/streaming/${qnaId}/delete-qna`,
+    LIKED_QNA: (streamId: string, qnaId: number) =>
+      `/app/streaming/${streamId}/liked-qna/${qnaId}`,
+    DELETE_QNA: (streamId: string, qnaId: number) =>
+      `/app/streaming/${streamId}/delete-qna/${qnaId}`,
   },
   SUBSCRIBE: {
-    NEW_CHAT: (chatId: string) => `/chat/streaming/${chatId}/add`,
-    NEW_QNA: (qnaId: string) => `/qna/streaming/${qnaId}/add`,
-    LIKED_QNA: (qnaId: string) => `/qna/streaming/${qnaId}/liked`,
-    DELETE_QNA: (qnaId: string) => `/qna/streaming/${qnaId}/delete`,
+    NEW_CHAT: (chatId: string) => `/streaming/chat/${chatId}/add`,
+    NEW_QNA: (qnaId: string) => `/streaming/qna/${qnaId}/add`,
+    LIKED_QNA: (streamId: string) => `/streaming/qna/${streamId}/liked`,
+    DELETE_QNA: (streamId: string) => `/streaming/qna/${streamId}/delete`,
   },
 };

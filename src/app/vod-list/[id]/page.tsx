@@ -1,6 +1,5 @@
 import styles from './page.module.scss';
 import SideTabProvider from '@/app/components/streaming/[id]/SideTabProvider';
-import ChattingInput from '@/app/components/streaming/[id]/ChattingInput';
 import VideoStreaming from '@/app/components/streaming/[id]/VideoStreaming';
 import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
 import { getVodDetail } from '@/app/lib/apis/vod/vod';

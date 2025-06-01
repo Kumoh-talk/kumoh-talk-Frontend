@@ -24,9 +24,8 @@ export default function QnACard({
   const handleThumbsUp = (qnaId: number) => {
     if (stompClient) {
       stompClient.send(
-        END_POINTS.PUBLISH.LIKED_QNA(JSON.stringify(streamId)),
-        {},
-        JSON.stringify({ qnaId })
+        END_POINTS.PUBLISH.LIKED_QNA(JSON.stringify(streamId), qnaId),
+        {}
       );
     }
   };
@@ -34,9 +33,8 @@ export default function QnACard({
   const handleClose = (qnaId: number) => {
     if (stompClient) {
       stompClient.send(
-        END_POINTS.PUBLISH.DELETE_QNA(JSON.stringify(streamId)),
-        {},
-        JSON.stringify({ qnaId })
+        END_POINTS.PUBLISH.DELETE_QNA(JSON.stringify(streamId), qnaId),
+        {}
       );
     }
   };

@@ -14,14 +14,26 @@ import { Send } from 'lucide-react';
 import useSocketStore from '@/app/lib/stores/socketStore';
 import { END_POINTS } from '@/app/lib/constants/common/path';
 
-export default function ChattingInput() {
+interface Props {
+  userRole: string;
+}
+
+export default function ChattingInput({ userRole }: Props) {
   const chattingInputRef = useRef<HTMLInputElement | null>(null);
   const { tab } = useContext(SideTabContext);
   const [content, setContent] = useState('');
   const [isPending, startTransition] = useTransition();
   const { stompClient, streamId } = useSocketStore();
 
-  const handleChatting = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChatting = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!userRole) {
+      alert('로그인 후 이용가능합니다.');
+      return;
+    }
+    if (userRole === 'ROLE_GUEST') {
+      alert('권한이 없습니다.');
+      return;
+    }
     setContent(e.target.value);
   };
 

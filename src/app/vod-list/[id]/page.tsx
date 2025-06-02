@@ -34,7 +34,6 @@ export default async function Page({ params }: Props) {
   const { id } = params;
 
   const vodDetail = (await getVodDetail(id)) as VodDetail;
-  console.log(vodDetail);
 
   return (
     <div className={styles.container}>

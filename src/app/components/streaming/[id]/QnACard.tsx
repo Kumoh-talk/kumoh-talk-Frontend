@@ -6,8 +6,11 @@ import clsx from 'clsx';
 import { Qna } from '@/app/lib/types/streaming/streaming';
 import useSocketStore from '@/app/lib/stores/socketStore';
 import { END_POINTS } from '@/app/lib/constants/common/path';
+import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
 
-interface Props extends Qna {}
+interface Props extends Qna {
+  userRole: string;
+}
 
 export default function QnACard({
   qnaId,
@@ -16,13 +19,19 @@ export default function QnACard({
   time,
   likes,
   anonymous,
+  userRole,
 }: Props) {
   const { stompClient, streamId, myLikedQna } = useSocketStore();
+  const userRoleValidator = new UserRoleValidator();
 
   const isDisabled = myLikedQna.includes(qnaId);
 
   const handleThumbsUp = (qnaId: number) => {
     if (stompClient) {
+      if (!userRoleValidator.guest(userRole)) {
+        alert('로그인 후 이용가능합니다.');
+        return;
+      }
       stompClient.send(
         END_POINTS.PUBLISH.LIKED_QNA(JSON.stringify(streamId), qnaId),
         {}
@@ -32,6 +41,10 @@ export default function QnACard({
 
   const handleClose = (qnaId: number) => {
     if (stompClient) {
+      if (!userRoleValidator.admin(userRole)) {
+        alert('어드민 권한이 있어야 이용가능합니다.');
+        return;
+      }
       stompClient.send(
         END_POINTS.PUBLISH.DELETE_QNA(JSON.stringify(streamId), qnaId),
         {}
@@ -57,12 +70,16 @@ export default function QnACard({
             </button>
             {likes}
           </div>
-          <button
-            className={clsx(styles.iconButton, styles.close)}
-            onClick={() => handleClose(qnaId)}
-          >
-            <X />
-          </button>
+          {userRoleValidator.admin(userRole) ? (
+            <button
+              className={clsx(styles.iconButton, styles.close)}
+              onClick={() => handleClose(qnaId)}
+            >
+              <X />
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <pre className={styles.content}>{content}</pre>

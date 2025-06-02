@@ -41,7 +41,7 @@ export default function ChattingInput({ userRole }: Props) {
 
   const handleChattingSubmit = () => {
     if (stompClient) {
-      startTransition(async () => {
+      startTransition(() => {
         stompClient.send(
           END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
           {},

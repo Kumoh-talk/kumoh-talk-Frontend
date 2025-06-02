@@ -66,7 +66,7 @@ export default function QnASection({ userRole }: Props) {
       </FormProvider>
       <div className={styles.listWrapper}>
         {qnaList.map((qna) => (
-          <QnACard key={qna.qnaId} {...qna} />
+          <QnACard key={qna.qnaId} userRole={userRole} {...qna} />
         ))}
       </div>
     </div>

@@ -13,6 +13,7 @@ import { SideTabContext } from './SideTabProvider';
 import { Send } from 'lucide-react';
 import useSocketStore from '@/app/lib/stores/socketStore';
 import { END_POINTS } from '@/app/lib/constants/common/path';
+import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
 
 interface Props {
   userRole: string;
@@ -24,13 +25,14 @@ export default function ChattingInput({ userRole }: Props) {
   const [content, setContent] = useState('');
   const [isPending, startTransition] = useTransition();
   const { stompClient, streamId } = useSocketStore();
+  const userRoleValidator = new UserRoleValidator();
 
   const handleChatting = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (!userRole) {
+    if (!userRoleValidator.guest(userRole)) {
       alert('로그인 후 이용가능합니다.');
       return;
     }
-    if (userRole === 'ROLE_GUEST') {
+    if (!userRoleValidator.user(userRole)) {
       alert('권한이 없습니다.');
       return;
     }

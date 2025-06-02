@@ -4,15 +4,18 @@ import { useContext } from 'react';
 import { SideTabContext } from './SideTabProvider';
 import ChattingList from './ChattingList';
 import QnASection from './QnASection';
-import { Bookmark } from '@/app/lib/types/streaming/vod';
 
-export default function TabViewer() {
+interface Props {
+  userRole: string;
+}
+
+export default function TabViewer({ userRole }: Props) {
   const { tab, setTab } = useContext(SideTabContext);
 
   return (
     <>
       {tab === 'chatting' && <ChattingList />}
-      {tab === 'qna' && <QnASection />}
+      {tab === 'qna' && <QnASection userRole={userRole} />}
     </>
   );
 }

@@ -20,9 +20,7 @@ export default function VideoStreaming({
   slideTsQuery,
 }: Props) {
   const [mainScreenUrl, setMainScreenUrl] = useState(slideUrl);
-  const [mainScreenTsQuery, setMainScreenTsQuery] = useState(slideTsQuery);
   const [subScreenUrl, setSubScreenUrl] = useState(camUrl);
-  const [subScreenTsQuery, setSubScreenTsQuery] = useState(camTsQuery);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -30,17 +28,20 @@ export default function VideoStreaming({
     if (videoRef.current) {
       if (Hls.isSupported()) {
         const hls = new Hls({
-          xhrSetup: (xhr, url) => {
-            if (url.endsWith('.ts')) {
-              const separator = url.includes('?') ? '&' : '?';
-              xhr.open('GET', url + separator + mainScreenTsQuery, true);
-            }
-          },
+          liveSyncDuration: 2,
+          startPosition: -2,
         });
         hls.loadSource(mainScreenUrl);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
           videoRef.current?.play();
+        });
+
+        hls.on(Hls.Events.LEVEL_LOADED, (_event, data) => {
+          // data.details.totalduration: 해당 레벨(quality)의 전체 길이(초 단위)
+          // (VOD인 경우 유한한 숫자로, 라이브인 경우 Infinity로 나옴)
+          const total = data.details.totalduration;
+          console.log('HLS LEVEL_LOADED totalduration:', total);
         });
 
         return () => {
@@ -63,13 +64,9 @@ export default function VideoStreaming({
         <div className={styles.top}>
           <SubVideoStreaming
             mainScreenUrl={mainScreenUrl}
-            mainScreenTsQuery={mainScreenTsQuery}
             subScreenUrl={subScreenUrl}
-            subScreenTsQuery={subScreenTsQuery}
             setMainScreenUrl={setMainScreenUrl}
-            setMainScreenTsQuery={setMainScreenTsQuery}
             setSubScreenUrl={setSubScreenUrl}
-            setSubScreenTsQuery={setSubScreenTsQuery}
           />
         </div>
         <Caption />

@@ -1,29 +1,21 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import styles from './subVideoStreaming.module.scss';
 import Hls, { type Level } from 'hls.js';
 
 interface Props {
   mainScreenUrl: string;
-  mainScreenTsQuery: string;
   subScreenUrl: string;
-  subScreenTsQuery: string;
   setMainScreenUrl: Dispatch<SetStateAction<string>>;
-  setMainScreenTsQuery: Dispatch<SetStateAction<string>>;
   setSubScreenUrl: Dispatch<SetStateAction<string>>;
-  setSubScreenTsQuery: Dispatch<SetStateAction<string>>;
 }
 
 export default function SubVideoStreaming({
   mainScreenUrl,
-  mainScreenTsQuery,
   subScreenUrl,
-  subScreenTsQuery,
   setMainScreenUrl,
-  setMainScreenTsQuery,
   setSubScreenUrl,
-  setSubScreenTsQuery,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -37,17 +29,20 @@ export default function SubVideoStreaming({
     if (videoRef.current) {
       if (Hls.isSupported()) {
         const hls = new Hls({
-          xhrSetup: (xhr, url) => {
-            if (url.endsWith('.ts')) {
-              const separator = url.includes('?') ? '&' : '?';
-              xhr.open('GET', url + separator + subScreenTsQuery, true);
-            }
-          },
+          liveSyncDuration: 2,
+          startPosition: -2,
         });
         hls.loadSource(subScreenUrl);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
           videoRef.current?.play();
+        });
+
+        hls.on(Hls.Events.LEVEL_LOADED, (_event, data) => {
+          // data.details.totalduration: 해당 레벨(quality)의 전체 길이(초 단위)
+          // (VOD인 경우 유한한 숫자로, 라이브인 경우 Infinity로 나옴)
+          const total = data.details.totalduration;
+          console.log('HLS LEVEL_LOADED totalduration:', total);
         });
 
         return () => {

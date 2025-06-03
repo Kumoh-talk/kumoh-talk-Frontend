@@ -7,10 +7,9 @@ export type Streaming = {
 };
 
 export type Chat = {
-  chatId: number;
+  userId: number;
   nickname: string;
   content: string;
-  time: string;
 };
 
 export type Qna = {

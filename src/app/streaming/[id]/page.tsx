@@ -33,7 +33,7 @@ export default async function Page({ params }: Props) {
           <div className={styles.chattingSection}>
             <SideTab tabs={['채팅', 'Q&A']} />
             <TabViewer userRole={userRole} />
-            <ChattingInput userRole={userRole} />
+            <ChattingInput accessToken={accessToken} userRole={userRole} />
             <UtilityTab />
           </div>
         </SideTabProvider>

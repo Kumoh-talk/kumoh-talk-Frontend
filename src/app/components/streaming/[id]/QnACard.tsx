@@ -9,6 +9,7 @@ import { END_POINTS } from '@/app/lib/constants/common/path';
 import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
 
 interface Props extends Qna {
+  accessToken?: string;
   userRole: string;
 }
 
@@ -19,6 +20,7 @@ export default function QnACard({
   time,
   likes,
   anonymous,
+  accessToken,
   userRole,
 }: Props) {
   const { stompClient, streamId, myLikedQna } = useSocketStore();
@@ -34,7 +36,9 @@ export default function QnACard({
       }
       stompClient.send(
         END_POINTS.PUBLISH.LIKED_QNA(JSON.stringify(streamId), qnaId),
-        {}
+        {
+          Authorization: `Bearer ${accessToken}`,
+        }
       );
     }
   };
@@ -47,7 +51,9 @@ export default function QnACard({
       }
       stompClient.send(
         END_POINTS.PUBLISH.DELETE_QNA(JSON.stringify(streamId), qnaId),
-        {}
+        {
+          Authorization: `Bearer ${accessToken}`,
+        }
       );
     }
   };

@@ -6,16 +6,19 @@ import ChattingList from './ChattingList';
 import QnASection from './QnASection';
 
 interface Props {
+  accessToken?: string;
   userRole: string;
 }
 
-export default function TabViewer({ userRole }: Props) {
+export default function TabViewer({ accessToken, userRole }: Props) {
   const { tab, setTab } = useContext(SideTabContext);
 
   return (
     <>
       {tab === 'chatting' && <ChattingList />}
-      {tab === 'qna' && <QnASection userRole={userRole} />}
+      {tab === 'qna' && (
+        <QnASection accessToken={accessToken} userRole={userRole} />
+      )}
     </>
   );
 }

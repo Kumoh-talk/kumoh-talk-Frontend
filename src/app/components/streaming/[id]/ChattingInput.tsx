@@ -16,10 +16,11 @@ import { END_POINTS } from '@/app/lib/constants/common/path';
 import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
 
 interface Props {
+  accessToken?: string;
   userRole: string;
 }
 
-export default function ChattingInput({ userRole }: Props) {
+export default function ChattingInput({ accessToken, userRole }: Props) {
   const chattingInputRef = useRef<HTMLInputElement | null>(null);
   const { tab } = useContext(SideTabContext);
   const [content, setContent] = useState('');
@@ -44,7 +45,9 @@ export default function ChattingInput({ userRole }: Props) {
       startTransition(() => {
         stompClient.send(
           END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
-          {},
+          {
+            Authorization: `Bearer ${accessToken}`,
+          },
           JSON.stringify({
             content,
           })

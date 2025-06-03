@@ -19,10 +19,11 @@ const defaultValues = {
 };
 
 interface Props {
+  accessToken?: string;
   userRole: string;
 }
 
-export default function QnASection({ userRole }: Props) {
+export default function QnASection({ accessToken, userRole }: Props) {
   const { stompClient, streamId, qnaList } = useSocketStore();
   const formState = useForm({ defaultValues });
   const userRoleValidator = new UserRoleValidator();
@@ -46,7 +47,9 @@ export default function QnASection({ userRole }: Props) {
       };
       stompClient.send(
         END_POINTS.PUBLISH.CREATE_QNA(JSON.stringify(streamId)),
-        {},
+        {
+          Authorization: `Bearer ${accessToken}`,
+        },
         JSON.stringify(newQna)
       );
     }
@@ -66,7 +69,12 @@ export default function QnASection({ userRole }: Props) {
       </FormProvider>
       <div className={styles.listWrapper}>
         {qnaList.map((qna) => (
-          <QnACard key={qna.qnaId} userRole={userRole} {...qna} />
+          <QnACard
+            key={qna.qnaId}
+            accessToken={accessToken}
+            userRole={userRole}
+            {...qna}
+          />
         ))}
       </div>
     </div>

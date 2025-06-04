@@ -14,5 +14,6 @@ export const END_POINTS = {
     NEW_QNA: (qnaId: string) => `/streaming/qna/${qnaId}/add`,
     LIKED_QNA: (streamId: string) => `/streaming/qna/${streamId}/liked`,
     DELETE_QNA: (streamId: string) => `/streaming/qna/${streamId}/delete`,
+    ERROR: (sessionId: string) => `/user/${sessionId}/queue/errors`,
   },
 };

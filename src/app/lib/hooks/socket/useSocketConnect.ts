@@ -16,6 +16,9 @@ export default function useSocketConnect({ streamId }: useSocketConnectProps) {
       return new SockJS(WEBSOCKET_URL);
     });
 
+    // 디버그 로그를 없애기 위해 빈 함수로 덮어쓰는 코드 배포 시 주석 해제하기
+    // client.debug = () => {};
+
     client.connect({}, () => {
       setStompClient(client);
       setStreamId(Number(streamId));

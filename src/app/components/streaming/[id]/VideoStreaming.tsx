@@ -8,17 +8,10 @@ import SubVideoStreaming from './SubVideoStreaming';
 
 interface Props {
   camUrl: string;
-  camTsQuery: string;
   slideUrl: string;
-  slideTsQuery: string;
 }
 
-export default function VideoStreaming({
-  camUrl,
-  camTsQuery,
-  slideUrl,
-  slideTsQuery,
-}: Props) {
+export default function VideoStreaming({ camUrl, slideUrl }: Props) {
   const [mainScreenUrl, setMainScreenUrl] = useState(slideUrl);
   const [subScreenUrl, setSubScreenUrl] = useState(camUrl);
 

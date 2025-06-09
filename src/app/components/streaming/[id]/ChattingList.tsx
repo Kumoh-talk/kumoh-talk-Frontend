@@ -1,5 +1,6 @@
-import { Chat } from '@/app/lib/types/streaming/streaming';
+import { MouseEvent } from 'react';
 import styles from './chattingList.module.scss';
+import useSocketStore from '@/app/lib/stores/socketStore';
 
 const nameColors = [
   '#0c80d3',
@@ -20,20 +21,18 @@ const nameColors = [
   '#0b6d82',
 ];
 
-interface Props {
-  chatList: Chat[];
-}
+export default function ChattingList() {
+  const { socketId, chatMessageList } = useSocketStore();
 
-export default function ChattingList({ chatList }: Props) {
   return (
     <div className={styles.chattingList}>
-      {chatList.map((chat) => (
+      {chatMessageList.map((chat) => (
         <div key={chat.chatId} className={styles.chattingItem}>
           <span
             className={styles.chattingUser}
-            style={{ color: nameColors[chat.socketId % nameColors.length] }}
+            style={{ color: nameColors[socketId % nameColors.length] }}
           >
-            {chat.name}: &nbsp;
+            {chat.nickname}: &nbsp;
           </span>
           <span className={styles.chattingContent}>{chat.content}</span>
         </div>

@@ -1,13 +1,17 @@
 export type Vod = {
   vodId: number;
   title: string;
-  cam_url: string;
-  slide_url: string;
+  thumbnailUrl: string;
   length: string;
-  episode: number;
-  summary: string;
-  presenter: string;
   views: number;
+};
+
+export type VodDetail = {
+  slideUrl: string;
+  slideTsQuery: string;
+  camUrl: string;
+  camTsQuery: string;
+  bookmarks: string;
 };
 
 export type Bookmark = {

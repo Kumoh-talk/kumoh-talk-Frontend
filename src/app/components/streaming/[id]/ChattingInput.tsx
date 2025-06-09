@@ -11,23 +11,51 @@ import {
 import styles from './chattingInput.module.scss';
 import { SideTabContext } from './SideTabProvider';
 import { Send } from 'lucide-react';
+import useSocketStore from '@/app/lib/stores/socketStore';
+import { END_POINTS } from '@/app/lib/constants/common/path';
+import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
 
-export default function ChattingInput() {
+interface Props {
+  accessToken?: string;
+  userRole: string;
+}
+
+export default function ChattingInput({ accessToken, userRole }: Props) {
   const chattingInputRef = useRef<HTMLInputElement | null>(null);
   const { tab } = useContext(SideTabContext);
   const [content, setContent] = useState('');
   const [isPending, startTransition] = useTransition();
+  const { stompClient, streamId } = useSocketStore();
+  const userRoleValidator = new UserRoleValidator();
 
-  const handleChatting = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChatting = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!userRoleValidator.guest(userRole)) {
+      alert('로그인 후 이용가능합니다.');
+      return;
+    }
+    if (!userRoleValidator.user(userRole)) {
+      alert('권한이 없습니다.');
+      return;
+    }
     setContent(e.target.value);
   };
 
   const handleChattingSubmit = () => {
-    startTransition(async () => {
-      setContent('');
-      chattingInputRef.current?.focus();
-      console.log(content);
-    });
+    if (stompClient) {
+      startTransition(() => {
+        stompClient.send(
+          END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
+          {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          JSON.stringify({
+            content,
+          })
+        );
+        setContent('');
+        chattingInputRef.current?.focus();
+      });
+    }
   };
 
   const onKeyDownEnter = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -48,6 +76,7 @@ export default function ChattingInput() {
             value={content}
             onChange={handleChatting}
             onKeyDown={onKeyDownEnter}
+            maxLength={200}
           />
           {content && (
             <button

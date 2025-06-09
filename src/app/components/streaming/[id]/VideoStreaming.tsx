@@ -1,39 +1,55 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import styles from "./videoStreaming.module.scss";
-import Hls, { type Level } from "hls.js";
-import Caption from "./Caption";
-import SubVideoStreaming from "./subVideoStreaming";
+import { useEffect, useRef, useState } from 'react';
+import styles from './videoStreaming.module.scss';
+import Hls, { type Level } from 'hls.js';
+import Caption from './Caption';
+import SubVideoStreaming from './SubVideoStreaming';
 
-export default function VideoStreaming() {
-  const [mainScreenUrl, setMainScreenUrl] = useState(
-    "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-  );
-  const [subScreenUrl, setSubScreenUrl] = useState(
-    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
-  );
+interface Props {
+  camUrl: string;
+  slideUrl: string;
+  subVideoOpacity?: number;
+}
+
+export default function VideoStreaming({
+  camUrl,
+  slideUrl,
+  subVideoOpacity = 1,
+}: Props) {
+  const [mainScreenUrl, setMainScreenUrl] = useState(slideUrl);
+  const [subScreenUrl, setSubScreenUrl] = useState(camUrl);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
       if (Hls.isSupported()) {
-        const hls = new Hls();
+        const hls = new Hls({
+          liveSyncDuration: 2,
+          startPosition: -2,
+        });
         hls.loadSource(mainScreenUrl);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
           videoRef.current?.play();
         });
 
+        hls.on(Hls.Events.LEVEL_LOADED, (_event, data) => {
+          // data.details.totalduration: 해당 레벨(quality)의 전체 길이(초 단위)
+          // (VOD인 경우 유한한 숫자로, 라이브인 경우 Infinity로 나옴)
+          const total = data.details.totalduration;
+          console.log('HLS LEVEL_LOADED totalduration:', total);
+        });
+
         return () => {
           hls.destroy();
         };
       } else if (
-        videoRef.current.canPlayType("application/vnd.apple.mpegurl")
+        videoRef.current.canPlayType('application/vnd.apple.mpegurl')
       ) {
         videoRef.current.src = mainScreenUrl;
-        videoRef.current.addEventListener("loadedmetadata", () => {
+        videoRef.current.addEventListener('loadedmetadata', () => {
           videoRef.current?.play();
         });
       }
@@ -49,6 +65,7 @@ export default function VideoStreaming() {
             subScreenUrl={subScreenUrl}
             setMainScreenUrl={setMainScreenUrl}
             setSubScreenUrl={setSubScreenUrl}
+            style={{ opacity: subVideoOpacity }}
           />
         </div>
         <Caption />

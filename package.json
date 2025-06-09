@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@mui/base": "^5.0.0-beta.68",
+    "@stomp/stompjs": "^7.1.1",
     "@tanstack/react-query": "^5.56.2",
     "@tiptap/extension-code-block-lowlight": "^2.11.5",
     "@tiptap/extension-image": "^2.11.2",
@@ -19,6 +20,7 @@
     "@tiptap/extension-underline": "^2.11.5",
     "@tiptap/react": "^2.11.0",
     "@tiptap/starter-kit": "^2.11.0",
+    "@types/sockjs-client": "^1.5.4",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "dompurify": "^3.2.4",
@@ -35,8 +37,10 @@
     "react-responsive": "^10.0.1",
     "react-toastify": "^11.0.5",
     "sass": "^1.77.8",
+    "sockjs-client": "^1.6.1",
     "swiper": "^11.2.5",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.8",

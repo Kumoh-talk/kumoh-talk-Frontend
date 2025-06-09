@@ -8,17 +8,16 @@ export type Streaming = {
 
 export type Chat = {
   chatId: number;
-  socketId: number;
-  name: string;
+  userId: number;
+  nickname: string;
   content: string;
-  time: string;
 };
 
 export type Qna = {
   qnaId: number;
-  name: string;
+  userId: number;
+  nickname: string;
   content: string;
-  time: string;
   likes: number;
-  isAnswered: boolean;
+  anonymous: boolean;
 };

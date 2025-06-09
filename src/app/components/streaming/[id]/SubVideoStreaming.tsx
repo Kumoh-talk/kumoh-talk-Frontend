@@ -1,8 +1,9 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect, useRef } from 'react';
 import styles from './subVideoStreaming.module.scss';
 import Hls, { type Level } from 'hls.js';
+import { SideTabContext } from './SideTabProvider';
 
 interface Props {
   mainScreenUrl: string;
@@ -18,8 +19,10 @@ export default function SubVideoStreaming({
   setSubScreenUrl,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { isSubVideoVisible } = useContext(SideTabContext);
 
   const handleChangeScreen = () => {
+    console.log('화면 변경');
     setMainScreenUrl(subScreenUrl);
     setSubScreenUrl(mainScreenUrl);
   };
@@ -27,11 +30,21 @@ export default function SubVideoStreaming({
   useEffect(() => {
     if (videoRef.current) {
       if (Hls.isSupported()) {
-        const hls = new Hls();
+        const hls = new Hls({
+          liveSyncDuration: 2,
+          startPosition: -2,
+        });
         hls.loadSource(subScreenUrl);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
           videoRef.current?.play();
+        });
+
+        hls.on(Hls.Events.LEVEL_LOADED, (_event, data) => {
+          // data.details.totalduration: 해당 레벨(quality)의 전체 길이(초 단위)
+          // (VOD인 경우 유한한 숫자로, 라이브인 경우 Infinity로 나옴)
+          const total = data.details.totalduration;
+          console.log('HLS LEVEL_LOADED totalduration:', total);
         });
 
         return () => {
@@ -49,7 +62,11 @@ export default function SubVideoStreaming({
   }, [subScreenUrl]);
 
   return (
-    <div className={styles.streamingVideo} onClick={handleChangeScreen}>
+    <div
+      className={styles.streamingVideo}
+      onClick={handleChangeScreen}
+      style={{ opacity: isSubVideoVisible ? 1 : 0 }}
+    >
       <video ref={videoRef} className={styles.videoPlayer} muted />
     </div>
   );

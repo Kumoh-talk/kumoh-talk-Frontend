@@ -8,13 +8,15 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 0.5rem;
+  border: 2px solid var(--color-blue-100);
+  border-radius: 4px;
 }
 
 .modal {
   z-index: 101;
   background-color: #fff;
   max-width: 280px;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.25rem 1.25rem 1.25rem;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }

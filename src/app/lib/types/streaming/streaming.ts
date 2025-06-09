@@ -15,9 +15,9 @@ export type Chat = {
 
 export type Qna = {
   qnaId: number;
+  userId: number;
   nickname: string;
   content: string;
-  time: string;
   likes: number;
   anonymous: boolean;
 };

@@ -1,10 +1,11 @@
 'use client';
 
-import { FileText, Vote } from 'lucide-react';
+import { FileText, Video, Vote } from 'lucide-react';
 import styles from './utilityTab.module.scss';
 import SeminarSummaryPopup from './SeminarSummaryPopup';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import VoteCard from './VoteCard';
+import { SideTabContext } from './SideTabProvider';
 
 const dummyVote = {
   name: '몇 학년이신가요?',
@@ -31,8 +32,9 @@ const dummyVote = {
 
 export default function UtilityTab() {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isVoteShow, setIsVoteShow] = useState(false);
+  const [isVoteShow, setIsVoteShow] = useState(true);
   const [initialVote, setInitialVote] = useState(true);
+  const { setIsSubVideoVisible } = useContext(SideTabContext);
 
   const handleVoteClose = () => {
     setIsVoteShow(false);
@@ -43,6 +45,10 @@ export default function UtilityTab() {
       setInitialVote(false);
     }
     setIsVoteShow(true);
+  };
+
+  const handleSubVideoToggle = () => {
+    setIsSubVideoVisible((isSubVideoVisible: boolean) => !isSubVideoVisible);
   };
 
   return (
@@ -58,6 +64,11 @@ export default function UtilityTab() {
           className={styles.iconButton}
         >
           <FileText />
+        </button>
+      </div>
+      <div>
+        <button className={styles.iconButton} onClick={handleSubVideoToggle}>
+          <Video />
         </button>
       </div>
       <div>

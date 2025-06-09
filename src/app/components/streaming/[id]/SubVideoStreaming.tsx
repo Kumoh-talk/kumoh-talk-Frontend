@@ -1,8 +1,9 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect, useRef } from 'react';
 import styles from './subVideoStreaming.module.scss';
 import Hls, { type Level } from 'hls.js';
+import { SideTabContext } from './SideTabProvider';
 
 interface Props {
   mainScreenUrl: string;
@@ -18,6 +19,7 @@ export default function SubVideoStreaming({
   setSubScreenUrl,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { isSubVideoVisible } = useContext(SideTabContext);
 
   const handleChangeScreen = () => {
     console.log('화면 변경');
@@ -60,7 +62,11 @@ export default function SubVideoStreaming({
   }, [subScreenUrl]);
 
   return (
-    <div className={styles.streamingVideo} onClick={handleChangeScreen}>
+    <div
+      className={styles.streamingVideo}
+      onClick={handleChangeScreen}
+      style={{ opacity: isSubVideoVisible ? 1 : 0 }}
+    >
       <video ref={videoRef} className={styles.videoPlayer} muted />
     </div>
   );

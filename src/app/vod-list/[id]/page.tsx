@@ -37,23 +37,23 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.streamingWrapper}>
-        <VideoVod
-          camUrl={vodDetail.camUrl}
-          camTsQuery={vodDetail.camTsQuery}
-          slideUrl={vodDetail.slideUrl}
-          slideTsQuery={vodDetail.slideTsQuery}
-        />
-        <div className={styles.streamingTitle}>JPA란 무엇인가?</div>
-      </div>
-      <div className={styles.sideTapWrapper}>
-        <SideTabProvider>
+      <SideTabProvider>
+        <div className={styles.streamingWrapper}>
+          <VideoVod
+            camUrl={vodDetail.camUrl}
+            camTsQuery={vodDetail.camTsQuery}
+            slideUrl={vodDetail.slideUrl}
+            slideTsQuery={vodDetail.slideTsQuery}
+          />
+          <div className={styles.streamingTitle}>JPA란 무엇인가?</div>
+        </div>
+        <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>
             <BookmarkSection bookmarkList={bookmarkList} />
             <UtilityTab />
           </div>
-        </SideTabProvider>
-      </div>
+        </div>
+      </SideTabProvider>
     </div>
   );
 }

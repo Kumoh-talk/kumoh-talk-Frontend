@@ -9,9 +9,14 @@ import SubVideoStreaming from './SubVideoStreaming';
 interface Props {
   camUrl: string;
   slideUrl: string;
+  subVideoOpacity?: number;
 }
 
-export default function VideoStreaming({ camUrl, slideUrl }: Props) {
+export default function VideoStreaming({
+  camUrl,
+  slideUrl,
+  subVideoOpacity = 1,
+}: Props) {
   const [mainScreenUrl, setMainScreenUrl] = useState(slideUrl);
   const [subScreenUrl, setSubScreenUrl] = useState(camUrl);
 
@@ -60,6 +65,7 @@ export default function VideoStreaming({ camUrl, slideUrl }: Props) {
             subScreenUrl={subScreenUrl}
             setMainScreenUrl={setMainScreenUrl}
             setSubScreenUrl={setSubScreenUrl}
+            style={{ opacity: subVideoOpacity }}
           />
         </div>
         <Caption />

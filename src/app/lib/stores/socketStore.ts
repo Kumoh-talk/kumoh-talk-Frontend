@@ -18,6 +18,7 @@ interface ChatSlice {
 
 interface QnaSlice {
   qnaList: Qna[];
+  setQnaList: (qnaList: Qna[]) => void;
   addQna: (newQna: Qna) => void;
   likeQna: (qnaId: number) => void;
   myLikedQna: number[];
@@ -45,6 +46,7 @@ const createChatSlice: StateCreator<ChatSlice, [], [], ChatSlice> = (set) => ({
 
 const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
   qnaList: [],
+  setQnaList: (qnaList: Qna[]) => set(() => ({ qnaList: qnaList })),
   addQna: (newQna: Qna) =>
     set((state) => ({ qnaList: [...state.qnaList, newQna] })),
   likeQna: (qnaId: number) =>

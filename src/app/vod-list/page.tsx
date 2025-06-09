@@ -3,9 +3,10 @@ import styles from './page.module.scss';
 import PageMoreSvg from '../assets/svg/PageMoreSvg';
 import VodCard from '../components/vod-list/VodCard';
 import { getVodList } from '../lib/apis/vod/vod';
+import { Vod } from '../lib/types/streaming/vod';
 
 export default async function Page() {
-  const vodList = await getVodList();
+  const vodList: Vod[] = await getVodList();
 
   return (
     <div className={styles.container}>
@@ -17,7 +18,7 @@ export default async function Page() {
         </Link>
       </div>
       <div className={styles.vodList}>
-        {vodList.map((vod) => (
+        {vodList.map((vod: Vod) => (
           <VodCard key={vod.vodId} {...vod} />
         ))}
       </div>

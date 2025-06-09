@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import styles from './chattingList.module.scss';
 import useSocketStore from '@/app/lib/stores/socketStore';
 

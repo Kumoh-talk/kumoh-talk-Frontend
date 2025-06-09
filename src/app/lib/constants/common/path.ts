@@ -4,12 +4,14 @@ export const END_POINTS = {
   PUBLISH: {
     CREATE_CHAT: (chatId: string) => `/app/streaming/${chatId}/add-chat`,
     CREATE_QNA: (qnaId: string) => `/app/streaming/${qnaId}/add-qna`,
+    GET_QNA_LIST: (streamId: string) => `/app/streaming/${streamId}/qna-list`,
     LIKED_QNA: (streamId: string, qnaId: number) =>
       `/app/streaming/${streamId}/liked-qna/${qnaId}`,
     DELETE_QNA: (streamId: string, qnaId: number) =>
       `/app/streaming/${streamId}/delete-qna/${qnaId}`,
   },
   SUBSCRIBE: {
+    GET_QNA_LIST: (sessionId: string) => `/streaming/qna-list/${sessionId}`,
     NEW_CHAT: (chatId: string) => `/streaming/chat/${chatId}/add`,
     NEW_QNA: (qnaId: string) => `/streaming/qna/${qnaId}/add`,
     LIKED_QNA: (streamId: string) => `/streaming/qna/${streamId}/liked`,

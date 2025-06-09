@@ -1,45 +1,42 @@
-import { Vod, VodDetail } from '../../types/streaming/vod';
+const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
 
-export const getVodList = async () => {
+const _fetch = async (
+  url: string,
+  options: RequestInit,
+  body?: string | any
+) => {
+  if (body && typeof body !== 'string') {
+    options.body = JSON.stringify(body);
+  }
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STREAMING_URL}/vod`,
-      {
-        cache: 'no-store',
-      }
-    );
-    const result = await response.json();
+    const response = await fetch(url, options);
 
-    if (response.ok && 'success' in result && 'data' in result) {
-      return result.data.vodList as Vod[];
-    } else {
-      console.error('Failed to fetch data:', result);
-      return [];
+    if (!response.ok) {
+      throw new Error(JSON.stringify(await response.json()));
     }
+
+    return await response.json();
   } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
+    return error;
   }
 };
 
-export const getVodDetail = async (vodId: string) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STREAMING_URL}/vod/${vodId}`,
-      {
-        cache: 'no-store',
-      }
-    );
-    const result = await response.json();
+export const getVodList = async () => {
+  return _fetch(`${baseUrl}/vod`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+};
 
-    if (response.ok && 'success' in result && 'data' in result) {
-      return result.data as VodDetail;
-    } else {
-      console.error('Failed to fetch data:', result);
-      return [];
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
-  }
+export const getVodDetail = async (vodId: string) => {
+  return _fetch(`${baseUrl}/vod/${vodId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
 };

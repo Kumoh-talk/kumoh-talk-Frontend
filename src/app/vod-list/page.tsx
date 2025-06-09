@@ -4,9 +4,11 @@ import PageMoreSvg from '../assets/svg/PageMoreSvg';
 import VodCard from '../components/vod-list/VodCard';
 import { getVodList } from '../lib/apis/vod/vod';
 import { Vod } from '../lib/types/streaming/vod';
+import { cookies } from 'next/headers';
 
 export default async function Page() {
-  const vodList: Vod[] = await getVodList();
+  const vodList = await getVodList(cookies().toString());
+  console.log(vodList.data.vodList);
 
   return (
     <div className={styles.container}>
@@ -18,7 +20,7 @@ export default async function Page() {
         </Link>
       </div>
       <div className={styles.vodList}>
-        {vodList.map((vod: Vod) => (
+        {vodList.data.vodList.map((vod: Vod) => (
           <VodCard key={vod.vodId} {...vod} />
         ))}
       </div>

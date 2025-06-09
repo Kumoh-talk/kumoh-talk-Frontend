@@ -1,4 +1,11 @@
-@import "mixin";
+@import 'mixin';
+
+.container {
+  position: relative;
+  max-height: 100%;
+  flex: 1;
+  overflow-y: auto;
+}
 
 .chattingList {
   flex: 1;
@@ -9,6 +16,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  position: relative;
+  text-wrap: nowrap;
 
   .chattingItem {
     .chattingUser {
@@ -29,5 +38,28 @@
 
   @include mobile-streaming {
     min-height: 0;
+  }
+}
+
+.scrollButton {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-blue-400);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: fit-content;
+  white-space: nowrap;
+  max-width: 80%;
+  overflow-x: hidden;
+
+  &:hover {
+    background-color: var(--color-blue-500);
   }
 }

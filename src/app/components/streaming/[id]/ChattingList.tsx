@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './chattingList.module.scss';
 import useSocketStore from '@/app/lib/stores/socketStore';
+import useChattingScroll from '@/app/lib/hooks/streaming/useChattingScroll';
 
 const nameColors = [
   '#0c80d3',
@@ -22,25 +23,21 @@ const nameColors = [
 ];
 
 export default function ChattingList() {
-  const { socketId, chatMessageList } = useSocketStore();
-  const chatListRef = useRef<HTMLDivElement>(null);
-  const [showScrollButton, setShowScrollButton] = useState(false);
-  const [isAtBottom, setIsAtBottom] = useState(true);
-
-  const checkIfAtBottom = () => {
-    if (chatListRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = chatListRef.current;
-      const isBottom = Math.abs(scrollHeight - clientHeight - scrollTop) < 1;
-      setIsAtBottom(isBottom);
-      setShowScrollButton(!isBottom);
-    }
-  };
+  const { chatMessageList } = useSocketStore();
+  const {
+    chatListRef,
+    isAtBottom,
+    showScrollButton,
+    setShowScrollButton,
+    checkIsAtBottom,
+    scrollToBottom,
+  } = useChattingScroll();
 
   useEffect(() => {
     const chatList = chatListRef.current;
     if (chatList) {
-      chatList.addEventListener('scroll', checkIfAtBottom);
-      return () => chatList.removeEventListener('scroll', checkIfAtBottom);
+      chatList.addEventListener('scroll', checkIsAtBottom);
+      return () => chatList.removeEventListener('scroll', checkIsAtBottom);
     }
   }, []);
 
@@ -50,15 +47,7 @@ export default function ChattingList() {
     } else if (chatMessageList.length > 0) {
       setShowScrollButton(true);
     }
-  }, [chatMessageList, isAtBottom]);
-
-  const scrollToBottom = () => {
-    if (chatListRef.current) {
-      chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
-      setIsAtBottom(true);
-      setShowScrollButton(false);
-    }
-  };
+  }, [chatListRef, chatMessageList, isAtBottom, setShowScrollButton]);
 
   return (
     <div className={styles.container}>

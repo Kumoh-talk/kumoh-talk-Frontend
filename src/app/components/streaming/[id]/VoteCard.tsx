@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import Button from '../../common/button/Button';
 import styles from './voteCard.module.scss';
 import clsx from 'clsx';
-import { ChevronUp, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface Props {
   vote: {
@@ -29,11 +29,23 @@ export default function VoteCard({
   handleOpen,
 }: Props) {
   const { name, multiple, select } = vote;
-  const [selectedVote, setSelectedVote] = useState<number | null>(null);
+  const [selectedVotes, setSelectedVotes] = useState<number[]>([]);
 
   const handleVote = (e: FormEvent) => {
     e.preventDefault();
-    console.log('Selected vote:', selectedVote);
+    console.log('Selected votes:', selectedVotes);
+  };
+
+  const handleVoteChange = (itemId: number) => {
+    if (multiple) {
+      setSelectedVotes((prev) =>
+        prev.includes(itemId)
+          ? prev.filter((id) => id !== itemId)
+          : [...prev, itemId]
+      );
+    } else {
+      setSelectedVotes([itemId]);
+    }
   };
 
   return (
@@ -55,10 +67,11 @@ export default function VoteCard({
               <div>
                 <input
                   className={styles.selectButton}
-                  type='radio'
+                  type={multiple ? 'checkbox' : 'radio'}
                   name='vote'
                   value={item.id}
-                  onChange={(e) => setSelectedVote(Number(e.target.value))}
+                  checked={selectedVotes.includes(item.id)}
+                  onChange={() => handleVoteChange(item.id)}
                 />
               </div>
               <div>

@@ -7,22 +7,6 @@ interface StompSlice {
   setStompClient: (client: CompatClient | null) => void;
   streamId: number;
   setStreamId: (number: number) => void;
-  socketId: number;
-  setSocketId: (number: number) => void;
-}
-
-interface ChatSlice {
-  chatMessageList: Chat[];
-  addChatMessage: (chatMessage: Chat) => void;
-}
-
-interface QnaSlice {
-  qnaList: Qna[];
-  setQnaList: (qnaList: Qna[]) => void;
-  addQna: (newQna: Qna) => void;
-  likeQna: (qnaId: number) => void;
-  myLikedQna: number[];
-  deleteQna: (qnaId: number) => void;
 }
 
 const createStompSlice: StateCreator<StompSlice, [], [], StompSlice> = (
@@ -32,9 +16,12 @@ const createStompSlice: StateCreator<StompSlice, [], [], StompSlice> = (
   setStompClient: (client) => set({ stompClient: client }),
   streamId: 0,
   setStreamId: (number) => set({ streamId: number }),
-  socketId: 0,
-  setSocketId: (number) => set({ socketId: number }),
 });
+
+interface ChatSlice {
+  chatMessageList: Chat[];
+  addChatMessage: (chatMessage: Chat) => void;
+}
 
 const createChatSlice: StateCreator<ChatSlice, [], [], ChatSlice> = (set) => ({
   chatMessageList: [],
@@ -43,6 +30,15 @@ const createChatSlice: StateCreator<ChatSlice, [], [], ChatSlice> = (set) => ({
       chatMessageList: [...state.chatMessageList, chatMessage],
     })),
 });
+
+interface QnaSlice {
+  qnaList: Qna[];
+  setQnaList: (qnaList: Qna[]) => void;
+  addQna: (newQna: Qna) => void;
+  likeQna: (qnaId: number) => void;
+  myLikedQna: number[];
+  deleteQna: (qnaId: number) => void;
+}
 
 const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
   qnaList: [],
@@ -63,6 +59,11 @@ const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
       qnaList: state.qnaList.filter((qna) => qna.qnaId !== qnaId),
     })),
 });
+
+interface VoteSlice {
+  getVoteResult: () => void;
+  selectVote: () => void;
+}
 
 interface SocketStore extends StompSlice, ChatSlice, QnaSlice {}
 

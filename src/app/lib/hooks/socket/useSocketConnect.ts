@@ -9,7 +9,7 @@ export interface useSocketConnectProps {
 }
 
 export default function useSocketConnect({ streamId }: useSocketConnectProps) {
-  const { setStompClient, setStreamId, setSocketId } = useSocketStore();
+  const { setStompClient, setStreamId } = useSocketStore();
 
   const onConnect = () => {
     const client = Stomp.over(function () {
@@ -22,7 +22,6 @@ export default function useSocketConnect({ streamId }: useSocketConnectProps) {
     client.connect({}, () => {
       setStompClient(client);
       setStreamId(Number(streamId));
-      setSocketId(Math.floor(Math.random() * 7));
     });
   };
 

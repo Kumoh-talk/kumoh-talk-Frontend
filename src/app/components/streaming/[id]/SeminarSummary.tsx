@@ -1,43 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './SeminarSummary.module.scss';
 import WikiCard from './WikiCard';
+import wikis from '@/app/lib/constants/wiki.json';
 
 interface Props {
   summary: string;
 }
 
-const wikis = [
-  {
-    wiki: 'JDBC',
-    general: '자바 프로그램이 데이터베이스와 쉽게 대화할 수 있게 도와주는 도구',
-    expert:
-      'Java Database Connectivity의 약자로 Java 기반 애플리케이션의 데이터를 데이터베이스에 저장 및 업데이트하거나, 데이터베이스에 저장된 데이터를 Java에서 사용할 수 있도록 하는 자바 API이다.',
-  },
-  {
-    wiki: 'SQL',
-    general:
-      '관계형 데이터베이스에서 데이터를 정의, 조작, 조회할 수 있게 해주는 표준화된 언어',
-    expert:
-      'Structured Query Language의 약자로, SELECT, INSERT, UPDATE, DELETE 등 다양한 쿼리문을 사용해 RDBMS에서 데이터 작업을 수행할 수 있는 표준 언어이다.',
-  },
-  {
-    wiki: 'JPA',
-    general:
-      '자바 객체와 관계형 데이터베이스 테이블 간의 매핑을 제공하는 자바 표준 ORM 사양',
-    expert:
-      'Java Persistence API의 약자로, 객체-관계 매핑(ORM) 프레임워크를 위한 인터페이스와 애노테이션을 정의한다. 엔티티의 생명 주기 관리, JPQL 쿼리, 영속성 컨텍스트 등을 통해 데이터베이스 연동을 추상화하여 생산성을 높인다.',
-  },
-  {
-    wiki: 'Spring',
-    general: '자바 애플리케이션 개발을 위한 경량 오픈소스 프레임워크',
-    expert:
-      '스프링 프레임워크는 DI/IoC 컨테이너, AOP, 트랜잭션 관리, MVC 웹 프레임워크 등의 모듈로 구성되어 있다. 자바 기반 엔터프라이즈 애플리케이션 개발 시 모듈 단위로 다양한 기능을 제공해 개발 생산성과 유지보수성을 향상시킨다.',
-  },
-];
-
 export default function SeminarSummary({ summary }: Props) {
   const [hoveredWiki, setHoveredWiki] = useState<string | null>(null);
   const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
+  const [cardPosition, setCardPosition] = useState({ x: 0, y: 0 });
 
   const highlightWikiTerms = (text: string) => {
     const parts = text.split(/(\w+)/);
@@ -78,6 +51,40 @@ export default function SeminarSummary({ summary }: Props) {
     }
   };
 
+  useEffect(() => {
+    if (hoveredWiki) {
+      const cardWidth = 180; // WikiCard의 너비
+      const cardHeight = 240; // WikiCard의 높이
+      const margin = 10; // 여백
+
+      // 화면 경계 체크 및 위치 조정
+      let x = hoverPosition.x - margin;
+      let y = hoverPosition.y - cardHeight - margin;
+
+      // 오른쪽 경계 체크
+      if (x + cardWidth > window.innerWidth) {
+        x = window.innerWidth - cardWidth - margin;
+      }
+
+      // 왼쪽 경계 체크
+      if (x < margin) {
+        x = margin;
+      }
+
+      // 위쪽 경계 체크
+      if (y < margin) {
+        y = hoverPosition.y + margin;
+      }
+
+      // 아래쪽 경계 체크
+      if (y + cardHeight > window.innerHeight) {
+        y = window.innerHeight - cardHeight - margin;
+      }
+
+      setCardPosition({ x, y });
+    }
+  }, [hoverPosition, hoveredWiki]);
+
   return (
     <div className={styles.summary}>
       <div className={styles.content}>{highlightWikiTerms(summary)}</div>
@@ -86,8 +93,8 @@ export default function SeminarSummary({ summary }: Props) {
           className={styles.wikiCardContainer}
           style={{
             position: 'fixed',
-            left: hoverPosition.x - 10,
-            top: hoverPosition.y - 230,
+            left: cardPosition.x,
+            top: cardPosition.y,
           }}
           onMouseLeave={handleMouseLeave}
         >

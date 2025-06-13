@@ -1,0 +1,13 @@
+.streamKey {
+  display: flex;
+
+  label {
+    border-bottom: 1px solid var(--color-gray-800);
+  }
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}

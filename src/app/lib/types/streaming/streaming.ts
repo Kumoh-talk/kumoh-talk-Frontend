@@ -23,12 +23,23 @@ export type Qna = {
 };
 
 type VoteSelect = {
-  id: number;
+  selectId: number;
   content: string;
 };
 
 export type Vote = {
+  voteId: number;
   title: string;
-  isMultiple: boolean;
+  multiple: boolean;
   selects: VoteSelect[];
+};
+
+type VoteCount = {
+  selectId: number;
+  count: number;
+};
+
+export type VoteResult = {
+  voteId: number;
+  voteCounts: VoteCount[];
 };

@@ -1,6 +1,6 @@
 import { CompatClient } from '@stomp/stompjs';
 import { create, StateCreator } from 'zustand';
-import { Chat, Qna } from '../types/streaming/streaming';
+import { Chat, Qna, Vote } from '../types/streaming/streaming';
 
 interface StompSlice {
   stompClient: CompatClient | null;
@@ -61,16 +61,32 @@ const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
 });
 
 interface VoteSlice {
+  vote: Vote;
+  getVote: () => void;
+  voteResult: [];
   getVoteResult: () => void;
   selectVote: () => void;
 }
 
-interface SocketStore extends StompSlice, ChatSlice, QnaSlice {}
+const createVoteSlice: StateCreator<VoteSlice, [], [], VoteSlice> = (set) => ({
+  vote: {
+    title: '',
+    isMultiple: false,
+    selects: [],
+  },
+  getVote: () => {},
+  voteResult: [],
+  getVoteResult: () => {},
+  selectVote: () => {},
+});
+
+interface SocketStore extends StompSlice, ChatSlice, QnaSlice, VoteSlice {}
 
 const useSocketStore = create<SocketStore>((...a) => ({
   ...createStompSlice(...a),
   ...createChatSlice(...a),
   ...createQnaSlice(...a),
+  ...createVoteSlice(...a),
 }));
 
 export default useSocketStore;

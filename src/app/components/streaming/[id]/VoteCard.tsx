@@ -5,16 +5,10 @@ import Button from '../../common/button/Button';
 import styles from './voteCard.module.scss';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
+import { Vote } from '@/app/lib/types/streaming/streaming';
 
 interface Props {
-  vote: {
-    name: string;
-    multiple: boolean;
-    select: {
-      id: number;
-      content: string;
-    }[];
-  };
+  vote: Vote;
   initialVote: boolean;
   isShow: boolean;
   handleClose: () => void;
@@ -28,7 +22,7 @@ export default function VoteCard({
   handleClose,
   handleOpen,
 }: Props) {
-  const { name, multiple, select } = vote;
+  const { title, isMultiple, selects } = vote;
   const [selectedVotes, setSelectedVotes] = useState<number[]>([]);
 
   const handleVote = (e: FormEvent) => {
@@ -37,7 +31,7 @@ export default function VoteCard({
   };
 
   const handleVoteChange = (itemId: number) => {
-    if (multiple) {
+    if (isMultiple) {
       setSelectedVotes((prev) =>
         prev.includes(itemId)
           ? prev.filter((id) => id !== itemId)
@@ -60,14 +54,14 @@ export default function VoteCard({
         </button>
       </div>
       <div className={styles.content}>
-        <h3>{name}</h3>
+        <h3>{title}</h3>
         <form className={styles.selectWrapper} onSubmit={handleVote}>
-          {select.map((item) => (
+          {selects.map((item) => (
             <div key={item.id} className={styles.select}>
               <div>
                 <input
                   className={styles.selectButton}
-                  type={multiple ? 'checkbox' : 'radio'}
+                  type={isMultiple ? 'checkbox' : 'radio'}
                   name='vote'
                   value={item.id}
                   checked={selectedVotes.includes(item.id)}

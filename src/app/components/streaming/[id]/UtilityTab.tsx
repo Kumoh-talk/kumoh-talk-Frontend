@@ -8,9 +8,9 @@ import VoteCard from './VoteCard';
 import { SideTabContext } from './SideTabProvider';
 
 const dummyVote = {
-  name: '몇 학년이신가요?',
-  multiple: false,
-  select: [
+  title: '몇 학년이신가요?',
+  isMultiple: false,
+  selects: [
     {
       id: 1,
       content: '1학년',

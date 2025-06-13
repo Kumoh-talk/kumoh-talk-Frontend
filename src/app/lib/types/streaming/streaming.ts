@@ -21,3 +21,14 @@ export type Qna = {
   likes: number;
   anonymous: boolean;
 };
+
+type VoteSelect = {
+  id: number;
+  content: string;
+};
+
+export type Vote = {
+  title: string;
+  isMultiple: boolean;
+  selects: VoteSelect[];
+};

@@ -22,7 +22,7 @@ export default function VoteCard({
   handleClose,
   handleOpen,
 }: Props) {
-  const { title, isMultiple, selects } = vote;
+  const { title, multiple, selects } = vote;
   const [selectedVotes, setSelectedVotes] = useState<number[]>([]);
 
   const handleVote = (e: FormEvent) => {
@@ -31,7 +31,7 @@ export default function VoteCard({
   };
 
   const handleVoteChange = (itemId: number) => {
-    if (isMultiple) {
+    if (multiple) {
       setSelectedVotes((prev) =>
         prev.includes(itemId)
           ? prev.filter((id) => id !== itemId)
@@ -57,15 +57,15 @@ export default function VoteCard({
         <h3>{title}</h3>
         <form className={styles.selectWrapper} onSubmit={handleVote}>
           {selects.map((item) => (
-            <div key={item.id} className={styles.select}>
+            <div key={item.selectId} className={styles.select}>
               <div>
                 <input
                   className={styles.selectButton}
-                  type={isMultiple ? 'checkbox' : 'radio'}
+                  type={multiple ? 'checkbox' : 'radio'}
                   name='vote'
-                  value={item.id}
-                  checked={selectedVotes.includes(item.id)}
-                  onChange={() => handleVoteChange(item.id)}
+                  value={item.selectId}
+                  checked={selectedVotes.includes(item.selectId)}
+                  onChange={() => handleVoteChange(item.selectId)}
                 />
               </div>
               <div>

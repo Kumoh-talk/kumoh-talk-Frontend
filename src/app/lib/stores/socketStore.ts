@@ -1,6 +1,6 @@
 import { CompatClient } from '@stomp/stompjs';
 import { create, StateCreator } from 'zustand';
-import { Chat, Qna, Vote } from '../types/streaming/streaming';
+import { Chat, Qna, Vote, VoteResult } from '../types/streaming/streaming';
 
 interface StompSlice {
   stompClient: CompatClient | null;
@@ -42,7 +42,7 @@ interface QnaSlice {
 
 const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
   qnaList: [],
-  setQnaList: (qnaList: Qna[]) => set(() => ({ qnaList: qnaList })),
+  setQnaList: (qnaList: Qna[]) => set(() => ({ qnaList })),
   addQna: (newQna: Qna) =>
     set((state) => ({ qnaList: [...state.qnaList, newQna] })),
   likeQna: (qnaId: number) =>
@@ -62,21 +62,28 @@ const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
 
 interface VoteSlice {
   vote: Vote;
-  getVote: () => void;
-  voteResult: [];
-  getVoteResult: () => void;
+  setVote: (vote: Vote) => void;
+  voteResult: VoteResult;
+  setVoteResult: (voteResult: VoteResult) => void;
   selectVote: () => void;
 }
 
 const createVoteSlice: StateCreator<VoteSlice, [], [], VoteSlice> = (set) => ({
   vote: {
+    voteId: 0,
     title: '',
-    isMultiple: false,
+    multiple: false,
     selects: [],
   },
-  getVote: () => {},
-  voteResult: [],
-  getVoteResult: () => {},
+  setVote: (vote) =>
+    set(() => ({
+      vote,
+    })),
+  voteResult: {
+    voteId: 0,
+    voteCounts: [],
+  },
+  setVoteResult: (voteResult) => set(() => ({ voteResult })),
   selectVote: () => {},
 });
 

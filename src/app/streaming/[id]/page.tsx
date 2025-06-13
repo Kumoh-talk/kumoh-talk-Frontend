@@ -24,20 +24,27 @@ export default async function Page({ params }: Props) {
   return (
     <div className={styles.container}>
       <SocketProvider paramId={id} />
-      <div className={styles.streamingWrapper}>
-        {/* <VideoStreaming /> */}
-        <div className={styles.streamingTitle}>JPA란무엇인가?</div>
-      </div>
-      <div className={styles.sideTapWrapper}>
-        <SideTabProvider>
+      <SideTabProvider>
+        <div className={styles.streamingWrapper}>
+          <VideoStreaming
+            camUrl={
+              'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
+            }
+            slideUrl={
+              'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
+            }
+          />
+          <div className={styles.streamingTitle}>JPA란무엇인가?</div>
+        </div>
+        <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>
             <SideTab tabs={['채팅', 'Q&A']} />
             <TabViewer userRole={userRole} />
             <ChattingInput accessToken={accessToken} userRole={userRole} />
             <UtilityTab />
           </div>
-        </SideTabProvider>
-      </div>
+        </div>
+      </SideTabProvider>
     </div>
   );
 }

@@ -17,7 +17,6 @@ export default function QnACard({
   qnaId,
   nickname,
   content,
-  time,
   likes,
   anonymous,
   accessToken,
@@ -63,7 +62,7 @@ export default function QnACard({
       <div className={styles.header}>
         <div className={styles.left}>
           <span className={styles.name}>{anonymous ? '익명' : nickname}</span>
-          <span className={styles.time}>{time}</span>
+          {/* <span className={styles.time}>{time}</span> */}
         </div>
         <div className={styles.right}>
           <div className={styles.likes}>

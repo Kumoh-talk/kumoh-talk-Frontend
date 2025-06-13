@@ -13,7 +13,8 @@ const useVoteSubscription = (props: useVoteSubscriptionProps) => {
   const getCurrentVoteSubscribeRef = useRef<StompSubscription | null>(null);
   const voteCloseAndResultSubscribeRef = useRef<StompSubscription | null>(null);
   const createVoteSubscribeRef = useRef<StompSubscription | null>(null);
-  const { stompClient, setVote, setVoteResult, selectVote } = useSocketStore();
+  const { stompClient, setVote, setIsVoteShow, setVoteResult } =
+    useSocketStore();
 
   useEffect(() => {
     if (streamId && stompClient) {
@@ -23,6 +24,7 @@ const useVoteSubscription = (props: useVoteSubscriptionProps) => {
         ),
         (message) => {
           setVote(JSON.parse(message.body).voteInfo);
+          setIsVoteShow(true);
         }
       );
 
@@ -46,6 +48,7 @@ const useVoteSubscription = (props: useVoteSubscriptionProps) => {
         END_POINTS.SUBSCRIBE.VOTE_CREATE(streamId),
         (message) => {
           setVote(JSON.parse(message.body).voteInfo);
+          setIsVoteShow(true);
         }
       );
 
@@ -73,7 +76,7 @@ const useVoteSubscription = (props: useVoteSubscriptionProps) => {
         createVoteSubscribeRef.current = null;
       }
     };
-  }, [streamId, stompClient, setVote, setVoteResult, selectVote]);
+  }, [streamId, stompClient, setVote, setVoteResult]);
 };
 
 export default useVoteSubscription;

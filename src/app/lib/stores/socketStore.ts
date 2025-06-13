@@ -63,9 +63,10 @@ const createQnaSlice: StateCreator<QnaSlice, [], [], QnaSlice> = (set) => ({
 interface VoteSlice {
   vote: Vote;
   setVote: (vote: Vote) => void;
+  isVoteShow: boolean;
+  setIsVoteShow: (isVoteShow: boolean) => void;
   voteResult: VoteResult;
   setVoteResult: (voteResult: VoteResult) => void;
-  selectVote: () => void;
 }
 
 const createVoteSlice: StateCreator<VoteSlice, [], [], VoteSlice> = (set) => ({
@@ -79,12 +80,13 @@ const createVoteSlice: StateCreator<VoteSlice, [], [], VoteSlice> = (set) => ({
     set(() => ({
       vote,
     })),
+  isVoteShow: false,
+  setIsVoteShow: (isVoteShow: boolean) => set(() => ({ isVoteShow })),
   voteResult: {
     voteId: 0,
     voteCounts: [],
   },
   setVoteResult: (voteResult) => set(() => ({ voteResult })),
-  selectVote: () => {},
 });
 
 interface SocketStore extends StompSlice, ChatSlice, QnaSlice, VoteSlice {}

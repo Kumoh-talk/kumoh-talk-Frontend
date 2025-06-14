@@ -41,7 +41,7 @@ export default async function Page({ params }: Props) {
             <SideTab tabs={['채팅', 'Q&A']} />
             <TabViewer accessToken={accessToken} userRole={userRole} />
             <ChattingInput accessToken={accessToken} userRole={userRole} />
-            <UtilityTab />
+            <UtilityTab accessToken={accessToken} streamId={id} />
           </div>
         </div>
       </SideTabProvider>

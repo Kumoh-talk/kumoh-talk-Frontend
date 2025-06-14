@@ -1,33 +1,50 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useTransition } from 'react';
 import Button from '../../common/button/Button';
 import styles from './voteCard.module.scss';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
 import { Vote } from '@/app/lib/types/streaming/streaming';
+import useSocketStore from '@/app/lib/stores/socketStore';
+import { END_POINTS } from '@/app/lib/constants/common/path';
 
 interface Props {
+  accessToken?: string;
+  streamId: string;
   vote: Vote;
-  initialVote: boolean;
   isShow: boolean;
   handleClose: () => void;
   handleOpen: () => void;
 }
 
 export default function VoteCard({
+  accessToken,
+  streamId,
   vote,
-  initialVote,
   isShow,
   handleClose,
   handleOpen,
 }: Props) {
-  const { title, multiple, selects } = vote;
+  const { voteId, title, multiple, selects } = vote;
   const [selectedVotes, setSelectedVotes] = useState<number[]>([]);
+  const [isPending, startTransition] = useTransition();
+  const { stompClient, isSelected, setIsSelected } = useSocketStore();
 
   const handleVote = (e: FormEvent) => {
     e.preventDefault();
-    console.log('Selected votes:', selectedVotes);
+    startTransition(() => {
+      stompClient?.send(
+        END_POINTS.PUBLISH.VOTE_SELECT(streamId, JSON.stringify(voteId)),
+        {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        JSON.stringify({
+          selects: selectedVotes,
+        })
+      );
+      setIsSelected(true);
+    });
   };
 
   const handleVoteChange = (itemId: number) => {
@@ -43,10 +60,7 @@ export default function VoteCard({
   };
 
   return (
-    <div
-      className={clsx(styles.container, isShow ? styles.show : styles.hide)}
-      style={{ display: initialVote ? 'none' : 'flex' }}
-    >
+    <div className={clsx(styles.container, isShow ? styles.show : styles.hide)}>
       <div className={styles.header}>
         <h2>투표</h2>
         <button onClick={isShow ? handleClose : handleOpen}>
@@ -66,6 +80,7 @@ export default function VoteCard({
                   value={item.selectId}
                   checked={selectedVotes.includes(item.selectId)}
                   onChange={() => handleVoteChange(item.selectId)}
+                  disabled={isPending || isSelected}
                 />
               </div>
               <div>
@@ -75,11 +90,12 @@ export default function VoteCard({
             </div>
           ))}
           <div className={styles.actions}>
-            <Button bgColor='bg-white' color='text-black-85'>
+            <Button
+              bgColor='bg-white'
+              color='text-black-85'
+              disabled={isPending || isSelected}
+            >
               선택하기
-            </Button>
-            <Button bgColor='bg-white' color='text-black-85'>
-              결과보기
             </Button>
           </div>
         </form>

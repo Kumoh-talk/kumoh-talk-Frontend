@@ -6,46 +6,30 @@ import SeminarSummaryPopup from './SeminarSummaryPopup';
 import { useContext, useState } from 'react';
 import VoteCard from './VoteCard';
 import { SideTabContext } from './SideTabProvider';
+import useSocketStore from '@/app/lib/stores/socketStore';
+import VoteResultCard from './VoteResultCard';
 
-const dummyVote = {
-  voteId: 0,
-  title: '몇 학년이신가요?',
-  multiple: false,
-  selects: [
-    {
-      selectId: 1,
-      content: '1학년',
-    },
-    {
-      selectId: 2,
-      content: '2학년',
-    },
-    {
-      selectId: 3,
-      content: '3학년',
-    },
-    {
-      selectId: 4,
-      content: '4학년',
-    },
-  ],
-};
+interface Props {
+  accessToken?: string;
+  streamId: string;
+}
 
-export default function UtilityTab() {
+export default function UtilityTab({ accessToken, streamId }: Props) {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isVoteShow, setIsVoteShow] = useState(true);
+  const [isVoteCardShow, setIsVoteCardShow] = useState(true);
   const [initialVote, setInitialVote] = useState(true);
   const { setIsSubVideoVisible } = useContext(SideTabContext);
+  const { vote, isVoteShow, isVoteFinished, setIsVoteShow } = useSocketStore();
 
   const handleVoteClose = () => {
-    setIsVoteShow(false);
+    setIsVoteCardShow(false);
   };
 
   const handleVoteOpen = () => {
     if (initialVote) {
       setInitialVote(false);
     }
-    setIsVoteShow(true);
+    setIsVoteCardShow(true);
   };
 
   const handleSubVideoToggle = () => {
@@ -72,18 +56,30 @@ export default function UtilityTab() {
           <Video />
         </button>
       </div>
-      <div>
-        <button onClick={handleVoteOpen} className={styles.iconButton}>
-          <Vote />
-        </button>
-        <VoteCard
-          vote={dummyVote}
-          initialVote={initialVote}
-          isShow={isVoteShow}
-          handleClose={handleVoteClose}
-          handleOpen={handleVoteOpen}
-        />
-      </div>
+      {isVoteShow ? (
+        <div>
+          <button onClick={handleVoteOpen} className={styles.iconButton}>
+            <Vote />
+          </button>
+          {isVoteFinished ? (
+            <VoteResultCard
+              vote={vote}
+              isShow={isVoteCardShow}
+              handleClose={handleVoteClose}
+              handleOpen={handleVoteOpen}
+            />
+          ) : (
+            <VoteCard
+              accessToken={accessToken}
+              streamId={streamId}
+              vote={vote}
+              isShow={isVoteCardShow}
+              handleClose={handleVoteClose}
+              handleOpen={handleVoteOpen}
+            />
+          )}
+        </div>
+      ) : null}
     </div>
   );
 }

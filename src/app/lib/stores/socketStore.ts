@@ -65,6 +65,10 @@ interface VoteSlice {
   setVote: (vote: Vote) => void;
   isVoteShow: boolean;
   setIsVoteShow: (isVoteShow: boolean) => void;
+  isSelected: boolean;
+  setIsSelected: (isSelected: boolean) => void;
+  isVoteFinished: boolean;
+  setIsVoteFinished: (isFinished: boolean) => void;
   voteResult: VoteResult;
   setVoteResult: (voteResult: VoteResult) => void;
 }
@@ -81,7 +85,12 @@ const createVoteSlice: StateCreator<VoteSlice, [], [], VoteSlice> = (set) => ({
       vote,
     })),
   isVoteShow: false,
-  setIsVoteShow: (isVoteShow: boolean) => set(() => ({ isVoteShow })),
+  setIsVoteShow: (isVoteShow) => set(() => ({ isVoteShow })),
+  isSelected: false,
+  setIsSelected: (isSelected) => set(() => ({ isSelected })),
+  isVoteFinished: true,
+  setIsVoteFinished: (isFinished) =>
+    set(() => ({ isVoteFinished: isFinished })),
   voteResult: {
     voteId: 0,
     voteCounts: [],

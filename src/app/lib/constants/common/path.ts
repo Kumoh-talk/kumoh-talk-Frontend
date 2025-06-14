@@ -24,6 +24,7 @@ export const END_POINTS = {
     VOTE_CLOSE_AND_RESULT: (streamId: string) =>
       `/streaming/vote/${streamId}/close`,
     VOTE_CREATE: (streamId: string) => `/streaming/vote/${streamId}/add-vote`,
+    CAPTION: '/streaming/caption',
     ERROR: (sessionId: string) => `/user/${sessionId}/queue/errors`,
   },
 };

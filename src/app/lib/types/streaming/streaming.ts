@@ -1,8 +1,7 @@
 export type Streaming = {
-  streamingId: number;
+  streamId: number;
   title: string;
-  subTitle: string;
-  presenter: string;
+  thumbnailUrl: string;
   viewers: number;
 };
 
@@ -42,4 +41,9 @@ type VoteCount = {
 export type VoteResult = {
   voteId: number;
   voteCounts: VoteCount[];
+};
+
+export type Caption = {
+  duration: number;
+  text: string;
 };

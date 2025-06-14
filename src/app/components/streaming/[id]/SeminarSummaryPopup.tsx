@@ -7,13 +7,11 @@ import SeminarSummary from './SeminarSummary';
 interface SeminarSummaryPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  content: string;
 }
 
 export default function SeminarSummaryPopup({
   isOpen,
   onClose,
-  content,
 }: SeminarSummaryPopupProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -33,7 +31,7 @@ export default function SeminarSummaryPopup({
           </button>
         </div>
         <div className={styles.content}>
-          <SeminarSummary summary={content} />
+          <SeminarSummary />
         </div>
       </div>
     </div>

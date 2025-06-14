@@ -119,12 +119,25 @@ const createCaptionSlice: StateCreator<CaptionSlice, [], [], CaptionSlice> = (
   setCaption: (caption) => set(() => ({ caption })),
 });
 
+interface SummarySlice {
+  summary: string;
+  setSummary: (summary: string) => void;
+}
+
+const createSummarySlice: StateCreator<SummarySlice, [], [], SummarySlice> = (
+  set
+) => ({
+  summary: '',
+  setSummary: (summary) => set(() => ({ summary })),
+});
+
 interface SocketStore
   extends StompSlice,
     ChatSlice,
     QnaSlice,
     VoteSlice,
-    CaptionSlice {}
+    CaptionSlice,
+    SummarySlice {}
 
 const useSocketStore = create<SocketStore>((...a) => ({
   ...createStompSlice(...a),
@@ -132,6 +145,7 @@ const useSocketStore = create<SocketStore>((...a) => ({
   ...createQnaSlice(...a),
   ...createVoteSlice(...a),
   ...createCaptionSlice(...a),
+  ...createSummarySlice(...a),
 }));
 
 export default useSocketStore;

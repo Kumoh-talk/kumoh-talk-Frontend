@@ -1,11 +1,11 @@
 import styles from './page.module.scss';
 import SideTabProvider from '@/app/components/streaming/[id]/SideTabProvider';
-import VideoStreaming from '@/app/components/streaming/[id]/VideoStreaming';
-import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
 import { getVodDetail } from '@/app/lib/apis/vod/vod';
 import BookmarkSection from '@/app/components/vod-list/[id]/BookmarkSection';
 import { VodDetail } from '@/app/lib/types/streaming/vod';
 import VideoVod from '@/app/components/vod-list/[id]/VideoVod';
+import VodUtilityTab from '@/app/components/vod-list/[id]/VodUtilityTab';
+import { notFound } from 'next/navigation';
 
 const bookmarkList = [
   {
@@ -35,22 +35,26 @@ export default async function Page({ params }: Props) {
 
   const vodDetail = (await getVodDetail(id)) as VodDetail;
 
+  // if (!vodDetail.camUrl) {
+  //   return notFound();
+  // }
+
   return (
     <div className={styles.container}>
       <SideTabProvider>
         <div className={styles.streamingWrapper}>
-          <VideoVod
+          {/* <VideoVod
             camUrl={vodDetail.camUrl}
             camTsQuery={vodDetail.camTsQuery}
             slideUrl={vodDetail.slideUrl}
             slideTsQuery={vodDetail.slideTsQuery}
-          />
-          <div className={styles.streamingTitle}>JPA란 무엇인가?</div>
+          /> */}
+          <div className={styles.streamingTitle}>{vodDetail.title}</div>
         </div>
         <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>
             <BookmarkSection bookmarkList={bookmarkList} />
-            <UtilityTab />
+            <VodUtilityTab summary={'요약'} />
           </div>
         </div>
       </SideTabProvider>

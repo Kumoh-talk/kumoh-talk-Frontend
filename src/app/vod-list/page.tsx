@@ -5,10 +5,19 @@ import VodCard from '../components/vod-list/VodCard';
 import { getVodList } from '../lib/apis/vod/vod';
 import { Vod } from '../lib/types/streaming/vod';
 import { cookies } from 'next/headers';
+import { parseJwt } from '../lib/apis/auth';
+import { UserRoleValidator } from '../lib/apis/userRoleValidator';
+import { notFound } from 'next/navigation';
 
 export default async function Page() {
   const vodList = await getVodList(cookies().toString());
-  console.log(vodList.data.vodList);
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
+
+  if (!UserRoleValidator.user(userRole)) {
+    notFound();
+  }
 
   return (
     <div className={styles.container}>

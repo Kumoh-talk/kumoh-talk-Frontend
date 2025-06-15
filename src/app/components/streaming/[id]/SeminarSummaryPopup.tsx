@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import styles from './SeminarSummaryPopup.module.scss';
+import styles from './seminarSummaryPopup.module.scss';
 import SeminarSummary from './SeminarSummary';
 
 interface SeminarSummaryPopupProps {

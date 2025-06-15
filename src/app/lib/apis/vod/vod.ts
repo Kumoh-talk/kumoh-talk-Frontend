@@ -42,3 +42,24 @@ export const getVodDetail = async (vodId: string) => {
     credentials: 'include',
   });
 };
+
+export const postBookmark = async (
+  title: string,
+  time: string,
+  cookie?: string
+) => {
+  return _fetch(
+    `${baseUrl}/북마크 등록 경로`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(cookie ? { Cookie: cookie ?? '' } : {}),
+      },
+    },
+    {
+      title,
+      time,
+    }
+  );
+};

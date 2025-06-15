@@ -8,10 +8,11 @@ import AddBookmarkField from './AddBookmarkField';
 import { Bookmark } from '@/app/lib/types/streaming/vod';
 
 interface Props {
+  vodId: string;
   bookmarkList: Bookmark[];
 }
 
-export default function BookmarkSection({ bookmarkList }: Props) {
+export default function BookmarkSection({ vodId, bookmarkList }: Props) {
   const [isAddBookmark, setAddBookmark] = useState(false);
 
   return (
@@ -35,7 +36,7 @@ export default function BookmarkSection({ bookmarkList }: Props) {
       </div>
       {isAddBookmark && (
         <div className={styles.addBookmarkFieldWrapper}>
-          <AddBookmarkField curTime='00:00:00' />
+          <AddBookmarkField vodId={vodId} curTime='00:00:00' />
         </div>
       )}
       <div className={styles.bookmarkList}>

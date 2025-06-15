@@ -26,7 +26,6 @@ interface Props {
 export default function QnASection({ accessToken, userRole }: Props) {
   const { stompClient, streamId, qnaList } = useSocketStore();
   const formState = useForm({ defaultValues });
-  const userRoleValidator = new UserRoleValidator();
 
   const onSubmit = async (data: addQnaRequestDto) => {
     if (!data.content) {
@@ -34,11 +33,11 @@ export default function QnASection({ accessToken, userRole }: Props) {
     }
 
     if (stompClient) {
-      if (!userRoleValidator.guest(userRole)) {
+      if (!UserRoleValidator.guest(userRole)) {
         alert('로그인 후 이용가능합니다.');
         return;
       }
-      if (!userRoleValidator.user(userRole)) {
+      if (!UserRoleValidator.user(userRole)) {
         alert('권한이 없습니다.');
         return;
       }

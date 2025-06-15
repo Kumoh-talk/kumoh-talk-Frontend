@@ -5,6 +5,13 @@ export type Streaming = {
   viewers: number;
 };
 
+export type streamingDetail = {
+  streamId: number;
+  title: string;
+  camUrl: string;
+  slideUrl: string;
+};
+
 export type Chat = {
   chatId: number;
   userId: number;

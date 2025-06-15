@@ -7,27 +7,27 @@ const authorityNumber = {
 };
 
 export class UserRoleValidator {
-  guest(role: string) {
+  static guest(role: string) {
     return this.validationAuthority(role, authorityNumber.ROLE_GUEST);
   }
 
-  user(role: string) {
+  static user(role: string) {
     return this.validationAuthority(role, authorityNumber.ROLE_USER);
   }
 
-  activeUser(role: string) {
+  static activeUser(role: string) {
     return this.validationAuthority(role, authorityNumber.ROLE_ACTIVE_USER);
   }
 
-  seminarWriter(role: string) {
+  static seminarWriter(role: string) {
     return this.validationAuthority(role, authorityNumber.ROLE_SEMINAR_WRITER);
   }
 
-  admin(role: string) {
+  static admin(role: string) {
     return this.validationAuthority(role, authorityNumber.ROLE_ADMIN);
   }
 
-  private validationAuthority(role: string, authorityNumber: number) {
+  private static validationAuthority(role: string, authorityNumber: number) {
     if (this.getAuthorityNumber(role) < authorityNumber) {
       return false;
     }
@@ -35,7 +35,7 @@ export class UserRoleValidator {
     return true;
   }
 
-  private getAuthorityNumber(role: string) {
+  private static getAuthorityNumber(role: string) {
     switch (role) {
       case 'ROLE_GUEST':
         return 1;

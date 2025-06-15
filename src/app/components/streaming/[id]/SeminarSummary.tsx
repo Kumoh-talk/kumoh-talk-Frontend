@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styles from './SeminarSummary.module.scss';
+import styles from './seminarSummary.module.scss';
 import WikiCard from './WikiCard';
 import wikis from '@/app/lib/constants/wiki.json';
 import useSocketStore from '@/app/lib/stores/socketStore';

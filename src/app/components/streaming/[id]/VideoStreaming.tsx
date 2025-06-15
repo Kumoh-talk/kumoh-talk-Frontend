@@ -1,25 +1,21 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import styles from './videoStreaming.module.scss';
 import Hls, { type Level } from 'hls.js';
 import Caption from './Caption';
 import SubVideoStreaming from './SubVideoStreaming';
+import { SideTabContext } from './SideTabProvider';
 
 interface Props {
   camUrl: string;
   slideUrl: string;
-  subVideoOpacity?: number;
 }
 
-export default function VideoStreaming({
-  camUrl,
-  slideUrl,
-  subVideoOpacity = 1,
-}: Props) {
+export default function VideoStreaming({ camUrl, slideUrl }: Props) {
   const [mainScreenUrl, setMainScreenUrl] = useState(slideUrl);
   const [subScreenUrl, setSubScreenUrl] = useState(camUrl);
-
+  const { isSubVideoVisible } = useContext(SideTabContext);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -60,13 +56,14 @@ export default function VideoStreaming({
     <div className={styles.streamingVideo}>
       <div className={styles.overlay}>
         <div className={styles.top}>
-          <SubVideoStreaming
-            mainScreenUrl={mainScreenUrl}
-            subScreenUrl={subScreenUrl}
-            setMainScreenUrl={setMainScreenUrl}
-            setSubScreenUrl={setSubScreenUrl}
-            style={{ opacity: subVideoOpacity }}
-          />
+          {isSubVideoVisible && (
+            <SubVideoStreaming
+              mainScreenUrl={mainScreenUrl}
+              subScreenUrl={subScreenUrl}
+              setMainScreenUrl={setMainScreenUrl}
+              setSubScreenUrl={setSubScreenUrl}
+            />
+          )}
         </div>
         <Caption />
       </div>

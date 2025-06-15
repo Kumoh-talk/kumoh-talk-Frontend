@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import styles from './SeminarSummary.module.scss';
-import WikiCard from './WikiCard';
+import styles from './vodSummary.module.scss';
 import wikis from '@/app/lib/constants/wiki.json';
-import useSocketStore from '@/app/lib/stores/socketStore';
+import WikiCard from '../../streaming/[id]/WikiCard';
 
-export default function SeminarSummary() {
+interface Props {
+  summary: string;
+}
+
+export default function VodSummary({ summary }: Props) {
   const [hoveredWiki, setHoveredWiki] = useState<string | null>(null);
   const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
   const [cardPosition, setCardPosition] = useState({ x: 0, y: 0 });
-  const { summary } = useSocketStore();
 
   const highlightWikiTerms = (text: string) => {
     const parts = text.split(/(\w+)/);

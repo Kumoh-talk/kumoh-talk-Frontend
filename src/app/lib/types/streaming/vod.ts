@@ -7,6 +7,7 @@ export type Vod = {
 };
 
 export type VodDetail = {
+  title: string;
   slideUrl: string;
   slideTsQuery: string;
   camUrl: string;

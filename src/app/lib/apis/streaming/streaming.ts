@@ -21,23 +21,23 @@ const _fetch = async (
   }
 };
 
-export const getVodList = async (cookie?: string) => {
-  return _fetch(`${baseUrl}/vod`, {
+export const getStreamingList = async (cookie?: string) => {
+  return _fetch(`${baseUrl}/stream/list`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       ...(cookie ? { Cookie: cookie ?? '' } : {}),
     },
-    next: { revalidate: 30 },
     credentials: 'include',
   });
 };
 
-export const getVodDetail = async (vodId: string) => {
-  return _fetch(`${baseUrl}/vod/${vodId}`, {
+export const getStreamingDetail = async (streamId: string, cookie?: string) => {
+  return _fetch(`${baseUrl}/stream/${streamId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...(cookie ? { Cookie: cookie ?? '' } : {}),
     },
     credentials: 'include',
   });

@@ -24,7 +24,7 @@ const useQnaSubscription = (props: useChatSubscriptionProps) => {
           stompClient.ws._transport.url.split('/')[5]
         ),
         (message) => {
-          setQnaList(JSON.parse(message.body));
+          setQnaList(JSON.parse(message.body).qnaInfoList);
         }
       );
 

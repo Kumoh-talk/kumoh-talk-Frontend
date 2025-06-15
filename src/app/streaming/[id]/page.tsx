@@ -8,6 +8,9 @@ import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
 import SocketProvider from '@/app/components/streaming/[id]/SocketProvider';
 import { cookies } from 'next/headers';
 import { parseJwt } from '@/app/lib/apis/auth';
+import { getStreamingDetail } from '@/app/lib/apis/streaming/streaming';
+import { streamingDetail } from '@/app/lib/types/streaming/streaming';
+import { notFound } from 'next/navigation';
 
 interface Props {
   params: {
@@ -20,24 +23,39 @@ export default async function Page({ params }: Props) {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
   const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
+  const streamDetail = (await getStreamingDetail(
+    id,
+    cookieStore.toString()
+  )) as streamingDetail;
+
+  // if (!streamDetail.camUrl) {
+  //   notFound();
+  // }
 
   return (
     <div className={styles.container}>
       <SocketProvider paramId={id} />
-      <div className={styles.streamingWrapper}>
-        {/* <VideoStreaming /> */}
-        <div className={styles.streamingTitle}>JPA란무엇인가?</div>
-      </div>
-      <div className={styles.sideTapWrapper}>
-        <SideTabProvider>
+      <SideTabProvider>
+        <div className={styles.streamingWrapper}>
+          <VideoStreaming
+            camUrl={
+              'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
+            }
+            slideUrl={
+              'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
+            }
+          />
+          <div className={styles.streamingTitle}>{streamDetail.title}</div>
+        </div>
+        <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>
             <SideTab tabs={['채팅', 'Q&A']} />
-            <TabViewer userRole={userRole} />
+            <TabViewer accessToken={accessToken} userRole={userRole} />
             <ChattingInput accessToken={accessToken} userRole={userRole} />
-            <UtilityTab />
+            <UtilityTab accessToken={accessToken} streamId={id} />
           </div>
-        </SideTabProvider>
-      </div>
+        </div>
+      </SideTabProvider>
     </div>
   );
 }

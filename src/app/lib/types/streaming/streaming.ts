@@ -1,9 +1,15 @@
 export type Streaming = {
-  streamingId: number;
+  streamId: number;
   title: string;
-  subTitle: string;
-  presenter: string;
+  thumbnailUrl: string;
   viewers: number;
+};
+
+export type streamingDetail = {
+  streamId: number;
+  title: string;
+  camUrl: string;
+  slideUrl: string;
 };
 
 export type Chat = {
@@ -20,4 +26,31 @@ export type Qna = {
   content: string;
   likes: number;
   anonymous: boolean;
+};
+
+type VoteSelect = {
+  selectId: number;
+  content: string;
+};
+
+export type Vote = {
+  voteId: number;
+  title: string;
+  multiple: boolean;
+  selects: VoteSelect[];
+};
+
+type VoteCount = {
+  selectId: number;
+  count: number;
+};
+
+export type VoteResult = {
+  voteId: number;
+  voteCounts: VoteCount[];
+};
+
+export type Caption = {
+  duration: number;
+  text: string;
 };

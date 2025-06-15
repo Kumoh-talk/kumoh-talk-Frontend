@@ -1,6 +1,7 @@
-import { MouseEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './chattingList.module.scss';
 import useSocketStore from '@/app/lib/stores/socketStore';
+import useChattingScroll from '@/app/lib/hooks/streaming/useChattingScroll';
 
 const nameColors = [
   '#0c80d3',
@@ -22,21 +23,55 @@ const nameColors = [
 ];
 
 export default function ChattingList() {
-  const { socketId, chatMessageList } = useSocketStore();
+  const { chatMessageList } = useSocketStore();
+  const {
+    chatListRef,
+    isAtBottom,
+    showScrollButton,
+    setShowScrollButton,
+    checkIsAtBottom,
+    scrollToBottom,
+  } = useChattingScroll();
+
+  useEffect(() => {
+    const chatList = chatListRef.current;
+    if (chatList) {
+      chatList.addEventListener('scroll', checkIsAtBottom);
+      return () => chatList.removeEventListener('scroll', checkIsAtBottom);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (chatListRef.current && isAtBottom) {
+      chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
+    } else if (chatMessageList.length > 0) {
+      setShowScrollButton(true);
+    }
+  }, [chatListRef, chatMessageList, isAtBottom, setShowScrollButton]);
 
   return (
-    <div className={styles.chattingList}>
-      {chatMessageList.map((chat) => (
-        <div key={chat.chatId} className={styles.chattingItem}>
-          <span
-            className={styles.chattingUser}
-            style={{ color: nameColors[socketId % nameColors.length] }}
-          >
-            {chat.nickname}: &nbsp;
-          </span>
-          <span className={styles.chattingContent}>{chat.content}</span>
+    <div className={styles.container}>
+      <div className={styles.chattingList} ref={chatListRef}>
+        {chatMessageList.map((chat) => (
+          <div key={chat.chatId} className={styles.chattingItem}>
+            <span
+              className={styles.chattingUser}
+              style={{ color: nameColors[chat.userId % nameColors.length] }}
+            >
+              {chat.nickname}: &nbsp;
+            </span>
+            <span className={styles.chattingContent}>{chat.content}</span>
+          </div>
+        ))}
+      </div>
+      {showScrollButton && (
+        <div>
+          <button className={styles.scrollButton} onClick={scrollToBottom}>
+            {chatMessageList.at(-1)?.nickname}:{' '}
+            {chatMessageList.at(-1)?.content}
+          </button>
         </div>
-      ))}
+      )}
     </div>
   );
 }

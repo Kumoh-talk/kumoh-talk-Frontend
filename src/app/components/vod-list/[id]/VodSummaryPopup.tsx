@@ -1,18 +1,20 @@
 'use client';
 
 import React, { useRef } from 'react';
-import styles from './SeminarSummaryPopup.module.scss';
-import SeminarSummary from './SeminarSummary';
+import styles from './vodSummaryPopup.module.scss';
+import VodSummary from './VodSummary';
 
-interface SeminarSummaryPopupProps {
+interface VodSummaryPopupProps {
   isOpen: boolean;
   onClose: () => void;
+  summary: string;
 }
 
-export default function SeminarSummaryPopup({
+export default function VodSummaryPopup({
   isOpen,
   onClose,
-}: SeminarSummaryPopupProps) {
+  summary,
+}: VodSummaryPopupProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   if (!isOpen) return null;
@@ -31,7 +33,7 @@ export default function SeminarSummaryPopup({
           </button>
         </div>
         <div className={styles.content}>
-          <SeminarSummary />
+          <VodSummary summary={summary} />
         </div>
       </div>
     </div>

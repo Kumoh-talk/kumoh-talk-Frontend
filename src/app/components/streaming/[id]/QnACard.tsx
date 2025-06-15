@@ -17,20 +17,18 @@ export default function QnACard({
   qnaId,
   nickname,
   content,
-  time,
   likes,
   anonymous,
   accessToken,
   userRole,
 }: Props) {
   const { stompClient, streamId, myLikedQna } = useSocketStore();
-  const userRoleValidator = new UserRoleValidator();
 
   const isDisabled = myLikedQna.includes(qnaId);
 
   const handleThumbsUp = (qnaId: number) => {
     if (stompClient) {
-      if (!userRoleValidator.guest(userRole)) {
+      if (!UserRoleValidator.guest(userRole)) {
         alert('로그인 후 이용가능합니다.');
         return;
       }
@@ -45,7 +43,7 @@ export default function QnACard({
 
   const handleClose = (qnaId: number) => {
     if (stompClient) {
-      if (!userRoleValidator.admin(userRole)) {
+      if (!UserRoleValidator.admin(userRole)) {
         alert('어드민 권한이 있어야 이용가능합니다.');
         return;
       }
@@ -63,7 +61,7 @@ export default function QnACard({
       <div className={styles.header}>
         <div className={styles.left}>
           <span className={styles.name}>{anonymous ? '익명' : nickname}</span>
-          <span className={styles.time}>{time}</span>
+          {/* <span className={styles.time}>{time}</span> */}
         </div>
         <div className={styles.right}>
           <div className={styles.likes}>
@@ -76,7 +74,7 @@ export default function QnACard({
             </button>
             {likes}
           </div>
-          {userRoleValidator.admin(userRole) ? (
+          {UserRoleValidator.admin(userRole) ? (
             <button
               className={clsx(styles.iconButton, styles.close)}
               onClick={() => handleClose(qnaId)}

@@ -4,9 +4,20 @@ import PageMoreSvg from '../assets/svg/PageMoreSvg';
 import VodCard from '../components/vod-list/VodCard';
 import { getVodList } from '../lib/apis/vod/vod';
 import { Vod } from '../lib/types/streaming/vod';
+import { cookies } from 'next/headers';
+import { parseJwt } from '../lib/apis/auth';
+import { UserRoleValidator } from '../lib/apis/userRoleValidator';
+import { notFound } from 'next/navigation';
 
 export default async function Page() {
-  const vodList: Vod[] = await getVodList();
+  const vodList = await getVodList(cookies().toString());
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
+
+  if (!UserRoleValidator.user(userRole)) {
+    notFound();
+  }
 
   return (
     <div className={styles.container}>
@@ -18,7 +29,7 @@ export default async function Page() {
         </Link>
       </div>
       <div className={styles.vodList}>
-        {vodList.map((vod: Vod) => (
+        {vodList.data.vodList.map((vod: Vod) => (
           <VodCard key={vod.vodId} {...vod} />
         ))}
       </div>

@@ -1,68 +1,26 @@
 'use client';
 
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useContext,
-  useRef,
-  useState,
-  useTransition,
-} from 'react';
+import { useContext } from 'react';
 import styles from './chattingInput.module.scss';
 import { SideTabContext } from './SideTabProvider';
 import { Send } from 'lucide-react';
-import useSocketStore from '@/app/lib/stores/socketStore';
-import { END_POINTS } from '@/app/lib/constants/common/path';
-import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
+import useChattingInput from '@/app/lib/hooks/streaming/useChattingInput';
 
 interface Props {
-  accessToken?: string;
   userRole: string;
+  accessToken?: string;
 }
 
-export default function ChattingInput({ accessToken, userRole }: Props) {
-  const chattingInputRef = useRef<HTMLInputElement | null>(null);
+export default function ChattingInput({ userRole, accessToken }: Props) {
   const { tab } = useContext(SideTabContext);
-  const [content, setContent] = useState('');
-  const [isPending, startTransition] = useTransition();
-  const { stompClient, streamId } = useSocketStore();
-  const userRoleValidator = new UserRoleValidator();
-
-  const handleChatting = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (!userRoleValidator.guest(userRole)) {
-      alert('로그인 후 이용가능합니다.');
-      return;
-    }
-    if (!userRoleValidator.user(userRole)) {
-      alert('권한이 없습니다.');
-      return;
-    }
-    setContent(e.target.value);
-  };
-
-  const handleChattingSubmit = () => {
-    if (stompClient) {
-      startTransition(() => {
-        stompClient.send(
-          END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
-          {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          JSON.stringify({
-            content,
-          })
-        );
-        setContent('');
-        chattingInputRef.current?.focus();
-      });
-    }
-  };
-
-  const onKeyDownEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleChattingSubmit();
-    }
-  };
+  const {
+    chattingInputRef,
+    content,
+    handleChatting,
+    handleChattingSubmit,
+    onKeyDownEnter,
+    isPending,
+  } = useChattingInput(userRole, accessToken);
 
   return (
     <>

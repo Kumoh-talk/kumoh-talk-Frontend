@@ -70,4 +70,7 @@
 
 .content {
   @include title3;
+  max-height: 120px;
+  overflow-y: auto;
+  scroll-behavior: contain;
 }

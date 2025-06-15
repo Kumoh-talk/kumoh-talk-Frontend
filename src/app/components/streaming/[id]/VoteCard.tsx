@@ -8,6 +8,8 @@ import { X } from 'lucide-react';
 import { Vote } from '@/app/lib/types/streaming/streaming';
 import useSocketStore from '@/app/lib/stores/socketStore';
 import { END_POINTS } from '@/app/lib/constants/common/path';
+import { parseJwt } from '@/app/lib/apis/auth';
+import { UserRoleValidator } from '@/app/lib/apis/userRoleValidator';
 
 interface Props {
   accessToken?: string;
@@ -31,11 +33,22 @@ export default function VoteCard({
   const [isPending, startTransition] = useTransition();
   const { stompClient, setLastSend, isSelected, setIsSelected } =
     useSocketStore();
+  const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
 
   const handleVote = (e: FormEvent) => {
     e.preventDefault();
 
     if (!selectedVotes.length) {
+      return;
+    }
+
+    if (!UserRoleValidator.guest(userRole)) {
+      alert('로그인 후 이용가능합니다.');
+      return;
+    }
+
+    if (!UserRoleValidator.user(userRole)) {
+      alert('권한이 없습니다.');
       return;
     }
 

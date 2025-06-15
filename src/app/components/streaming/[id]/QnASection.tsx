@@ -24,7 +24,7 @@ interface Props {
 }
 
 export default function QnASection({ accessToken, userRole }: Props) {
-  const { stompClient, streamId, qnaList } = useSocketStore();
+  const { stompClient, streamId, setLastSend, qnaList } = useSocketStore();
   const formState = useForm({ defaultValues });
 
   const onSubmit = async (data: addQnaRequestDto) => {
@@ -44,6 +44,10 @@ export default function QnASection({ accessToken, userRole }: Props) {
       const newQna = {
         ...data,
       };
+      setLastSend({
+        destination: END_POINTS.PUBLISH.CREATE_QNA(JSON.stringify(streamId)),
+        body: JSON.stringify(newQna),
+      });
       stompClient.send(
         END_POINTS.PUBLISH.CREATE_QNA(JSON.stringify(streamId)),
         {

@@ -9,15 +9,21 @@ import useVoteSubscription from '@/app/lib/hooks/socket/useVoteSubscription';
 
 interface Props {
   paramId: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
-export default function SocketProvider({ paramId }: Props) {
+export default function SocketProvider({
+  paramId,
+  accessToken,
+  refreshToken,
+}: Props) {
   useSocketConnect({ streamId: paramId });
   useChatSubscription({ chatId: paramId });
   useQnaSubscription({ qnaId: paramId });
   useVoteSubscription({ streamId: paramId });
   useCaptionSubscription();
-  useErrorSubscription();
+  useErrorSubscription(accessToken, refreshToken);
 
   return <></>;
 }

@@ -29,11 +29,26 @@ export default function VoteCard({
   const { voteId, title, multiple, selects } = vote;
   const [selectedVotes, setSelectedVotes] = useState<number[]>([]);
   const [isPending, startTransition] = useTransition();
-  const { stompClient, isSelected, setIsSelected } = useSocketStore();
+  const { stompClient, setLastSend, isSelected, setIsSelected } =
+    useSocketStore();
 
   const handleVote = (e: FormEvent) => {
     e.preventDefault();
+
+    if (!selectedVotes.length) {
+      return;
+    }
+
     startTransition(() => {
+      setLastSend({
+        destination: END_POINTS.PUBLISH.VOTE_SELECT(
+          streamId,
+          JSON.stringify(voteId)
+        ),
+        body: JSON.stringify({
+          selects: selectedVotes,
+        }),
+      });
       stompClient?.send(
         END_POINTS.PUBLISH.VOTE_SELECT(streamId, JSON.stringify(voteId)),
         {

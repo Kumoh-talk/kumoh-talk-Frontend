@@ -20,7 +20,7 @@ export default function ChattingInput({ userRole, accessToken }: Props) {
     handleChattingSubmit,
     onKeyDownEnter,
     isPending,
-  } = useChattingInput(userRole, accessToken);
+  } = useChattingInput(accessToken);
 
   return (
     <>

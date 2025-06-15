@@ -8,6 +8,9 @@ import UtilityTab from '@/app/components/streaming/[id]/UtilityTab';
 import SocketProvider from '@/app/components/streaming/[id]/SocketProvider';
 import { cookies } from 'next/headers';
 import { parseJwt } from '@/app/lib/apis/auth';
+import { getStreamingDetail } from '@/app/lib/apis/streaming/streaming';
+import { streamingDetail } from '@/app/lib/types/streaming/streaming';
+import { notFound } from 'next/navigation';
 
 interface Props {
   params: {
@@ -20,6 +23,14 @@ export default async function Page({ params }: Props) {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
   const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
+  const streamDetail = (await getStreamingDetail(
+    id,
+    cookieStore.toString()
+  )) as streamingDetail;
+
+  // if (!streamDetail.camUrl) {
+  //   notFound();
+  // }
 
   return (
     <div className={styles.container}>
@@ -34,7 +45,7 @@ export default async function Page({ params }: Props) {
               'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
             }
           />
-          <div className={styles.streamingTitle}>JPA란무엇인가?</div>
+          <div className={styles.streamingTitle}>{streamDetail.title}</div>
         </div>
         <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>

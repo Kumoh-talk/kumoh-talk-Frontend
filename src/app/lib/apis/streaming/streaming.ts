@@ -31,3 +31,14 @@ export const getStreamingList = async (cookie?: string) => {
     credentials: 'include',
   });
 };
+
+export const getStreamingDetail = async (streamId: string, cookie?: string) => {
+  return _fetch(`${baseUrl}/stream/${streamId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(cookie ? { Cookie: cookie ?? '' } : {}),
+    },
+    credentials: 'include',
+  });
+};

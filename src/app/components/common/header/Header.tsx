@@ -24,6 +24,7 @@ export default function Header({ title = '', alwaysVisible = true }: Props) {
         )}
       </div>
       <div className={styles.right}>
+        {/* <Link href='/streaming'>Live</Link> */}
         <LoginArea />
         <NewsletterArea />
         <WriteArea />

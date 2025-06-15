@@ -1,26 +1,22 @@
-import { Dot, User2 } from 'lucide-react';
+import { Dot } from 'lucide-react';
 import styles from './streamingCard.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Streaming } from '@/app/lib/types/streaming/streaming';
 
-interface Props {
-  streamingId: number;
-  title: string;
-  subTitle: string;
-  presentor: string;
-  viewers: number;
-}
+interface Props extends Streaming {}
 
 export default function StreamingCard({
-  streamingId,
+  streamId,
   title,
-  subTitle,
-  presentor,
+  thumbnailUrl,
   viewers,
 }: Props) {
   return (
-    <Link href={`./streaming/${streamingId}`} className={styles.cardWrapper}>
+    <Link href={`./streaming/${streamId}`} className={styles.cardWrapper}>
       <div className={styles.card}>
         <div className={styles.thumbnail}>
+          {thumbnailUrl ? <Image src={thumbnailUrl} alt='' fill /> : null}
           <div className={styles.viewers}>
             <Dot color='red' />
             {viewers.toLocaleString()}
@@ -28,10 +24,6 @@ export default function StreamingCard({
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>{title}</h3>
-          <h3 className={styles.subTitle}>{subTitle}</h3>
-          <div className={styles.presentor}>
-            <User2 /> &nbsp;{presentor}
-          </div>
         </div>
       </div>
     </Link>

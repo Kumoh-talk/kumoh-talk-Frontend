@@ -11,6 +11,11 @@ import {
 interface StompSlice {
   stompClient: CompatClient | null;
   setStompClient: (client: CompatClient | null) => void;
+  lastSend: {
+    destination: string;
+    body: string;
+  } | null;
+  setLastSend: (lastSend: { destination: string; body: string } | null) => void;
   streamId: number;
   setStreamId: (number: number) => void;
 }
@@ -20,6 +25,8 @@ const createStompSlice: StateCreator<StompSlice, [], [], StompSlice> = (
 ) => ({
   stompClient: null,
   setStompClient: (client) => set({ stompClient: client }),
+  lastSend: null,
+  setLastSend: (lastSend) => set({ lastSend }),
   streamId: 0,
   setStreamId: (number) => set({ streamId: number }),
 });

@@ -5,14 +5,14 @@ import {
   useState,
   useTransition,
 } from 'react';
-import { UserRoleValidator } from '../../apis/userRoleValidator';
 import useSocketStore from '../../stores/socketStore';
 import { END_POINTS } from '../../constants/common/path';
+import { UserRoleValidator } from '../../apis/userRoleValidator';
 
 const useChattingInput = (userRole: string, accessToken?: string) => {
   const [content, setContent] = useState('');
   const chattingInputRef = useRef<HTMLInputElement | null>(null);
-  const { stompClient, streamId } = useSocketStore();
+  const { stompClient, streamId, setLastSend } = useSocketStore();
   const [isPending, startTransition] = useTransition();
 
   const handleChatting = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +30,12 @@ const useChattingInput = (userRole: string, accessToken?: string) => {
   const handleChattingSubmit = () => {
     if (stompClient) {
       startTransition(() => {
+        setLastSend({
+          destination: END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
+          body: JSON.stringify({
+            content,
+          }),
+        });
         stompClient.send(
           END_POINTS.PUBLISH.CREATE_CHAT(JSON.stringify(streamId)),
           {

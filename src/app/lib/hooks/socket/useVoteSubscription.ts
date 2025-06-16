@@ -29,9 +29,10 @@ const useVoteSubscription = (props: useVoteSubscriptionProps) => {
           stompClient.ws._transport.url.split('/')[5]
         ),
         (message) => {
-          const voteInfo = JSON.parse(message.body).voteInfo;
+          const body = JSON.parse(message.body);
+          const voteInfo = body.voteInfoList[0];
           if (voteInfo) {
-            setVote(JSON.parse(message.body).voteInfo[0]);
+            setVote(voteInfo);
             setIsVoteShow(true);
             setIsVoteFinished(false);
             setIsSelected(false);

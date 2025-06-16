@@ -33,7 +33,7 @@ const useChatSubscription = (props: useChatSubscriptionProps) => {
         chatSubscribeRef.current = null;
       }
     };
-  }, [chatId, stompClient]);
+  }, [chatId, stompClient, addChatMessage]);
 };
 
 export default useChatSubscription;

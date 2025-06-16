@@ -21,7 +21,7 @@ const useErrorSubscription = (accessToken: string, refreshToken: string) => {
               refreshToken
             );
             if (lastSend) {
-              console.log('토큰 리프레시');
+              alert('토큰 리프레시');
               stompClient.send(
                 lastSend.destination,
                 {
@@ -43,7 +43,7 @@ const useErrorSubscription = (accessToken: string, refreshToken: string) => {
         errorSubscribeRef.current = null;
       }
     };
-  }, [stompClient]);
+  }, [stompClient, accessToken, refreshToken, lastSend]);
 };
 
 export default useErrorSubscription;

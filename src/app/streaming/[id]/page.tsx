@@ -43,12 +43,8 @@ export default async function Page({ params }: Props) {
       <SideTabProvider>
         <div className={styles.streamingWrapper}>
           <VideoStreaming
-            camUrl={
-              'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
-            }
-            slideUrl={
-              'https://test-streams.mux.dev/x36xhzz/url_6/193039199_mp4_h264_aac_hq_7.m3u8'
-            }
+            camUrl={streamDetail.camUrl}
+            slideUrl={streamDetail.slideUrl}
           />
           <div className={styles.streamingTitle}>{streamDetail.title}</div>
         </div>

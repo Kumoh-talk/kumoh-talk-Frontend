@@ -26,11 +26,10 @@ export default async function Page({ params }: Props) {
   const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
   const streamDetail = (await getStreamingDetail(id, cookieStore.toString()))
     .data as streamingDetail;
-  console.log(streamDetail);
 
-  // if (!streamDetail.camUrl) {
-  //   notFound();
-  // }
+  if (!streamDetail.camUrl) {
+    notFound();
+  }
 
   return (
     <div className={styles.container}>

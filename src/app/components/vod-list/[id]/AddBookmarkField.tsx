@@ -4,25 +4,31 @@ import { Bookmark } from 'lucide-react';
 import styles from './addBookmarkField.module.scss';
 import { useForm } from 'react-hook-form';
 import Button from '../../common/button/Button';
+import { bookmarkPostAction } from '@/app/lib/utils/bookmarkPostAction';
 
 const defaultValues = {
   title: '',
 };
 
 interface Props {
+  vodId: string;
   curTime: string;
 }
 
-export default function AddBookmarkField({ curTime }: Props) {
+export default function AddBookmarkField({ vodId, curTime }: Props) {
   const {
     formState: { isSubmitting },
     handleSubmit,
     register,
   } = useForm({ defaultValues });
 
-  const onSubmit = async (data: unknown) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+  const onSubmit = async (data: { title: string }) => {
+    const formData = new FormData();
+    formData.append('vodId', vodId);
+    formData.append('title', data.title);
+    formData.append('time', curTime);
+
+    await bookmarkPostAction(formData);
   };
 
   const onError = (error: unknown) => {

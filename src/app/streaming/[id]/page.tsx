@@ -22,6 +22,7 @@ export default async function Page({ params }: Props) {
   const { id } = params;
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
   const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
   const streamDetail = (await getStreamingDetail(
     id,
@@ -34,7 +35,11 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className={styles.container}>
-      <SocketProvider paramId={id} />
+      <SocketProvider
+        paramId={id}
+        accessToken={accessToken || ''}
+        refreshToken={refreshToken || ''}
+      />
       <SideTabProvider>
         <div className={styles.streamingWrapper}>
           <VideoStreaming

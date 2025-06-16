@@ -1,3 +1,5 @@
+'use client';
+
 import { Bookmark, Trash2 } from 'lucide-react';
 import styles from './bookmarkCard.module.scss';
 
@@ -16,6 +18,10 @@ export default function BookmarkCard({
   title,
   time,
 }: Props) {
+  const handleDeleteBookmark = () => {
+    console.log(`북마크 ${bookmarkId}번 삭제`);
+  };
+
   return (
     <div className={styles.bookmarkCard}>
       <div className={styles.left}>
@@ -24,7 +30,9 @@ export default function BookmarkCard({
       </div>
       <div className={styles.right}>
         {time}
-        <Trash2 color='var(--color-red)' />
+        <button onClick={handleDeleteBookmark}>
+          <Trash2 color='var(--color-red)' />
+        </button>
       </div>
     </div>
   );

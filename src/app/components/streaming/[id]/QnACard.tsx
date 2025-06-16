@@ -22,7 +22,7 @@ export default function QnACard({
   accessToken,
   userRole,
 }: Props) {
-  const { stompClient, streamId, myLikedQna } = useSocketStore();
+  const { stompClient, streamId, setLastSend, myLikedQna } = useSocketStore();
 
   const isDisabled = myLikedQna.includes(qnaId);
 
@@ -32,6 +32,13 @@ export default function QnACard({
         alert('로그인 후 이용가능합니다.');
         return;
       }
+      setLastSend({
+        destination: END_POINTS.PUBLISH.LIKED_QNA(
+          JSON.stringify(streamId),
+          qnaId
+        ),
+        body: JSON.stringify({}),
+      });
       stompClient.send(
         END_POINTS.PUBLISH.LIKED_QNA(JSON.stringify(streamId), qnaId),
         {

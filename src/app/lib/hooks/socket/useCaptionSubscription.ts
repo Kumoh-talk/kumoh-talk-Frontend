@@ -35,7 +35,7 @@ const useCaptionSubscription = () => {
         captionSubscribeRef.current = null;
       }
     };
-  }, [stompClient]);
+  }, [stompClient, setCaption]);
 };
 
 export default useCaptionSubscription;

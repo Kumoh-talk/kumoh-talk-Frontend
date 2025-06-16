@@ -29,7 +29,7 @@ const useSummarySubscription = () => {
         summarySubscribeRef.current = null;
       }
     };
-  }, [stompClient]);
+  }, [stompClient, setSummary]);
 };
 
 export default useSummarySubscription;

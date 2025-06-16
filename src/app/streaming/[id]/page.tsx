@@ -24,10 +24,9 @@ export default async function Page({ params }: Props) {
   const accessToken = cookieStore.get('accessToken')?.value;
   const refreshToken = cookieStore.get('refreshToken')?.value;
   const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
-  const streamDetail = (await getStreamingDetail(
-    id,
-    cookieStore.toString()
-  )) as streamingDetail;
+  const streamDetail = (await getStreamingDetail(id, cookieStore.toString()))
+    .data as streamingDetail;
+  console.log(streamDetail);
 
   // if (!streamDetail.camUrl) {
   //   notFound();

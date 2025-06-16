@@ -9,13 +9,17 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/app/')],
   },
   images: {
-    domains: [
-      'kumoh-talk-bucket.s3.ap-northeast-2.amazonaws.com',
-      'kumoh-talkofyabam-streaming.s3.ap-northeast-2.amazonaws.com',
-    ],
+    // domains: [
+    //   'kumoh-talk-bucket.s3.ap-northeast-2.amazonaws.com',
+    //   'kumoh-talkofyabam-streaming.s3.ap-northeast-2.amazonaws.com',
+    // ],
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
         hostname: '**',
       },
     ],

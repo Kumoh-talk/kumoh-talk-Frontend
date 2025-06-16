@@ -16,7 +16,7 @@ export default function StreamingCard({
     <Link href={`./streaming/${streamId}`} className={styles.cardWrapper}>
       <div className={styles.card}>
         <div className={styles.thumbnail}>
-          {thumbnailUrl ? <Image src={thumbnailUrl} alt='' fill /> : null}
+          {thumbnailUrl ? <img src={thumbnailUrl} alt='' /> : null}
           <div className={styles.viewers}>
             <Dot color='red' />
             {viewers.toLocaleString()}

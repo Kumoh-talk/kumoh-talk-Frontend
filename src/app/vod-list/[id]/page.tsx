@@ -35,20 +35,20 @@ export default async function Page({ params }: Props) {
 
   const vodDetail = (await getVodDetail(id)) as VodDetail;
 
-  // if (!vodDetail.camUrl) {
-  //   return notFound();
-  // }
+  if (!vodDetail.camUrl) {
+    return notFound();
+  }
 
   return (
     <div className={styles.container}>
       <SideTabProvider>
         <div className={styles.streamingWrapper}>
-          {/* <VideoVod
+          <VideoVod
             camUrl={vodDetail.camUrl}
             camTsQuery={vodDetail.camTsQuery}
             slideUrl={vodDetail.slideUrl}
             slideTsQuery={vodDetail.slideTsQuery}
-          /> */}
+          />
           <div className={styles.streamingTitle}>{vodDetail.title}</div>
         </div>
         <div className={styles.sideTapWrapper}>

@@ -39,9 +39,18 @@ interface ChatSlice {
 const createChatSlice: StateCreator<ChatSlice, [], [], ChatSlice> = (set) => ({
   chatMessageList: [],
   addChatMessage: (chatMessage) =>
-    set((state) => ({
-      chatMessageList: [...state.chatMessageList, chatMessage],
-    })),
+    set((state) => {
+      if (state.chatMessageList.length >= 200) {
+        const deleted = [...state.chatMessageList.splice(0, 1)];
+
+        return {
+          chatMessageList: [...state.chatMessageList, chatMessage],
+        };
+      }
+      return {
+        chatMessageList: [...state.chatMessageList, chatMessage],
+      };
+    }),
 });
 
 interface QnaSlice {

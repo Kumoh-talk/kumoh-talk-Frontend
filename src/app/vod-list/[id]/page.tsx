@@ -39,7 +39,10 @@ export default async function Page({ params }: Props) {
         </div>
         <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>
-            <BookmarkSection vodId={id} bookmarkList={vodDetail.bookmarks} />
+            <BookmarkSection
+              vodId={id}
+              bookmarkList={vodDetail.bookmarks || []}
+            />
             <VodUtilityTab summary={'요약'} />
           </div>
         </div>

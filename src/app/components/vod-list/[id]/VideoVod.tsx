@@ -54,6 +54,8 @@ export default function VideoVod({
   useEffect(() => {
     const videoEl = videoRef.current;
 
+    console.log(mainScreenUrl);
+
     if (videoEl) {
       if (Hls.isSupported()) {
         const hls = new Hls({

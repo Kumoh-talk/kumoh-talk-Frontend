@@ -14,6 +14,7 @@ export default async function Page() {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
   const userRole = accessToken ? parseJwt(accessToken).USER_ROLE : '';
+  console.log(vodList.data);
 
   if (!UserRoleValidator.user(userRole)) {
     notFound();

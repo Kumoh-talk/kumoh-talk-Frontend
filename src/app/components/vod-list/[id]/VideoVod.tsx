@@ -82,7 +82,7 @@ export default function VideoVod({
         });
       }
     }
-  }, [mainScreenUrl, lastPlayTime]);
+  }, [mainScreenUrl, mainScreenTsQuery, lastPlayTime]);
 
   return (
     <div className={styles.streamingVideo}>

@@ -33,11 +33,12 @@ export const getVodList = async (cookie?: string) => {
   });
 };
 
-export const getVodDetail = async (vodId: string) => {
+export const getVodDetail = async (vodId: string, cookie?: string) => {
   return _fetch(`${baseUrl}/vod/${vodId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...(cookie ? { Cookie: cookie ?? '' } : {}),
     },
     credentials: 'include',
   });

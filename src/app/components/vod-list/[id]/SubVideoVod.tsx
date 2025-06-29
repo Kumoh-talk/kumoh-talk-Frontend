@@ -24,6 +24,14 @@ export default function SubVideoVod({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // URL이 없으면 Hls.js 실행하지 않음
+    if (
+      !subScreenUrl ||
+      typeof subScreenUrl !== 'string' ||
+      !subScreenUrl.trim()
+    )
+      return;
+
     if (videoRef.current) {
       if (Hls.isSupported()) {
         const hls = new Hls({
@@ -59,7 +67,7 @@ export default function SubVideoVod({
         });
       }
     }
-  }, [subScreenUrl, lastPlayTime]);
+  }, [subScreenUrl, subScreenTsQuery, lastPlayTime]);
 
   useEffect(() => {
     if (videoRef.current) {

@@ -6,6 +6,7 @@ import { VodDetail } from '@/app/lib/types/streaming/vod';
 import VideoVod from '@/app/components/vod-list/[id]/VideoVod';
 import VodUtilityTab from '@/app/components/vod-list/[id]/VodUtilityTab';
 import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 const bookmarkList = [
   {
@@ -33,20 +34,21 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { id } = params;
 
-  const vodDetail = (await getVodDetail(id)) as VodDetail;
+  const vodDetail = (await getVodDetail(id, cookies().toString())) as VodDetail;
+  console.log(vodDetail);
 
-  if (!vodDetail.camUrl) {
-    return notFound();
-  }
+  // if (!vodDetail.camUrl) {
+  //   return notFound();
+  // }
 
   return (
     <div className={styles.container}>
       <SideTabProvider>
         <div className={styles.streamingWrapper}>
           <VideoVod
-            camUrl={vodDetail.camUrl}
+            camUrl={vodDetail.camUrl || ''}
             camTsQuery={vodDetail.camTsQuery}
-            slideUrl={vodDetail.slideUrl}
+            slideUrl={vodDetail.slideUrl || ''}
             slideTsQuery={vodDetail.slideTsQuery}
           />
           <div className={styles.streamingTitle}>{vodDetail.title}</div>

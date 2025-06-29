@@ -22,8 +22,8 @@ export default function VideoStreaming({ camUrl, slideUrl }: Props) {
     if (videoRef.current) {
       if (Hls.isSupported()) {
         const hls = new Hls({
-          liveSyncDuration: 2,
-          startPosition: -2,
+          liveSyncDuration: 5,
+          startPosition: -5,
         });
         hls.loadSource(mainScreenUrl);
         hls.attachMedia(videoRef.current);
@@ -67,7 +67,7 @@ export default function VideoStreaming({ camUrl, slideUrl }: Props) {
         </div>
         <Caption />
       </div>
-      <video ref={videoRef} className={styles.videoPlayer} controls muted />
+      <video ref={videoRef} className={styles.videoPlayer} muted />
     </div>
   );
 }

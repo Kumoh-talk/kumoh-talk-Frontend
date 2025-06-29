@@ -34,8 +34,8 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { id } = params;
 
-  const vodDetail = (await getVodDetail(id, cookies().toString())) as VodDetail;
-  console.log(vodDetail);
+  const response = await getVodDetail(id, cookies().toString());
+  const vodDetail = response.data as VodDetail;
 
   // if (!vodDetail.camUrl) {
   //   return notFound();

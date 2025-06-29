@@ -29,8 +29,8 @@ export default function SubVideoStreaming({
     if (videoRef.current) {
       if (Hls.isSupported()) {
         const hls = new Hls({
-          liveSyncDuration: 2,
-          startPosition: -2,
+          liveSyncDuration: 5,
+          startPosition: -5,
         });
         hls.loadSource(subScreenUrl);
         hls.attachMedia(videoRef.current);

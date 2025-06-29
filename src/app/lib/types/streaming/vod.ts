@@ -12,7 +12,7 @@ export type VodDetail = {
   slideTsQuery: string;
   camUrl: string;
   camTsQuery: string;
-  bookmarks: string;
+  bookmarks: Bookmark[];
 };
 
 export type Bookmark = {

@@ -8,23 +8,6 @@ import VodUtilityTab from '@/app/components/vod-list/[id]/VodUtilityTab';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 
-const bookmarkList = [
-  {
-    bookmarkId: 0,
-    userId: 0,
-    vodId: 0,
-    title: 'JPA 목차',
-    time: '02:13',
-  },
-  {
-    bookmarkId: 1,
-    userId: 1,
-    vodId: 1,
-    title: 'JDBC에 대해서',
-    time: '05:40',
-  },
-];
-
 interface Props {
   params: {
     id: string;
@@ -36,10 +19,11 @@ export default async function Page({ params }: Props) {
 
   const response = await getVodDetail(id, cookies().toString());
   const vodDetail = response.data as VodDetail;
+  console.log(vodDetail);
 
-  // if (!vodDetail.camUrl) {
-  //   return notFound();
-  // }
+  if (!vodDetail.camUrl) {
+    return notFound();
+  }
 
   return (
     <div className={styles.container}>
@@ -55,7 +39,7 @@ export default async function Page({ params }: Props) {
         </div>
         <div className={styles.sideTapWrapper}>
           <div className={styles.chattingSection}>
-            <BookmarkSection vodId={id} bookmarkList={bookmarkList} />
+            <BookmarkSection vodId={id} bookmarkList={vodDetail.bookmarks} />
             <VodUtilityTab summary={'요약'} />
           </div>
         </div>
